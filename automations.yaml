@@ -196,3 +196,81 @@
   - data:
       entity_id: light.yeelight_color2_7c49eb1566bb
     service: light.turn_off
+- id: '1541327330757'
+  alias: Hall - empty room
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0001e531e0.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e531e0.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  condition:
+  - condition: state
+    entity_id: light.yeelight_color2_7c49eb1566bb
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1566bb
+    service: light.turn_off
+- id: '1541327802282'
+  alias: Living room - stair LEDs
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e4707c
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.yeelight_strip_7811dc691c74
+    state: 'off'
+  - below: '100'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e4707c
+  - after: sunrise
+    before: sunset
+    before_offset: 04:00:00
+    condition: sun
+  action:
+  - data:
+      entity_id: light.yeelight_strip_7811dc691c74
+    service: light.turn_on
+  - data:
+      entity_id: light.yeelight_strip_7811dc691c74
+      mode: normal
+    service: light.yeelight_set_mode
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e4707c.attributes[''No
+      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e4707c.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.yeelight_strip_7811dc691c74
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_strip_7811dc691c74
+    service: light.turn_off
+- id: '1541328487535'
+  alias: Living room - empty room
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0001e43ac7.attributes[''No
+      motion since''] | int >= 1800 and states.binary_sensor.motion_sensor_158d0001e43ac7.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  condition:
+    condition: or
+    - condition: state
+      entity_id: light.xiaomi_philips_ceiling_light
+      state: 'on'
+    - condition: state
+      entity_id: light.yeelight_strip_7811dca220d2
+      state: 'on'
+    - condition: state
+      entity_id: light.yeelight_strip_7811dc691c74
+      state: 'on'
+  action:
+  - data:
+      entity_id: light.xiaomi_philips_ceiling_light
+    service: light.turn_off
+  - data:
+      entity_id: light.yeelight_strip_7811dca220d2
+    service: light.turn_off
+  - data:
+      entity_id: light.yeelight_strip_7811dc691c74
+    service: light.turn_off
