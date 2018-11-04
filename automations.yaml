@@ -1,0 +1,198 @@
+- id: '1539104120193'
+  alias: Windows open
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d0001ad5eb6
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.door_window_sensor_158d00022f148a
+    from: 'off'
+    platform: state
+    to: 'on'
+  - entity_id: binary_sensor.door_window_sensor_158d00023709f7
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      command: PowerToggle
+      device: 42382138
+      entity_id: remote.jaskrowo_media
+    service: remote.send_command
+- id: '1539104502084'
+  alias: Windows closed
+  trigger:
+  - entity_id: binary_sensor.door_window_sensor_158d0001ad5eb6
+    from: 'on'
+    platform: state
+    to: 'off'
+  - entity_id: binary_sensor.door_window_sensor_158d00022f148a
+    from: 'on'
+    platform: state
+    to: 'off'
+  - entity_id: binary_sensor.door_window_sensor_158d00023709f7
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.door_window_sensor_158d0001ad5eb6
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.door_window_sensor_158d00022f148a
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.door_window_sensor_158d00023709f7
+    state: 'off'
+  action:
+  - data:
+      command: PowerToggle
+      device: 42382138
+      entity_id: remote.jaskrowo_media
+    service: remote.send_command
+- id: '1541261179517'
+  alias: Living room motion - 01 normal
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - above: '-10'
+    below: '30'
+    condition: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+  - condition: template
+    value_template: '{% if not is_state(''weather.krakow'', ''sunny'') %}true{% endif
+      %}'
+  - below: '125'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e43ac7
+  action:
+  - data:
+      entity_id: scene.living_room_normal
+    service: scene.turn_on
+- id: '1541276176307'
+  alias: Living room motion - 02 evening
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - above: '-30'
+    below: '-10'
+    condition: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+  - condition: template
+    value_template: '{% if not is_state(''weather.krakow'', ''sunny'') %}true{% endif
+      %}'
+  action:
+  - data:
+      entity_id: scene.living_room_slight_dim
+    service: scene.turn_on
+- id: '1541276365179'
+  alias: Living room motion - 03 late evening
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - below: '-30'
+    condition: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+  - before: '20:29:59'
+    condition: time
+  action:
+  - data:
+      entity_id: scene.living_room_evening
+    service: scene.turn_on
+- id: '1541276548411'
+  alias: Living room motion - 04 TV mode
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - after: '20:30:00'
+    condition: time
+  action:
+  - data:
+      entity_id: scene.living_room_tv_mode
+    service: scene.turn_on
+- id: '1541319904416'
+  alias: Hall - motion daytime
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e531e0
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.yeelight_color2_7c49eb1566bb
+    state: 'off'
+  - below: '100'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e531e0
+  - after: sunrise
+    before: sunset
+    before_offset: 02:00:00
+    condition: sun
+  action:
+  - data:
+      entity_id: scene.hall_light_day
+    service: scene.turn_on
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1566bb
+      mode: normal
+    service: light.yeelight_set_mode
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e531e0.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e531e0.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.yeelight_color2_7c49eb1566bb
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1566bb
+    service: light.turn_off
+- id: '1541323739426'
+  alias: Hall - motion night
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e531e0
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.yeelight_color2_7c49eb1566bb
+    state: 'off'
+  - below: '100'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e531e0
+  - after: sunset
+    after_offset: 02:00:00
+    before: sunrise
+    condition: sun
+  action:
+  - data:
+      entity_id: scene.hall_light_night
+    service: scene.turn_on
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1566bb
+      mode: moonlight
+    service: light.yeelight_set_mode
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e531e0.attributes[''No
+      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e531e0.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.yeelight_color2_7c49eb1566bb
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1566bb
+    service: light.turn_off
