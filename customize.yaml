@@ -1,84 +1,83 @@
-binary_sensor.cube_158d000101c2a1: {}
 light.yeelight_color2_7c49eb1566bb:
-  friendly_name: "Hall light"
+  friendly_name: Hall light
 light.yeelight_strip_7811dc66f063:
-  friendly_name: "Master bedroom LEDs"
+  friendly_name: Master bedroom LEDs
 light.yeelight_strip_7811dc68588d:
-  friendly_name: "Kitchen LEDs"
+  friendly_name: Kitchen LEDs
 light.yeelight_strip_7811dc691c74:
-  friendly_name: "Stairs LEDs"
+  friendly_name: Stairs LEDs
 light.yeelight_strip_7811dca220d2:
-  friendly_name: "Wall LEDs"
+  friendly_name: Wall LEDs
 light.yeelight_color2_7c49eb1581f6:
-  friendly_name: "Attic light"
+  friendly_name: Attic light
 light.yeelight_color2_7c49eb1582dd:
-  friendly_name: "Tosia lamp"
+  friendly_name: Tosia lamp
 light.gateway_light_34ce0088a579:
-  friendly_name: "Kitchen gateway light"
+  friendly_name: Kitchen gateway light
 light.gateway_light_34ce00fb56e8:
-  friendly_name: "Tosia gateway light"
-switch.plug_158d0001de79e6:
-  friendly_name: "Attic lamp"
+  friendly_name: Tosia gateway light
 switch.plug_158d0001ded32d:
-  friendly_name: "Guest room lamp"
+  friendly_name: Guest room lamp
 switch.plug_158d0001deb419:
-  friendly_name: "Fan"
-  hidden: true
+  friendly_name: Wardrobe lamp
 sensor.temperature_158d0001b9208d:
-  friendly_name: "Loggia temperature"
+  friendly_name: Loggia temperature
 sensor.humidity_158d0001b9208d:
-  friendly_name: "Loggia humidity"
+  friendly_name: Loggia humidity
 sensor.temperature_158d0001b92145:
-  friendly_name: "Master bedroom temperature"
+  friendly_name: Master bedroom temperature
 sensor.humidity_158d0001b92145:
-  friendly_name: "Master bedroom humidity"
+  friendly_name: Master bedroom humidity
 sensor.temperature_158d0001b1c3fb:
-  friendly_name: "Living room temperature"
+  friendly_name: Living room temperature
 sensor.humidity_158d0001b1c3fb:
-  friendly_name: "Living room humidity"
+  friendly_name: Living room humidity
 binary_sensor.door_window_sensor_158d0001ad5eb6:
-  friendly_name: "Living room balcony"
+  friendly_name: Living room balcony
 binary_sensor.door_window_sensor_158d000232da46:
-  friendly_name: "Tosia window"
+  friendly_name: Tosia window
 binary_sensor.door_window_sensor_158d00023709f7:
-  friendly_name: "Kitchen window right"
+  friendly_name: Kitchen window right
 binary_sensor.door_window_sensor_158d00022f148a:
-  friendly_name: "Kitchen window left"
+  friendly_name: Kitchen window left
 binary_sensor.door_window_sensor_158d000232db84:
-  friendly_name: "Loggia door"
+  friendly_name: Loggia door
 binary_sensor.door_window_sensor_158d0002436b09:
-  friendly_name: "Guest room window"
+  friendly_name: Guest room window
 sensor.temperature_158d0001b92092:
-  friendly_name: "Tosia room temperature"
+  friendly_name: Tosia room temperature
 sensor.humidity_158d0001b92092:
-  friendly_name: "Tosia room humidity"
+  friendly_name: Tosia room humidity
 sensor.temperature_158d00023208a6:
-  friendly_name: "Attic temperature"
+  friendly_name: Attic temperature
 sensor.humidity_158d00023208a6:
-  friendly_name: "Attic humidity"
+  friendly_name: Attic humidity
 sensor.temperature_158d0002320e0c:
-  friendly_name: "Guest room temperature"
+  friendly_name: Guest room temperature
 sensor.humidity_158d0002320e0c:
-  friendly_name: "Guest room humidity"
+  friendly_name: Guest room humidity
 sensor.temperature_158d0002320de3:
-  friendly_name: "Kitchen temperature"
+  friendly_name: Kitchen temperature
 sensor.humidity_158d0002320de3:
-  friendly_name: "Kitchen humidity"
+  friendly_name: Kitchen humidity
 light.xiaomi_philips_e14_frosted:
-  friendly_name: "Master bedroom lamp"
+  friendly_name: Master bedroom lamp
 light.xiaomi_philips_e14_crystal:
-  friendly_name: "Left lamp"
+  friendly_name: Left lamp
 light.xiaomi_philips_e14_crystal_2:
-  friendly_name: "Right lamp"
+  friendly_name: Right lamp
 sensor.mold_indicator:
-  friendly_name: "Attic mold indicator"
+  friendly_name: Attic mold indicator
   hidden: true
 sun.sun:
-  hidden: true
+  hidden: false
 group.all_automations:
-  hidden: true
+  hidden: false
 group.all_scripts:
   hidden: true
+group.all_devices:
+  hidden: false
+  friendly_name: People at home
 group.living_room:
   order: 1
 group.kitchen:
@@ -91,15 +90,51 @@ group.guest_room:
   order: 5
 group.attic:
   order: 6
-group.network:
+weather.krakow:
   order: 7
+group.air_pollution:
+  order: 8
+history_graph.air_pollution:
+  order: 9
+group.network:
+  order: 10
 sensor.waqi_kurdwanow_krakow_maopolska_poland:
-  friendly_name: "Kurdwanów PM 2.5"
+  friendly_name: Kurdwanów PM 2.5
 sensor.waqi_aleja_krasinskiego_krakow_maopolska_poland:
-  friendly_name: "Aleje PM 2.5"
+  friendly_name: Aleje PM 2.5
 sensor.waqi_skawina_maopolska_poland:
-  friendly_name: "Skawina PM 2.5"
-sensor.rtac68u_kbytesec_received:
-  friendly_name: "Download"
-sensor.rtac68u_kbytesec_sent:
-  friendly_name: "Upload"
+  friendly_name: Skawina PM 2.5
+sensor.rtac68u_kbytesec_received_2:
+  friendly_name: Download
+sensor.rtac68u_kbytesec_sent_2:
+  friendly_name: Upload
+binary_sensor.motion_sensor_158d0001e43ac7:
+  friendly_name: Living room motion sensor
+binary_sensor.illumination_158d0001e43ac7:
+  friendly_name: Living room illumination sensor
+binary_sensor.motion_sensor_158d0001e531e0:
+  friendly_name: Hall motion sensor
+binary_sensor.illumination_158d0001e531e0:
+  friendly_name: Hall illumination sensor
+binary_sensor.motion_sensor_158d0001e4707c:
+  friendly_name: Stairs motion sensor
+binary_sensor.illumination_158d0001e4707c:
+  friendly_name: Stairs illumination sensor
+binary_sensor.motion_sensor_158d0001e43bc7:
+  friendly name: Master bedroom motion sensor
+binary_sensor.illumination_158d0001e43bc7:
+  friendly_name: Master bedroom illumination sensor
+binary_sensor.motion_sensor_158d0001e547ae:
+  friendly_name: Attic entry motion sensor
+binary_sensor.illumination_158d0001e547ae:
+  friendly_name: Attic entry illumination sensor
+binary_sensor.motion_sensor_158d0001e55ff7:
+  friendly_name: Attic wardrobe motion sensor
+binary_sensor.illumination_158d0001e55ff7:
+  friendly_name: Attic wardrobe illumination sensor
+binary_sensor.motion_sensor_158d0001e532dc:
+  friendly_name: Guest room motion sensor
+binary_sensor.illumination_158d0001e532dc:
+  friendly_name: Guest room illumination sensor
+binary_sensor.motion_sensor_158d0001655da1:
+  friendly_name: Kitchen motion sensor

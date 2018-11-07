@@ -1,3 +1,20 @@
+default_view:
+  name: Home
+  view: yes
+  entities:
+    - group.living_room
+    - group.kitchen
+    - group.tosia_room
+    - group.guest_room
+    - group.master_bedroom
+    - group.attic
+    - weather.krakow
+    - group.air_pollution
+    - history_graph.air_pollution
+    - group.network
+    - history_graph.temperature
+    - history_graph.humidity
+    - history_graph.windows_open
 kitchen:
   name: Kitchen
   icon: mdi:food
@@ -31,13 +48,14 @@ master_bedroom:
     - binary_sensor.door_window_sensor_158d000232db84
     - light.xiaomi_philips_e14_frosted
     - light.yeelight_strip_7811dc66f063
+    - light.gateway_light_34ce00fb56e8
 attic:
   name: Attic
   entities:
     - sensor.temperature_158d00023208a6
     - sensor.humidity_158d00023208a6
     - light.yeelight_color2_7c49eb1581f6
-    - switch.plug_158d0001de79e6
+    - switch.plug_158d0001deb419
 tosia_room:
   name: "Tosia's bedroom"
   entities:
@@ -45,7 +63,6 @@ tosia_room:
     - sensor.humidity_158d0001b92092
     - binary_sensor.door_window_sensor_158d000232da46
     - light.yeelight_color2_7c49eb1582dd
-    - light.gateway_light_34ce00fb56e8
 guest_room:
   name: Guest room
   entities:
@@ -61,8 +78,8 @@ network:
     - sensor.speedtest_download
     - sensor.speedtest_upload
     - sensor.speedtest_ping
-    - sensor.rtac68u_kbytesec_received
-    - sensor.rtac68u_kbytesec_sent
+    - sensor.rtac68u_kbytesec_received_2
+    - sensor.rtac68u_kbytesec_sent_2
 air_pollution:
   name: Air pollution
   entities:
@@ -72,8 +89,14 @@ air_pollution:
     - sensor.waqi_aleja_krasinskiego_krakow_maopolska_poland_pm_10
     - sensor.waqi_skawina_maopolska_poland
     - sensor.waqi_skawina_maopolska_poland_pm_10
-people_locators:
-  name: People locators
+automations:
+  name: Automations
+  view: yes
   entities:
-    - device_tracker.mimix2wojtekmimix2
-    - device_tracker.android247eb3fd123d19b7
+    - group.all_automations
+    - group.all_devices
+    - group.sun
+sun:
+  name: Sunlight
+  entities:
+    - sun.sun

@@ -59,7 +59,7 @@
     platform: state
     to: 'on'
   condition:
-  - above: '-10'
+  - above: '10'
     below: '30'
     condition: numeric_state
     entity_id: sun.sun
@@ -67,15 +67,18 @@
   - condition: template
     value_template: '{% if not is_state(''weather.krakow'', ''sunny'') %}true{% endif
       %}'
-  - below: '125'
+  - below: '100'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
+  - after: 06:30:00
+    before: '22:00:00'
+    condition: time
   action:
   - data:
       entity_id: scene.living_room_normal
     service: scene.turn_on
 - id: '1541276176307'
-  alias: Living room motion - 02 evening
+  alias: Living room motion - 02 slight dim
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
     from: 'off'
@@ -83,22 +86,24 @@
     to: 'on'
   condition:
   - above: '-30'
-    below: '-10'
+    below: '10'
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
-  - condition: template
-    value_template: '{% if not is_state(''weather.krakow'', ''sunny'') %}true{% endif
-      %}'
+  - after: 06:30:00
+    before: '22:00:00'
+    condition: time
+  - below: '100'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e43ac7
   action:
   - data:
       entity_id: scene.living_room_slight_dim
     service: scene.turn_on
 - id: '1541276365179'
-  alias: Living room motion - 03 late evening
+  alias: Living room motion - 03 evening
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
-    from: 'off'
     platform: state
     to: 'on'
   condition:
@@ -106,8 +111,12 @@
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
-  - before: '20:29:59'
+  - after: 06:30:00
+    before: '20:29:59'
     condition: time
+  - below: '100'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e43ac7
   action:
   - data:
       entity_id: scene.living_room_evening
@@ -116,12 +125,15 @@
   alias: Living room motion - 04 TV mode
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
-    from: 'off'
     platform: state
     to: 'on'
   condition:
   - after: '20:30:00'
+    before: 06:29:59
     condition: time
+  - below: '100'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e43ac7
   action:
   - data:
       entity_id: scene.living_room_tv_mode
@@ -137,12 +149,13 @@
   - condition: state
     entity_id: light.yeelight_color2_7c49eb1566bb
     state: 'off'
-  - below: '100'
+  - below: '50'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e531e0
   - after: sunrise
+    after_offset: -02:00:00
     before: sunset
-    before_offset: 02:00:00
+    before_offset: 03:00:00
     condition: sun
   action:
   - data:
@@ -153,7 +166,7 @@
       mode: normal
     service: light.yeelight_set_mode
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e531e0.attributes[''No
-      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e531e0.state
+      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e531e0.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
     entity_id: light.yeelight_color2_7c49eb1566bb
@@ -169,32 +182,39 @@
     platform: state
     to: 'on'
   condition:
-  - condition: state
-    entity_id: light.yeelight_color2_7c49eb1566bb
-    state: 'off'
-  - below: '100'
-    condition: numeric_state
-    entity_id: sensor.illumination_158d0001e531e0
-  - after: sunset
-    after_offset: 02:00:00
-    before: sunrise
-    condition: sun
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: light.yeelight_color2_7c49eb1566bb
+        state: 'off'
+      - below: '50'
+        condition: numeric_state
+        entity_id: sensor.illumination_158d0001e531e0
+      - condition: or
+        conditions:
+          - condition: sun
+            after: sunset
+            after_offset: 03:00:00
+          - condition: sun
+            before: sunrise
+            before_offset: -02:00:00
   action:
   - data:
       entity_id: scene.hall_light_night
     service: scene.turn_on
   - data:
       entity_id: light.yeelight_color2_7c49eb1566bb
-      mode: moonlight
+      mode: normal
     service: light.yeelight_set_mode
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e531e0.attributes[''No
-      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e531e0.state
+      motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e531e0.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
     entity_id: light.yeelight_color2_7c49eb1566bb
     state: 'on'
   - data:
       entity_id: light.yeelight_color2_7c49eb1566bb
+      transition: 1
     service: light.turn_off
 - id: '1541327330757'
   alias: Hall - empty room
@@ -210,6 +230,7 @@
   action:
   - data:
       entity_id: light.yeelight_color2_7c49eb1566bb
+      transition: 1
     service: light.turn_off
 - id: '1541327802282'
   alias: Living room - stair LEDs
@@ -222,7 +243,7 @@
   - condition: state
     entity_id: light.yeelight_strip_7811dc691c74
     state: 'off'
-  - below: '100'
+  - below: '30'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e4707c
   - after: sunrise
@@ -232,6 +253,7 @@
   action:
   - data:
       entity_id: light.yeelight_strip_7811dc691c74
+      transition: 1
     service: light.turn_on
   - data:
       entity_id: light.yeelight_strip_7811dc691c74
@@ -245,6 +267,7 @@
     state: 'on'
   - data:
       entity_id: light.yeelight_strip_7811dc691c74
+      transition: 1
     service: light.turn_off
 - id: '1541328487535'
   alias: Living room - empty room
@@ -255,6 +278,7 @@
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
     condition: or
+    conditions:
     - condition: state
       entity_id: light.xiaomi_philips_ceiling_light
       state: 'on'
@@ -267,10 +291,67 @@
   action:
   - data:
       entity_id: light.xiaomi_philips_ceiling_light
+      transition: 1
     service: light.turn_off
   - data:
       entity_id: light.yeelight_strip_7811dca220d2
+      transition: 1
     service: light.turn_off
   - data:
       entity_id: light.yeelight_strip_7811dc691c74
+      transition: 1
     service: light.turn_off
+- id: '1541522658112'
+  alias: Attic - entry area motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e547ae
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - below: '100'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e547ae
+  action:
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1581f6
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1581f6
+      mode: normal
+    service: light.yeelight_set_mode
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e547ae.attributes[''No
+      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e547ae.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.yeelight_color2_7c49eb1581f6
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1581f6
+      transition: 1
+    service: light.turn_off
+- id: '1541525021925'
+  alias: Attic - wardrobe area motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e55ff7
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - below: '100'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e55ff7
+  action:
+  - data:
+      entity_id: switch.plug_158d0001deb419
+    service: switch.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e55ff7.attributes[''No
+      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e55ff7.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: switch.plug_158d0001deb419
+    state: 'on'
+  - data:
+      entity_id: switch.plug_158d0001deb419
+    service: switch.turn_off

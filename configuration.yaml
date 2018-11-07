@@ -38,11 +38,11 @@ homeassistant:
       hidden: true
       homebridge_hidden: true
       emulated_hue_hidden: true
-    "device_tracker.*":
+    "automation.*":
       hidden: false
       homebridge_hidden: true
       emulated_hue_hidden: true
-    "automation.*":
+    "scene.*":
       hidden: false
       homebridge_hidden: true
       emulated_hue_hidden: true
@@ -297,7 +297,7 @@ scene:
         light.xiaomi_philips_ceiling_light:
             state: on
             transition: 5
-            brightness_pct: 25
+            brightness_pct: 35
         light.yeelight_strip_7811dca220d2:
             state: on
             transition: 5
@@ -309,14 +309,14 @@ scene:
         light.yeelight_strip_7811dca220d2:
             state: on
             transition: 5
-            brightness_pct: 100
-            rgb_color: [255, 20, 147]
+            brightness_pct: 80
+            rgb_color: [255,205,166]
   - name: Hall light day
     entities:
         light.yeelight_color2_7c49eb1566bb:
             state: on
             transition: 1
-            brightness_pct: 100
+            brightness_pct: 90
   - name: Hall light night
     entities:
         light.yeelight_color2_7c49eb1566bb:
