@@ -78,8 +78,8 @@ network:
     - sensor.speedtest_download
     - sensor.speedtest_upload
     - sensor.speedtest_ping
-    - sensor.rtac68u_kbytesec_received_2
-    - sensor.rtac68u_kbytesec_sent_2
+    - sensor.rtac68u_kbytesec_received_3
+    - sensor.rtac68u_kbytesec_sent_3
 air_pollution:
   name: Air pollution
   entities:
@@ -96,7 +96,19 @@ automations:
     - group.all_automations
     - group.all_devices
     - group.sun
+    - group.switches
 sun:
   name: Sunlight
   entities:
     - sun.sun
+switches:
+  name: Switches
+  entities:
+    - binary_sensor.switch_158d00016dbe9e
+    - binary_sensor.switch_158d00019ca9dc
+    - binary_sensor.switch_158d00019d5813
+    - binary_sensor.switch_158d0001b1827e
+    - binary_sensor.switch_158d0001b182db
+    - binary_sensor.switch_158d0001be5b10
+    - binary_sensor.switch_158d0001d8eeb1
+    - binary_sensor.switch_158d0001f9c3fe

@@ -59,15 +59,18 @@
     platform: state
     to: 'on'
   condition:
-  - above: '10'
+  - condition: state
+    entity_id: light.xiaomi_philips_ceiling_light
+    state: 'off'
+  - condition: state
+    entity_id: light.yeelight_strip_7811dca220d2
+    state: 'off'
+  - above: '-10'
     below: '30'
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
-  - condition: template
-    value_template: '{% if not is_state(''weather.krakow'', ''sunny'') %}true{% endif
-      %}'
-  - below: '100'
+  - below: '70'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   - after: 06:30:00
@@ -86,14 +89,14 @@
     to: 'on'
   condition:
   - above: '-30'
-    below: '10'
+    below: '-10'
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
   - after: 06:30:00
     before: '22:00:00'
     condition: time
-  - below: '100'
+  - below: '70'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   action:
@@ -112,9 +115,9 @@
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
   - after: 06:30:00
-    before: '20:29:59'
+    before: '20:34:59'
     condition: time
-  - below: '100'
+  - below: '70'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   action:
@@ -128,10 +131,10 @@
     platform: state
     to: 'on'
   condition:
-  - after: '20:30:00'
+  - after: '20:35:00'
     before: 06:29:59
     condition: time
-  - below: '100'
+  - below: '70'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   action:
@@ -149,7 +152,7 @@
   - condition: state
     entity_id: light.yeelight_color2_7c49eb1566bb
     state: 'off'
-  - below: '50'
+  - below: '35'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e531e0
   - after: sunrise
@@ -184,20 +187,20 @@
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: light.yeelight_color2_7c49eb1566bb
-        state: 'off'
-      - below: '50'
-        condition: numeric_state
-        entity_id: sensor.illumination_158d0001e531e0
-      - condition: or
-        conditions:
-          - condition: sun
-            after: sunset
-            after_offset: 03:00:00
-          - condition: sun
-            before: sunrise
-            before_offset: -02:00:00
+    - condition: state
+      entity_id: light.yeelight_color2_7c49eb1566bb
+      state: 'off'
+    - below: '35'
+      condition: numeric_state
+      entity_id: sensor.illumination_158d0001e531e0
+    - condition: or
+      conditions:
+      - condition: sun
+        after: sunset
+        after_offset: 03:00:00
+      - condition: sun
+        before: sunrise
+        before_offset: -02:00:00
   action:
   - data:
       entity_id: scene.hall_light_night
@@ -221,7 +224,7 @@
   trigger:
   - platform: template
     value_template: '{% if states.binary_sensor.motion_sensor_158d0001e531e0.attributes[''No
-      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e531e0.state
+      motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0001e531e0.state
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
   - condition: state
@@ -258,9 +261,9 @@
       entity_id: light.yeelight_strip_7811dc691c74
       mode: normal
     service: light.yeelight_set_mode
-  - wait_template: "{% if states.binary_sensor.motion_sensor_158d0001e4707c.attributes['No
-      motion since'] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e4707c.state
-      == 'off' %}True{% else %}False{% endif %}"
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e4707c.attributes[''No
+      motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e4707c.state
+      == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
     entity_id: light.yeelight_strip_7811dc691c74
     state: 'on'
@@ -272,7 +275,7 @@
   trigger:
   - platform: template
     value_template: '{% if states.binary_sensor.motion_sensor_158d0001e43ac7.attributes[''No
-      motion since''] | int >= 1800 and states.binary_sensor.motion_sensor_158d0001e43ac7.state
+      motion since''] | int >= 900 and states.binary_sensor.motion_sensor_158d0001e43ac7.state
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
     condition: or
@@ -307,7 +310,7 @@
     platform: state
     to: 'on'
   condition:
-  - below: '100'
+  - below: '30'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e547ae
   action:
@@ -336,10 +339,6 @@
     from: 'off'
     platform: state
     to: 'on'
-  condition:
-  - below: '100'
-    condition: numeric_state
-    entity_id: sensor.illumination_158d0001e55ff7
   action:
   - data:
       entity_id: switch.plug_158d0001deb419
@@ -353,3 +352,132 @@
   - data:
       entity_id: switch.plug_158d0001deb419
     service: switch.turn_off
+- id: '1541876800870'
+  alias: Attic - empty room
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0001e547ae.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e43ac7.state
+      == ''off'' and states.binary_sensor.motion_sensor_158d0001e55ff7.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e55ff7.state
+      == ''off''%}True{% else %}False{% endif %}'
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: switch.plug_158d0001deb419
+      state: 'on'
+    - condition: state
+      entity_id: light.yeelight_color2_7c49eb1581f6
+      state: 'on'
+  action:
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1581f6
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: switch.plug_158d0001deb419
+    service: switch.turn_off
+- id: '1542048714041'
+  alias: Guest room - motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e532dc
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.xiaomi_philips_e14_crystal
+    state: 'off'
+  - condition: state
+    entity_id: light.xiaomi_philips_e14_crystal_2
+    state: 'off'
+  - condition: state
+    entity_id: switch.plug_158d0001ded32d
+    state: 'off'
+  - below: '50'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e532dc
+  action:
+  - data:
+      entity_id: scene.guest_room_lights
+    service: scene.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e532dc.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e532dc.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - data:
+      entity_id: scene.guest_room_lights
+    service: scene.turn_off
+- id: '1542050718235'
+  alias: Guest room - toogle light
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001b182db
+      click_type: single
+    event_type: click
+    platform: event
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001be5b10
+      click_type: single
+    event_type: click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal
+      transition: 1
+    service: light.toggle
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal_2
+      transition: 1
+    service: light.toggle
+  - data:
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.toggle
+- id: '1542052917920'
+  alias: Guest room - toggle lamp
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001b182db
+      click_type: double
+    event_type: click
+    platform: event
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001be5b10
+      click_type: double
+    event_type: click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.toggle
+- id: '1542053124048'
+  alias: Guest room - bright mode
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001b182db
+      click_type: hold
+    event_type: click
+    platform: event
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001be5b10
+      click_type: hold
+    event_type: click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal
+    service: scene.turn_on
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal
+      mode: bright
+    service: light.yeelight_set_mode
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal_2
+    service: scene.turn_on
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal_2
+      mode: bright
+    service: light.yeelight_set_mode
