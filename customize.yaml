@@ -9,7 +9,9 @@ light.yeelight_strip_7811dc691c74:
 light.yeelight_strip_7811dca220d2:
   friendly_name: Wall LEDs
 light.yeelight_color2_7c49eb1581f6:
-  friendly_name: Attic light
+  friendly_name: Attic left light
+light.yeelight_color2_04cf8c7bf9ba:
+  friendly_name: Attic right light
 light.yeelight_color2_7c49eb1582dd:
   friendly_name: Tosia lamp
 light.gateway_light_34ce0088a579:
@@ -18,8 +20,6 @@ light.gateway_light_34ce00fb56e8:
   friendly_name: Tosia gateway light
 switch.plug_158d0001ded32d:
   friendly_name: Guest room lamp
-switch.plug_158d0001deb419:
-  friendly_name: Wardrobe lamp
 sensor.temperature_158d0001b9208d:
   friendly_name: Loggia temperature
 sensor.humidity_158d0001b9208d:
@@ -108,35 +108,35 @@ sensor.rtac68u_kbytesec_received_3:
   friendly_name: Download
 sensor.rtac68u_kbytesec_sent_3:
   friendly_name: Upload
-binary_sensor.motion_sensor_158d0001e43ac7:
+sensor.motion_sensor_158d0001e43ac7:
   friendly_name: Living room motion sensor
-binary_sensor.illumination_158d0001e43ac7:
+sensor.illumination_158d0001e43ac7:
   friendly_name: Living room illumination sensor
-binary_sensor.motion_sensor_158d0001e531e0:
+sensor.motion_sensor_158d0001e531e0:
   friendly_name: Hall motion sensor
-binary_sensor.illumination_158d0001e531e0:
+sensor.illumination_158d0001e531e0:
   friendly_name: Hall illumination sensor
-binary_sensor.motion_sensor_158d0001e4707c:
+sensor.motion_sensor_158d0001e4707c:
   friendly_name: Stairs motion sensor
-binary_sensor.illumination_158d0001e4707c:
+sensor.illumination_158d0001e4707c:
   friendly_name: Stairs illumination sensor
-binary_sensor.motion_sensor_158d0001e43bc7:
+sensor.motion_sensor_158d0001e43bc7:
   friendly name: Master bedroom motion sensor
-binary_sensor.illumination_158d0001e43bc7:
+sensor.illumination_158d0001e43bc7:
   friendly_name: Master bedroom illumination sensor
-binary_sensor.motion_sensor_158d0001e547ae:
+sensor.motion_sensor_158d0001e547ae:
   friendly_name: Attic entry motion sensor
-binary_sensor.illumination_158d0001e547ae:
+sensor.illumination_158d0001e547ae:
   friendly_name: Attic entry illumination sensor
-binary_sensor.motion_sensor_158d0001e55ff7:
+sensor.motion_sensor_158d0001e55ff7:
   friendly_name: Attic wardrobe motion sensor
-binary_sensor.illumination_158d0001e55ff7:
+sensor.illumination_158d0001e55ff7:
   friendly_name: Attic wardrobe illumination sensor
-binary_sensor.motion_sensor_158d0001e532dc:
+sensor.motion_sensor_158d0001e532dc:
   friendly_name: Guest room motion sensor
-binary_sensor.illumination_158d0001e532dc:
+sensor.illumination_158d0001e532dc:
   friendly_name: Guest room illumination sensor
-binary_sensor.motion_sensor_158d0001655da1:
+sensor.motion_sensor_158d0001655da1:
   friendly_name: Kitchen motion sensor
 binary_sensor.switch_158d0001be5b10:
   friendly_name: Guest room bedside table switch
@@ -146,3 +146,5 @@ binary_sensor.switch_158d00019ca9dc:
   friendly_name: Master bedroom wall switch
 binary_sensor.switch_158d00016dbe9e:
   friendly_name: Master bedroom table switch
+light.yeelight_color2_04cf8c7cc6ad:
+  friendly_name: Wardrobe lamp

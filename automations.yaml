@@ -66,11 +66,11 @@
     entity_id: light.yeelight_strip_7811dca220d2
     state: 'off'
   - above: '-10'
-    below: '30'
+    below: '20'
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
-  - below: '70'
+  - below: '30'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   - after: 06:30:00
@@ -115,7 +115,7 @@
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
   - after: 06:30:00
-    before: '20:34:59'
+    before: '20:19:59'
     condition: time
   - below: '70'
     condition: numeric_state
@@ -131,7 +131,7 @@
     platform: state
     to: 'on'
   condition:
-  - after: '20:35:00'
+  - after: '20:20:00'
     before: 06:29:59
     condition: time
   - below: '70'
@@ -322,6 +322,14 @@
       entity_id: light.yeelight_color2_7c49eb1581f6
       mode: normal
     service: light.yeelight_set_mode
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7bf9ba
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7bf9ba
+      mode: normal
+    service: light.yeelight_set_mode
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e547ae.attributes[''No
       motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e547ae.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -330,6 +338,13 @@
     state: 'on'
   - data:
       entity_id: light.yeelight_color2_7c49eb1581f6
+      transition: 1
+    service: light.turn_off
+  - condition: state
+    entity_id: light.yeelight_color2_04cf8c7bf9ba
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7bf9ba
       transition: 1
     service: light.turn_off
 - id: '1541525021925'
@@ -341,17 +356,23 @@
     to: 'on'
   action:
   - data:
-      entity_id: switch.plug_158d0001deb419
-    service: switch.turn_on
+      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      mode: normal
+    service: light.yeelight_set_mode
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e55ff7.attributes[''No
       motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e55ff7.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
-    entity_id: switch.plug_158d0001deb419
+    entity_id: light.yeelight_color2_04cf8c7cc6ad
     state: 'on'
   - data:
-      entity_id: switch.plug_158d0001deb419
-    service: switch.turn_off
+      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      transition: 1
+    service: light.turn_off
 - id: '1541876800870'
   alias: Attic - empty room
   trigger:
@@ -365,10 +386,13 @@
     condition: or
     conditions:
     - condition: state
-      entity_id: switch.plug_158d0001deb419
+      entity_id: light.yeelight_color2_7c49eb1581f6
       state: 'on'
     - condition: state
-      entity_id: light.yeelight_color2_7c49eb1581f6
+      entity_id: light.yeelight_color2_04cf8c7bf9ba
+      state: 'on'
+    - condition: state
+      entity_id: light.yeelight_color2_04cf8c7cc6ad
       state: 'on'
   action:
   - data:
@@ -403,7 +427,7 @@
       entity_id: scene.guest_room_lights
     service: scene.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e532dc.attributes[''No
-      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e532dc.state
+      motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e532dc.state
       == ''off'' %}True{% else %}False{% endif %}'
   - data:
       entity_id: scene.guest_room_lights

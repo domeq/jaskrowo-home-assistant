@@ -55,7 +55,8 @@ attic:
     - sensor.temperature_158d00023208a6
     - sensor.humidity_158d00023208a6
     - light.yeelight_color2_7c49eb1581f6
-    - switch.plug_158d0001deb419
+    - light.yeelight_color2_04cf8c7bf9ba
+    - light.yeelight_color2_04cf8c7cc6ad
 tosia_room:
   name: "Tosia's bedroom"
   entities:
@@ -97,6 +98,7 @@ automations:
     - group.all_devices
     - group.sun
     - group.switches
+    - history_graph.illumination
 sun:
   name: Sunlight
   entities:

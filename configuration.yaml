@@ -195,6 +195,20 @@ history_graph:
       - sensor.waqi_skawina_maopolska_poland
     hours_to_show: 72
     refresh: 60
+  illumination:
+    name: Illumination
+    entities:
+      - sensor.illumination_158d0001e43ac7
+      - sensor.illumination_158d0001e43bc7
+      - sensor.illumination_158d0001e4707c
+      - sensor.illumination_158d0001e531e0
+      - sensor.illumination_158d0001e532dc
+      - sensor.illumination_158d0001e547ae
+      - sensor.illumination_158d0001e55ff7
+      - sensor.illumination_34ce0088a579
+      - sensor.illumination_34ce00fb56e8
+    hours_to_show: 12
+    refresh: 60
 
 sensor:
   - platform: speedtest
