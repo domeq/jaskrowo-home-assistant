@@ -15,7 +15,7 @@ homeassistant:
   # Customize entities matching a pattern
   customize_glob:
     "sensor.illumination_*":
-      hidden: true
+      hidden: false
       homebridge_hidden: true
       emulated_hue_hidden: true
     "sensor.pressure_*":
@@ -205,8 +205,6 @@ history_graph:
       - sensor.illumination_158d0001e532dc
       - sensor.illumination_158d0001e547ae
       - sensor.illumination_158d0001e55ff7
-      - sensor.illumination_34ce0088a579
-      - sensor.illumination_34ce00fb56e8
     hours_to_show: 12
     refresh: 60
 
