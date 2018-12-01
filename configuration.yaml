@@ -266,14 +266,10 @@ sensor:
         icon_template: 'mdi:cloud-outline'
         entity_id: sensor.waqi_skawina_maopolska_poland
 
-device_tracker:
-  - platform: asuswrt
-    host: 192.168.1.254
-    username: wojtek
-    ssh_key: /home/homeassistant/.homeassistant/id_rsa
-    new_device_defaults:
-      track_new_devices: false
-      hide_if_away: false
+asuswrt:
+  host: 192.168.1.254
+  username: wojtek
+  ssh_key: /home/homeassistant/.homeassistant/id_rsa
 
 weather:
   - platform: yweather
