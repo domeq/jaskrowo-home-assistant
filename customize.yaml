@@ -104,9 +104,9 @@ sensor.waqi_aleja_krasinskiego_krakow_maopolska_poland:
   friendly_name: Aleje PM 2.5
 sensor.waqi_skawina_maopolska_poland:
   friendly_name: Skawina PM 2.5
-sensor.rtac68u_kbytesec_received_3:
+sensor.asuswrt_download_speed:
   friendly_name: Download
-sensor.rtac68u_kbytesec_sent_3:
+sensor.asuswrt_upload_speed:
   friendly_name: Upload
 sensor.motion_sensor_158d0001e43ac7:
   friendly_name: Living room motion sensor
