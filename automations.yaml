@@ -317,7 +317,7 @@
   - data:
       entity_id: light.yeelight_color2_7c49eb1581f6
       transition: 1
-      brightness: 75
+      brightness: 100
     service: light.turn_on
   - data:
       entity_id: light.yeelight_color2_7c49eb1581f6
@@ -326,7 +326,7 @@
   - data:
       entity_id: light.yeelight_color2_04cf8c7bf9ba
       transition: 1
-      brightness: 75
+      brightness: 100
     service: light.turn_on
   - data:
       entity_id: light.yeelight_color2_04cf8c7bf9ba
@@ -421,7 +421,7 @@
   - condition: state
     entity_id: switch.plug_158d0001ded32d
     state: 'off'
-  - below: '50'
+  - below: '30'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e532dc
   action:
