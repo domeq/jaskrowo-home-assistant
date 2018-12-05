@@ -55,22 +55,15 @@
   alias: Living room motion - 01 normal
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
-    from: 'off'
     platform: state
     to: 'on'
   condition:
-  - condition: state
-    entity_id: light.xiaomi_philips_ceiling_light
-    state: 'off'
-  - condition: state
-    entity_id: light.yeelight_strip_7811dca220d2
-    state: 'off'
   - above: '-10'
-    below: '20'
+    below: '30'
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
-  - below: '30'
+  - below: '70'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   - after: 06:30:00
@@ -84,7 +77,6 @@
   alias: Living room motion - 02 slight dim
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
-    from: 'off'
     platform: state
     to: 'on'
   condition:
@@ -155,11 +147,9 @@
   - below: '35'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e531e0
-  - after: sunrise
-    after_offset: -02:00:00
-    before: sunset
-    before_offset: 03:00:00
-    condition: sun
+  - condition: time
+    after: 05:40:00
+    before: '21:30:00'
   action:
   - data:
       entity_id: scene.hall_light_day
@@ -193,14 +183,9 @@
     - below: '35'
       condition: numeric_state
       entity_id: sensor.illumination_158d0001e531e0
-    - condition: or
-      conditions:
-      - condition: sun
-        after: sunset
-        after_offset: 03:00:00
-      - condition: sun
-        before: sunrise
-        before_offset: -02:00:00
+    - condition: time
+      after: '21:30:01'
+      before: 05:39:59
   action:
   - data:
       entity_id: scene.hall_light_night
@@ -289,6 +274,9 @@
     - condition: state
       entity_id: light.yeelight_strip_7811dc691c74
       state: 'on'
+    - condition: state
+      entity_id: switch.plug_158d0001deb419
+      state: 'on'
   action:
   - data:
       entity_id: light.xiaomi_philips_ceiling_light
@@ -302,6 +290,9 @@
       entity_id: light.yeelight_strip_7811dc691c74
       transition: 1
     service: light.turn_off
+  - data:
+      entity_id: switch.plug_158d0001deb419
+    service: switch.turn_off
 - id: '1541522658112'
   alias: Attic - entry area motion
   trigger:
@@ -317,7 +308,7 @@
   - data:
       entity_id: light.yeelight_color2_7c49eb1581f6
       transition: 1
-      brightness: 100
+      brightness: 255
     service: light.turn_on
   - data:
       entity_id: light.yeelight_color2_7c49eb1581f6
@@ -326,7 +317,7 @@
   - data:
       entity_id: light.yeelight_color2_04cf8c7bf9ba
       transition: 1
-      brightness: 100
+      brightness: 255
     service: light.turn_on
   - data:
       entity_id: light.yeelight_color2_04cf8c7bf9ba
@@ -408,7 +399,6 @@
   alias: Guest room - motion
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e532dc
-    from: 'off'
     platform: state
     to: 'on'
   condition:
@@ -515,3 +505,75 @@
       entity_id: light.xiaomi_philips_e14_crystal_2
       mode: bright
     service: light.yeelight_set_mode
+- id: '1543665916713'
+  alias: Living room - bright enough
+  trigger:
+  - above: '120'
+    entity_id: sensor.illumination_158d0001e43ac7
+    platform: numeric_state
+    for:
+      minutes: 5
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: light.xiaomi_philips_ceiling_light
+      state: 'on'
+    - condition: state
+      entity_id: light.yeelight_strip_7811dca220d2
+      state: 'on'
+    - condition: state
+      entity_id: light.yeelight_strip_7811dc691c74
+      state: 'on'
+    - condition: state
+      entity_id: switch.plug_158d0001deb419
+      state: 'on'
+  action:
+  - data:
+      entity_id: light.xiaomi_philips_ceiling_light
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.yeelight_strip_7811dca220d2
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: switch.plug_158d0001deb419
+    service: switch.turn_off
+- id: '1543859792965'
+  alias: Tosia room light
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0002b85113
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.yeelight_color2_7c49eb1582dd
+    state: 'off'
+  - below: '10'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0002b85113
+  - condition: time
+    after: '15:00:00'
+    before: '20:00:00'
+  action:
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1582dd
+      transition: 1
+      brightness: 3
+      rgb_color: [255,0,255]
+    service: light.turn_on
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1566bb
+      mode: rgb
+    service: light.yeelight_set_mode
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0002b85113.attributes[''No
+      motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0002b85113.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.yeelight_color2_7c49eb1582dd
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1582dd
+    service: light.turn_off

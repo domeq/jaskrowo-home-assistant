@@ -148,3 +148,21 @@ binary_sensor.switch_158d00016dbe9e:
   friendly_name: Master bedroom table switch
 light.yeelight_color2_04cf8c7cc6ad:
   friendly_name: Wardrobe lamp
+switch.plug_158d0001deb419:
+  friendly_name: Wall Christmas lights
+binary_sensor.motion_sensor_158d0002b70d79:
+  friendly_name: Wardrobe motion sensor
+sensor.illumination_158d0002b70d79:
+  friendly_name: Wardrobe illumination sensor
+binary_sensor.motion_sensor_158d0002b85113:
+  friendly_name: Tosia room motion sensor
+sensor.illumination_158d0002b85113:
+  friendly_name: Tosia room illumination sensor
+binary_sensor.motion_sensor_158d0002b72030:
+  friendly_name: Upstairs bathroom motion sensor
+sensor.illumination_158d0002b72030:
+  friendly_name: Upstairs bathroom illumination sensor
+binary_sensor.motion_sensor_158d0002b422b4:
+  friendly_name: Downstairs bathroom motion sensor
+sensor.illumination_158d0002b422b4:
+  friendly_name: Downstairs bathroom illumination sensor
