@@ -80,7 +80,7 @@ http:
   # Secrets are defined in the file secrets.yaml
   # api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  # base_url: example.duckdns.org:8123
+  base_url: jaskrowo.asuscomm.com:8123
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -285,7 +285,8 @@ scene:
             transition: 5
             brightness_pct: 65
         light.yeelight_strip_7811dca220d2: off
-        switch.plug_158d0001deb419: on
+        switch.plug_158d0001deb419: off
+        switch.plug_158d0001de79e6: off
   - name: Living room slight dim
     entities:
         light.xiaomi_philips_ceiling_light:
@@ -294,6 +295,7 @@ scene:
             brightness_pct: 50
         light.yeelight_strip_7811dca220d2: off
         switch.plug_158d0001deb419: on
+        switch.plug_158d0001de79e6: on
   - name: Living room evening
     entities:
         light.xiaomi_philips_ceiling_light:
@@ -302,6 +304,7 @@ scene:
             brightness_pct: 35
         light.yeelight_strip_7811dca220d2: off
         switch.plug_158d0001deb419: on
+        switch.plug_158d0001de79e6: on
   - name: Living room TV mode
     entities:
         light.xiaomi_philips_ceiling_light: off
@@ -311,20 +314,7 @@ scene:
             brightness_pct: 90
             rgb_color: [255,205,166]
         switch.plug_158d0001deb419: on
-  - name: Hall light day
-    entities:
-        light.yeelight_color2_7c49eb1566bb:
-            state: on
-            transition: 1
-            brightness_pct: 100
-            mode: normal
-  - name: Hall light night
-    entities:
-        light.yeelight_color2_7c49eb1566bb:
-            state: on
-            transition: 1
-            brightness_pct: 10
-            mode: normal
+        switch.plug_158d0001de79e6: on
   - name: Guest room lights
     entities:
         light.xiaomi_philips_e14_crystal:

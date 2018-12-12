@@ -166,3 +166,5 @@ binary_sensor.motion_sensor_158d0002b422b4:
   friendly_name: Downstairs bathroom motion sensor
 sensor.illumination_158d0002b422b4:
   friendly_name: Downstairs bathroom illumination sensor
+switch.plug_158d0001de79e6:
+  friendly_name: Christmas tree

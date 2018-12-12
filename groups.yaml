@@ -36,6 +36,7 @@ living_room:
     - light.xiaomi_philips_ceiling_light
     - light.yeelight_strip_7811dca220d2
     - switch.plug_158d0001deb419
+    - switch.plug_158d0001de79e6
     - light.yeelight_strip_7811dc691c74
     - light.yeelight_color2_7c49eb1566bb
     - remote.jaskrowo_media
