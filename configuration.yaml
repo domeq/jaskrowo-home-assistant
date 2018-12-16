@@ -325,5 +325,3 @@ scene:
             state: on
             transition: 1
             brightness_pct: 100
-        switch.plug_158d0001ded32d:
-            state: on

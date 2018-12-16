@@ -19,7 +19,7 @@ light.gateway_light_34ce0088a579:
 light.gateway_light_34ce00fb56e8:
   friendly_name: Tosia gateway light
 switch.plug_158d0001ded32d:
-  friendly_name: Guest room lamp
+  friendly_name: Tosia Christmas tree
 sensor.temperature_158d0001b9208d:
   friendly_name: Loggia temperature
 sensor.humidity_158d0001b9208d:
@@ -168,3 +168,5 @@ sensor.illumination_158d0002b422b4:
   friendly_name: Downstairs bathroom illumination sensor
 switch.plug_158d0001de79e6:
   friendly_name: Christmas tree
+binary_sensor.switch_158d0001b1827e:
+  friendly_name: Tosia switch
