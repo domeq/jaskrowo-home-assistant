@@ -15,6 +15,11 @@
     to: 'on'
   condition: []
   action:
+  - service: tts.google_say
+    entity_id: media_player.googlehome8282
+    data:
+      message: 'Open windows detected, turning off air purifier.'
+      language: 'en-us'
   - data:
       command: PowerToggle
       device: 42382138
@@ -46,6 +51,11 @@
     entity_id: binary_sensor.door_window_sensor_158d00023709f7
     state: 'off'
   action:
+  - service: tts.google_say
+    entity_id: media_player.googlehome8282
+    data:
+      message: 'Windows closed, turning on air purifier.'
+      language: 'en-us'
   - data:
       command: PowerToggle
       device: 42382138
@@ -422,8 +432,21 @@
     entity_id: sensor.illumination_158d0001e532dc
   action:
   - data:
-      entity_id: scene.guest_room_lights
-    service: scene.turn_on
+      entity_id: light.xiaomi_philips_e14_crystal
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal_2
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal
+      scene: 2
+    service: light.xiaomi_miio_set_scene
+  - data:
+      entity_id: light.xiaomi_philips_e14_crystal_2
+      scene: 2
+    service: light.xiaomi_miio_set_scene
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e532dc.attributes[''No
       motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e532dc.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -477,16 +500,16 @@
       entity_id: light.xiaomi_philips_e14_crystal
     service: scene.turn_on
   - data:
-      entity_id: light.xiaomi_philips_e14_crystal
-      mode: bright
-    service: light.yeelight_set_mode
-  - data:
       entity_id: light.xiaomi_philips_e14_crystal_2
     service: scene.turn_on
   - data:
+      entity_id: light.xiaomi_philips_e14_crystal
+      scene: 1
+    service: light.xiaomi_miio_set_scene
+  - data:
       entity_id: light.xiaomi_philips_e14_crystal_2
-      mode: bright
-    service: light.yeelight_set_mode
+      scene: 1
+    service: light.xiaomi_miio_set_scene
 - id: '1543665916713'
   alias: Living room - bright enough
   trigger:
@@ -494,7 +517,7 @@
     entity_id: sensor.illumination_158d0001e43ac7
     platform: numeric_state
     for:
-      minutes: 5
+      minutes: 2
   condition:
     condition: or
     conditions:
@@ -511,6 +534,11 @@
       entity_id: switch.plug_158d0001deb419
       state: 'on'
   action:
+  - service: tts.google_say
+    entity_id: media_player.googlehome8282
+    data:
+      message: "Looks like it's sunny - turning the lights off."
+      language: 'en-us'
   - data:
       entity_id: light.xiaomi_philips_ceiling_light
       transition: 1
@@ -546,7 +574,7 @@
   - data:
       entity_id: light.yeelight_color2_7c49eb1582dd
       transition: 1
-      brightness: 3
+      brightness: 15
       rgb_color:
       - 255
       - 0
@@ -598,3 +626,49 @@
   - data:
       entity_id: switch.plug_158d0001ded32d
     service: switch.toggle
+- id: '1544967617743'
+  alias: Leaving home
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d00019d5813
+      click_type: long_click_press
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - service: tts.google_say
+    entity_id: media_player.googlehome8282
+    data:
+      message: 'See you later, turning the lights off.'
+      language: 'en-us'
+  - delay: 00:00:02
+  - data:
+      entity_id: scene.leaving_home
+    service: scene.turn_on
+- id: '1544970728739'
+  alias: Coming home
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d00019d5813
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - service: tts.google_say
+    entity_id: media_player.googlehome8282
+    data:
+      message: 'Welcome home!'
+      language: 'en-us'
+  - data:
+      entity_id: scene.living_room_normal
+    service: scene.turn_on
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1566bb
+      transition: 1
+      brightness: 230
+    service: light.turn_on
+  - data:
+      entity_id: light.yeelight_strip_7811dc68588d
+      transition: 1
+    service: light.turn_on
