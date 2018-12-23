@@ -11,6 +11,7 @@ default_view:
     - weather.krakow
     - group.air_pollution
     - history_graph.air_pollution
+    - group.phone_battery
     - group.network
     - history_graph.temperature
     - history_graph.humidity
@@ -83,6 +84,12 @@ network:
     - sensor.speedtest_ping
     - sensor.asuswrt_download_speed
     - sensor.asuswrt_upload_speed
+phone_battery:
+  name: Device battery
+  entities:
+    - sensor.battery_gosiak_mia2
+    - sensor.battery_wiskra_mimix2
+    - sensor.battery_wiskra_ipad
 air_pollution:
   name: Air pollution
   entities:

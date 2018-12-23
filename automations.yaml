@@ -18,8 +18,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: Open windows detected, turning off air purifier.
-      language: en-us
+      message: Wykryłem otwarte okno, wyłączam oczyszczacz powietrza.
+      language: pl
   - data:
       command: PowerToggle
       device: 42382138
@@ -54,8 +54,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: Windows closed, turning on air purifier.
-      language: en-us
+      message: Wszystkie okna zamknięte, włączam oczyszczacz powietrza.
+      language: pl
   - data:
       command: PowerToggle
       device: 42382138
@@ -90,7 +90,7 @@
     platform: state
     to: 'on'
   condition:
-  - below: '-30'
+  - below: '0'
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
@@ -429,11 +429,11 @@
 - id: '1543665916713'
   alias: Living room - bright enough
   trigger:
-  - above: '120'
+  - above: '110'
     entity_id: sensor.illumination_158d0001e43ac7
     platform: numeric_state
     for:
-      minutes: 2
+      minutes: 3
   condition:
     condition: or
     conditions:
@@ -453,8 +453,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: Looks like it's sunny - turning the lights off.
-      language: en-us
+      message: Wygląda, że wystarczająco jasno - wyłączam światła.
+      language: pl
   - data:
       entity_id: light.xiaomi_philips_ceiling_light
       transition: 1
@@ -558,8 +558,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: See you later, turning the lights off.
-      language: en-us
+      message: Do zobaczenia później - wyłączam światła.
+      language: pl
   - delay: 00:00:02
   - data:
       entity_id: scene.leaving_home
@@ -577,8 +577,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: Welcome home!
-      language: en-us
+      message: Witaj w domu! Włączam światła.
+      language: pl
   - data:
       entity_id: scene.living_room_normal
     service: scene.turn_on
@@ -613,3 +613,81 @@
   - data:
       entity_id: switch.circadian_lighting_attic_lights_auto
     service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_master_bedroom_lights_auto
+    service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_kitchen_lights_auto
+    service: switch.turn_on
+- id: '1545565835153'
+  alias: Master bedroom - motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e43bc7
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.xiaomi_philips_e14_frosted
+    state: 'off'
+  - below: '35'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0001e43bc7
+  - after: '10:00:00'
+    before: '21:00:00'
+    condition: time
+  action:
+  - data:
+      entity_id: light.xiaomi_philips_e14_frosted
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.gateway_light_34ce00fb56e8
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.yeelight_strip_7811dc66f063
+      transition: 1
+    service: light.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e43bc7.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e43bc7.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.xiaomi_philips_e14_frosted
+    state: 'on'
+  - data:
+      entity_id: light.xiaomi_philips_e14_frosted
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.gateway_light_34ce00fb56e8
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.yeelight_strip_7811dc66f063
+      transition: 1
+    service: light.turn_off
+- id: '1545565868381'
+  alias: Master bedroom - empty
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0001e43bc7.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e43bc7.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  condition:
+  - condition: state
+    entity_id: light.xiaomi_philips_e14_frosted
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.xiaomi_philips_e14_frosted
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.gateway_light_34ce00fb56e8
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.yeelight_strip_7811dc66f063
+      transition: 1
+    service: light.turn_off

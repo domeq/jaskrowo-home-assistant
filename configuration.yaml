@@ -86,7 +86,7 @@ http:
     - https://google.com
     - https://www.home-assistant.io
   # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
+  api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: jaskrowo.asuscomm.com:8123
 
@@ -240,6 +240,38 @@ sensor:
     calibration_factor: 2.0
   - platform: template
     sensors:
+      battery_wiskra_mimix2:
+        friendly_name: Wojtek's Mi Mix 2
+        unit_of_measurement: '%'
+        value_template: >-
+            {%- if states.device_tracker.wiskra_mimix2.attributes.battery %}
+                {{ states.device_tracker.wiskra_mimix2.attributes.battery|round }}
+            {% else %}
+                {{ states.device_tracker.wiskra_mimix2.state }}
+            {%- endif %}
+        device_class: battery
+      battery_gosiak_mia2:
+        friendly_name: Gosiak's Mi A2 Lite
+        unit_of_measurement: '%'
+        value_template: >-
+            {%- if states.device_tracker.gosiak_mia2.attributes.battery %}
+                {{ states.device_tracker.gosiak_mia2.attributes.battery|round }}
+            {% else %}
+                {{ states.device_tracker.gosiak_mia2.state }}
+            {%- endif %}
+        device_class: battery
+      battery_wiskra_ipad:
+        friendly_name: iPad
+        unit_of_measurement: '%'
+        value_template: >-
+            {%- if states.device_tracker.wiskra_1996c7e73ef9451bbe555b27c09d3c5d.attributes.battery %}
+                {{ states.device_tracker.wiskra_1996c7e73ef9451bbe555b27c09d3c5d.attributes.battery|round }}
+            {% else %}
+                {{ states.device_tracker.wiskra_1996c7e73ef9451bbe555b27c09d3c5d.state }}
+            {%- endif %}
+        device_class: battery
+  - platform: template
+    sensors:
       waqi_kurdwanow_krakow_maopolska_poland_pm_2_5:
         friendly_name: "Kurdwanów PM 2.5"
         value_template: "{{ states.sensor.waqi_kurdwanow_krakow_maopolska_poland.attributes.pm_2_5 }}"
@@ -288,9 +320,15 @@ weather:
 
 sun:
 
+lovelace:
+  mode: yaml
+
 # Example configuration.yaml entry
 circadian_lighting:
+  max_colortemp: 4500
+  min_colortemp: 2800
   sunrise_offset: "-02:00:00"
+  sunset_offset: "02:00:00"
 
 switch:
   - platform: circadian_lighting
@@ -300,12 +338,12 @@ switch:
       - light.xiaomi_philips_ceiling_light
   - platform: circadian_lighting
     name: "Living room auto LEDs"
-    lights_ct:
+    lights_rgb:
       - light.yeelight_strip_7811dca220d2
       - light.yeelight_strip_7811dc691c74
   - platform: circadian_lighting
     name: "Hall lights auto"
-    lights_ct:
+    lights_rgb:
       - light.yeelight_color2_7c49eb1566bb
   - platform: circadian_lighting
     name: "Guest room lights auto"
@@ -313,11 +351,21 @@ switch:
       - light.xiaomi_philips_e14_crystal
       - light.xiaomi_philips_e14_crystal_2
   - platform: circadian_lighting
-    name: "Attic lights auto"
+    name: "Master bedroom lights auto"
     lights_ct:
+      - light.xiaomi_philips_e14_frosted
+      - light.gateway_light_34ce00fb56e8
+  - platform: circadian_lighting
+    name: "Attic lights auto"
+    lights_rgb:
       - light.yeelight_color2_7c49eb1581f6
       - light.yeelight_color2_04cf8c7bf9ba
       - light.yeelight_color2_04cf8c7cc6ad
+  - platform: circadian_lighting
+    name: "Kitchen lights auto"
+    lights_rgb:
+      - light.yeelight_strip_7811dc68588d
+      - light.gateway_light_34ce0088a579
 
 scene:
   - name: Living room day
@@ -338,16 +386,6 @@ scene:
         light.yeelight_strip_7811dca220d2: on
         switch.plug_158d0001deb419: on
         switch.plug_158d0001de79e6: on
-  - name: Guest room lights
-    entities:
-        light.xiaomi_philips_e14_crystal:
-            state: on
-            transition: 1
-            brightness_pct: 100
-        light.xiaomi_philips_e14_crystal_2:
-            state: on
-            transition: 1
-            brightness_pct: 100
   - name: Leaving home
     entities:
       light.gateway_light_34ce0088a579: off
