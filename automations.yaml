@@ -18,8 +18,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: 'Open windows detected, turning off air purifier.'
-      language: 'en-us'
+      message: Open windows detected, turning off air purifier.
+      language: en-us
   - data:
       command: PowerToggle
       device: 42382138
@@ -54,8 +54,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: 'Windows closed, turning on air purifier.'
-      language: 'en-us'
+      message: Windows closed, turning on air purifier.
+      language: en-us
   - data:
       command: PowerToggle
       device: 42382138
@@ -68,7 +68,7 @@
     platform: state
     to: 'on'
   condition:
-  - above: '-10'
+  - above: '0'
     below: '30'
     condition: numeric_state
     entity_id: sun.sun
@@ -81,32 +81,10 @@
     condition: time
   action:
   - data:
-      entity_id: scene.living_room_normal
-    service: scene.turn_on
-- id: '1541276176307'
-  alias: Living room motion - 02 slight dim
-  trigger:
-  - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
-    platform: state
-    to: 'on'
-  condition:
-  - above: '-30'
-    below: '-10'
-    condition: numeric_state
-    entity_id: sun.sun
-    value_template: '{{ state.attributes.elevation }}'
-  - after: 06:30:00
-    before: '22:00:00'
-    condition: time
-  - below: '70'
-    condition: numeric_state
-    entity_id: sensor.illumination_158d0001e43ac7
-  action:
-  - data:
-      entity_id: scene.living_room_slight_dim
+      entity_id: scene.living_room_day
     service: scene.turn_on
 - id: '1541276365179'
-  alias: Living room motion - 03 evening
+  alias: Living room motion - 02 evening
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
     platform: state
@@ -127,7 +105,7 @@
       entity_id: scene.living_room_evening
     service: scene.turn_on
 - id: '1541276548411'
-  alias: Living room motion - 04 TV mode
+  alias: Living room motion - 03 TV mode
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
     platform: state
@@ -144,7 +122,7 @@
       entity_id: scene.living_room_tv_mode
     service: scene.turn_on
 - id: '1541319904416'
-  alias: Hall - motion daytime
+  alias: Hall - motion
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e531e0
     from: 'off'
@@ -157,19 +135,11 @@
   - below: '35'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e531e0
-  - condition: time
-    after: 05:40:00
-    before: '20:19:59'
   action:
   - data:
       entity_id: light.yeelight_color2_7c49eb1566bb
       transition: 1
-      brightness: 230
     service: light.turn_on
-  - data:
-      entity_id: light.yeelight_color2_7c49eb1566bb
-      mode: normal
-    service: light.yeelight_set_mode
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e531e0.attributes[''No
       motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e531e0.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -178,48 +148,6 @@
     state: 'on'
   - data:
       entity_id: light.yeelight_color2_7c49eb1566bb
-    service: light.turn_off
-- id: '1541323739426'
-  alias: Hall - motion night
-  trigger:
-  - entity_id: binary_sensor.motion_sensor_158d0001e531e0
-    from: 'off'
-    platform: state
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: state
-      entity_id: light.yeelight_color2_7c49eb1566bb
-      state: 'off'
-    - below: '35'
-      condition: numeric_state
-      entity_id: sensor.illumination_158d0001e531e0
-    - condition: or
-      conditions:
-      - condition: time
-        after: '20:20:00'
-      - condition: time
-        before: 05:39:59
-  action:
-  - data:
-      entity_id: light.yeelight_color2_7c49eb1566bb
-      transition: 1
-      brightness: 3
-    service: light.turn_on
-  - data:
-      entity_id: light.yeelight_color2_7c49eb1566bb
-      mode: normal
-    service: light.yeelight_set_mode
-  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e531e0.attributes[''No
-      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e531e0.state
-      == ''off'' %}True{% else %}False{% endif %}'
-  - condition: state
-    entity_id: light.yeelight_color2_7c49eb1566bb
-    state: 'on'
-  - data:
-      entity_id: light.yeelight_color2_7c49eb1566bb
-      transition: 1
     service: light.turn_off
 - id: '1541327330757'
   alias: Hall - empty room
@@ -255,10 +183,6 @@
   - data:
       entity_id: light.yeelight_strip_7811dc691c74
     service: light.turn_on
-  - data:
-      entity_id: light.yeelight_strip_7811dc691c74
-      mode: normal
-    service: light.yeelight_set_mode
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e4707c.attributes[''No
       motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e4707c.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -439,14 +363,6 @@
       entity_id: light.xiaomi_philips_e14_crystal_2
       transition: 1
     service: light.turn_on
-  - data:
-      entity_id: light.xiaomi_philips_e14_crystal
-      scene: 2
-    service: light.xiaomi_miio_set_scene
-  - data:
-      entity_id: light.xiaomi_philips_e14_crystal_2
-      scene: 2
-    service: light.xiaomi_miio_set_scene
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e532dc.attributes[''No
       motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e532dc.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -459,7 +375,7 @@
       transition: 1
     service: light.turn_off
 - id: '1542050718235'
-  alias: Guest room - toogle light
+  alias: Guest room - toggle light
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001b182db
@@ -537,8 +453,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: "Looks like it's sunny - turning the lights off."
-      language: 'en-us'
+      message: Looks like it's sunny - turning the lights off.
+      language: en-us
   - data:
       entity_id: light.xiaomi_philips_ceiling_light
       transition: 1
@@ -636,11 +552,14 @@
     platform: event
   condition: []
   action:
+  - data:
+      entity_id: remote.jaskrowo_media
+    service: remote.turn_off
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: 'See you later, turning the lights off.'
-      language: 'en-us'
+      message: See you later, turning the lights off.
+      language: en-us
   - delay: 00:00:02
   - data:
       entity_id: scene.leaving_home
@@ -658,8 +577,8 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data:
-      message: 'Welcome home!'
-      language: 'en-us'
+      message: Welcome home!
+      language: en-us
   - data:
       entity_id: scene.living_room_normal
     service: scene.turn_on
@@ -672,3 +591,25 @@
       entity_id: light.yeelight_strip_7811dc68588d
       transition: 1
     service: light.turn_on
+- id: '1545557982983'
+  alias: Turn on Circadian Lighting switches on startup
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+  - data:
+      entity_id: switch.circadian_lighting_hall_lights_auto
+    service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_living_room_auto_ceiling
+    service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_living_room_auto_leds
+    service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_guest_room_lights_auto
+    service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_attic_lights_auto
+    service: switch.turn_on

@@ -66,6 +66,14 @@ homeassistant:
       hidden: true
       homebridge_hidden: true
       emulated_hue_hidden: true
+    "group.all_switches":
+      hidden: false
+      homebridge_hidden: true
+      emulated_hue_hidden: true"
+    "group.all_devices":
+      hidden: false
+      homebridge_hidden: true
+      emulated_hue_hidden: true"
 
 # Enables the frontend
 frontend:
@@ -109,6 +117,9 @@ tts:
 
 # Cloud
 cloud:
+
+map:
+owntracks:
 
 group: !include groups.yaml
 automation: !include automations.yaml
@@ -277,42 +288,54 @@ weather:
 
 sun:
 
+# Example configuration.yaml entry
+circadian_lighting:
+  sunrise_offset: "-02:00:00"
+
+switch:
+  - platform: circadian_lighting
+    name: "Living room auto ceiling"
+    max_brightness: 50
+    lights_ct:
+      - light.xiaomi_philips_ceiling_light
+  - platform: circadian_lighting
+    name: "Living room auto LEDs"
+    lights_ct:
+      - light.yeelight_strip_7811dca220d2
+      - light.yeelight_strip_7811dc691c74
+  - platform: circadian_lighting
+    name: "Hall lights auto"
+    lights_ct:
+      - light.yeelight_color2_7c49eb1566bb
+  - platform: circadian_lighting
+    name: "Guest room lights auto"
+    lights_ct:
+      - light.xiaomi_philips_e14_crystal
+      - light.xiaomi_philips_e14_crystal_2
+  - platform: circadian_lighting
+    name: "Attic lights auto"
+    lights_ct:
+      - light.yeelight_color2_7c49eb1581f6
+      - light.yeelight_color2_04cf8c7bf9ba
+      - light.yeelight_color2_04cf8c7cc6ad
+
 scene:
-  - name: Living room normal
+  - name: Living room day
     entities:
-        light.xiaomi_philips_ceiling_light:
-            state: on
-            transition: 5
-            brightness_pct: 65
+        light.xiaomi_philips_ceiling_light: on
         light.yeelight_strip_7811dca220d2: off
         switch.plug_158d0001deb419: off
         switch.plug_158d0001de79e6: off
-  - name: Living room slight dim
-    entities:
-        light.xiaomi_philips_ceiling_light:
-            state: on
-            transition: 5
-            brightness_pct: 50
-        light.yeelight_strip_7811dca220d2: off
-        switch.plug_158d0001deb419: on
-        switch.plug_158d0001de79e6: on
   - name: Living room evening
     entities:
-        light.xiaomi_philips_ceiling_light:
-            state: on
-            transition: 5
-            brightness_pct: 35
+        light.xiaomi_philips_ceiling_light: on
         light.yeelight_strip_7811dca220d2: off
         switch.plug_158d0001deb419: on
         switch.plug_158d0001de79e6: on
   - name: Living room TV mode
     entities:
         light.xiaomi_philips_ceiling_light: off
-        light.yeelight_strip_7811dca220d2:
-            state: on
-            transition: 5
-            brightness_pct: 90
-            rgb_color: [255,205,166]
+        light.yeelight_strip_7811dca220d2: on
         switch.plug_158d0001deb419: on
         switch.plug_158d0001de79e6: on
   - name: Guest room lights

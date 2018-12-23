@@ -99,6 +99,7 @@ automations:
     - group.all_automations
     - group.all_devices
     - group.sun
+    - group.all_switches
     - group.switches
     - history_graph.illumination
 sun:
