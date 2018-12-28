@@ -265,6 +265,8 @@ switch:
     lights_ct:
       - light.xiaomi_philips_e14_frosted
       - light.gateway_light_34ce00fb56e8
+    lights_rgb:
+      - light.gateway_light_34ce00fb56e8
   - platform: circadian_lighting
     name: "Attic lights auto"
     lights_ct:
@@ -276,6 +278,7 @@ switch:
     min_brightness: 75
     lights_ct:
       - light.yeelight_strip_7811dc68588d
+    lights_rgb:
       - light.gateway_light_34ce0088a579
 
 scene:

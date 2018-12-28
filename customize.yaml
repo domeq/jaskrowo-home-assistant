@@ -16,8 +16,12 @@ light.yeelight_color2_7c49eb1582dd:
   friendly_name: Tosia lamp
 light.gateway_light_34ce0088a579:
   friendly_name: Kitchen gateway light
+sensor.illumination_34ce0088a579:
+  friendly_name: Kitchen gateway illumination sensor
 light.gateway_light_34ce00fb56e8:
-  friendly_name: Tosia gateway light
+  friendly_name: Master bedroom gateway light
+sensor.illumination_34ce00fb56e8:
+  friendly_name: Master bedroom gateway illumination sensor
 switch.plug_158d0001ded32d:
   friendly_name: Tosia Christmas tree
 sensor.temperature_158d0001b9208d:
@@ -178,3 +182,7 @@ binary_sensor.wall_switch_right_158d0001e06c11:
   friendly_name: Living room left wall switch - right button
 binary_sensor.wall_switch_both_158d0001e06c11:
   friendly_name: Living room left wall switch - both buttons
+binary_sensor.switch_158d0001f9c3fe:
+  friendly_name: Attic desk switch
+binary_sensor.switch_158d0001d8eeb1:
+  friendly_name: Tosia feeder

@@ -81,11 +81,11 @@
     condition: time
   action:
   - data:
-      entity_id: switch.circadian_lighting_living_room_auto_ceiling
-    service: switch.turn_on
-  - data:
       entity_id: scene.living_room_day
     service: scene.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_living_room_auto_ceiling
+    service: switch.turn_on
 - id: '1541276365179'
   alias: Living room motion - 02 evening
   trigger:
@@ -105,11 +105,11 @@
     entity_id: sensor.illumination_158d0001e43ac7
   action:
   - data:
-      entity_id: switch.circadian_lighting_living_room_auto_ceiling
-    service: switch.turn_on
-  - data:
       entity_id: scene.living_room_evening
     service: scene.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_living_room_auto_ceiling
+    service: switch.turn_on
 - id: '1541276548411'
   alias: Living room motion - 03 TV mode
   trigger:
@@ -125,11 +125,11 @@
     entity_id: sensor.illumination_158d0001e43ac7
   action:
   - data:
-      entity_id: switch.circadian_lighting_living_room_auto_ceiling
-    service: switch.turn_on
-  - data:
       entity_id: scene.living_room_tv_mode
     service: scene.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_living_room_auto_ceiling
+    service: switch.turn_on
 - id: '1541319904416'
   alias: Hall - motion
   trigger:
@@ -211,6 +211,11 @@
     value_template: '{% if states.binary_sensor.motion_sensor_158d0001e43ac7.attributes[''No
       motion since''] | int >= 900 and states.binary_sensor.motion_sensor_158d0001e43ac7.state
       == ''off'' %}True{% else %}False{% endif %}'
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000101c2a1_2
+      action_type: flip180
   condition:
     condition: or
     conditions:
@@ -662,7 +667,7 @@
       transition: 1
     service: light.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e43bc7.attributes[''No
-      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001e43bc7.state
+      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e43bc7.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
     entity_id: light.xiaomi_philips_e14_frosted
@@ -788,6 +793,11 @@
       click_type: single
     event_type: xiaomi_aqara.click
     platform: event
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000101c2a1_2
+      action_type: flip90
   condition: []
   action:
   - data:
@@ -802,6 +812,11 @@
       click_type: single
     event_type: xiaomi_aqara.click
     platform: event
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000101c2a1_2
+      action_type: move
   condition:
   - condition: state
     entity_id: light.xiaomi_philips_ceiling_light
@@ -824,6 +839,11 @@
       click_type: both
     event_type: xiaomi_aqara.click
     platform: event
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d000101c2a1_2
+      action_type: shake_air
   condition: []
   action:
   - data:
@@ -916,18 +936,18 @@
     platform: event
   condition: []
   action:
-    - data:
-        entity_id: light.xiaomi_philips_e14_frosted
-        transition: 1
-      service: light.toggle
-    - data:
-        entity_id: light.yeelight_strip_7811dc66f063
-        transition: 1
-      service: light.toggle
-    - data:
-        entity_id: light.gateway_light_34ce00fb56e8
-        transition: 1
-      service: light.toggle
+  - data:
+      entity_id: light.xiaomi_philips_e14_frosted
+      transition: 1
+    service: light.toggle
+  - data:
+      entity_id: light.yeelight_strip_7811dc66f063
+      transition: 1
+    service: light.toggle
+  - data:
+      entity_id: light.gateway_light_34ce00fb56e8
+      transition: 1
+    service: light.toggle
 - id: '1546010333874'
   alias: Master bedroom - toggle LEDs
   trigger:
@@ -966,3 +986,147 @@
       entity_id: light.gateway_light_34ce00fb56e8
       transition: 1
     service: light.toggle
+- id: '1546013441545'
+  alias: Kitchen - motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001655da1
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.gateway_light_34ce0088a579
+    state: 'off'
+  - below: '500'
+    condition: numeric_state
+    entity_id: sensor.illumination_34ce0088a579
+  action:
+  - data:
+      entity_id: light.yeelight_strip_7811dc68588d
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.gateway_light_34ce0088a579
+      transition: 1
+    service: light.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001655da1.attributes[''No
+      motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001655da1.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.gateway_light_34ce0088a579
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_strip_7811dc68588d
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.gateway_light_34ce0088a579
+      transition: 1
+    service: light.turn_off
+- id: '1546013479738'
+  alias: Kitchen - empty
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0001655da1.attributes[''No
+      motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0001655da1.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  condition:
+  - condition: state
+    entity_id: light.gateway_light_34ce0088a579
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.yeelight_strip_7811dc68588d
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.gateway_light_34ce0088a579
+      transition: 1
+    service: light.turn_off
+- id: '1546014691265'
+  alias: Attic - toggle left entry light
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001f9c3fe
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1581f6
+      transition: 1
+    service: light.toggle
+- id: '1546014728200'
+  alias: Attic - toggle right entry light
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001f9c3fe
+      click_type: double
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7bf9ba
+      transition: 1
+    service: light.toggle
+- id: '1546014760465'
+  alias: Attic - toggle wardrobe area light
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001f9c3fe
+      click_type: long_click_press
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      transition: 1
+    service: light.toggle
+- id: '1546020188168'
+  alias: 'Tosia feeder - gryzkaj, gryzkaj'
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001d8eeb1
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - service: tts.google_say
+    entity_id: media_player.googlehome8282
+    data_template:
+      message: >
+        {{ [
+        'No dalej Tosia! Gryzkaj. Gryzkaj.',
+        'Tosia gryziemy. Duży gryz a nie taki malutki.',
+        'Tosia jemy jemy',
+        'Dalej Tosia, już Ci niedużo zostało',
+        'Coś dziś królisie słabo jedzą',
+        'Tosia. Pusta buzia. To kolejny gryzek!'
+        'No dalej Tosia, bo będziemy tu siedzieć godzinę'
+        ] | random }}
+      language: pl
+- id: '1546020275655'
+  alias: 'Tosia feeder - nie złość Mamy!'
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001d8eeb1
+      click_type: long_click_press
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - service: tts.google_say
+    entity_id: media_player.googlehome8282
+    data:
+      message: >
+        {{ [
+          'Dalej Tosia, nie złość Mamy.',
+          'Tosia bo sobie pójdę i będziesz tu siedzieć sama'
+          'Dziś to chyba nie będzie żadnej nagrody'
+          'Tosia, bo nie będzie już czasu na żadną bajkę'
+          ] | random }}
+      language: pl
