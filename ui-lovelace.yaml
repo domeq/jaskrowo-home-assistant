@@ -134,6 +134,13 @@ views:
           - sensor.temperature_158d0002320e0c
         hours_to_show: 24
         type: history-graph
+      - type: map
+        aspect_ratio: 16:9
+        default_zoom: 12
+        entities:
+          - device_tracker.gosiak_mia2
+          - device_tracker.wiskra_mimix2
+          - zone.home
   - title: Automations
     path: automations
     badges: []
@@ -158,7 +165,8 @@ views:
           - automation.living_room_motion__03_tv_mode
           - automation.master_bedroom__empty
           - automation.master_bedroom__motion
-          - automation.tosia_room_light
+          - automation.tosia_room__motion
+          - automation.tosia_room__empty
           - automation.tosia_toggle_christmas_tree
           - automation.tosia_toggle_lamp
           - automation.turn_on_circadian_lighting_switches_on_startup
@@ -177,7 +185,7 @@ views:
           - sun.sun
         type: entities
         show_header_toggle: false
-      - title: all switches
+      - title: Automatic brightness
         entities:
           - switch.circadian_lighting_attic_lights_auto
           - switch.circadian_lighting_guest_room_lights_auto
@@ -185,9 +193,6 @@ views:
           - switch.circadian_lighting_living_room_auto_leds
           - switch.circadian_lighting_living_room_auto_ceiling
           - switch.circadian_lighting_master_bedroom_lights_auto
-          - switch.plug_158d0001de79e6
-          - switch.plug_158d0001deb419
-          - switch.plug_158d0001ded32d
         type: entities
       - title: Switches
         entities:
@@ -200,7 +205,9 @@ views:
           - binary_sensor.switch_158d0001d8eeb1
           - binary_sensor.switch_158d0001f9c3fe
         type: entities
-      - title: Illumination
+      - type: entities
+        title: Illumination
+        show_header_toggle: false
         entities:
           - sensor.illumination_158d0001e43ac7
           - sensor.illumination_158d0001e43bc7
@@ -209,6 +216,43 @@ views:
           - sensor.illumination_158d0001e532dc
           - sensor.illumination_158d0001e547ae
           - sensor.illumination_158d0001e55ff7
-        hours_to_show: 24
+          - sensor.illumination_158d0002b70d79
+          - sensor.illumination_158d0002b85113
+          - sensor.illumination_158d0002b72030
+          - sensor.illumination_158d0002b422b4
+      - type: entities
+        title: Motion detection
+        show_header_toggle: false
+        entities:
+          - binary_sensor.motion_sensor_158d0001e43ac7
+          - binary_sensor.motion_sensor_158d0001e43bc7
+          - binary_sensor.motion_sensor_158d0001e4707c
+          - binary_sensor.motion_sensor_158d0001e531e0
+          - binary_sensor.motion_sensor_158d0001e532dc
+          - binary_sensor.motion_sensor_158d0001e547ae
+          - binary_sensor.motion_sensor_158d0001e55ff7
+          - binary_sensor.motion_sensor_158d0002b70d79
+          - binary_sensor.motion_sensor_158d0002b85113
+          - binary_sensor.motion_sensor_158d0002b72030
+          - binary_sensor.motion_sensor_158d0002b422b4
+      - title: Lights temperature
+        entities:
+          - sensor.light_ct_philips_ceiling_light
+          - sensor.light_ct_hall_light
+        hours_to_show: 72
         type: history-graph
-        refresh_time: 60
+        refresh_time: 300
+      - title: Lights brightness
+        entities:
+          - sensor.light_brightness_philips_ceiling_light
+          - sensor.light_brightness_hall_light
+        hours_to_show: 72
+        type: history-graph
+        refresh_time: 300
+      - type: glance
+        title: System load
+        entities:
+          - sensor.cpu_temperature
+          - sensor.cpu_speed
+          - sensor.load_5m
+          - sensor.memory_use_percent

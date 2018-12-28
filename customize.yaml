@@ -108,35 +108,35 @@ sensor.asuswrt_download_speed:
   friendly_name: Download
 sensor.asuswrt_upload_speed:
   friendly_name: Upload
-sensor.motion_sensor_158d0001e43ac7:
+binary_sensor.motion_sensor_158d0001e43ac7:
   friendly_name: Living room motion sensor
 sensor.illumination_158d0001e43ac7:
   friendly_name: Living room illumination sensor
-sensor.motion_sensor_158d0001e531e0:
+binary_sensor.motion_sensor_158d0001e531e0:
   friendly_name: Hall motion sensor
 sensor.illumination_158d0001e531e0:
   friendly_name: Hall illumination sensor
-sensor.motion_sensor_158d0001e4707c:
+binary_sensor.motion_sensor_158d0001e4707c:
   friendly_name: Stairs motion sensor
 sensor.illumination_158d0001e4707c:
   friendly_name: Stairs illumination sensor
-sensor.motion_sensor_158d0001e43bc7:
+binary_sensor.motion_sensor_158d0001e43bc7:
   friendly name: Master bedroom motion sensor
 sensor.illumination_158d0001e43bc7:
   friendly_name: Master bedroom illumination sensor
-sensor.motion_sensor_158d0001e547ae:
+binary_sensor.motion_sensor_158d0001e547ae:
   friendly_name: Attic entry motion sensor
 sensor.illumination_158d0001e547ae:
   friendly_name: Attic entry illumination sensor
-sensor.motion_sensor_158d0001e55ff7:
+binary_sensor.motion_sensor_158d0001e55ff7:
   friendly_name: Attic wardrobe motion sensor
 sensor.illumination_158d0001e55ff7:
   friendly_name: Attic wardrobe illumination sensor
-sensor.motion_sensor_158d0001e532dc:
+binary_sensor.motion_sensor_158d0001e532dc:
   friendly_name: Guest room motion sensor
 sensor.illumination_158d0001e532dc:
   friendly_name: Guest room illumination sensor
-sensor.motion_sensor_158d0001655da1:
+binary_sensor.motion_sensor_158d0001655da1:
   friendly_name: Kitchen motion sensor
 binary_sensor.switch_158d0001be5b10:
   friendly_name: Guest room bedside table switch
@@ -172,3 +172,9 @@ binary_sensor.switch_158d0001b1827e:
   friendly_name: Tosia switch
 binary_sensor.switch_158d00019d5813:
   friendly_name: Hall switch
+binary_sensor.wall_switch_left_158d0001e06c11:
+  friendly_name: Living room left wall switch - left button
+binary_sensor.wall_switch_right_158d0001e06c11:
+  friendly_name: Living room left wall switch - right button
+binary_sensor.wall_switch_both_158d0001e06c11:
+  friendly_name: Living room left wall switch - both buttons
