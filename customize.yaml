@@ -64,7 +64,7 @@ sensor.temperature_158d0002320de3:
   friendly_name: Kitchen temperature
 sensor.humidity_158d0002320de3:
   friendly_name: Kitchen humidity
-light.xiaomi_philips_e14_frosted:
+light.master_bedroom_bed_lamp:
   friendly_name: Master bedroom lamp
 light.xiaomi_philips_e14_crystal:
   friendly_name: Left lamp
@@ -186,3 +186,7 @@ binary_sensor.switch_158d0001f9c3fe:
   friendly_name: Attic desk switch
 binary_sensor.switch_158d0001d8eeb1:
   friendly_name: Tosia feeder
+light.tosia_left_wall_lamp:
+  friendly_name: Tosia left wall lamp
+light.yeelight_color2_04cf8c7cb0ca:
+  friendly_name: Tosia right wall lamp

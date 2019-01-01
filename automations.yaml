@@ -446,7 +446,7 @@
 - id: '1543665916713'
   alias: Living room - bright enough
   trigger:
-  - above: '110'
+  - above: '135'
     entity_id: sensor.illumination_158d0001e43ac7
     platform: numeric_state
     for:
@@ -466,6 +466,9 @@
     - condition: state
       entity_id: switch.plug_158d0001deb419
       state: 'on'
+    - condition: state
+      entity_id: switch.plug_158d0001de79e6
+      state: 'on'
   action:
   - service: tts.google_say
     entity_id: media_player.googlehome8282
@@ -483,6 +486,9 @@
   - data:
       entity_id: switch.plug_158d0001deb419
     service: switch.turn_off
+  - data:
+      entity_id: switch.plug_158d0001de79e6
+    service: switch.turn_off
 - id: '1543859792965'
   alias: Tosia room - motion
   trigger:
@@ -491,13 +497,7 @@
     platform: state
     to: 'on'
   condition:
-  - condition: state
-    entity_id: light.yeelight_color2_7c49eb1582dd
-    state: 'off'
-  - condition: state
-    entity_id: switch.plug_158d0001ded32d
-    state: 'off'
-  - below: '10'
+  - below: '70'
     condition: numeric_state
     entity_id: sensor.illumination_158d0002b85113
   - condition: time
@@ -507,7 +507,6 @@
   - data:
       entity_id: light.yeelight_color2_7c49eb1582dd
       transition: 1
-      brightness: 15
       rgb_color:
       - 255
       - 0
@@ -517,6 +516,14 @@
       entity_id: light.yeelight_color2_7c49eb1566bb
       mode: rgb
     service: light.yeelight_set_mode
+  - data:
+      entity_id: light.tosia_left_wall_lamp
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cb0ca
+      transition: 1
+    service: light.turn_on
   - data:
       entity_id: switch.plug_158d0001ded32d
     service: switch.turn_on
@@ -528,6 +535,15 @@
     state: 'on'
   - data:
       entity_id: light.yeelight_color2_7c49eb1582dd
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.tosia_left_wall_lamp
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cb0ca
+      transition: 1
     service: light.turn_off
   - data:
       entity_id: switch.plug_158d0001ded32d
@@ -578,9 +594,8 @@
       message: Do zobaczenia później - wyłączam światła.
       language: pl
   - delay: 00:00:02
-  - data:
-      entity_id: scene.leaving_home
-    service: scene.turn_on
+  - service: switch.turn_off
+  - service: light.turn_off
 - id: '1544970728739'
   alias: Coming home
   trigger:
@@ -602,7 +617,10 @@
   - data:
       entity_id: light.yeelight_color2_7c49eb1566bb
       transition: 1
-      brightness: 230
+    service: light.turn_on
+  - data:
+      entity_id: light.xiaomi_philips_ceiling_light
+      transition: 1
     service: light.turn_on
   - data:
       entity_id: light.yeelight_strip_7811dc68588d
@@ -636,6 +654,9 @@
   - data:
       entity_id: switch.circadian_lighting_kitchen_lights_auto
     service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_tosia_room_lights_auto
+    service: switch.turn_on
 - id: '1545565835153'
   alias: Master bedroom - motion
   trigger:
@@ -645,7 +666,7 @@
     to: 'on'
   condition:
   - condition: state
-    entity_id: light.xiaomi_philips_e14_frosted
+    entity_id: light.master_bedroom_bed_lamp
     state: 'off'
   - below: '20'
     condition: numeric_state
@@ -655,7 +676,7 @@
     condition: time
   action:
   - data:
-      entity_id: light.xiaomi_philips_e14_frosted
+      entity_id: light.master_bedroom_bed_lamp
       transition: 1
     service: light.turn_on
   - data:
@@ -670,10 +691,10 @@
       motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e43bc7.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
-    entity_id: light.xiaomi_philips_e14_frosted
+    entity_id: light.master_bedroom_bed_lamp
     state: 'on'
   - data:
-      entity_id: light.xiaomi_philips_e14_frosted
+      entity_id: light.master_bedroom_bed_lamp
       transition: 1
     service: light.turn_off
   - data:
@@ -693,11 +714,11 @@
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
   - condition: state
-    entity_id: light.xiaomi_philips_e14_frosted
+    entity_id: light.master_bedroom_bed_lamp
     state: 'on'
   action:
   - data:
-      entity_id: light.xiaomi_philips_e14_frosted
+      entity_id: light.master_bedroom_bed_lamp
       transition: 1
     service: light.turn_off
   - data:
@@ -713,7 +734,7 @@
   trigger:
   - platform: template
     value_template: '{% if states.binary_sensor.motion_sensor_158d0002b85113.attributes[''No
-      motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0002b85113.state
+      motion since''] | int >= 1800 and states.binary_sensor.motion_sensor_158d0002b85113.state
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
     condition: or
@@ -722,11 +743,24 @@
       entity_id: light.yeelight_color2_7c49eb1582dd
       state: 'on'
     - condition: state
+      entity_id: light.yeelight_color2_04cf8c7cb0ca
+      state: 'on'
+    - condition: state
+      entity_id: light.tosia_left_wall_lamp
+      state: 'on'
+    - condition: state
       entity_id: switch.plug_158d0001ded32d
       state: 'on'
   action:
   - data:
       entity_id: light.yeelight_color2_7c49eb1582dd
+    service: light.turn_off
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cb0ca
+    service: light.turn_off
+  - data:
+      entity_id: light.tosia_left_wall_lamp
+      transition: 1
     service: light.turn_off
   - data:
       entity_id: switch.plug_158d0001ded32d
@@ -871,7 +905,6 @@
   - data:
       entity_id: switch.circadian_lighting_hall_lights_auto
     service: switch.turn_off
-  - service: light.turn_on
   - data:
       entity_id: light.yeelight_color2_7c49eb1566bb
       transition: 1
@@ -937,7 +970,7 @@
   condition: []
   action:
   - data:
-      entity_id: light.xiaomi_philips_e14_frosted
+      entity_id: light.master_bedroom_bed_lamp
       transition: 1
     service: light.toggle
   - data:
@@ -1086,7 +1119,7 @@
       transition: 1
     service: light.toggle
 - id: '1546020188168'
-  alias: 'Tosia feeder - gryzkaj, gryzkaj'
+  alias: Tosia feeder - gryzkaj, gryzkaj
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001d8eeb1
@@ -1098,19 +1131,16 @@
   - service: tts.google_say
     entity_id: media_player.googlehome8282
     data_template:
-      message: >
-        {{ [
-        'No dalej Tosia! Gryzkaj. Gryzkaj.',
-        'Tosia gryziemy. Duży gryz a nie taki malutki.',
-        'Tosia jemy jemy',
-        'Dalej Tosia, już Ci niedużo zostało',
-        'Coś dziś królisie słabo jedzą',
-        'Tosia. Pusta buzia. To kolejny gryzek!'
-        'No dalej Tosia, bo będziemy tu siedzieć godzinę'
-        ] | random }}
+      message: '{{ [ ''No dalej Tosia! Gryzkaj. Gryzkaj.'', ''Tosia gryziemy. Duży
+        gryz a nie taki malutki.'', ''Tosia jemy jemy, następny gryzek'', ''Dalej
+        Tosia, już Ci niedużo zostało'', ''Coś dziś królisie słabo jedzą'', ''Tosia.
+        Pusta buzia. To kolejny gryzek!'', ''No dalej Tosia, bo będziemy tu siedzieć
+        godzinę'' ] | random }}
+
+        '
       language: pl
 - id: '1546020275655'
-  alias: 'Tosia feeder - nie złość Mamy!'
+  alias: Tosia feeder - nie złość Mamy!
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001d8eeb1
@@ -1121,12 +1151,32 @@
   action:
   - service: tts.google_say
     entity_id: media_player.googlehome8282
-    data:
-      message: >
-        {{ [
-          'Dalej Tosia, nie złość Mamy.',
-          'Tosia bo sobie pójdę i będziesz tu siedzieć sama'
-          'Dziś to chyba nie będzie żadnej nagrody'
-          'Tosia, bo nie będzie już czasu na żadną bajkę'
-          ] | random }}
+    data_template:
+      message: "{{ [\n  'Dalej Tosia, nie złość Mamy.',\n  'Tosia bo sobie pójdę i\
+        \ będziesz tu siedzieć sama',\n  'Dziś to chyba nie będzie żadnej nagrody',\n\
+        \  'Tosia, bo nie będzie już czasu na żadną bajkę'\n  ] | random }}\n"
       language: pl
+- id: '1546091775458'
+  alias: Kitchen - bright enough
+  trigger:
+  - above: '800'
+    entity_id: sensor.illumination_34ce0088a579
+    platform: numeric_state
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: light.yeelight_strip_7811dc68588d
+      state: 'on'
+    - condition: state
+      entity_id: light.gateway_light_34ce0088a579
+      state: 'on'
+  action:
+  - data:
+      entity_id: light.yeelight_strip_7811dc68588d
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: light.gateway_light_34ce0088a579
+      transition: 1
+    service: light.turn_off

@@ -86,7 +86,7 @@ http:
     - https://google.com
     - https://www.home-assistant.io
   # Secrets are defined in the file secrets.yaml
-  api_password: !secret http_password
+  # api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: jaskrowo.asuscomm.com:8123
 
@@ -137,7 +137,7 @@ light:
     token: 3d5f7ae53b51aa312e464b150b37453b
     model: philips.light.ceiling
   - platform: xiaomi_miio
-    name: Xiaomi Philips E14 Frosted
+    name: Master bedroom bed lamp
     host: 192.168.1.107
     token: c1ac97f17b98eb0cc6132fd6f6433f91
     model: philips.light.candle2
@@ -151,7 +151,11 @@ light:
     host: 192.168.1.116
     token: c16d7777b418c34a8e110f0a3614aa2a
     model: philips.light.candle2
-
+  - platform: xiaomi_miio
+    name: Tosia left wall lamp
+    host: 192.168.1.118
+    token: 11f0e1c5e69ec2ca7b19833d642e8a82
+    model: philips.light.candle2
 
 vacuum:
   - platform: xiaomi_miio
@@ -263,10 +267,11 @@ switch:
   - platform: circadian_lighting
     name: "Master bedroom lights auto"
     lights_ct:
-      - light.xiaomi_philips_e14_frosted
-      - light.gateway_light_34ce00fb56e8
+      - light.master_bedroom_bed_lamp
     lights_rgb:
       - light.gateway_light_34ce00fb56e8
+    lights_brightness:
+      - light.yeelight_strip_7811dc66f063
   - platform: circadian_lighting
     name: "Attic lights auto"
     lights_ct:
@@ -275,11 +280,19 @@ switch:
       - light.yeelight_color2_04cf8c7cc6ad
   - platform: circadian_lighting
     name: "Kitchen lights auto"
-    min_brightness: 75
+    min_brightness: 90
     lights_ct:
       - light.yeelight_strip_7811dc68588d
     lights_rgb:
       - light.gateway_light_34ce0088a579
+  - platform: circadian_lighting
+    name: "Tosia room lights auto"
+    max_brightness: 50
+    lights_ct:
+      - light.yeelight_color2_04cf8c7cb0ca
+      - light.tosia_left_wall_lamp
+    lights_brightness:
+      - light.yeelight_color2_7c49eb1582dd
 
 scene:
   - name: Living room day
@@ -300,23 +313,3 @@ scene:
         light.yeelight_strip_7811dca220d2: on
         switch.plug_158d0001deb419: on
         switch.plug_158d0001de79e6: on
-  - name: Leaving home
-    entities:
-      light.gateway_light_34ce0088a579: off
-      light.gateway_light_34ce00fb56e8: off
-      light.xiaomi_philips_ceiling_light: off
-      light.xiaomi_philips_e14_crystal: off
-      light.xiaomi_philips_e14_crystal_2: off
-      light.xiaomi_philips_e14_frosted: off
-      light.yeelight_color2_04cf8c7bf9ba: off
-      light.yeelight_color2_04cf8c7cc6ad: off
-      light.yeelight_color2_7c49eb1566bb: off
-      light.yeelight_color2_7c49eb1581f6: off
-      light.yeelight_color2_7c49eb1582dd: off
-      light.yeelight_strip_7811dc66f063: off
-      light.yeelight_strip_7811dc68588d: off
-      light.yeelight_strip_7811dc691c74: off
-      light.yeelight_strip_7811dca220d2: off
-      switch.plug_158d0001deb419: off
-      switch.plug_158d0001de79e6: off
-      switch.plug_158d0001ded32d: off

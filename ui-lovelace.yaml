@@ -32,6 +32,8 @@ views:
           - sensor.temperature_158d0001b92092
           - sensor.humidity_158d0001b92092
           - binary_sensor.door_window_sensor_158d000232da46
+          - light.tosia_left_wall_lamp
+          - light.yeelight_color2_04cf8c7cb0ca
           - light.yeelight_color2_7c49eb1582dd
           - switch.plug_158d0001ded32d
         type: entities
@@ -50,7 +52,7 @@ views:
           - sensor.temperature_158d0001b9208d
           - sensor.humidity_158d0001b9208d
           - binary_sensor.door_window_sensor_158d000232db84
-          - light.xiaomi_philips_e14_frosted
+          - light.master_bedroom_bed_lamp
           - light.yeelight_strip_7811dc66f063
           - light.gateway_light_34ce00fb56e8
         type: entities
@@ -158,6 +160,7 @@ views:
           - automation.hall__motion
           - automation.kitchen__motion
           - automation.kitchen__empty
+          - automation.kitchen__bright_enough
           - automation.leaving_home
           - automation.living_room__bright_enough
           - automation.living_room__empty_room
@@ -195,6 +198,7 @@ views:
           - switch.circadian_lighting_living_room_auto_leds
           - switch.circadian_lighting_living_room_auto_ceiling
           - switch.circadian_lighting_master_bedroom_lights_auto
+          - switch.circadian_lighting_tosia_room_lights_auto
         type: entities
       - title: Switches
         entities:
@@ -211,17 +215,19 @@ views:
         title: Illumination
         show_header_toggle: false
         entities:
+          - sensor.illumination_34ce0088a579
           - sensor.illumination_158d0001e43ac7
-          - sensor.illumination_158d0001e43bc7
           - sensor.illumination_158d0001e4707c
           - sensor.illumination_158d0001e531e0
+          - sensor.illumination_158d0002b422b4
+          - sensor.illumination_158d0001e43bc7
+          - sensor.illumination_34ce00fb56e8
           - sensor.illumination_158d0001e532dc
+          - sensor.illumination_158d0002b85113
+          - sensor.illumination_158d0002b70d79
+          - sensor.illumination_158d0002b72030
           - sensor.illumination_158d0001e547ae
           - sensor.illumination_158d0001e55ff7
-          - sensor.illumination_158d0002b70d79
-          - sensor.illumination_158d0002b85113
-          - sensor.illumination_158d0002b72030
-          - sensor.illumination_158d0002b422b4
       - type: entities
         title: Motion detection
         show_header_toggle: false
