@@ -228,8 +228,7 @@ asuswrt:
   ssh_key: /home/homeassistant/.homeassistant/id_rsa
 
 weather:
-  - platform: yweather
-    name: Kraków
+  - platform: met
 
 sun:
 
