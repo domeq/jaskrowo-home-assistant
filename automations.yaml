@@ -594,8 +594,16 @@
       message: Do zobaczenia później - wyłączam światła.
       language: pl
   - delay: 00:00:02
-  - service: switch.turn_off
   - service: light.turn_off
+  - data:
+      entity_id: switch.plug_158d0001deb419
+    service: switch.turn_off
+  - data:
+      entity_id: switch.plug_158d0001de79e6
+    service: switch.turn_off
+  - data:
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.turn_off
 - id: '1544970728739'
   alias: Coming home
   trigger:
