@@ -52,16 +52,16 @@
   sensors:
     waqi_kurdwanow_krakow_maopolska_poland_pm_2_5:
       friendly_name: "Kurdwanów PM 2.5"
-      value_template: "{{ states.sensor.waqi_kurdwanow_krakow_maopolska_poland.attributes.pm_2_5 }}"
+      value_template: "{{ states.sensor.airly_air_quality.attributes.pm_2_5 }}"
       unit_of_measurement: 'µg/m³'
       icon_template: 'mdi:cloud-outline'
-      entity_id: sensor.waqi_kurdwanow_krakow_maopolska_poland
+      entity_id: sensor.airly_air_quality
     waqi_kurdwanow_krakow_maopolska_poland_pm_10:
       friendly_name: "Kurdwanów PM 10"
-      value_template: "{{ states.sensor.waqi_kurdwanow_krakow_maopolska_poland.attributes.pm_10 }}"
+      value_template: "{{ states.sensor.airly_air_quality.attributes.pm_10 }}"
       unit_of_measurement: 'µg/m³'
       icon_template: 'mdi:cloud-outline'
-      entity_id: sensor.waqi_kurdwanow_krakow_maopolska_poland
+      entity_id: sensor.airly_air_quality
     waqi_aleja_krasinskiego_krakow_maopolska_poland_pm_2_5:
       friendly_name: "Aleje PM 2.5"
       value_template: "{{ states.sensor.waqi_aleja_krasinskiego_krakow_maopolska_poland.attributes.pm_2_5 }}"
@@ -144,3 +144,13 @@
   command: "cat /sys/class/thermal/thermal_zone0/temp"
   unit_of_measurement: "°C"
   value_template: '{{ (value | multiply(0.001)) | round(1) }}'
+- platform: airly
+  api_key: !secret airly_api_key
+  latitude: 49.87
+  longitude: 19.497
+- platform: airly
+  api_key: !secret airly_api_key
+- platform: airly
+  api_key: !secret airly_api_key
+  latitude: 50.0721293
+  longitude: 19.8916957

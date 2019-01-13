@@ -68,12 +68,12 @@
     platform: state
     to: 'on'
   condition:
-  - above: '-10'
+  - above: '0'
     below: '30'
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
-  - below: '70'
+  - below: '60'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   - after: 06:30:00
@@ -93,14 +93,14 @@
     platform: state
     to: 'on'
   condition:
-  - below: '-10'
+  - below: '0'
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
   - after: 06:30:00
     before: '20:19:59'
     condition: time
-  - below: '70'
+  - below: '60'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   action:
@@ -120,7 +120,7 @@
   - after: '20:20:00'
     before: 06:29:59
     condition: time
-  - below: '70'
+  - below: '60'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
   action:
@@ -446,7 +446,7 @@
 - id: '1543665916713'
   alias: Living room - bright enough
   trigger:
-  - above: '135'
+  - above: '120'
     entity_id: sensor.illumination_158d0001e43ac7
     platform: numeric_state
     for:
@@ -497,7 +497,7 @@
     platform: state
     to: 'on'
   condition:
-  - below: '70'
+  - below: '30'
     condition: numeric_state
     entity_id: sensor.illumination_158d0002b85113
   - condition: time

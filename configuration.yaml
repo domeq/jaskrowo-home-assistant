@@ -240,7 +240,7 @@ circadian_lighting:
   max_colortemp: 5500
   min_colortemp: 3000
   sunrise_offset: "00:00:00"
-  sunset_offset: "01:00:00"
+  sunset_offset: "00:00:00"
 
 switch:
   - platform: circadian_lighting
@@ -312,3 +312,9 @@ scene:
         light.yeelight_strip_7811dca220d2: on
         switch.plug_158d0001deb419: on
         switch.plug_158d0001de79e6: on
+
+# To start the camera:
+# pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
+# camera:
+#  - platform: ffmpeg
+#    input: -rtsp_transport tcp -i rtsp://127.0.0.1:8554/

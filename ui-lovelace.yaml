@@ -64,14 +64,20 @@ views:
           - light.yeelight_color2_04cf8c7bf9ba
           - light.yeelight_color2_04cf8c7cc6ad
         type: entities
+      # - type: picture-glance
+      #   title: Attic
+      #   entities:
+      #     - sensor.temperature_158d00023208a6
+      #     - sensor.humidity_158d00023208a6
+      #     - light.yeelight_color2_7c49eb1581f6
+      #     - light.yeelight_color2_04cf8c7bf9ba
+      #     - light.yeelight_color2_04cf8c7cc6ad
+      #   camera_image: camera.ffmpeg
       - title: Air pollution
         entities:
-          - sensor.waqi_kurdwanow_krakow_maopolska_poland
-          - sensor.waqi_kurdwanow_krakow_maopolska_poland_pm_10
-          - sensor.waqi_aleja_krasinskiego_krakow_maopolska_poland
-          - sensor.waqi_aleja_krasinskiego_krakow_maopolska_poland_pm_10
-          - sensor.waqi_skawina_maopolska_poland
-          - sensor.waqi_skawina_maopolska_poland_pm_10
+          - sensor.airly_air_quality_50009_19961
+          - sensor.airly_air_quality_4987_19497
+          - sensor.airly_air_quality_500721293_198916957
         type: entities
         show_header_toggle: false
       - title: Device battery
@@ -107,12 +113,12 @@ views:
         refresh_interval: 60
       - title: Air pollution
         entities:
-          - sensor.waqi_kurdwanow_krakow_maopolska_poland
-          - sensor.waqi_aleja_krasinskiego_krakow_maopolska_poland
-          - sensor.waqi_skawina_maopolska_poland
+          - sensor.airly_air_quality_50009_19961
+          - sensor.airly_air_quality_4987_19497
+          - sensor.airly_air_quality_500721293_198916957
         hours_to_show: 72
         type: history-graph
-        refresh_interval: 3600
+        refresh_interval: 900
       - title: Windows open?
         entities:
           - binary_sensor.door_window_sensor_158d00023709f7
