@@ -42,10 +42,10 @@
       friendly_name: iPad
       unit_of_measurement: '%'
       value_template: >-
-          {%- if states.device_tracker.wiskra_1996c7e73ef9451bbe555b27c09d3c5d.attributes.battery %}
-              {{ states.device_tracker.wiskra_1996c7e73ef9451bbe555b27c09d3c5d.attributes.battery|round }}
+          {%- if states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d.attributes.battery %}
+              {{ states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d.attributes.battery|round }}
           {% else %}
-              {{ states.device_tracker.wiskra_1996c7e73ef9451bbe555b27c09d3c5d.state }}
+              {{ states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d.state }}
           {%- endif %}
       device_class: battery
 - platform: template
@@ -141,7 +141,7 @@
 - platform: cpuspeed
 - platform: command_line
   name: CPU Temperature
-  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  command: "cat /sys/class/thermal/thermal_zone3/temp"
   unit_of_measurement: "°C"
   value_template: '{{ (value | multiply(0.001)) | round(1) }}'
 - platform: airly

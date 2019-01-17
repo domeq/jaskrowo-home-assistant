@@ -190,9 +190,9 @@ light.tosia_left_wall_lamp:
   friendly_name: Tosia left wall lamp
 light.yeelight_color2_04cf8c7cb0ca:
   friendly_name: Tosia right wall lamp
-sensor.airly_air_quality_50009_19961:
+sensor.airly_air_quality_50_009_19_961:
   friendly_name: Turniejowa
-sensor.airly_air_quality_4987_19497:
+sensor.airly_air_quality_49_87_19_497:
   friendly_name: Wadowice
-sensor.airly_air_quality_500721293_198916957:
+sensor.airly_air_quality_50_0721293_19_8916957:
   friendly_name: Schibsted

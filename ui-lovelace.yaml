@@ -75,9 +75,9 @@ views:
       #   camera_image: camera.ffmpeg
       - title: Air pollution
         entities:
-          - sensor.airly_air_quality_50009_19961
-          - sensor.airly_air_quality_4987_19497
-          - sensor.airly_air_quality_500721293_198916957
+          - sensor.airly_air_quality_50_009_19_961
+          - sensor.airly_air_quality_49_87_19_497
+          - sensor.airly_air_quality_50_0721293_19_8916957
         type: entities
         show_header_toggle: false
       - title: Device battery
@@ -98,7 +98,7 @@ views:
         type: entities
         show_header_toggle: false
       - type: weather-forecast
-        entity: weather.metno
+        entity: weather.met_no
       - title: Humidity
         entities:
           - sensor.humidity_158d0001b9208d
@@ -113,9 +113,9 @@ views:
         refresh_interval: 60
       - title: Air pollution
         entities:
-          - sensor.airly_air_quality_50009_19961
-          - sensor.airly_air_quality_4987_19497
-          - sensor.airly_air_quality_500721293_198916957
+          - sensor.airly_air_quality_50_009_19_961
+          - sensor.airly_air_quality_49_87_19_497
+          - sensor.airly_air_quality_50_0721293_19_8916957
         hours_to_show: 72
         type: history-graph
         refresh_interval: 900
@@ -155,29 +155,29 @@ views:
     cards:
       - title: all automations
         entities:
-          - automation.attic__empty_room
-          - automation.attic__entry_area_motion
-          - automation.attic__wardrobe_area_motion
+          - automation.attic_empty_room
+          - automation.attic_entry_area_motion
+          - automation.attic_wardrobe_area_motion
           - automation.coming_home
-          - automation.guest_room__bright_mode
-          - automation.guest_room__motion
-          - automation.guest_room__toggle_light
-          - automation.hall__empty_room
-          - automation.hall__motion
-          - automation.kitchen__motion
-          - automation.kitchen__empty
-          - automation.kitchen__bright_enough
+          - automation.guest_room_bright_mode
+          - automation.guest_room_motion
+          - automation.guest_room_toggle_light
+          - automation.hall_empty_room
+          - automation.hall_motion
+          - automation.kitchen_motion
+          - automation.kitchen_empty
+          - automation.kitchen_bright_enough
           - automation.leaving_home
-          - automation.living_room__bright_enough
-          - automation.living_room__empty_room
-          - automation.living_room__stair_leds
-          - automation.living_room_motion__01_normal
-          - automation.living_room_motion__02_evening
-          - automation.living_room_motion__03_tv_mode
-          - automation.master_bedroom__empty
-          - automation.master_bedroom__motion
-          - automation.tosia_room__motion
-          - automation.tosia_room__empty
+          - automation.living_room_bright_enough
+          - automation.living_room_empty_room
+          - automation.living_room_stair_leds
+          - automation.living_room_motion_01_normal
+          - automation.living_room_motion_02_evening
+          - automation.living_room_motion_03_tv_mode
+          - automation.master_bedroom_empty
+          - automation.master_bedroom_motion
+          - automation.tosia_room_motion
+          - automation.tosia_room_empty
           - automation.tosia_toggle_christmas_tree
           - automation.tosia_toggle_lamp
           - automation.turn_on_circadian_lighting_switches_on_startup
@@ -186,7 +186,7 @@ views:
         type: entities
       - title: People at home
         entities:
-          - device_tracker.wiskra_1996c7e73ef9451bbe555b27c09d3c5d
+          - device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d
           - device_tracker.wiskra_mimix2
           - device_tracker.gosiak_mia2
         type: entities

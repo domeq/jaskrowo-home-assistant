@@ -225,7 +225,7 @@ sensor: !include sensors.yaml
 asuswrt:
   host: 192.168.1.254
   username: wojtek
-  ssh_key: /home/homeassistant/.homeassistant/id_rsa
+  ssh_key: "/config/id_rsa"
 
 weather:
   - platform: met
@@ -313,6 +313,7 @@ scene:
         switch.plug_158d0001deb419: on
         switch.plug_158d0001de79e6: on
 
+recorder:
 # To start the camera:
 # pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
 # camera:
