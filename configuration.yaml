@@ -299,7 +299,7 @@ scene:
         light.xiaomi_philips_ceiling_light: on
         light.yeelight_strip_7811dca220d2: off
         switch.plug_158d0001deb419: off
-        switch.plug_158d0001de79e6: on
+        switch.plug_158d0001de79e6: off
   - name: Living room evening
     entities:
         light.xiaomi_philips_ceiling_light: on
@@ -313,9 +313,8 @@ scene:
         switch.plug_158d0001deb419: on
         switch.plug_158d0001de79e6: on
 
-recorder:
 # To start the camera:
 # pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
-# camera:
-#  - platform: ffmpeg
-#    input: -rtsp_transport tcp -i rtsp://127.0.0.1:8554/
+camera:
+ - platform: ffmpeg
+   input: -rtsp_transport tcp -i rtsp://127.0.0.1:8554/

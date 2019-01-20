@@ -64,15 +64,15 @@ views:
           - light.yeelight_color2_04cf8c7bf9ba
           - light.yeelight_color2_04cf8c7cc6ad
         type: entities
-      # - type: picture-glance
-      #   title: Attic
-      #   entities:
-      #     - sensor.temperature_158d00023208a6
-      #     - sensor.humidity_158d00023208a6
-      #     - light.yeelight_color2_7c49eb1581f6
-      #     - light.yeelight_color2_04cf8c7bf9ba
-      #     - light.yeelight_color2_04cf8c7cc6ad
-      #   camera_image: camera.ffmpeg
+      - type: picture-glance
+        title: Attic
+        entities:
+          - sensor.temperature_158d00023208a6
+          - sensor.humidity_158d00023208a6
+          - light.yeelight_color2_7c49eb1581f6
+          - light.yeelight_color2_04cf8c7bf9ba
+          - light.yeelight_color2_04cf8c7cc6ad
+        camera_image: camera.ffmpeg
       - title: Air pollution
         entities:
           - sensor.airly_air_quality_50_009_19_961

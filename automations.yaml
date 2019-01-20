@@ -16,7 +16,7 @@
   condition: []
   action:
   - service: tts.google_say
-    entity_id: media_player.googlehome8282
+    entity_id: media_player.living_room_speaker
     data:
       message: Wykryłem otwarte okno, wyłączam oczyszczacz powietrza.
       language: pl
@@ -52,7 +52,7 @@
     state: 'off'
   action:
   - service: tts.google_say
-    entity_id: media_player.googlehome8282
+    entity_id: media_player.living_room_speaker
     data:
       message: Wszystkie okna zamknięte, włączam oczyszczacz powietrza.
       language: pl
@@ -214,7 +214,7 @@
   - platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000101c2a1_2
+      entity_id: binary_sensor.cube_158d000101c2a1
       action_type: flip180
   condition:
     condition: or
@@ -471,7 +471,7 @@
       state: 'on'
   action:
   - service: tts.google_say
-    entity_id: media_player.googlehome8282
+    entity_id: media_player.living_room_speaker
     data:
       message: Wygląda, że jest wystarczająco jasno - wyłączam światła.
       language: pl
@@ -589,7 +589,7 @@
       entity_id: remote.jaskrowo_media
     service: remote.turn_off
   - service: tts.google_say
-    entity_id: media_player.googlehome8282
+    entity_id: media_player.living_room_speaker
     data:
       message: Do zobaczenia później - wyłączam światła.
       language: pl
@@ -615,7 +615,7 @@
   condition: []
   action:
   - service: tts.google_say
-    entity_id: media_player.googlehome8282
+    entity_id: media_player.living_room_speaker
     data:
       message: Witaj w domu! Włączam światła.
       language: pl
@@ -838,7 +838,7 @@
   - platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000101c2a1_2
+      entity_id: binary_sensor.cube_158d000101c2a1
       action_type: flip90
   condition: []
   action:
@@ -857,7 +857,7 @@
   - platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000101c2a1_2
+      entity_id: binary_sensor.cube_158d000101c2a1
       action_type: move
   condition:
   - condition: state
@@ -884,7 +884,7 @@
   - platform: event
     event_type: xiaomi_aqara.cube_action
     event_data:
-      entity_id: binary_sensor.cube_158d000101c2a1_2
+      entity_id: binary_sensor.cube_158d000101c2a1
       action_type: shake_air
   condition: []
   action:
@@ -1137,7 +1137,7 @@
   condition: []
   action:
   - service: tts.google_say
-    entity_id: media_player.googlehome8282
+    entity_id: media_player.living_room_speaker
     data_template:
       message: '{{ [ ''No dalej Tosia! Gryzkaj. Gryzkaj.'', ''Tosia gryziemy. Duży
         gryz a nie taki malutki.'', ''Tosia jemy jemy, następny gryzek'', ''Dalej
@@ -1158,7 +1158,7 @@
   condition: []
   action:
   - service: tts.google_say
-    entity_id: media_player.googlehome8282
+    entity_id: media_player.living_room_speaker
     data_template:
       message: "{{ [\n  'Dalej Tosia, nie złość Mamy.',\n  'Tosia bo sobie pójdę i\
         \ będziesz tu siedzieć sama',\n  'Dziś to chyba nie będzie żadnej nagrody',\n\
