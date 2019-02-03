@@ -1,4 +1,7 @@
 title: Home
+resources:
+  - url: /local/surveillance-card.js?v=1
+    type: module
 views:
   - title: Home
     path: default_view
@@ -11,11 +14,10 @@ views:
           - binary_sensor.door_window_sensor_158d0001ad5eb6
           - light.xiaomi_philips_ceiling_light
           - light.yeelight_strip_7811dca220d2
-          - switch.plug_158d0001deb419
-          - switch.plug_158d0001de79e6
           - light.yeelight_strip_7811dc691c74
           - light.yeelight_color2_7c49eb1566bb
           - remote.jaskrowo_media
+          - media_player.marantz_sr5008
         type: entities
       - title: Kitchen
         entities:
@@ -27,24 +29,6 @@ views:
           - light.gateway_light_34ce0088a579
           - vacuum.xiaomi_vacuum_cleaner
         type: entities
-      - title: Tosia's bedroom
-        entities:
-          - sensor.temperature_158d0001b92092
-          - sensor.humidity_158d0001b92092
-          - binary_sensor.door_window_sensor_158d000232da46
-          - light.tosia_left_wall_lamp
-          - light.yeelight_color2_04cf8c7cb0ca
-          - light.yeelight_color2_7c49eb1582dd
-          - switch.plug_158d0001ded32d
-        type: entities
-      - title: Guest room
-        entities:
-          - sensor.temperature_158d0002320e0c
-          - sensor.humidity_158d0002320e0c
-          - binary_sensor.door_window_sensor_158d0002436b09
-          - light.xiaomi_philips_e14_crystal
-          - light.xiaomi_philips_e14_crystal_2
-        type: entities
       - title: Master bedroom
         entities:
           - sensor.temperature_158d0001b92145
@@ -54,7 +38,25 @@ views:
           - binary_sensor.door_window_sensor_158d000232db84
           - light.master_bedroom_bed_lamp
           - light.yeelight_strip_7811dc66f063
+          - switch.master_bedroom_stair
           - light.gateway_light_34ce00fb56e8
+        type: entities
+      - title: Tosia's bedroom
+        entities:
+          - sensor.temperature_158d0001b92092
+          - sensor.humidity_158d0001b92092
+          - binary_sensor.door_window_sensor_158d000232da46
+          - light.tosia_left_wall_lamp
+          - light.yeelight_color2_04cf8c7cb0ca
+          - light.yeelight_color2_7c49eb1582dd
+        type: entities
+      - title: Guest room
+        entities:
+          - sensor.temperature_158d0002320e0c
+          - sensor.humidity_158d0002320e0c
+          - binary_sensor.door_window_sensor_158d0002436b09
+          - light.xiaomi_philips_e14_crystal
+          - light.xiaomi_philips_e14_crystal_2
         type: entities
       - title: Attic
         entities:
@@ -62,19 +64,30 @@ views:
           - sensor.humidity_158d00023208a6
           - light.yeelight_color2_7c49eb1581f6
           - light.yeelight_color2_04cf8c7bf9ba
+          - light.yeelight_color2_04cf8c971345
+        type: entities
+      - title: Downstairs bathroom
+        entities:
           - light.yeelight_color2_04cf8c7cc6ad
         type: entities
-      - type: picture-glance
-        title: Attic
+      - title: Wardrobe
         entities:
-          - sensor.temperature_158d00023208a6
-          - sensor.humidity_158d00023208a6
-          - light.yeelight_color2_7c49eb1581f6
-          - light.yeelight_color2_04cf8c7bf9ba
-          - light.yeelight_color2_04cf8c7cc6ad
-        camera_image: camera.ffmpeg
+          - light.wardrobe_lamp
+        type: entities
+      # - type: media-control
+      #   entity: media_player.marantz_sr5008
+      # - type: picture-glance
+      #   title: Living room
+      #   entities:
+      #     - sensor.temperature_158d0001b1c3fb
+      #     - sensor.humidity_158d0001b1c3fb
+      #     - image_processing.face_counter
+      #     - light.xiaomi_philips_ceiling_light
+      #     - light.yeelight_strip_7811dca220d2
+      #   camera_image: camera.ffmpeg
       - title: Air pollution
         entities:
+          - sensor.xiaomi_air_quality_monitor
           - sensor.airly_air_quality_50_009_19_961
           - sensor.airly_air_quality_49_87_19_497
           - sensor.airly_air_quality_50_0721293_19_8916957
@@ -93,8 +106,8 @@ views:
           - sensor.speedtest_download
           - sensor.speedtest_upload
           - sensor.speedtest_ping
-          - sensor.asuswrt_download_speed
-          - sensor.asuswrt_upload_speed
+          - sensor.rt_ac68u_kbyte_sec_received_2
+          - sensor.rt_ac68u_kbyte_sec_sent_2
         type: entities
         show_header_toggle: false
       - type: weather-forecast
@@ -270,3 +283,13 @@ views:
           - sensor.cpu_speed
           - sensor.load_5m
           - sensor.memory_use_percent
+  # - title: Surveillance
+  #   icon: mdi:cctv
+  #   panel: true
+  #   cards:
+  #     - type: custom:surveillance-card
+  #       thumb_interval: "0.5"
+  #       update_interval: "0.5"
+  #       cameras:
+  #         - entity: camera.ffmpeg
+  #           motion_entity: binary_sensor.motion_sensor_158d0001e547ae

@@ -22,8 +22,6 @@ light.gateway_light_34ce00fb56e8:
   friendly_name: Master bedroom gateway light
 sensor.illumination_34ce00fb56e8:
   friendly_name: Master bedroom gateway illumination sensor
-switch.plug_158d0001ded32d:
-  friendly_name: Tosia Christmas tree
 sensor.temperature_158d0001b9208d:
   friendly_name: Loggia temperature
 sensor.humidity_158d0001b9208d:
@@ -151,9 +149,7 @@ binary_sensor.switch_158d00019ca9dc:
 binary_sensor.switch_158d00016dbe9e:
   friendly_name: Master bedroom table switch
 light.yeelight_color2_04cf8c7cc6ad:
-  friendly_name: Wardrobe lamp
-switch.plug_158d0001deb419:
-  friendly_name: Wall Christmas lights
+  friendly_name: Downstairs bathroom lamp
 binary_sensor.motion_sensor_158d0002b70d79:
   friendly_name: Wardrobe motion sensor
 sensor.illumination_158d0002b70d79:
@@ -196,3 +192,17 @@ sensor.airly_air_quality_49_87_19_497:
   friendly_name: Wadowice
 sensor.airly_air_quality_50_0721293_19_8916957:
   friendly_name: Schibsted
+binary_sensor.wall_switch_left_158d0002b453ca:
+  friendly_name: Tosia wall switch - left button
+binary_sensor.wall_switch_right_158d0002b453ca:
+  friendly_name: Tosia wall switch - right button
+binary_sensor.wall_switch_both_158d0002b453ca:
+  friendly_name: Tosia wall switch - both buttons
+binary_sensor.wall_switch_158d0002828af1:
+  friendly_name: Wardrobe wall switch
+light.yeelight_color2_04cf8c971345:
+  friendly_name: Attic wardrobe area lamp
+switch.master_bedroom_stair:
+  friendly_name: Stairs lights
+sensor.xiaomi_air_quality_monitor:
+  friendly_name: Indoor air quality

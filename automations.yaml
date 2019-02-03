@@ -228,12 +228,6 @@
     - condition: state
       entity_id: light.yeelight_strip_7811dc691c74
       state: 'on'
-    - condition: state
-      entity_id: switch.plug_158d0001deb419
-      state: 'on'
-    - condition: state
-      entity_id: switch.plug_158d0001de79e6
-      state: 'on'
   action:
   - data:
       entity_id: light.xiaomi_philips_ceiling_light
@@ -247,12 +241,6 @@
       entity_id: light.yeelight_strip_7811dc691c74
       transition: 1
     service: light.turn_off
-  - data:
-      entity_id: switch.plug_158d0001deb419
-    service: switch.turn_off
-  - data:
-      entity_id: switch.plug_158d0001de79e6
-    service: switch.turn_off
 - id: '1541522658112'
   alias: Attic - entry area motion
   trigger:
@@ -309,21 +297,17 @@
     to: 'on'
   action:
   - data:
-      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      entity_id: light.yeelight_color2_04cf8c971345
       transition: 1
     service: light.turn_on
-  - data:
-      entity_id: light.yeelight_color2_04cf8c7cc6ad
-      mode: normal
-    service: light.yeelight_set_mode
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e55ff7.attributes[''No
       motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e55ff7.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
-    entity_id: light.yeelight_color2_04cf8c7cc6ad
+    entity_id: light.yeelight_color2_04cf8c971345
     state: 'on'
   - data:
-      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      entity_id: light.yeelight_color2_04cf8c971345
       transition: 1
     service: light.turn_off
 - id: '1541876800870'
@@ -345,16 +329,13 @@
       entity_id: light.yeelight_color2_04cf8c7bf9ba
       state: 'on'
     - condition: state
-      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      entity_id: light.yeelight_color2_04cf8c971345
       state: 'on'
   action:
   - data:
       entity_id: light.yeelight_color2_7c49eb1581f6
       transition: 1
     service: light.turn_off
-  - data:
-      entity_id: switch.plug_158d0001deb419
-    service: switch.turn_off
 - id: '1542048714041'
   alias: Guest room - motion
   trigger:
@@ -393,6 +374,7 @@
     service: light.turn_off
 - id: '1542050718235'
   alias: Guest room - toggle light
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001b182db
@@ -463,12 +445,6 @@
     - condition: state
       entity_id: light.yeelight_strip_7811dc691c74
       state: 'on'
-    - condition: state
-      entity_id: switch.plug_158d0001deb419
-      state: 'on'
-    - condition: state
-      entity_id: switch.plug_158d0001de79e6
-      state: 'on'
   action:
   - service: tts.google_say
     entity_id: media_player.living_room_speaker
@@ -483,12 +459,6 @@
       entity_id: light.yeelight_strip_7811dca220d2
       transition: 1
     service: light.turn_off
-  - data:
-      entity_id: switch.plug_158d0001deb419
-    service: switch.turn_off
-  - data:
-      entity_id: switch.plug_158d0001de79e6
-    service: switch.turn_off
 - id: '1543859792965'
   alias: Tosia room - motion
   trigger:
@@ -501,7 +471,7 @@
     condition: numeric_state
     entity_id: sensor.illumination_158d0002b85113
   - condition: time
-    after: '10:00:00'
+    after: '17:00:00'
     before: '20:00:00'
   action:
   - data:
@@ -524,9 +494,6 @@
       entity_id: light.yeelight_color2_04cf8c7cb0ca
       transition: 1
     service: light.turn_on
-  - data:
-      entity_id: switch.plug_158d0001ded32d
-    service: switch.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0002b85113.attributes[''No
       motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0002b85113.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -545,11 +512,9 @@
       entity_id: light.yeelight_color2_04cf8c7cb0ca
       transition: 1
     service: light.turn_off
-  - data:
-      entity_id: switch.plug_158d0001ded32d
-    service: switch.turn_off
 - id: '1544955116908'
   alias: Tosia toggle lamp
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001b1827e
@@ -564,6 +529,7 @@
     service: light.toggle
 - id: '1544955175467'
   alias: Tosia toggle Christmas tree
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001b1827e
@@ -572,9 +538,6 @@
     platform: event
   condition: []
   action:
-  - data:
-      entity_id: switch.plug_158d0001ded32d
-    service: switch.toggle
 - id: '1544967617743'
   alias: Leaving home
   trigger:
@@ -595,15 +558,6 @@
       language: pl
   - delay: 00:00:02
   - service: light.turn_off
-  - data:
-      entity_id: switch.plug_158d0001deb419
-    service: switch.turn_off
-  - data:
-      entity_id: switch.plug_158d0001de79e6
-    service: switch.turn_off
-  - data:
-      entity_id: switch.plug_158d0001ded32d
-    service: switch.turn_off
 - id: '1544970728739'
   alias: Coming home
   trigger:
@@ -664,6 +618,12 @@
     service: switch.turn_on
   - data:
       entity_id: switch.circadian_lighting_tosia_room_lights_auto
+    service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_wardrobe_lights_auto
+    service: switch.turn_on
+  - data:
+      entity_id: switch.circadian_lighting_downstairs_bathroom_lights_auto
     service: switch.turn_on
 - id: '1545565835153'
   alias: Master bedroom - motion
@@ -756,9 +716,6 @@
     - condition: state
       entity_id: light.tosia_left_wall_lamp
       state: 'on'
-    - condition: state
-      entity_id: switch.plug_158d0001ded32d
-      state: 'on'
   action:
   - data:
       entity_id: light.yeelight_color2_7c49eb1582dd
@@ -770,9 +727,6 @@
       entity_id: light.tosia_left_wall_lamp
       transition: 1
     service: light.turn_off
-  - data:
-      entity_id: switch.plug_158d0001ded32d
-    service: switch.turn_off
 - id: '1545994936009'
   alias: Living room left wall switch - right click
   trigger:
@@ -964,6 +918,7 @@
     service: light.turn_on
 - id: '1546010274549'
   alias: Master bedroom - toggle lights
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d00016dbe9e
@@ -991,6 +946,7 @@
     service: light.toggle
 - id: '1546010333874'
   alias: Master bedroom - toggle LEDs
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d00016dbe9e
@@ -1010,6 +966,7 @@
     service: light.toggle
 - id: '1546010434351'
   alias: Master bedroom - toggle gateway
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d00016dbe9e
@@ -1086,6 +1043,7 @@
     service: light.turn_off
 - id: '1546014691265'
   alias: Attic - toggle left entry light
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001f9c3fe
@@ -1100,6 +1058,7 @@
     service: light.toggle
 - id: '1546014728200'
   alias: Attic - toggle right entry light
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001f9c3fe
@@ -1114,6 +1073,7 @@
     service: light.toggle
 - id: '1546014760465'
   alias: Attic - toggle wardrobe area light
+  hide_entity: true
   trigger:
   - event_data:
       entity_id: binary_sensor.switch_158d0001f9c3fe
@@ -1123,7 +1083,7 @@
   condition: []
   action:
   - data:
-      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      entity_id: light.yeelight_color2_04cf8c971345
       transition: 1
     service: light.toggle
 - id: '1546020188168'
@@ -1188,3 +1148,155 @@
       entity_id: light.gateway_light_34ce0088a579
       transition: 1
     service: light.turn_off
+- id: '1548095677962'
+  alias: Downstairs bathroom - motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0002b422b4
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.yeelight_color2_04cf8c7cc6ad
+    state: 'off'
+  action:
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      transition: 1
+    service: light.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0002b422b4.attributes[''No
+      motion since''] | int >= 1200 and states.binary_sensor.motion_sensor_158d0002b422b4.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.yeelight_color2_04cf8c7cc6ad
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cc6ad
+    service: light.turn_off
+- id: '1548095715939'
+  alias: Downstairs bathroom - empty
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0002b422b4.attributes[''No
+      motion since''] | int >= 1200 and states.binary_sensor.motion_sensor_158d0002b422b4.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  condition:
+  - condition: state
+    entity_id: light.yeelight_color2_04cf8c7cc6ad
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cc6ad
+      transition: 1
+    service: light.turn_off
+- id: '1549129661008'
+  alias: Tosia wall switch - left button
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.wall_switch_left_158d0002b453ca
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.tosia_left_wall_lamp
+      transition: 1
+    service: light.toggle
+- id: '1549129689282'
+  alias: Tosia wall switch - right click
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.wall_switch_right_158d0002b453ca
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cb0ca
+      transition: 1
+    service: light.toggle
+- id: '1549129715747'
+  alias: Tosia wall switch - both buttons
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.wall_switch_both_158d0002b453ca
+      click_type: both
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.yeelight_color2_04cf8c7cb0ca
+      transition: 1
+    service: light.toggle
+  - data:
+      entity_id: light.tosia_left_wall_lamp
+      transition: 1
+    service: light.toggle
+  - data:
+      entity_id: light.yeelight_color2_7c49eb1582dd
+      transition: 1
+    service: light.toggle
+- id: '1549179592040'
+  alias: Wardrobe - motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0002b70d79
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: light.wardrobe_lamp
+    state: 'off'
+  - below: '35'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0002b70d79
+  action:
+  - data:
+      entity_id: switch.circadian_lighting_wardrobe_lights_auto
+    service: switch.turn_on
+  - data:
+      entity_id: light.wardrobe_lamp
+      transition: 1
+    service: light.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0002b70d79.attributes[''No
+      motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0002b70d79.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: light.wardrobe_lamp
+    state: 'on'
+  - data:
+      entity_id: light.wardrobe_lamp
+    service: light.turn_off
+- id: '1549179643827'
+  alias: Wardrobe - empty
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0002b70d79.attributes[''No
+      motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0002b70d79.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  condition:
+  - condition: state
+    entity_id: light.wardrobe_lamp
+    state: 'on'
+  action:
+  - data:
+      entity_id: light.wardrobe_lamp
+      transition: 1
+    service: light.turn_off
+- id: '1549179693148'
+  alias: Wardrobe - toggle light
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.wall_switch_158d0002828af1
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.wardrobe_lamp
+      transition: 1
+    service: light.toggle
