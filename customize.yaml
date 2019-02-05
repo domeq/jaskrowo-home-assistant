@@ -204,5 +204,17 @@ light.yeelight_color2_04cf8c971345:
   friendly_name: Attic wardrobe area lamp
 switch.master_bedroom_stair:
   friendly_name: Stairs lights
+switch.master_bedroom_wall:
+  friendly_name: Wall lamp
+switch.upstairs_bathroom_ceiling:
+  friendly_name: Upstairs bathroom lights
 sensor.xiaomi_air_quality_monitor:
   friendly_name: Indoor air quality
+binary_sensor.wall_switch_both_158d0002b455e6:
+  friendly_name: Master bedroom wall switch - both buttons
+binary_sensor.wall_switch_left_158d0002b455e6:
+  friendly_name: Master bedroom wall switch - left button
+binary_sensor.wall_switch_right_158d0002b455e6:
+  friendly_name: Master bedroom wall switch - right button
+binary_sensor.wall_switch_158d000282896e:
+  friendly_name: Upstairs bathroom wall switch

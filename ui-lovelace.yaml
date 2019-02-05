@@ -38,6 +38,7 @@ views:
           - binary_sensor.door_window_sensor_158d000232db84
           - light.master_bedroom_bed_lamp
           - light.yeelight_strip_7811dc66f063
+          - switch.master_bedroom_wall
           - switch.master_bedroom_stair
           - light.gateway_light_34ce00fb56e8
         type: entities
@@ -66,9 +67,10 @@ views:
           - light.yeelight_color2_04cf8c7bf9ba
           - light.yeelight_color2_04cf8c971345
         type: entities
-      - title: Downstairs bathroom
+      - title: Bathrooms
         entities:
           - light.yeelight_color2_04cf8c7cc6ad
+          - switch.upstairs_bathroom_ceiling
         type: entities
       - title: Wardrobe
         entities:

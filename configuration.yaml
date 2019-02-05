@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: 50.009
-  longitude: 19.961
+  latitude: !secret geo_latitude
+  longitude: !secret geo_longitude
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 269
   # metric for Metric, imperial for Imperial
@@ -312,7 +312,10 @@ switch:
     switches:
       master_bedroom_stair:
         host: 192.168.1.92
-
+      master_bedroom_wall:
+        host: 192.168.1.128
+      upstairs_bathroom_ceiling:
+        host: 192.168.1.227
 scene:
   - name: Living room day
     entities:
@@ -354,3 +357,12 @@ media_player:
     host: 192.168.1.80
     name: Marantz SR5008
     show_all_sources: true
+
+recorder:
+  purge_keep_days: 3
+  purge_interval: 1
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
