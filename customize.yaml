@@ -218,3 +218,11 @@ binary_sensor.wall_switch_right_158d0002b455e6:
   friendly_name: Master bedroom wall switch - right button
 binary_sensor.wall_switch_158d000282896e:
   friendly_name: Upstairs bathroom wall switch
+switch.living_room_stair:
+  friendly_name: Stairs lamp
+switch.living_room_wall:
+  friendly_name: Wall lights
+binary_sensor.motion_sensor_158d000257a1be:
+  friendly_name: Living room stairs - motion sensor
+binary_sensor.illumination_158d000257a1be:
+  friendly_name: Living room stairs - illumination sensor

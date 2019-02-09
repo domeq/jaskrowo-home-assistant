@@ -196,7 +196,7 @@
       entity_id: light.yeelight_strip_7811dc691c74
     service: light.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e4707c.attributes[''No
-      motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e4707c.state
+      motion since''] | int >= 0 and states.binary_sensor.motion_sensor_158d0001e4707c.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
     entity_id: light.yeelight_strip_7811dc691c74
@@ -228,6 +228,12 @@
     - condition: state
       entity_id: light.yeelight_strip_7811dc691c74
       state: 'on'
+    - condition: state
+      entity_id: switch.living_room_stair
+      state: 'on'
+    - condition: state
+      entity_id: switch.living_room_wall
+      state: 'on'
   action:
   - data:
       entity_id: light.xiaomi_philips_ceiling_light
@@ -240,6 +246,12 @@
   - data:
       entity_id: light.yeelight_strip_7811dc691c74
       transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: switch.living_room_stair
+    service: light.turn_off
+  - data:
+      entity_id: switch.living_room_wall
     service: light.turn_off
 - id: '1541522658112'
   alias: Attic - entry area motion
@@ -554,6 +566,12 @@
       language: pl
   - delay: 00:00:02
   - service: light.turn_off
+  - service: switch.turn_off
+    data:
+      entity_id: switch.living_room_wall
+  - service: switch.turn_off
+    data:
+      entity_id: switch.living_room_stair
 - id: '1544970728739'
   alias: Coming home
   trigger:
@@ -834,20 +852,10 @@
     event_data:
       entity_id: binary_sensor.cube_158d000101c2a1
       action_type: move
-  condition:
-  - condition: state
-    entity_id: light.xiaomi_philips_ceiling_light
-    state: 'on'
   action:
   - data:
-      entity_id: switch.circadian_lighting_living_room_auto_ceiling
-    service: switch.turn_off
-  - service: light.turn_on
-    data_template:
-      transition: 1
-      entity_id: light.xiaomi_philips_ceiling_light
-      brightness: '{{ ((states.light.xiaomi_philips_ceiling_light.attributes[''brightness'']
-        | int) * 0.5) | round }}'
+      entity_id: switch.living_room_wall
+    service: switch.toggle
 - id: '1545995978732'
   alias: Living room right wall switch - both click
   trigger:
@@ -1393,7 +1401,6 @@
   action:
   - data:
       entity_id: switch.upstairs_bathroom_ceiling
-      transition: 1
     service: switch.turn_off
 - id: '1549196390092'
   alias: Upstairs bathroom - toggle light
@@ -1483,11 +1490,13 @@
     to: 'on'
   condition:
   - after: 07:00:00
-    before: '10:00:00'
+    before: '09:00:00'
     weekday:
     - sat
     - sun
     condition: time
+  - condition: template
+    value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.others_weekend_wake_up.attributes.last_triggered) | int > 43200 }}'
   action:
   - service: tts.google_say
     entity_id: media_player.living_room_speaker
@@ -1498,5 +1507,50 @@
   - service: media_player.play_media
     data_template:
       entity_id: media_player.living_room_speaker
-      media_content_id: !secret wake_up_music_location
-      media_content_type: 'audio/flac'
+      media_content_id: https://jaskrowo.asuscomm.com/local/wake_up.flac
+      media_content_type: audio/flac
+- id: '1549654128210'
+  alias: Living room stairs - motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d000257a1be
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.living_room_stair
+    state: 'off'
+  - below: '10'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d000257a1be
+  - after: 06:30:00
+    before: '22:00:00'
+    condition: time
+  action:
+  - data:
+      entity_id: switch.living_room_stair
+    service: switch.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d000257a1be.attributes[''No
+      motion since''] | int >= 0 and states.binary_sensor.motion_sensor_158d000257a1be.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: switch.living_room_stair
+    state: 'on'
+  - data:
+      entity_id: switch.living_room_stair
+    service: switch.turn_off
+- id: '1549654154926'
+  alias: Living room stairs - empty
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d000257a1be.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d000257a1be.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  condition:
+  - condition: state
+    entity_id: switch.living_room_stair
+    state: 'on'
+  action:
+  - data:
+      entity_id: switch.living_room_stair
+    service: switch.turn_off

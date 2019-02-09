@@ -233,6 +233,15 @@ asuswrt:
   host: 192.168.1.254
   username: wojtek
   ssh_key: "/config/id_rsa"
+  sensors:
+    - upload_speed
+    - download_speed
+
+device_tracker:
+  - platform: asuswrt
+    new_device_defaults:
+      track_new_devices: false
+      hide_if_away: false
 
 weather:
   - platform: met
@@ -257,6 +266,7 @@ switch:
       - light.xiaomi_philips_ceiling_light
   - platform: circadian_lighting
     name: "Living room auto LEDs"
+    min_brightness: 30
     lights_ct:
       - light.yeelight_strip_7811dca220d2
       - light.yeelight_strip_7811dc691c74
@@ -316,6 +326,10 @@ switch:
         host: 192.168.1.128
       upstairs_bathroom_ceiling:
         host: 192.168.1.227
+      living_room_stair:
+        host: 192.168.1.114
+      living_room_wall:
+        host: 192.168.1.200
 scene:
   - name: Living room day
     entities:
@@ -366,3 +380,5 @@ recorder:
       - automation
       - weblink
       - updater
+
+system_health:
