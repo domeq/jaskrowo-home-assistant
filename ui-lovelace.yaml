@@ -25,10 +25,13 @@ views:
         entities:
           - sensor.temperature_158d0002320de3
           - sensor.humidity_158d0002320de3
+          - switch.kitchen_lights
+          - switch.dining_room_ceiling
+          - switch.dining_room_wall
+          - light.yeelight_strip_7811dc68588d
+          - switch.plug_158d0001ded32d
           - binary_sensor.door_window_sensor_158d00023709f7
           - binary_sensor.door_window_sensor_158d00022f148a
-          - light.yeelight_strip_7811dc68588d
-          - light.gateway_light_34ce0088a579
           - vacuum.xiaomi_vacuum_cleaner
         type: entities
       - title: Master bedroom

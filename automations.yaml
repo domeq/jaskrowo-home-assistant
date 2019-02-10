@@ -572,6 +572,18 @@
   - service: switch.turn_off
     data:
       entity_id: switch.living_room_stair
+  - service: switch.turn_off
+    data:
+      entity_id: switch.kitchen_lights
+  - service: switch.turn_off
+    data:
+      entity_id: switch.dining_room_wall
+  - service: switch.turn_off
+    data:
+      entity_id: switch.dining_room_ceiling
+  - service: switch.turn_off
+    data:
+      entity_id: switch.plug_158d0001ded32d
 - id: '1544970728739'
   alias: Coming home
   trigger:
@@ -687,7 +699,7 @@
       transition: 1
     service: light.turn_off
   - data:
-      entity_id: switch.wall
+      entity_id: switch.master_bedroom_wall
     service: switch.turn_off
   - data:
       entity_id: switch.master_bedroom_stair
@@ -1019,62 +1031,79 @@
       transition: 1
     service: light.toggle
 - id: '1546013441545'
-  alias: Kitchen - motion
+  alias: Kitchen - motion daytime
   trigger:
-  - entity_id: binary_sensor.motion_sensor_158d0001655da1
+  - entity_id: binary_sensor.motion_sensor_158d0002ec7efa
     from: 'off'
     platform: state
     to: 'on'
   condition:
   - condition: state
-    entity_id: light.gateway_light_34ce0088a579
+    entity_id: switch.kitchen_lights
     state: 'off'
-  - below: '500'
+  - condition: state
+    entity_id: switch.plug_158d0001ded32d
+    state: 'off'
+  - below: '60'
     condition: numeric_state
-    entity_id: sensor.illumination_34ce0088a579
+    entity_id: sensor.illumination_158d0002ec7efa
+  - after: 05:30:00
+    before: '23:00:00'
+    condition: time
   action:
+  - data:
+      entity_id: switch.kitchen_lights
+    service: switch.turn_on
   - data:
       entity_id: light.yeelight_strip_7811dc68588d
       transition: 1
     service: light.turn_on
   - data:
-      entity_id: light.gateway_light_34ce0088a579
-      transition: 1
-    service: light.turn_on
-  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001655da1.attributes[''No
-      motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001655da1.state
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0002ec7efa.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0002ec7efa.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
-    entity_id: light.gateway_light_34ce0088a579
+    entity_id: switch.kitchen_lights
     state: 'on'
   - data:
       entity_id: light.yeelight_strip_7811dc68588d
       transition: 1
     service: light.turn_off
   - data:
-      entity_id: light.gateway_light_34ce0088a579
-      transition: 1
-    service: light.turn_off
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.turn_off
+  - data:
+      entity_id: switch.kitchen_lights
+    service: switch.turn_off
 - id: '1546013479738'
   alias: Kitchen - empty
   trigger:
   - platform: template
-    value_template: '{% if states.binary_sensor.motion_sensor_158d0001655da1.attributes[''No
-      motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0001655da1.state
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0002ec7efa.attributes[''No
+      motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0002ec7efa.state
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
-  - condition: state
-    entity_id: light.gateway_light_34ce0088a579
-    state: 'on'
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: switch.plug_158d0001ded32d
+      state: 'on'
+    - condition: state
+      entity_id: switch.kitchen_lights
+      state: 'on'
   action:
   - data:
       entity_id: light.yeelight_strip_7811dc68588d
       transition: 1
     service: light.turn_off
   - data:
-      entity_id: light.gateway_light_34ce0088a579
-      transition: 1
-    service: light.turn_off
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.turn_off
+  - data:
+      entity_id: switch.kitchen_lights
+    service: switch.turn_off
 - id: '1546014691265'
   alias: Attic - toggle left entry light
   hide_entity: true
@@ -1161,9 +1190,11 @@
 - id: '1546091775458'
   alias: Kitchen - bright enough
   trigger:
-  - above: '800'
-    entity_id: sensor.illumination_34ce0088a579
+  - above: '200'
+    entity_id: sensor.illumination_158d0002ec7efa
     platform: numeric_state
+    for:
+      minutes: 3
   condition:
     condition: or
     conditions:
@@ -1171,17 +1202,27 @@
       entity_id: light.yeelight_strip_7811dc68588d
       state: 'on'
     - condition: state
-      entity_id: light.gateway_light_34ce0088a579
+      entity_id: switch.plug_158d0001ded32d
+      state: 'on'
+    - condition: state
+      entity_id: switch.kitchen_lights
       state: 'on'
   action:
+  - service: tts.google_say
+    entity_id: media_player.living_room_speaker
+    data:
+      message: Wygląda, że w kuchni jest wystarczająco jasno - wyłączam światła.
+      language: pl
   - data:
       entity_id: light.yeelight_strip_7811dc68588d
       transition: 1
     service: light.turn_off
   - data:
-      entity_id: light.gateway_light_34ce0088a579
-      transition: 1
-    service: light.turn_off
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.turn_off
+  - data:
+      entity_id: switch.kitchen_lights
+    service: switch.turn_off
 - id: '1548095677962'
   alias: Downstairs bathroom - motion
   trigger:
@@ -1490,13 +1531,14 @@
     to: 'on'
   condition:
   - after: 07:00:00
-    before: '09:00:00'
+    before: 09:00:00
     weekday:
     - sat
     - sun
     condition: time
   - condition: template
-    value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.others_weekend_wake_up.attributes.last_triggered) | int > 43200 }}'
+    value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.others_weekend_wake_up.attributes.last_triggered)
+      | int > 43200 }}'
   action:
   - service: tts.google_say
     entity_id: media_player.living_room_speaker
@@ -1553,4 +1595,107 @@
   action:
   - data:
       entity_id: switch.living_room_stair
+    service: switch.turn_off
+- id: '1549810614088'
+  alias: Dining area - empty
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0001655da1.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001655da1.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: switch.dining_room_wall
+      state: 'on'
+    - condition: state
+      entity_id: switch.dining_room_ceiling
+      state: 'on'
+  action:
+  - data:
+      entity_id: switch.dining_room_wall
+    service: switch.turn_off
+  - data:
+      entity_id: switch.dining_room_ceiling
+    service: switch.turn_off
+- id: '1549810691857'
+  alias: Kitchen left wall switch - click
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.wall_switch_158d00028f6c2f
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: switch.kitchen_lights
+    service: switch.toggle
+- id: '1549810749195'
+  alias: Kitchen right wall switch - left button
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.wall_switch_left_158d0002b48cff
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: switch.dining_room_ceiling
+    service: switch.toggle
+- id: '1549810780701'
+  alias: Kitchen right wall switch - right button
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.wall_switch_right_158d0002b48cff
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: switch.dining_room_wall
+    service: switch.toggle
+- id: '1549820992742'
+  alias: Kitchen - motion at night
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0002ec7efa
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.plug_158d0001ded32d
+    state: 'off'
+  - below: '60'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0002ec7efa
+  - condition: or
+      conditions:
+      - condition: time
+        after: '23:00:01'
+      - condition: time
+        before: 05:29:59
+  action:
+  - data:
+      entity_id: light.yeelight_strip_7811dc68588d
+      transition: 1
+    service: light.turn_on
+  - data:
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0002ec7efa.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0002ec7efa.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: switch.plug_158d0001ded32d
+    state: 'on'
+  - data:
+      entity_id: light.yeelight_strip_7811dc68588d
+      transition: 1
+    service: light.turn_off
+  - data:
+      entity_id: switch.plug_158d0001ded32d
     service: switch.turn_off

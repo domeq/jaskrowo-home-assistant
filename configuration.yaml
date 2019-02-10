@@ -330,6 +330,14 @@ switch:
         host: 192.168.1.114
       living_room_wall:
         host: 192.168.1.200
+      kitchen_lights:
+        host: 192.168.1.124
+      dining_room_ceiling:
+        host: 192.168.1.93
+        path: /relay/1
+      dining_room_wall:
+        host: 192.168.1.93
+        path: /relay/0
 scene:
   - name: Living room day
     entities:

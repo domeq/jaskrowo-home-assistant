@@ -139,7 +139,7 @@ binary_sensor.motion_sensor_158d0001e532dc:
 sensor.illumination_158d0001e532dc:
   friendly_name: Guest room illumination sensor
 binary_sensor.motion_sensor_158d0001655da1:
-  friendly_name: Kitchen motion sensor
+  friendly_name: Dining area motion sensor
 binary_sensor.switch_158d0001be5b10:
   friendly_name: Guest room bedside table switch
 binary_sensor.switch_158d0001b182db:
@@ -226,3 +226,23 @@ binary_sensor.motion_sensor_158d000257a1be:
   friendly_name: Living room stairs - motion sensor
 binary_sensor.illumination_158d000257a1be:
   friendly_name: Living room stairs - illumination sensor
+switch.plug_158d0001ded32d:
+  friendly_name: Sink lights
+binary_sensor.motion_sensor_158d0002ec7efa:
+  friendly_name: Kitchen motion sensor
+sensor.illumination_158d0002ec7efa:
+  friendly_name: Kitchen illumination sensor
+switch.kitchen_lights:
+  friendly_name: Ceiling lights
+switch.dining_room_wall:
+  friendly_name: Dining area wall lamp
+switch.dining_room_ceiling:
+  friendly_name: Dining area ceiling lamp
+binary_sensor.wall_switch_158d00028f6c2f:
+  friendly_name: Kitchen left wall switch
+binary_sensor.wall_switch_right_158d0002b48cff:
+  friendly_name: Kitchen right wall switch - right button
+binary_sensor.wall_switch_left_158d0002b48cff:
+  friendly_name: Kitchen right wall switch - left button
+binary_sensor.wall_switch_both_158d0002b48cff:
+  friendly_name: Kitchen right wall switch - both buttons
