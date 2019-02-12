@@ -355,9 +355,12 @@
   hide_entity: true
   trigger:
   - event_data:
-      entity_id:
-        - binary_sensor.switch_158d0001b182db
-        - binary_sensor.switch_158d0001be5b10
+      entity_id: binary_sensor.switch_158d0001b182db
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001be5b10
       click_type: single
     event_type: xiaomi_aqara.click
     platform: event
@@ -373,9 +376,12 @@
   alias: Guest room - bright mode
   trigger:
   - event_data:
-      entity_id:
-        - binary_sensor.switch_158d0001b182db
-        - binary_sensor.switch_158d0001be5b10
+      entity_id: binary_sensor.switch_158d0001b182db
+      click_type: hold
+    event_type: xiaomi_aqara.click
+    platform: event
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001be5b10
       click_type: hold
     event_type: xiaomi_aqara.click
     platform: event
@@ -862,9 +868,12 @@
     event_type: xiaomi_aqara.click
     platform: event
   - event_data:
-      entity_id:
-        - binary_sensor.switch_158d00016dbe9e
-        - binary_sensor.switch_158d00019ca9dc
+      entity_id: binary_sensor.switch_158d00016dbe9e
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  - event_data:
+      entity_id: binary_sensor.switch_158d00019ca9dc
       click_type: single
     event_type: xiaomi_aqara.click
     platform: event
@@ -882,9 +891,12 @@
   hide_entity: true
   trigger:
   - event_data:
-      entity_id:
-        - binary_sensor.switch_158d00016dbe9e
-        - binary_sensor.switch_158d00019ca9dc
+      entity_id: binary_sensor.switch_158d00016dbe9e
+      click_type: double
+    event_type: xiaomi_aqara.click
+    platform: event
+  - event_data:
+      entity_id: binary_sensor.switch_158d00019ca9dc
       click_type: double
     event_type: xiaomi_aqara.click
     platform: event
@@ -899,9 +911,12 @@
   hide_entity: true
   trigger:
   - event_data:
-      entity_id:
-        - binary_sensor.switch_158d00016dbe9e
-        - binary_sensor.switch_158d00019ca9dc
+      entity_id: binary_sensor.switch_158d00016dbe9e
+      click_type: long_click_press
+    event_type: xiaomi_aqara.click
+    platform: event
+  - event_data:
+      entity_id: binary_sensor.switch_158d00019ca9dc
       click_type: long_click_press
     event_type: xiaomi_aqara.click
     platform: event
