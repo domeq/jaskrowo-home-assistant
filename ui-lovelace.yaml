@@ -186,7 +186,8 @@ views:
           - automation.guest_room_toggle_light
           - automation.hall_empty_room
           - automation.hall_motion
-          - automation.kitchen_motion
+          - automation.kitchen_motion_daytime
+          - automation.kitchen_motion_at_night
           - automation.kitchen_empty
           - automation.kitchen_bright_enough
           - automation.leaving_home
