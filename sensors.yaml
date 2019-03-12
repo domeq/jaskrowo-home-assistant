@@ -1,10 +1,3 @@
-- platform: speedtest
-  minute:
-    - 0
-  monitored_conditions:
-    - ping
-    - download
-    - upload
 - platform: template
   sensors:
     battery_wiskra_mimix2:

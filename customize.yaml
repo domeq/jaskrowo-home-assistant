@@ -224,7 +224,7 @@ switch.living_room_wall:
   friendly_name: Wall lights
 binary_sensor.motion_sensor_158d000257a1be:
   friendly_name: Living room stairs - motion sensor
-binary_sensor.illumination_158d000257a1be:
+sensor.illumination_158d000257a1be:
   friendly_name: Living room stairs - illumination sensor
 switch.plug_158d0001ded32d:
   friendly_name: Sink lights
@@ -246,3 +246,7 @@ binary_sensor.wall_switch_left_158d0002b48cff:
   friendly_name: Kitchen right wall switch - left button
 binary_sensor.wall_switch_both_158d0002b48cff:
   friendly_name: Kitchen right wall switch - both buttons
+binary_sensor.motion_sensor_158d000257a1db:
+  friendly_name: Upstairs hall motion sensor
+sensor.illumination_158d000257a1db:
+  friendly_name: Upstairs hall illumination sensor

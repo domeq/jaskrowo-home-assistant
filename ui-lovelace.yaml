@@ -77,8 +77,10 @@ views:
           - light.yeelight_color2_04cf8c7cc6ad
           - switch.upstairs_bathroom_ceiling
         type: entities
-      - title: Wardrobe
+      - title: Upstairs hall
         entities:
+          - light.upstairs_hall_left_lamp
+          - light.upstairs_hall_right_lamp
           - light.wardrobe_lamp
         type: entities
       # - type: media-control
@@ -169,6 +171,41 @@ views:
           - device_tracker.gosiak_mia2
           - device_tracker.wiskra_mimix2
           - zone.home
+      - type: glance
+        title: Vacuum
+        entities:
+          - icon: 'mdi:water'
+            type: entity-button
+            entity: script.vacuum_start_mopping
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              service_data:
+                entity_id: script.vacuum_start_mopping
+          - icon: 'mdi:robot-vacuum'
+            type: entity-button
+            entity: script.vacuum_start_cleaning
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              service_data:
+                entity_id: script.vacuum_start_cleaning
+          - icon: 'mdi:pause'
+            type: entity-button
+            entity: script.vacuum_pause
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              service_data:
+                entity_id: script.vacuum_pause
+          - icon: 'mdi:home-circle'
+            type: entity-button
+            entity: script.vacuum_go_home
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              service_data:
+                entity_id: script.vacuum_go_home
   - title: Automations
     path: automations
     badges: []
@@ -178,12 +215,11 @@ views:
           - automation.attic_empty_room
           - automation.attic_entry_area_motion
           - automation.attic_wardrobe_area_motion
-          - automation.coming_home
+          - automation.dining_area_empty
           - automation.downstairs_bathroom_motion
           - automation.downstairs_bathroom_empty
           - automation.guest_room_bright_mode
           - automation.guest_room_motion
-          - automation.guest_room_toggle_light
           - automation.hall_empty_room
           - automation.hall_motion
           - automation.kitchen_motion_daytime
@@ -201,6 +237,8 @@ views:
           - automation.living_room_motion_03_tv_mode
           - automation.master_bedroom_empty
           - automation.master_bedroom_motion
+          - automation.smog_air_is_clean
+          - automation.smog_close_the_windows
           - automation.tosia_room_motion
           - automation.tosia_room_empty
           - automation.tosia_toggle_christmas_tree
@@ -208,6 +246,8 @@ views:
           - automation.turn_on_circadian_lighting_switches_on_startup
           - automation.upstairs_bathroom_motion
           - automation.upstairs_bathroom_empty
+          - automation.upstairs_hall_motion
+          - automation.upstairs_hall_empty
           - automation.wardrobe_motion
           - automation.wardrobe_empty
         type: entities
@@ -261,6 +301,9 @@ views:
           - sensor.illumination_158d0002b72030
           - sensor.illumination_158d0001e547ae
           - sensor.illumination_158d0001e55ff7
+          - sensor.illumination_158d0002ec7efa
+          - sensor.illumination_158d000257a1be
+          - sensor.illumination_158d000257a1db
       - type: entities
         title: Motion detection
         show_header_toggle: false
@@ -276,6 +319,7 @@ views:
           - binary_sensor.motion_sensor_158d0002b85113
           - binary_sensor.motion_sensor_158d0002b72030
           - binary_sensor.motion_sensor_158d0002b422b4
+          - binary_sensor.motion_sensor_158d000257a1db
       - title: Lights temperature
         entities:
           - sensor.light_ct_philips_ceiling_light
@@ -297,41 +341,6 @@ views:
           - sensor.cpu_speed
           - sensor.load_5m
           - sensor.memory_use_percent
-      - type: glance
-        title: Vacuum
-        entities:
-          - icon: 'mdi:water'
-            type: entity-button
-            entity: script.vacuum_start_mopping
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.vacuum_start_mopping
-          - icon: 'mdi:robot-vacuum'
-            type: entity-button
-            entity: script.vacuum_start_cleaning
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.vacuum_start_cleaning
-          - icon: 'mdi:pause'
-            type: entity-button
-            entity: script.vacuum_pause
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.vacuum_pause
-          - icon: 'mdi:home-circle'
-            type: entity-button
-            entity: script.vacuum_go_home
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.vacuum_go_home
   # - title: Surveillance
   #   icon: mdi:cctv
   #   panel: true
