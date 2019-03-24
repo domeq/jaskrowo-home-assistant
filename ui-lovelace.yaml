@@ -63,6 +63,7 @@ views:
           - binary_sensor.door_window_sensor_158d0002436b09
           - light.xiaomi_philips_e14_crystal
           - light.xiaomi_philips_e14_crystal_2
+          - switch.xiaomi_miio_switch
         type: entities
       - title: Attic
         entities:

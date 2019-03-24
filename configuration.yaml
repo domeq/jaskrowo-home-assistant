@@ -141,7 +141,7 @@ light:
     model: philips.light.ceiling
   - platform: xiaomi_miio
     name: Master bedroom bed lamp
-    host: 192.168.1.108
+    host: 192.168.1.107
     token: c1ac97f17b98eb0cc6132fd6f6433f91
     model: philips.light.candle2
   - platform: xiaomi_miio
@@ -271,6 +271,10 @@ circadian_lighting:
   sunset_offset: "00:00:00"
 
 switch:
+  - platform: xiaomi_miio
+    name: "Guest room floor lamp"
+    host: 192.168.1.70
+    token: c434a0a9b9897896e9b6abc1ffc80fa3
   - platform: circadian_lighting
     name: "Living room auto ceiling"
     max_brightness: 50

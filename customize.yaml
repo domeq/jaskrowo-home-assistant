@@ -1,25 +1,34 @@
 light.yeelight_color2_7c49eb1566bb:
   friendly_name: Hall light
+  icon: "mdi:ceiling-light"
 light.yeelight_strip_7811dc66f063:
   friendly_name: Master bedroom LEDs
+  icon: "mdi:led-strip"
 light.yeelight_strip_7811dc68588d:
   friendly_name: Kitchen LEDs
+  icon: "mdi:led-strip"
 light.yeelight_strip_7811dc691c74:
   friendly_name: Stairs LEDs
+  icon: "mdi:led-strip"
 light.yeelight_strip_7811dca220d2:
   friendly_name: Wall LEDs
+  icon: "mdi:led-strip"
 light.yeelight_color2_7c49eb1581f6:
   friendly_name: Attic left light
+  icon: "mdi:ceiling-light"
 light.yeelight_color2_04cf8c7bf9ba:
   friendly_name: Attic right light
+  icon: "mdi:ceiling-light"
 light.yeelight_color2_7c49eb1582dd:
   friendly_name: Tosia lamp
+  icon: "mdi:lamp"
 light.gateway_light_34ce0088a579:
   friendly_name: Kitchen gateway light
 sensor.illumination_34ce0088a579:
   friendly_name: Kitchen gateway illumination sensor
 light.gateway_light_34ce00fb56e8:
   friendly_name: Master bedroom gateway light
+  icon: "mdi:led-outline"
 sensor.illumination_34ce00fb56e8:
   friendly_name: Master bedroom gateway illumination sensor
 sensor.temperature_158d0001b9208d:
@@ -36,16 +45,22 @@ sensor.humidity_158d0001b1c3fb:
   friendly_name: Living room humidity
 binary_sensor.door_window_sensor_158d0001ad5eb6:
   friendly_name: Living room balcony
+  icon: "mdi:window-closed"
 binary_sensor.door_window_sensor_158d000232da46:
   friendly_name: Tosia window
+  icon: "mdi:window-closed"
 binary_sensor.door_window_sensor_158d00023709f7:
   friendly_name: Kitchen window right
+  icon: "mdi:window-closed"
 binary_sensor.door_window_sensor_158d00022f148a:
   friendly_name: Kitchen window left
+  icon: "mdi:window-closed"
 binary_sensor.door_window_sensor_158d000232db84:
   friendly_name: Loggia door
+  icon: "mdi:window-closed"
 binary_sensor.door_window_sensor_158d0002436b09:
   friendly_name: Guest room window
+  icon: "mdi:window-closed"
 sensor.temperature_158d0001b92092:
   friendly_name: Tosia room temperature
 sensor.humidity_158d0001b92092:
@@ -64,10 +79,13 @@ sensor.humidity_158d0002320de3:
   friendly_name: Kitchen humidity
 light.master_bedroom_bed_lamp:
   friendly_name: Master bedroom lamp
+  icon: "mdi:ceiling-light"
 light.xiaomi_philips_e14_crystal:
   friendly_name: Left lamp
+  icon: "mdi:ceiling-light"
 light.xiaomi_philips_e14_crystal_2:
   friendly_name: Right lamp
+  icon: "mdi:ceiling-light"
 sensor.mold_indicator:
   friendly_name: Attic mold indicator
   hidden: true
@@ -150,6 +168,7 @@ binary_sensor.switch_158d00016dbe9e:
   friendly_name: Master bedroom table switch
 light.yeelight_color2_04cf8c7cc6ad:
   friendly_name: Downstairs bathroom lamp
+  icon: "mdi:ceiling-light"
 binary_sensor.motion_sensor_158d0002b70d79:
   friendly_name: Wardrobe motion sensor
 sensor.illumination_158d0002b70d79:
@@ -184,8 +203,10 @@ binary_sensor.switch_158d0001d8eeb1:
   friendly_name: Tosia feeder
 light.tosia_left_wall_lamp:
   friendly_name: Tosia left wall lamp
+  icon: "mdi:ceiling-light"
 light.yeelight_color2_04cf8c7cb0ca:
   friendly_name: Tosia right wall lamp
+  icon: "mdi:ceiling-light"
 sensor.airly_air_quality_50_009_19_961:
   friendly_name: Turniejowa
 sensor.airly_air_quality_49_87_19_497:
@@ -202,12 +223,16 @@ binary_sensor.wall_switch_158d0002828af1:
   friendly_name: Wardrobe wall switch
 light.yeelight_color2_04cf8c971345:
   friendly_name: Attic wardrobe area lamp
+  icon: "mdi:floor-lamp"
 switch.master_bedroom_stair:
   friendly_name: Stairs lights
+  icon: "mdi:spotlight-beam"
 switch.master_bedroom_wall:
   friendly_name: Wall lamp
+  icon: "mdi:ceiling-light"
 switch.upstairs_bathroom_ceiling:
   friendly_name: Upstairs bathroom lights
+  icon: "mdi:spotlight-beam"
 sensor.xiaomi_air_quality_monitor:
   friendly_name: Indoor air quality
 binary_sensor.wall_switch_both_158d0002b455e6:
@@ -220,24 +245,30 @@ binary_sensor.wall_switch_158d000282896e:
   friendly_name: Upstairs bathroom wall switch
 switch.living_room_stair:
   friendly_name: Stairs lamp
+  icon: "mdi:stairs"
 switch.living_room_wall:
   friendly_name: Wall lights
+  icon: "mdi:spotlight-beam"
 binary_sensor.motion_sensor_158d000257a1be:
   friendly_name: Living room stairs - motion sensor
 sensor.illumination_158d000257a1be:
   friendly_name: Living room stairs - illumination sensor
 switch.plug_158d0001ded32d:
   friendly_name: Sink lights
+  icon: "mdi:spotlight-beam"
 binary_sensor.motion_sensor_158d0002ec7efa:
   friendly_name: Kitchen motion sensor
 sensor.illumination_158d0002ec7efa:
   friendly_name: Kitchen illumination sensor
 switch.kitchen_lights:
   friendly_name: Ceiling lights
+  icon: "mdi:spotlight-beam"
 switch.dining_room_wall:
   friendly_name: Dining area wall lamp
+  icon: "mdi:spotlight-beam"
 switch.dining_room_ceiling:
   friendly_name: Dining area ceiling lamp
+  icon: "mdi:ceiling-light"
 binary_sensor.wall_switch_158d00028f6c2f:
   friendly_name: Kitchen left wall switch
 binary_sensor.wall_switch_right_158d0002b48cff:
@@ -250,3 +281,14 @@ binary_sensor.motion_sensor_158d000257a1db:
   friendly_name: Upstairs hall motion sensor
 sensor.illumination_158d000257a1db:
   friendly_name: Upstairs hall illumination sensor
+switch.xiaomi_miio_switch:
+  friendly_name: Floor lamp
+  icon: "mdi:floor-lamp"
+light.xiaomi_philips_ceiling_light:
+  icon: "mdi:ceiling-light"
+light.upstairs_hall_left_lamp:
+  icon: "mdi:spotlight-beam"
+light.upstairs_hall_right_lamp:
+  icon: "mdi:spotlight-beam"
+light.wardrobe_lamp:
+  icon: "mdi:spotlight-beam"

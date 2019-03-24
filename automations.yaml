@@ -341,6 +341,10 @@
       - light.xiaomi_philips_e14_crystal_2
       transition: 1
     service: light.turn_on
+  - data:
+      entity_id:
+        - switch.xiaomi_miio_switch
+    service: switch.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e532dc.attributes[''No
       motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e532dc.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -350,6 +354,10 @@
       - light.xiaomi_philips_e14_crystal_2
       transition: 1
     service: light.turn_off
+  - data:
+      entity_id:
+        - switch.xiaomi_miio_switch
+    service: switch.turn_off
 - id: '1542050718235'
   alias: Guest room - toggle light
   hide_entity: true
@@ -372,6 +380,10 @@
       - light.xiaomi_philips_e14_crystal_2
       transition: 1
     service: light.toggle
+  - data:
+      entity_id:
+        - switch.xiaomi_miio_switch
+    service: switch.toggle
 - id: '1542053124048'
   alias: Guest room - bright mode
   trigger:
@@ -392,6 +404,10 @@
       - light.xiaomi_philips_e14_crystal
       - light.xiaomi_philips_e14_crystal_2
     service: light.turn_on
+  - data:
+      entity_id:
+        - switch.xiaomi_miio_switch
+    service: switch.turn_on
   - data:
       entity_id:
       - light.xiaomi_philips_e14_crystal
