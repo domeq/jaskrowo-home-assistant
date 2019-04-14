@@ -179,7 +179,7 @@ light:
 vacuum:
   - platform: xiaomi_miio
     host: 192.168.1.85
-    token: 497847376161734438336f4a4b544f6d
+    token: "616e4e30556767583138707636386345"
 
 # Full configuration.yaml entry
 history_graph:
@@ -268,7 +268,7 @@ circadian_lighting:
   max_colortemp: 5500
   min_colortemp: 3000
   sunrise_offset: "01:00:00"
-  sunset_offset: "00:00:00"
+  sunset_offset: "-01:00:00"
 
 switch:
   - platform: xiaomi_miio
@@ -284,8 +284,8 @@ switch:
     name: "Living room auto LEDs"
     min_brightness: 30
     lights_ct:
-      - light.yeelight_strip_7811dca220d2
-      - light.yeelight_strip_7811dc691c74
+      - light.yeelight_strip1_7811dca220d2
+      - light.yeelight_strip1_7811dc691c74
   - platform: circadian_lighting
     name: "Hall lights auto"
     lights_ct:
@@ -303,7 +303,7 @@ switch:
     lights_rgb:
       - light.gateway_light_34ce00fb56e8
     lights_brightness:
-      - light.yeelight_strip_7811dc66f063
+      - light.yeelight_strip1_7811dc66f063
   - platform: circadian_lighting
     name: "Attic lights auto"
     lights_ct:
@@ -319,7 +319,7 @@ switch:
     name: "Kitchen lights auto"
     min_brightness: 90
     lights_ct:
-      - light.yeelight_strip_7811dc68588d
+      - light.yeelight_strip1_7811dc68588d
     lights_rgb:
       - light.gateway_light_34ce0088a579
   - platform: circadian_lighting
@@ -356,19 +356,21 @@ switch:
       dining_room_wall:
         host: 192.168.1.92
         path: /relay/0
+      downstairs_bathroom_side:
+        host: 192.168.1.115
 scene:
   - name: Living room day
     entities:
         light.xiaomi_philips_ceiling_light: on
-        light.yeelight_strip_7811dca220d2: off
+        light.yeelight_strip1_7811dca220d2: off
   - name: Living room evening
     entities:
         light.xiaomi_philips_ceiling_light: on
-        light.yeelight_strip_7811dca220d2: on
+        light.yeelight_strip1_7811dca220d2: on
   - name: Living room TV mode
     entities:
         light.xiaomi_philips_ceiling_light: off
-        light.yeelight_strip_7811dca220d2: on
+        light.yeelight_strip1_7811dca220d2: on
 
 # To start the camera:
 # pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
@@ -389,8 +391,9 @@ scene:
 notify:
   - platform: html5
     name: Home Assistant
-    gcm_api_key: !secret gcm_api_key
-    gcm_sender_id: !secret gcm_sender_id
+    vapid_pub_key: !secret vapid_pub_key
+    vapid_prv_key: !secret vapid_prv_key
+    vapid_email: !secret vapid_email
 
 media_player:
   - platform: denonavr

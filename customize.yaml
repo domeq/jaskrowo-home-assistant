@@ -1,16 +1,16 @@
 light.yeelight_color2_7c49eb1566bb:
   friendly_name: Hall light
   icon: "mdi:ceiling-light"
-light.yeelight_strip_7811dc66f063:
+light.yeelight_strip1_7811dc66f063:
   friendly_name: Master bedroom LEDs
   icon: "mdi:led-strip"
-light.yeelight_strip_7811dc68588d:
+light.yeelight_strip1_7811dc68588d:
   friendly_name: Kitchen LEDs
   icon: "mdi:led-strip"
-light.yeelight_strip_7811dc691c74:
+light.yeelight_strip1_7811dc691c74:
   friendly_name: Stairs LEDs
   icon: "mdi:led-strip"
-light.yeelight_strip_7811dca220d2:
+light.yeelight_strip1_7811dca220d2:
   friendly_name: Wall LEDs
   icon: "mdi:led-strip"
 light.yeelight_color2_7c49eb1581f6:
@@ -168,7 +168,7 @@ binary_sensor.switch_158d00016dbe9e:
   friendly_name: Master bedroom table switch
 light.yeelight_color2_04cf8c7cc6ad:
   friendly_name: Downstairs bathroom lamp
-  icon: "mdi:ceiling-light"
+  icon: "mdi:shower-head"
 binary_sensor.motion_sensor_158d0002b70d79:
   friendly_name: Wardrobe motion sensor
 sensor.illumination_158d0002b70d79:
@@ -226,13 +226,13 @@ light.yeelight_color2_04cf8c971345:
   icon: "mdi:floor-lamp"
 switch.master_bedroom_stair:
   friendly_name: Stairs lights
-  icon: "mdi:spotlight-beam"
+  icon: "mdi:stairs"
 switch.master_bedroom_wall:
   friendly_name: Wall lamp
   icon: "mdi:ceiling-light"
 switch.upstairs_bathroom_ceiling:
   friendly_name: Upstairs bathroom lights
-  icon: "mdi:spotlight-beam"
+  icon: "mdi:shower"
 sensor.xiaomi_air_quality_monitor:
   friendly_name: Indoor air quality
 binary_sensor.wall_switch_both_158d0002b455e6:
@@ -292,3 +292,22 @@ light.upstairs_hall_right_lamp:
   icon: "mdi:spotlight-beam"
 light.wardrobe_lamp:
   icon: "mdi:spotlight-beam"
+binary_sensor.wall_switch_158d00030a302b:
+  friendly_name: Stairs switch up
+binary_sensor.wall_switch_158d00030a3104:
+  friendly_name: Stairs switch down
+binary_sensor.wall_switch_158d00030a3141:
+  friendly_name: Attic stairs switch
+binary_sensor.wall_switch_158d00030ac4de:
+  friendly_name: Attic stairs switch 2
+binary_sensor.wall_switch_158d00030ac48b:
+  friendly_name: Upstairs hall switch
+binary_sensor.wall_switch_158d0003131adb:
+  friendly_name: Upstairs hall switch 2
+switch.downstairs_bathroom_side:
+  friendly_name: Downstairs bathroom side
+  icon: "mdi:spotlight-beam"
+binary_sensor.switch_158d000123e3fe:
+  friendly_name: Downstairs bathroom side switch
+binary_sensor.wall_switch_158d00030aaa92:
+  friendly_name: Downstairs bathroom wall switch
