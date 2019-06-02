@@ -89,10 +89,10 @@ http:
   # Secrets are defined in the file secrets.yaml
   # api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  base_url: https://jaskrowo.asuscomm.com
-  server_port: 443
-  ssl_certificate: /config/cert.pem
-  ssl_key: /config/key.pem
+  # base_url: https://jaskrowo.asuscomm.com
+  # server_port: 443
+  # ssl_certificate: /config/cert.pem
+  # ssl_key: /config/key.pem
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -114,7 +114,8 @@ logbook:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    language: 'pl'
 
 # Cloud
 cloud:
@@ -171,7 +172,7 @@ light:
     model: philips.light.downlight
   - platform: xiaomi_miio
     name: Upstairs hall right lamp
-    host: 192.168.1.171
+    host: 192.168.1.168
     token: 9077b63fbca71504a06c0441906260c9
     model: philips.light.downlight
 
@@ -267,8 +268,8 @@ lovelace:
 circadian_lighting:
   max_colortemp: 5500
   min_colortemp: 3000
-  sunrise_offset: "01:00:00"
-  sunset_offset: "-01:00:00"
+  sunrise_offset: "02:00:00"
+  sunset_offset: "-03:00:00"
 
 switch:
   - platform: xiaomi_miio
