@@ -242,6 +242,15 @@ history_graph:
 
 sensor: !include sensors.yaml
 
+binary_sensor:
+  - platform: trend
+    sensors:
+      outside_temperature_rising:
+        entity_id: sensor.temperature_158d0001b9208d
+        sample_duration: 1200
+        max_samples: 15
+        min_gradient: 0.00055
+
 asuswrt:
   host: 192.168.1.254
   username: wojtek
@@ -283,7 +292,7 @@ switch:
       - light.xiaomi_philips_ceiling_light
   - platform: circadian_lighting
     name: "Living room auto LEDs"
-    min_brightness: 30
+    min_brightness: 35
     lights_ct:
       - light.yeelight_strip1_7811dca220d2
       - light.yeelight_strip1_7811dc691c74
