@@ -18,7 +18,7 @@ views:
           - light.yeelight_strip1_7811dc691c74
           - light.yeelight_color2_7c49eb1566bb
           - switch.living_room_stair
-          - switch.plug_158d0001de79e6
+          - fan.xiaomi_smart_fan
           - remote.jaskrowo_media
           - media_player.marantz_sr5008
         type: entities
@@ -73,6 +73,7 @@ views:
           - light.yeelight_color2_7c49eb1581f6
           - light.yeelight_color2_04cf8c7bf9ba
           - light.yeelight_color2_04cf8c971345
+          - switch.plug_158d0001de79e6
         type: entities
       - title: Bathrooms
         entities:
@@ -238,7 +239,8 @@ views:
           - automation.living_room_motion_01_normal
           - automation.living_room_motion_02_evening
           - automation.living_room_motion_03_tv_mode
-          - automation.living_room_turn_on_fan
+          - automation.living_room_turn_on_fan_daytime
+          - automation.living_room_turn_on_fan_evening
           - automation.master_bedroom_empty
           - automation.master_bedroom_motion
           - automation.smog_air_is_clean

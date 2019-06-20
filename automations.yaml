@@ -537,6 +537,9 @@
       message: Do zobaczenia później - wyłączam światła.
       language: pl
   - delay: 00:00:02
+  - data:
+      entity_id: fan.xiaomi_smart_fan
+    service: fan.turn_off
   - service: switch.turn_off
     data:
       entity_id:
@@ -1824,45 +1827,40 @@
       transition: 1
     service: light.toggle
 - id: '1559483412308'
-  alias: Living room - turn on fan
+  alias: Living room - turn on fan daytime
   trigger:
   - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
-    from: 'off'
     platform: state
     to: 'on'
   condition:
   - condition: numeric_state
     entity_id: sensor.temperature_158d0001b1c3fb
-    above: 23
-  - condition: numeric_state
-    entity_id: sensor.temperature_158d0001b9208d
     above: 24
   - after: 06:30:00
     before: '20:30:00'
     condition: time
   action:
   - data:
-      entity_id: switch.plug_158d0001de79e6
-    service: switch.turn_on
-  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e43ac7.attributes[''No
-      motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0001e43ac7.state
-      == ''off'' %}True{% else %}False{% endif %}'
+      entity_id: fan.xiaomi_smart_fan
+    service: fan.turn_on
   - data:
-      entity_id: switch.switch.plug_158d0001de79e6
-    service: switch.turn_off
+      entity_id: fan.xiaomi_smart_fan
+    service: fan.xiaomi_miio_set_natural_mode_off
 - id: '1559500105148'
   alias: Living room - turn off fan
   trigger:
-  - at: '20:30:00'
-    platform: time
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0001e43ac7.attributes[''No
+      motion since''] | int >= 1200 and states.binary_sensor.motion_sensor_158d0001e43ac7.state
+      == ''off'' %}True{% else %}False{% endif %}'
   condition:
   - condition: state
-    entity_id: switch.plug_158d0001de79e6
+    entity_id: fan.xiaomi_smart_fan
     state: 'on'
   action:
   - data:
-      entity_id: switch.plug_158d0001de79e6
-    service: switch.turn_off
+      entity_id: fan.xiaomi_smart_fan
+    service: fan.turn_off
 - id: '1559584354899'
   alias: Weather - cool the flat down
   trigger:
@@ -1952,3 +1950,89 @@
     data:
       message: Na zewnątrz robi się gorąco, proszę pozamykaj okna.
       language: pl
+- id: '1559880624653'
+  alias: Bathroom - washing machine is done
+  trigger:
+  - entity_id: binary_sensor.vibration_158d000319aa4b
+    for: 00:03:00
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: or
+    conditions:
+  - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
+    condition: state
+    state: 'on'
+  - entity_id: binary_sensor.motion_sensor_158d0002ec7efa
+    condition: state
+    state: 'on'
+  - condition: time
+    after: 08:00:00
+    before: '22:00:00'
+  action:
+  - service: tts.google_translate_say
+    entity_id: media_player.living_room_speaker
+    data:
+      message: Pralka skończyła prać. Powieś ubrania.
+      language: pl
+- id: '1560962746881'
+  alias: Attic - turn on fan
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e547ae
+    platform: state
+    to: 'on'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.temperature_158d00023208a6
+    above: 23
+  - condition: numeric_state
+    entity_id: sensor.temperature_158d0001b9208d
+    above: 24
+  - after: 06:30:00
+    before: '22:00:00'
+    condition: time
+  action:
+  - data:
+      entity_id: switch.plug_158d0001de79e6
+    service: switch.turn_on
+- id: '1560962773416'
+  alias: Attic - turn off fan
+  trigger:
+  - platform: template
+    value_template: '{% if states.binary_sensor.motion_sensor_158d0001e547ae.attributes[''No
+      motion since''] | int >= 1200 and states.binary_sensor.motion_sensor_158d0001e547ae.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - at: '22:00:00'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: switch.plug_158d0001de79e6
+    state: 'on'
+  action:
+  - data:
+      entity_id: switch.plug_158d0001de79e6
+    service: switch.turn_off
+- id: '1560969416454'
+  alias: Living room - turn on fan evening
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001e43ac7
+    platform: state
+    to: 'on'
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.temperature_158d0001b1c3fb
+    above: 23
+  - condition: numeric_state
+    entity_id: sensor.temperature_158d0001b9208d
+    above: 24
+  - after: '20:30:00'
+    before: '22:00:00'
+    condition: time
+  action:
+  - data:
+      entity_id: fan.xiaomi_smart_fan
+    service: fan.turn_on
+  - data:
+      entity_id: fan.xiaomi_smart_fan
+    service: fan.xiaomi_miio_set_natural_mode_on

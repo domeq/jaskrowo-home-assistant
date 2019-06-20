@@ -186,7 +186,10 @@ binary_sensor.motion_sensor_158d0002b422b4:
 sensor.illumination_158d0002b422b4:
   friendly_name: Downstairs bathroom illumination sensor
 switch.plug_158d0001de79e6:
-  friendly_name: Fan
+  friendly_name: Attic fan
+  icon: "mdi:fan"
+fan.xiaomi_smart_fan:
+  friendly_name: Living room fan
   icon: "mdi:fan"
 binary_sensor.switch_158d0001b1827e:
   friendly_name: Tosia switch
