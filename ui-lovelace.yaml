@@ -73,7 +73,6 @@ views:
           - light.yeelight_color2_7c49eb1581f6
           - light.yeelight_color2_04cf8c7bf9ba
           - light.yeelight_color2_04cf8c971345
-          - switch.plug_158d0001de79e6
         type: entities
       - title: Bathrooms
         entities:
@@ -124,7 +123,7 @@ views:
         type: entities
         show_header_toggle: false
       - type: weather-forecast
-        entity: weather.met_no
+        entity: weather.home
       - title: Humidity
         entities:
           - sensor.humidity_158d0001b9208d
