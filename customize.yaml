@@ -315,3 +315,5 @@ binary_sensor.switch_158d000123e3fe:
   friendly_name: Downstairs bathroom side switch
 binary_sensor.wall_switch_158d00030aaa92:
   friendly_name: Downstairs bathroom wall switch
+switch.fan:
+  icon: "mdi:fan"

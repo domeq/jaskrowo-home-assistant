@@ -4,30 +4,30 @@
       friendly_name: Wojtek's Mi Mix 2
       unit_of_measurement: '%'
       value_template: >-
-          {%- if states.device_tracker.wiskra_mimix2.attributes.battery %}
-              {{ states.device_tracker.wiskra_mimix2.attributes.battery|round }}
+          {%- if states.device_tracker.wiskra_mimix2_2.attributes.battery_level %}
+              {{ states.device_tracker.wiskra_mimix2_2.attributes.battery_level|round }}
           {% else %}
-              {{ states.device_tracker.wiskra_mimix2.state }}
+              {{ states.device_tracker.wiskra_mimix2_2.state }}
           {%- endif %}
       device_class: battery
     battery_gosiak_mia2:
       friendly_name: Gosiak's Mi A2 Lite
       unit_of_measurement: '%'
       value_template: >-
-          {%- if states.device_tracker.gosiak_mia2.attributes.battery %}
-              {{ states.device_tracker.gosiak_mia2.attributes.battery|round }}
+          {%- if states.device_tracker.gosiak_mia2_2.attributes.battery_level %}
+              {{ states.device_tracker.gosiak_mia2_2.attributes.battery_level|round }}
           {% else %}
-              {{ states.device_tracker.gosiak_mia2.state }}
+              {{ states.device_tracker.gosiak_mia2_2.state }}
           {%- endif %}
       device_class: battery
     battery_wiskra_ipad:
       friendly_name: iPad
       unit_of_measurement: '%'
       value_template: >-
-          {%- if states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d.attributes.battery %}
-              {{ states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d.attributes.battery|round }}
+          {%- if states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d_2.attributes.battery_level %}
+              {{ states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d_2.attributes.battery_level|round }}
           {% else %}
-              {{ states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d.state }}
+              {{ states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d_2.state }}
           {%- endif %}
       device_class: battery
 - platform: template
@@ -90,6 +90,13 @@
   command: "cat /sys/class/thermal/thermal_zone3/temp"
   unit_of_measurement: "°C"
   value_template: '{{ (value | multiply(0.001)) | round(1) }}'
+# - platform: google_travel_time
+#   scan_interval: 600
+#   api_key: AIzaSyAjBHHLSZ_3TeLhqhHXXY6Sq3RJRmODWZQ
+#   origin: device_tracker.wiskra_mimix2_2
+#   destination: Armii Krajowej 28, Kraków
+#   options:
+#     mode: driving
 # - platform: airly
 #   api_key: !secret airly_api_key
 #   latitude: 49.87

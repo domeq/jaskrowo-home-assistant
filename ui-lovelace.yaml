@@ -31,6 +31,7 @@ views:
           - switch.dining_room_wall
           - light.yeelight_strip1_7811dc68588d
           - switch.plug_158d0001ded32d
+          - switch.fan
           - binary_sensor.door_window_sensor_158d00023709f7
           - binary_sensor.door_window_sensor_158d00022f148a
           - vacuum.xiaomi_vacuum_cleaner
@@ -171,8 +172,8 @@ views:
         aspect_ratio: 16:9
         default_zoom: 12
         entities:
-          - device_tracker.gosiak_mia2
-          - device_tracker.wiskra_mimix2
+          - device_tracker.gosiak_mia2_2
+          - device_tracker.wiskra_mimix2_2
           - zone.home
       - type: glance
         title: Vacuum
@@ -259,8 +260,8 @@ views:
       - title: People at home
         entities:
           - device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d
-          - device_tracker.wiskra_mimix2
-          - device_tracker.gosiak_mia2
+          - device_tracker.wiskra_mimix2_2
+          - device_tracker.gosiak_mia2_2
         type: entities
         show_header_toggle: false
       - title: Sunlight

@@ -1833,9 +1833,9 @@
     platform: state
     to: 'on'
   condition:
-  - condition: numeric_state
+  - above: '24'
+    condition: numeric_state
     entity_id: sensor.temperature_158d0001b1c3fb
-    above: 24
   - after: 06:30:00
     before: '20:00:00'
     condition: time
@@ -2020,9 +2020,9 @@
     platform: state
     to: 'on'
   condition:
-  - condition: numeric_state
+  - above: '24.5'
+    condition: numeric_state
     entity_id: sensor.temperature_158d0001b1c3fb
-    above: 24
   - after: '20:00:00'
     before: '22:00:00'
     condition: time
@@ -2033,3 +2033,23 @@
   - data:
       entity_id: fan.xiaomi_smart_fan
     service: fan.xiaomi_miio_set_natural_mode_on
+- id: '1565709018926'
+  alias: Kitchen - turn on fan
+  trigger:
+  - at: 08:00:00
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fan
+    service: switch.turn_on
+- id: '1565709065749'
+  alias: Kitchen - turn off fan
+  trigger:
+  - at: '20:00:00'
+    platform: time
+  condition: []
+  action:
+  - data:
+      entity_id: switch.fan
+    service: switch.turn_off
