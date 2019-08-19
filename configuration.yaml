@@ -137,49 +137,49 @@ xiaomi_aqara:
 light:
   - platform: xiaomi_miio
     name: Xiaomi Philips Ceiling Light
-    host: 192.168.1.87
+    host: 192.168.1.21
     token: 3d5f7ae53b51aa312e464b150b37453b
     model: philips.light.ceiling
   - platform: xiaomi_miio
     name: Master bedroom bed lamp
-    host: 192.168.1.110
+    host: 192.168.1.22
     token: c1ac97f17b98eb0cc6132fd6f6433f91
     model: philips.light.candle2
   - platform: xiaomi_miio
     name: Xiaomi Philips E14 Crystal
-    host: 192.168.1.56
+    host: 192.168.1.23
     token: 52c93cf48a74c69378780cd800b4f430
     model: philips.light.candle2
   - platform: xiaomi_miio
     name: Xiaomi Philips E14 Crystal 2
-    host: 192.168.1.119
+    host: 192.168.1.24
     token: c16d7777b418c34a8e110f0a3614aa2a
     model: philips.light.candle2
   - platform: xiaomi_miio
     name: Tosia left wall lamp
-    host: 192.168.1.121
+    host: 192.168.1.25
     token: 11f0e1c5e69ec2ca7b19833d642e8a82
     model: philips.light.candle2
   - platform: xiaomi_miio
     name: Wardrobe lamp
-    host: 192.168.1.72
+    host: 192.168.1.26
     token: 641353095386f5057a1243c1f0c11a3d
     model: philips.light.downlight
   - platform: xiaomi_miio
     name: Upstairs hall left lamp
-    host: 192.168.1.24
+    host: 192.168.1.27
     token: 6be52caebc5d6f6794b5e8df1fe1983c
     model: philips.light.downlight
   - platform: xiaomi_miio
     name: Upstairs hall right lamp
-    host: 192.168.1.173
+    host: 192.168.1.28
     token: 9077b63fbca71504a06c0441906260c9
     model: philips.light.downlight
 
 
 vacuum:
   - platform: xiaomi_miio
-    host: 192.168.1.85
+    host: 192.168.1.29
     token: "616e4e30556767583138707636386345"
 
 # Full configuration.yaml entry
@@ -280,11 +280,11 @@ circadian_lighting:
 switch:
   - platform: xiaomi_miio
     name: "Guest room floor lamp"
-    host: 192.168.1.70
+    host: 192.168.1.30
     token: c434a0a9b9897896e9b6abc1ffc80fa3
   - platform: xiaomi_miio
     name: "Fan"
-    host: 192.168.1.53
+    host: 192.168.1.31
     token: 7d34b272ed27dfd6cf229a75ab5a7a47
   - platform: circadian_lighting
     name: "Living room auto ceiling"
@@ -352,23 +352,23 @@ switch:
       master_bedroom_stair:
         host: 192.168.1.93
       master_bedroom_wall:
-        host: 192.168.1.128
+        host: 192.168.1.15
       upstairs_bathroom_ceiling:
-        host: 192.168.1.227
+        host: 192.168.1.20
       living_room_stair:
-        host: 192.168.1.114
+        host: 192.168.1.16
       living_room_wall:
-        host: 192.168.1.201
+        host: 192.168.1.17
       kitchen_lights:
-        host: 192.168.1.124
+        host: 192.168.1.18
       dining_room_ceiling:
-        host: 192.168.1.92
+        host: 192.168.1.14
         path: /relay/1
       dining_room_wall:
-        host: 192.168.1.92
+        host: 192.168.1.14
         path: /relay/0
       downstairs_bathroom_side:
-        host: 192.168.1.118
+        host: 192.168.1.19
 scene:
   - name: Living room day
     entities:
@@ -408,7 +408,7 @@ notify:
 
 media_player:
   - platform: denonavr
-    host: 192.168.1.80
+    host: 192.168.1.5
     name: Marantz SR5008
     show_all_sources: true
 
@@ -426,15 +426,15 @@ speedtestdotnet:
 
 googlehome:
   devices:
-    - host: 192.168.1.24
+    - host: 192.168.1.9
       track_alarms: true
-    - host: 192.168.1.249
+    - host: 192.168.1.10
       track_alarms: true
-    - host: 192.168.1.210
+    - host: 192.168.1.11
       track_alarms: true
 
 fan:
   - platform: xiaomi_miio_fan
     name: Xiaomi Smart Fan
-    host: 192.168.1.14
+    host: 192.168.1.32
     token: b385299315ea59d2a71abe8ae112b744
