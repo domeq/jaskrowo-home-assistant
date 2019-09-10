@@ -326,6 +326,8 @@ views:
           - binary_sensor.motion_sensor_158d0002b72030
           - binary_sensor.motion_sensor_158d0002b422b4
           - binary_sensor.motion_sensor_158d000257a1db
+          - binary_sensor.motion_sensor_158d0002ec7efa
+          - binary_sensor.motion_sensor_158d0001655da1
       - title: Lights temperature
         entities:
           - sensor.light_ct_philips_ceiling_light

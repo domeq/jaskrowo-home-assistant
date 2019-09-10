@@ -324,12 +324,12 @@ switch:
     name: "Living room auto LEDs"
     min_brightness: 35
     lights_ct:
-      - light.yeelight_strip1_7811dca220d2
-      - light.yeelight_strip1_7811dc691c74
+      - light.stairs_leds
+      - light.wall_leds
   - platform: circadian_lighting
     name: "Hall lights auto"
     lights_ct:
-      - light.yeelight_color2_7c49eb1566bb
+      - light.downstairs_hall_lamp
   - platform: circadian_lighting
     name: "Guest room lights auto"
     min_brightness: 50
@@ -343,33 +343,33 @@ switch:
     lights_rgb:
       - light.gateway_light_34ce00fb56e8
     lights_brightness:
-      - light.yeelight_strip1_7811dc66f063
+      - light.bed_leds
   - platform: circadian_lighting
     name: "Attic lights auto"
     lights_ct:
-      - light.yeelight_color2_7c49eb1581f6
-      - light.yeelight_color2_04cf8c7bf9ba
-      - light.yeelight_color2_04cf8c971345
+      - light.attic_left_light
+      - light.attic_right_light
+      - light.attic_wardrobe_area_light
   - platform: circadian_lighting
     name: "Downstairs bathroom lights auto"
     min_brightness: 70
     lights_ct:
-      - light.yeelight_color2_04cf8c7cc6ad
+      - light.downstairs_bathroom_lamp
   - platform: circadian_lighting
     name: "Kitchen lights auto"
     min_brightness: 90
     lights_ct:
-      - light.yeelight_strip1_7811dc68588d
+      - light.stove_leds
     lights_rgb:
       - light.gateway_light_34ce0088a579
   - platform: circadian_lighting
     name: "Tosia room lights auto"
     max_brightness: 50
     lights_ct:
-      - light.yeelight_color2_04cf8c7cb0ca
+      - light.tosia_lamp
       - light.tosia_left_wall_lamp
     lights_brightness:
-      - light.yeelight_color2_7c49eb1582dd
+      - light.right_wall_lamp
   - platform: circadian_lighting
     name: "Wardrobe lights auto"
     lights_ct:
@@ -402,15 +402,15 @@ scene:
   - name: Living room day
     entities:
         light.xiaomi_philips_ceiling_light: on
-        light.yeelight_strip1_7811dca220d2: off
+        light.wall_leds: off
   - name: Living room evening
     entities:
         light.xiaomi_philips_ceiling_light: on
-        light.yeelight_strip1_7811dca220d2: on
+        light.wall_leds: on
   - name: Living room TV mode
     entities:
         light.xiaomi_philips_ceiling_light: off
-        light.yeelight_strip1_7811dca220d2: on
+        light.wall_leds: on
 
 # To start the camera:
 # pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
