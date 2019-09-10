@@ -14,9 +14,9 @@ views:
           - binary_sensor.door_window_sensor_158d0001ad5eb6
           - light.xiaomi_philips_ceiling_light
           - switch.living_room_wall
-          - light.yeelight_strip1_7811dca220d2
-          - light.yeelight_strip1_7811dc691c74
-          - light.yeelight_color2_7c49eb1566bb
+          - light.wall_leds
+          - light.stairs_leds
+          - light.downstairs_hall_lamp
           - switch.living_room_stair
           - fan.xiaomi_smart_fan
           - remote.jaskrowo_media
@@ -29,7 +29,7 @@ views:
           - switch.kitchen_lights
           - switch.dining_room_ceiling
           - switch.dining_room_wall
-          - light.yeelight_strip1_7811dc68588d
+          - light.stove_leds
           - switch.plug_158d0001ded32d
           - switch.fan
           - binary_sensor.door_window_sensor_158d00023709f7
@@ -44,7 +44,7 @@ views:
           - sensor.humidity_158d0001b9208d
           - binary_sensor.door_window_sensor_158d000232db84
           - light.master_bedroom_bed_lamp
-          - light.yeelight_strip1_7811dc66f063
+          - light.bed_leds
           - switch.master_bedroom_wall
           - switch.master_bedroom_stair
           - light.gateway_light_34ce00fb56e8
@@ -55,8 +55,8 @@ views:
           - sensor.humidity_158d0001b92092
           - binary_sensor.door_window_sensor_158d000232da46
           - light.tosia_left_wall_lamp
-          - light.yeelight_color2_04cf8c7cb0ca
-          - light.yeelight_color2_7c49eb1582dd
+          - light.right_wall_lamp
+          - light.tosia_lamp
         type: entities
       - title: Guest room
         entities:
@@ -71,13 +71,13 @@ views:
         entities:
           - sensor.temperature_158d00023208a6
           - sensor.humidity_158d00023208a6
-          - light.yeelight_color2_7c49eb1581f6
-          - light.yeelight_color2_04cf8c7bf9ba
-          - light.yeelight_color2_04cf8c971345
+          - light.attic_left_light
+          - light.attic_right_light
+          - light.attic_wardrobe_area_light
         type: entities
       - title: Bathrooms
         entities:
-          - light.yeelight_color2_04cf8c7cc6ad
+          - light.downstairs_bathroom_lamp
           - switch.downstairs_bathroom_side
           - switch.upstairs_bathroom_ceiling
         type: entities
@@ -96,7 +96,7 @@ views:
       #     - sensor.humidity_158d0001b1c3fb
       #     - image_processing.face_counter
       #     - light.xiaomi_philips_ceiling_light
-      #     - light.yeelight_strip1_7811dca220d2
+      #     - light.wall_leds
       #   camera_image: camera.ffmpeg
       # - title: Air pollution
       #   entities:

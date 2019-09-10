@@ -1,25 +1,25 @@
-light.yeelight_color2_7c49eb1566bb:
+light.downstairs_hall_lamp:
   friendly_name: Hall light
   icon: "mdi:ceiling-light"
-light.yeelight_strip1_7811dc66f063:
+light.bed_leds:
   friendly_name: Master bedroom LEDs
   icon: "mdi:led-strip"
-light.yeelight_strip1_7811dc68588d:
+light.stove_leds:
   friendly_name: Kitchen LEDs
   icon: "mdi:led-strip"
-light.yeelight_strip1_7811dc691c74:
+light.stairs_leds:
   friendly_name: Stairs LEDs
   icon: "mdi:led-strip"
-light.yeelight_strip1_7811dca220d2:
+light.wall_leds:
   friendly_name: Wall LEDs
   icon: "mdi:led-strip"
-light.yeelight_color2_7c49eb1581f6:
+light.attic_left_light:
   friendly_name: Attic left light
   icon: "mdi:ceiling-light"
-light.yeelight_color2_04cf8c7bf9ba:
+light.attic_right_light:
   friendly_name: Attic right light
   icon: "mdi:ceiling-light"
-light.yeelight_color2_7c49eb1582dd:
+light.tosia_lamp:
   friendly_name: Tosia lamp
   icon: "mdi:lamp"
 light.gateway_light_34ce0088a579:
@@ -166,7 +166,7 @@ binary_sensor.switch_158d00019ca9dc:
   friendly_name: Master bedroom wall switch
 binary_sensor.switch_158d00016dbe9e:
   friendly_name: Master bedroom table switch
-light.yeelight_color2_04cf8c7cc6ad:
+light.downstairs_bathroom_lamp:
   friendly_name: Downstairs bathroom lamp
   icon: "mdi:shower-head"
 binary_sensor.motion_sensor_158d0002b70d79:
@@ -208,7 +208,7 @@ binary_sensor.switch_158d0001d8eeb1:
 light.tosia_left_wall_lamp:
   friendly_name: Tosia left wall lamp
   icon: "mdi:ceiling-light"
-light.yeelight_color2_04cf8c7cb0ca:
+light.right_wall_lamp:
   friendly_name: Tosia right wall lamp
   icon: "mdi:ceiling-light"
 sensor.airly_air_quality_50_009_19_961:
@@ -225,7 +225,7 @@ binary_sensor.wall_switch_both_158d0002b453ca:
   friendly_name: Tosia wall switch - both buttons
 binary_sensor.wall_switch_158d0002828af1:
   friendly_name: Wardrobe wall switch
-light.yeelight_color2_04cf8c971345:
+light.attic_wardrobe_area_light:
   friendly_name: Attic wardrobe area lamp
   icon: "mdi:floor-lamp"
 switch.master_bedroom_stair:

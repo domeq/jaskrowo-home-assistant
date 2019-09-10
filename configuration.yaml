@@ -105,6 +105,34 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  ignore:
+    - yeelight
+
+yeelight:
+  devices:
+    192.168.1.33:
+      name: Downstairs hall lamp
+    192.168.1.34:
+      name: Wall LEDs
+    192.168.1.35:
+      name: Stove LEDs
+    192.168.1.36:
+      name: Downstairs bathroom lamp
+    192.168.1.37:
+      name: Stairs LEDs
+    192.168.1.39:
+      name: Right wall lamp
+    192.168.1.38:
+      name: Bed LEDs
+    192.168.1.40:
+      name: Tosia lamp
+    192.168.1.41:
+      name: Attic left light
+    192.168.1.42:
+      name: Attic right light
+    192.168.1.43:
+      name: Attic wardrobe area light
+
 
 # Enables support for tracking state changes over time
 history:
@@ -128,6 +156,7 @@ script: !include scripts.yaml
 
 # 12 characters MAC can be obtained from the gateway.
 xiaomi_aqara:
+  discovery_retry: 30
   gateways:
     - mac: 34:CE:00:FB:56:E8
       key: 4z31ifz2sfrfv9mb
@@ -423,15 +452,6 @@ recorder:
 
 system_health:
 speedtestdotnet:
-
-googlehome:
-  devices:
-    - host: 192.168.1.9
-      track_alarms: true
-    - host: 192.168.1.10
-      track_alarms: true
-    - host: 192.168.1.11
-      track_alarms: true
 
 fan:
   - platform: xiaomi_miio_fan
