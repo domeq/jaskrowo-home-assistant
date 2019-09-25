@@ -1365,7 +1365,7 @@
     platform: state
     to: 'on'
   condition:
-  - entity_id: sensor.airly_air_quality_50_009_19_961
+  - entity_id: sensor.airly_caqi
     condition: numeric_state
     below: 25
   - condition: state
@@ -1412,7 +1412,7 @@
   condition:
   - above: '75'
     condition: numeric_state
-    entity_id: sensor.airly_air_quality_50_009_19_961
+    entity_id: sensor.airly_caqi
   - condition: or
     conditions:
     - condition: state
@@ -1433,7 +1433,7 @@
   - service: tts.google_translate_say
     entity_id: media_player.living_room_speaker
     data_template:
-      message: Zamknij okna, dziś jest za duży smog ({{ states.sensor.airly_air_quality_50_009_19_961.state
+      message: Zamknij okna, dziś jest za duży smog ({{ states.sensor.airly_caqi.state
         | int | round }} CAQI).
       language: pl
   - delay: 00:00:05
@@ -1444,7 +1444,7 @@
   - service: notify.home_assistant_mi_mix_2
     data_template:
       title: Alert smogowy
-      message: W domu okno otwarte, a tu {{ states.sensor.airly_air_quality_50_009_19_961.state
+      message: W domu okno otwarte, a tu {{ states.sensor.airly_caqi.state
         | int | round }} CAQI!
       data:
         vibrate:
@@ -1455,7 +1455,7 @@
   - service: notify.home_assistant_gosiak_mia2
     data_template:
       title: Alert smogowy
-      message: W domu okno otwarte, a tu {{ states.sensor.airly_air_quality_50_009_19_961.state
+      message: W domu okno otwarte, a tu {{ states.sensor.airly_caqi.state
         | int | round }} CAQI!
       data:
         vibrate:
@@ -1833,7 +1833,7 @@
     platform: state
     to: 'on'
   condition:
-  - above: '24.5'
+  - above: '24.0'
     condition: numeric_state
     entity_id: sensor.temperature_158d0001b1c3fb
   - after: 06:30:00
@@ -2020,7 +2020,7 @@
     platform: state
     to: 'on'
   condition:
-  - above: '24.5'
+  - above: '24.0'
     condition: numeric_state
     entity_id: sensor.temperature_158d0001b1c3fb
   - after: '20:00:00'

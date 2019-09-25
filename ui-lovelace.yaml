@@ -98,14 +98,13 @@ views:
       #     - light.xiaomi_philips_ceiling_light
       #     - light.wall_leds
       #   camera_image: camera.ffmpeg
-      # - title: Air pollution
-      #   entities:
-      #     - sensor.xiaomi_air_quality_monitor
-      #     - sensor.airly_air_quality_50_009_19_961
-      #     - sensor.airly_air_quality_49_87_19_497
-      #     - sensor.airly_air_quality_50_0721293_19_8916957
-      #   type: entities
-      #   show_header_toggle: false
+      - title: Air pollution
+        entities:
+          - sensor.xiaomi_air_quality_monitor
+          - sensor.airly_caqi
+          - sensor.airly_description
+        type: entities
+        show_header_toggle: false
       - title: Device battery
         entities:
           - sensor.battery_gosiak_mia2
@@ -139,12 +138,12 @@ views:
         refresh_interval: 60
       # - title: Air pollution
       #   entities:
-      #     - sensor.airly_air_quality_50_009_19_961
-      #     - sensor.airly_air_quality_49_87_19_497
-      #     - sensor.airly_air_quality_50_0721293_19_8916957
-        # hours_to_show: 72
-        # type: history-graph
-        # refresh_interval: 900
+      #     - sensor.airly_caqi
+      #     - sensor.airly_pm2_5
+      #     - sensor.airly_pm10
+      #   hours_to_show: 72
+      #   type: history-graph
+      #   refresh_interval: 900
       - title: Windows open?
         entities:
           - binary_sensor.door_window_sensor_158d00023709f7
@@ -166,6 +165,7 @@ views:
           - sensor.temperature_158d00023208a6
           - sensor.temperature_158d0002320de3
           - sensor.temperature_158d0002320e0c
+          - sensor.airly_temperature
         hours_to_show: 24
         type: history-graph
       - type: map

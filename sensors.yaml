@@ -97,17 +97,12 @@
 #   destination: Armii Krajowej 28, Kraków
 #   options:
 #     mode: driving
-# - platform: airly
-#   api_key: !secret airly_api_key
-#   latitude: 49.87
-#   longitude: 19.497
-# - platform: airly
-#   api_key: !secret airly_api_key
-# - platform: airly
-#   api_key: !secret airly_api_key
-#   latitude: 50.0721293
-#   longitude: 19.8916957
-# - platform: xiaomi_miio
-#   name: Xiaomi Air Quality Monitor
-#   host: 192.168.1.64
-#   token: dccf23c77edb2d19e4b827a49330f26f
+- platform: airly
+  name: home
+  api_key: !secret airly_api_key
+  latitude: !secret geo_latitude
+  longitude: !secret geo_longitude
+- platform: xiaomi_miio
+  name: Xiaomi Air Quality Monitor
+  host: 192.168.1.44
+  token: dccf23c77edb2d19e4b827a49330f26f
