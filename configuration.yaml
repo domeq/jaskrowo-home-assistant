@@ -156,12 +156,16 @@ script: !include scripts.yaml
 
 # 12 characters MAC can be obtained from the gateway.
 xiaomi_aqara:
-  discovery_retry: 30
+  discovery_retry: 10
   gateways:
     - mac: 34:CE:00:FB:56:E8
       key: 4z31ifz2sfrfv9mb
     - mac: 34:CE:00:88:A5:79
       key: iquhed73jeqsevke
+    - mac: 04:CF:8C:B8:7B:D4
+      key: zaoly671rews6dtn
+    # - mac: 04:CF:8C:B8:95:11
+      # key: ggcrtr1y791zwna1
 
 light:
   - platform: xiaomi_miio
@@ -303,8 +307,8 @@ lovelace:
 circadian_lighting:
   max_colortemp: 5500
   min_colortemp: 3000
-  sunrise_offset: "02:00:00"
-  sunset_offset: "-02:00:00"
+  sunrise_offset: "03:00:00"
+  sunset_offset: "-01:30:00"
 
 switch:
   - platform: xiaomi_miio
@@ -317,7 +321,7 @@ switch:
     token: 7d34b272ed27dfd6cf229a75ab5a7a47
   - platform: circadian_lighting
     name: "Living room auto ceiling"
-    max_brightness: 50
+    max_brightness: 70
     lights_ct:
       - light.xiaomi_philips_ceiling_light
   - platform: circadian_lighting
@@ -376,28 +380,6 @@ switch:
       - light.wardrobe_lamp
       - light.upstairs_hall_left_lamp
       - light.upstairs_hall_right_lamp
-  - platform: shelly
-    switches:
-      master_bedroom_stair:
-        host: 192.168.1.93
-      master_bedroom_wall:
-        host: 192.168.1.15
-      upstairs_bathroom_ceiling:
-        host: 192.168.1.20
-      living_room_stair:
-        host: 192.168.1.16
-      living_room_wall:
-        host: 192.168.1.17
-      kitchen_lights:
-        host: 192.168.1.18
-      dining_room_ceiling:
-        host: 192.168.1.14
-        path: /relay/1
-      dining_room_wall:
-        host: 192.168.1.14
-        path: /relay/0
-      downstairs_bathroom_side:
-        host: 192.168.1.19
 scene:
   - name: Living room day
     entities:
@@ -407,11 +389,37 @@ scene:
     entities:
         light.xiaomi_philips_ceiling_light: on
         light.wall_leds: on
+        switch.plug_158d0001de79e6: on
   - name: Living room TV mode
     entities:
         light.xiaomi_philips_ceiling_light: off
         light.wall_leds: on
-
+        switch.plug_158d0001de79e6: on
+  - name: Somebody sleeping in living room
+    entities:
+        automation.living_room_motion_01_normal: off
+        automation.living_room_motion_02_evening: off
+        automation.living_room_motion_03_tv_mode: off
+        group.living_room_lights: off
+        group.kitchen_lights: off
+        group.dining_area: off
+  - name: Living room normal mode
+    entities:
+        automation.living_room_motion_01_normal: on
+        automation.living_room_motion_02_evening: on
+        automation.living_room_motion_03_tv_mode: on
+  - name: Wojtek is cycling
+    entities:
+        light.xiaomi_philips_e14_crystal: off
+        light.xiaomi_philips_e14_crystal_2: off
+        switch.xiaomi_miio_switch: on
+        fan.xiaomi_smart_fan: on
+  - name: Wojtek finished cycling
+    entities:
+        light.xiaomi_philips_e14_crystal: off
+        light.xiaomi_philips_e14_crystal_2: off
+        switch.xiaomi_miio_switch: off
+        fan.xiaomi_smart_fan: off
 # To start the camera:
 # pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
 # camera:
@@ -458,3 +466,30 @@ fan:
     name: Xiaomi Smart Fan
     host: 192.168.1.32
     token: b385299315ea59d2a71abe8ae112b744
+
+group:
+  kitchen_lights:
+    name: Kitchen lights
+    entities:
+      - switch.shelly_shsw_1_55df6e
+      - light.stove_leds
+      - switch.plug_158d0001ded32d
+  dining_area:
+    name: Dining area
+    entities:
+      - switch.shelly_shsw_21_5a4ada_2
+      - switch.shelly_shsw_21_5a4ada_1
+  living_room_lights:
+    name: Living room lights
+    entities:
+      - light.xiaomi_philips_ceiling_light
+      - switch.shelly_shsw_1_5556b7
+      - light.wall_leds
+      - switch.plug_158d0001de79e6
+      - light.stairs_leds
+      - light.downstairs_hall_lamp
+      - switch.shelly_shsw_1_554b82
+mqtt:
+  broker: 172.17.0.1
+
+shelly:

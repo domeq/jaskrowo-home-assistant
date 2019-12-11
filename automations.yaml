@@ -13,7 +13,7 @@
   condition: []
   action:
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data:
       message: Wykryłem otwarte okno, wyłączam oczyszczacz powietrza.
       language: pl
@@ -46,7 +46,7 @@
     state: 'off'
   action:
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data:
       message: Wszystkie okna zamknięte, włączam oczyszczacz powietrza.
       language: pl
@@ -70,8 +70,8 @@
   - below: '60'
     condition: numeric_state
     entity_id: sensor.illumination_158d0001e43ac7
-  - after: 06:30:00
-    before: '20:19:59'
+  - after: 06:50:00
+    before: '19:59:59'
     condition: time
   action:
   - data:
@@ -91,8 +91,8 @@
     condition: numeric_state
     entity_id: sun.sun
     value_template: '{{ state.attributes.elevation }}'
-  - after: 06:30:00
-    before: '20:19:59'
+  - after: 06:50:00
+    before: '19:59:59'
     condition: time
   - below: '60'
     condition: numeric_state
@@ -111,8 +111,8 @@
     platform: state
     to: 'on'
   condition:
-  - after: '20:20:00'
-    before: 06:29:59
+  - after: '20:00:00'
+    before: 06:49:59
     condition: time
   - below: '60'
     condition: numeric_state
@@ -223,10 +223,10 @@
       entity_id: light.stairs_leds
       state: 'on'
     - condition: state
-      entity_id: switch.living_room_stair
+      entity_id: switch.shelly_shsw_1_554b82
       state: 'on'
     - condition: state
-      entity_id: switch.living_room_wall
+      entity_id: switch.shelly_shsw_1_5556b7
       state: 'on'
   action:
   - data:
@@ -238,8 +238,8 @@
     service: light.turn_off
   - data:
       entity_id:
-      - switch.living_room_wall
-      - switch.living_room_stair
+      - switch.shelly_shsw_1_5556b7
+      - switch.shelly_shsw_1_554b82
     service: switch.turn_off
 - id: '1541522658112'
   alias: Attic - entry area motion
@@ -345,10 +345,10 @@
       - light.xiaomi_philips_e14_crystal_2
       transition: 1
     service: light.turn_on
-  - data:
-      entity_id:
-      - switch.xiaomi_miio_switch
-    service: switch.turn_on
+  # - data:
+  #     entity_id:
+  #     - switch.xiaomi_miio_switch
+    # service: switch.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001e532dc.attributes[''No
       motion since''] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e532dc.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -358,10 +358,10 @@
       - light.xiaomi_philips_e14_crystal_2
       transition: 1
     service: light.turn_off
-  - data:
-      entity_id:
-      - switch.xiaomi_miio_switch
-    service: switch.turn_off
+  # - data:
+  #     entity_id:
+  #     - switch.xiaomi_miio_switch
+  #   service: switch.turn_off
 - id: '1542050718235'
   alias: Guest room - toggle light
   hide_entity: true
@@ -384,10 +384,10 @@
       - light.xiaomi_philips_e14_crystal_2
       transition: 1
     service: light.toggle
-  - data:
-      entity_id:
-      - switch.xiaomi_miio_switch
-    service: switch.toggle
+  # - data:
+  #     entity_id:
+  #     - switch.xiaomi_miio_switch
+  #   service: switch.toggle
 - id: '1542053124048'
   alias: Guest room - bright mode
   trigger:
@@ -408,10 +408,10 @@
       - light.xiaomi_philips_e14_crystal
       - light.xiaomi_philips_e14_crystal_2
     service: light.turn_on
-  - data:
-      entity_id:
-      - switch.xiaomi_miio_switch
-    service: switch.turn_on
+  # - data:
+  #     entity_id:
+  #     - switch.xiaomi_miio_switch
+  #   service: switch.turn_on
   - data:
       entity_id:
       - light.xiaomi_philips_e14_crystal
@@ -442,7 +442,7 @@
   - data:
       language: pl
       message: Wygląda, że jest wystarczająco jasno - wyłączam światła.
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     service: tts.google_translate_say
   - data:
       entity_id:
@@ -479,6 +479,10 @@
       - light.right_wall_lamp
       transition: 1
     service: light.turn_on
+  - data:
+      entity_id:
+      - switch.xiaomi_miio_switch
+    service: switch.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0002b85113.attributes[''No
       motion since''] | int >= 180 and states.binary_sensor.motion_sensor_158d0002b85113.state
       == ''off'' %}True{% else %}False{% endif %}'
@@ -492,6 +496,10 @@
       - light.right_wall_lamp
       transition: 1
     service: light.turn_off
+  - data:
+      entity_id:
+      - switch.xiaomi_miio_switch
+    service: switch.turn_off
 - id: '1544955116908'
   alias: Tosia toggle lamp
   hide_entity: true
@@ -518,6 +526,10 @@
     platform: event
   condition: []
   action:
+  - data:
+      entity_id:
+      - switch.xiaomi_miio_switch
+    service: switch.toggle
 - id: '1544967617743'
   alias: Leaving home
   trigger:
@@ -532,26 +544,30 @@
       entity_id: remote.jaskrowo_media
     service: remote.turn_off
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data:
       message: Do zobaczenia później - wyłączam światła.
       language: pl
   - delay: 00:00:02
+  - service: light.turn_off
+    data:
+      entity_id: all
   - data:
       entity_id: fan.xiaomi_smart_fan
     service: fan.turn_off
   - service: switch.turn_off
     data:
       entity_id:
-      - switch.living_room_wall
-      - switch.living_room_stair
-      - switch.kitchen_lights
-      - switch.dining_room_wall
-      - switch.dining_room_ceiling
+      - switch.shelly_shsw_1_5556b7
+      - switch.shelly_shsw_1_554b82
+      - switch.shelly_shsw_1_55df6e
+      - switch.shelly_shsw_21_5a4ada_1
+      - switch.shelly_shsw_21_5a4ada_2
+      - switch.shelly_shsw_1_2c03c5
+      - switch.shelly_shsw_1_5545a9
+      - switch.shelly_shsw_1_55dead
       - switch.plug_158d0001ded32d
-  - service: light.turn_off
-    data:
-      entity_id: all
+      - switch.shelly_shsw_1_55e273
 - id: '1544970728739'
   alias: Coming home
   trigger:
@@ -563,7 +579,7 @@
   condition: []
   action:
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data:
       message: Witaj w domu! Włączam światła.
       language: pl
@@ -580,7 +596,7 @@
   - service: switch.turn_on
     data:
       entity_id:
-      - switch.kitchen_lights
+      - switch.shelly_shsw_1_55df6e
 - id: '1545557982983'
   alias: Turn on Circadian Lighting switches on startup
   trigger:
@@ -641,8 +657,8 @@
     service: light.turn_off
   - data:
       entity_id:
-      - switch.master_bedroom_wall
-      - switch.master_bedroom_stair
+      - switch.shelly_shsw_1_2c03c5
+      - switch.shelly_shsw_1_55e273
     service: switch.turn_off
 - id: '1545565868381'
   alias: Master bedroom - empty
@@ -658,10 +674,10 @@
       entity_id: light.master_bedroom_bed_lamp
       state: 'on'
     - condition: state
-      entity_id: switch.master_bedroom_stair
+      entity_id: switch.shelly_shsw_1_55e273
       state: 'on'
     - condition: state
-      entity_id: switch.master_bedroom_wall
+      entity_id: switch.shelly_shsw_1_2c03c5
       state: 'on'
     - condition: state
       entity_id: light.bed_leds
@@ -679,8 +695,8 @@
     service: light.turn_off
   - data:
       entity_id:
-      - switch.master_bedroom_wall
-      - switch.master_bedroom_stair
+      - switch.shelly_shsw_1_2c03c5
+      - switch.shelly_shsw_1_55e273
     service: switch.turn_off
 - id: '1545992685443'
   alias: Tosia room - empty
@@ -790,7 +806,7 @@
       action_type: move
   action:
   - data:
-      entity_id: switch.living_room_wall
+      entity_id: switch.shelly_shsw_1_5556b7
     service: switch.toggle
 - id: '1545995978732'
   alias: Living room right wall switch - both click
@@ -958,7 +974,7 @@
     to: 'on'
   condition:
   - condition: state
-    entity_id: switch.kitchen_lights
+    entity_id: switch.shelly_shsw_1_55df6e
     state: 'off'
   - below: '60'
     condition: numeric_state
@@ -969,18 +985,18 @@
   action:
   - data:
       entity_id:
-      - switch.kitchen_lights
+      - switch.shelly_shsw_1_55df6e
     service: switch.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d0002ec7efa.attributes[''No
       motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0002ec7efa.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
-    entity_id: switch.kitchen_lights
+    entity_id: group.kitchen_lights
     state: 'on'
   - data:
       entity_id:
-      - switch.kitchen_lights
-    service: switch.turn_off
+      - group.kitchen_lights
+    service: homeassistant.turn_off
 - id: '1546013479738'
   alias: Kitchen - empty
   trigger:
@@ -989,24 +1005,14 @@
       motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0002ec7efa.state
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
-    condition: or
-    conditions:
-    - condition: state
-      entity_id: switch.plug_158d0001ded32d
-      state: 'on'
-    - condition: state
-      entity_id: switch.kitchen_lights
-      state: 'on'
+    condition: state
+    entity_id: group.kitchen_lights
+    state: 'on'
   action:
   - data:
-      entity_id: light.stove_leds
-      transition: 1
-    service: light.turn_off
-  - data:
       entity_id:
-      - switch.kitchen_lights
-      - switch.plug_158d0001ded32d
-    service: switch.turn_off
+      - group.kitchen_lights
+    service: homeassistant.turn_off
 - id: '1546014691265'
   alias: Attic - toggle left entry light
   hide_entity: true
@@ -1063,7 +1069,7 @@
   condition: []
   action:
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data_template:
       message: '{{ [ ''No dalej Tosia! Gryzkaj. Gryzkaj.'', ''Tosia gryziemy. Duży
         gryz a nie taki malutki.'', ''Tosia jemy jemy, następny gryzek'', ''Dalej
@@ -1084,7 +1090,7 @@
   condition: []
   action:
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data_template:
       message: "{{ [\n  'Dalej Tosia, nie złość Mamy.',\n  'Tosia bo sobie pójdę i\
         \ będziesz tu siedzieć sama',\n  'Dziś to chyba nie będzie żadnej nagrody',\n\
@@ -1108,11 +1114,11 @@
       entity_id: switch.plug_158d0001ded32d
       state: 'on'
     - condition: state
-      entity_id: switch.kitchen_lights
+      entity_id: switch.shelly_shsw_1_55df6e
       state: 'on'
   action:
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data:
       message: Wygląda, że w kuchni jest wystarczająco jasno - wyłączam światła.
       language: pl
@@ -1123,7 +1129,7 @@
   - data:
       entity_id:
       - switch.plug_158d0001ded32d
-      - switch.kitchen_lights
+      - switch.shelly_shsw_1_55df6e
     service: switch.turn_off
 - id: '1548095677962'
   alias: Downstairs bathroom - motion
@@ -1139,7 +1145,7 @@
       entity_id: light.downstairs_bathroom_lamp
       state: 'off'
     - condition: state
-      entity_id: switch.downstairs_bathroom_side
+      entity_id: switch.shelly_shsw_1_55dead
       state: 'off'
   action:
   - data:
@@ -1147,7 +1153,7 @@
       transition: 1
     service: light.turn_on
   - data:
-      entity_id: switch.downstairs_bathroom_side
+      entity_id: switch.shelly_shsw_1_55dead
     service: switch.turn_on
 - id: '1548095715939'
   alias: Downstairs bathroom - empty
@@ -1163,7 +1169,7 @@
       entity_id: light.downstairs_bathroom_lamp
       state: 'on'
     - condition: state
-      entity_id: switch.downstairs_bathroom_side
+      entity_id: switch.shelly_shsw_1_55dead
       state: 'on'
   action:
   - data:
@@ -1171,7 +1177,7 @@
       transition: 1
     service: light.turn_off
   - data:
-      entity_id: switch.downstairs_bathroom_side
+      entity_id: switch.shelly_shsw_1_55dead
     service: switch.turn_off
 - id: '1549129661008'
   alias: Tosia wall switch - left button
@@ -1290,7 +1296,7 @@
   condition: []
   action:
   - data:
-      entity_id: switch.master_bedroom_stair
+      entity_id: switch.shelly_shsw_1_55e273
     service: switch.toggle
 - id: '1549196224140'
   alias: Master bedroom - toggle wall lamp
@@ -1303,7 +1309,7 @@
   condition: []
   action:
   - data:
-      entity_id: switch.master_bedroom_wall
+      entity_id: switch.shelly_shsw_1_2c03c5
     service: switch.toggle
 - id: '1549196304469'
   alias: Upstairs bathroom - motion
@@ -1314,14 +1320,14 @@
     to: 'on'
   condition:
   - condition: state
-    entity_id: switch.upstairs_bathroom_ceiling
+    entity_id: switch.shelly_shsw_1_5545a9
     state: 'off'
   - after: 06:30:00
     before: '22:00:00'
     condition: time
   action:
   - data:
-      entity_id: switch.upstairs_bathroom_ceiling
+      entity_id: switch.shelly_shsw_1_5545a9
     service: switch.turn_on
 - id: '1549196345036'
   alias: Upstairs bathroom - empty
@@ -1332,11 +1338,11 @@
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
   - condition: state
-    entity_id: switch.upstairs_bathroom_ceiling
+    entity_id: switch.shelly_shsw_1_5545a9
     state: 'on'
   action:
   - data:
-      entity_id: switch.upstairs_bathroom_ceiling
+      entity_id: switch.shelly_shsw_1_5545a9
     service: switch.turn_off
 - id: '1549196390092'
   alias: Upstairs bathroom - toggle light
@@ -1349,7 +1355,7 @@
   condition: []
   action:
   - data:
-      entity_id: switch.upstairs_bathroom_ceiling
+      entity_id: switch.shelly_shsw_1_5545a9
     service: switch.toggle
 - id: '1549390161319'
   alias: Smog - air is clean
@@ -1391,7 +1397,7 @@
       | int > 600 }}'
   action:
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data:
       message: Powietrze na zewnątrz jest czyste, przewietrzmy mieszkanie.
       language: pl
@@ -1427,11 +1433,11 @@
   action:
   - service: media_player.volume_set
     data_template:
-      entity_id: media_player.living_room_speaker
+      entity_id: media_player.living_room_speakers
       volume_level: 0.8
   - delay: 00:00:03
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data_template:
       message: Zamknij okna, dziś jest za duży smog ({{ states.sensor.airly_caqi.state
         | int | round }} CAQI).
@@ -1439,13 +1445,13 @@
   - delay: 00:00:05
   - service: media_player.volume_set
     data_template:
-      entity_id: media_player.living_room_speaker
+      entity_id: media_player.living_room_speakers
       volume_level: 0.4
   - service: notify.home_assistant_mi_mix_2
     data_template:
       title: Alert smogowy
-      message: W domu okno otwarte, a tu {{ states.sensor.airly_caqi.state
-        | int | round }} CAQI!
+      message: W domu okno otwarte, a tu {{ states.sensor.airly_caqi.state | int |
+        round }} CAQI!
       data:
         vibrate:
         - 300
@@ -1455,8 +1461,8 @@
   - service: notify.home_assistant_gosiak_mia2
     data_template:
       title: Alert smogowy
-      message: W domu okno otwarte, a tu {{ states.sensor.airly_caqi.state
-        | int | round }} CAQI!
+      message: W domu okno otwarte, a tu {{ states.sensor.airly_caqi.state | int |
+        round }} CAQI!
       data:
         vibrate:
         - 300
@@ -1483,24 +1489,24 @@
   action:
   - service: media_player.volume_set
     data_template:
-      entity_id: media_player.living_room_speaker
-      volume_level: 0.4
+      entity_id: media_player.living_room_speakers
+      volume_level: 0.3
   - delay: 00:00:03
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data:
       message: Dzień dobry Kochanie, specjalnie dla Ciebie piosenka.
       language: pl
   - delay: 00:00:05
   - service: media_player.play_media
     data_template:
-      entity_id: media_player.living_room_speaker
+      entity_id: media_player.living_room_speakers
       media_content_id: https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa/local/wake_up.flac
       media_content_type: audio/flac
   - service: media_player.volume_set
     data_template:
-      entity_id: media_player.living_room_speaker
-      volume_level: 0.4
+      entity_id: media_player.living_room_speakers
+      volume_level: 0.3
 - id: '1549654128210'
   alias: Living room stairs - motion
   trigger:
@@ -1510,7 +1516,7 @@
     to: 'on'
   condition:
   - condition: state
-    entity_id: switch.living_room_stair
+    entity_id: switch.shelly_shsw_1_554b82
     state: 'off'
   - below: '10'
     condition: numeric_state
@@ -1520,16 +1526,16 @@
     condition: time
   action:
   - data:
-      entity_id: switch.living_room_stair
+      entity_id: switch.shelly_shsw_1_554b82
     service: switch.turn_on
   - wait_template: '{% if states.binary_sensor.motion_sensor_158d000257a1be.attributes[''No
       motion since''] | int >= 0 and states.binary_sensor.motion_sensor_158d000257a1be.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
-    entity_id: switch.living_room_stair
+    entity_id: switch.shelly_shsw_1_554b82
     state: 'on'
   - data:
-      entity_id: switch.living_room_stair
+      entity_id: switch.shelly_shsw_1_554b82
     service: switch.turn_off
 - id: '1549654154926'
   alias: Living room stairs - empty
@@ -1540,11 +1546,11 @@
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
   - condition: state
-    entity_id: switch.living_room_stair
+    entity_id: switch.shelly_shsw_1_554b82
     state: 'on'
   action:
   - data:
-      entity_id: switch.living_room_stair
+      entity_id: switch.shelly_shsw_1_554b82
     service: switch.turn_off
 - id: '1549810614088'
   alias: Dining area - empty
@@ -1554,21 +1560,13 @@
       motion since''] | int >= 600 and states.binary_sensor.motion_sensor_158d0001655da1.state
       == ''off'' %}True{% else %}False{% endif %}'
   condition:
-    condition: or
-    conditions:
-    - condition: state
-      entity_id: switch.dining_room_wall
-      state: 'on'
-    - condition: state
-      entity_id: switch.dining_room_ceiling
-      state: 'on'
+    condition: state
+    entity_id: group.dining_area
+    state: 'on'
   action:
   - data:
-      entity_id: switch.dining_room_wall
-    service: switch.turn_off
-  - data:
-      entity_id: switch.dining_room_ceiling
-    service: switch.turn_off
+      entity_id: group.dining_area
+    service: homeassistant.turn_off
 - id: '1549810691857'
   alias: Kitchen left wall switch - click
   trigger:
@@ -1581,7 +1579,7 @@
   action:
   - data:
       entity_id:
-      - switch.kitchen_lights
+      - switch.shelly_shsw_1_55df6e
     service: switch.toggle
   - data:
       entity_id: light.stove_leds
@@ -1598,7 +1596,7 @@
   condition: []
   action:
   - data:
-      entity_id: switch.dining_room_ceiling
+      entity_id: switch.shelly_shsw_21_5a4ada_2
     service: switch.toggle
 - id: '1549810780701'
   alias: Kitchen right wall switch - right button
@@ -1611,7 +1609,7 @@
   condition: []
   action:
   - data:
-      entity_id: switch.dining_room_wall
+      entity_id: switch.shelly_shsw_21_5a4ada_1
     service: switch.toggle
 - id: '1549820992742'
   alias: Kitchen - motion at night
@@ -1645,15 +1643,12 @@
       motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0002ec7efa.state
       == ''off'' %}True{% else %}False{% endif %}'
   - condition: state
-    entity_id: switch.plug_158d0001ded32d
+    entity_id: group.kitchen_lights
     state: 'on'
   - data:
-      entity_id: light.stove_leds
-      transition: 1
-    service: light.turn_off
-  - data:
-      entity_id: switch.plug_158d0001ded32d
-    service: switch.turn_off
+      entity_id:
+      - group.kitchen_lights
+    service: homeassistant.turn_off
 - id: '1551162176946'
   alias: Upstairs hall - motion
   trigger:
@@ -1738,7 +1733,7 @@
   condition: []
   action:
   - data:
-      entity_id: switch.living_room_stair
+      entity_id: switch.shelly_shsw_1_554b82
     service: switch.toggle
 - id: '1554226640385'
   alias: Attic stairs - toggle
@@ -1797,7 +1792,7 @@
       transition: 1
     service: light.toggle
   - data:
-      entity_id: switch.downstairs_bathroom_side
+      entity_id: switch.shelly_shsw_1_55dead
     service: switch.toggle
 - id: '1554627285943'
   alias: Downstairs bathroom - toggle side
@@ -1810,7 +1805,7 @@
   condition: []
   action:
   - data:
-      entity_id: switch.downstairs_bathroom_side
+      entity_id: switch.shelly_shsw_1_55dead
     service: switch.toggle
 - id: '1554627478669'
   alias: Downstairs bathroom - toggle ceiling
@@ -1904,7 +1899,7 @@
   - data:
       language: pl
       message: Na zewnątrz jest chłodno, otwórz na trochę okna.
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     service: tts.google_translate_say
 - id: '1559584380688'
   alias: Weather - too hot outside
@@ -1948,7 +1943,7 @@
   - data:
       language: pl
       message: Na zewnątrz robi się gorąco, proszę pozamykaj okna.
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     service: tts.google_translate_say
 - id: '1559880624653'
   alias: Bathroom - washing machine is done
@@ -1972,7 +1967,7 @@
     before: '22:00:00'
   action:
   - service: tts.google_translate_say
-    entity_id: media_player.living_room_speaker
+    entity_id: media_player.living_room_speakers
     data:
       message: Pralka skończyła prać. Powieś ubrania.
       language: pl
@@ -2053,3 +2048,61 @@
   - data:
       entity_id: switch.fan
     service: switch.turn_off
+- id: '1569862674233'
+  alias: Kitchen - switch sink light
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001b1286b
+      click_type: single
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: switch.plug_158d0001ded32d
+    service: switch.toggle
+- id: '1569862819815'
+  alias: Kitchen switch ceiling light
+  trigger:
+  - event_data:
+      entity_id: binary_sensor.switch_158d0001b1286b
+      click_type: double
+    event_type: xiaomi_aqara.click
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: switch.shelly_shsw_1_55df6e
+    service: switch.toggle
+- id: '1575388333096'
+  alias: Dining area - motion
+  trigger:
+  - entity_id: binary_sensor.motion_sensor_158d0001655da1
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.dining_area
+    state: 'off'
+  - below: '60'
+    condition: numeric_state
+    entity_id: sensor.illumination_158d0002ec7efa
+  - after: 06:30:00
+    before: '22:00:00'
+    condition: time
+  action:
+  - data:
+      entity_id:
+      - switch.shelly_shsw_21_5a4ada_2
+    service: switch.turn_on
+  - wait_template: '{% if states.binary_sensor.motion_sensor_158d0001655da1.attributes[''No
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0001655da1.state
+      == ''off'' %}True{% else %}False{% endif %}'
+  - condition: state
+    entity_id: group.dining_area
+    state: 'on'
+  - data:
+      entity_id:
+      - group.dining_area
+    service: homeassistant.turn_off

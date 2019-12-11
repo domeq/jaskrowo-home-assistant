@@ -13,12 +13,12 @@ views:
           - sensor.humidity_158d0001b1c3fb
           - binary_sensor.door_window_sensor_158d0001ad5eb6
           - light.xiaomi_philips_ceiling_light
-          - switch.living_room_wall
+          - switch.shelly_shsw_1_5556b7
           - light.wall_leds
+          - switch.plug_158d0001de79e6
           - light.stairs_leds
           - light.downstairs_hall_lamp
-          - switch.living_room_stair
-          - fan.xiaomi_smart_fan
+          - switch.shelly_shsw_1_554b82
           - remote.jaskrowo_media
           - media_player.marantz_sr5008
         type: entities
@@ -26,12 +26,11 @@ views:
         entities:
           - sensor.temperature_158d0002320de3
           - sensor.humidity_158d0002320de3
-          - switch.kitchen_lights
-          - switch.dining_room_ceiling
-          - switch.dining_room_wall
+          - switch.shelly_shsw_1_55df6e
+          - switch.shelly_shsw_21_5a4ada_1
+          - switch.shelly_shsw_21_5a4ada_2
           - light.stove_leds
           - switch.plug_158d0001ded32d
-          - switch.fan
           - binary_sensor.door_window_sensor_158d00023709f7
           - binary_sensor.door_window_sensor_158d00022f148a
           - vacuum.xiaomi_vacuum_cleaner
@@ -45,18 +44,19 @@ views:
           - binary_sensor.door_window_sensor_158d000232db84
           - light.master_bedroom_bed_lamp
           - light.bed_leds
-          - switch.master_bedroom_wall
-          - switch.master_bedroom_stair
+          - switch.shelly_shsw_1_2c03c5
+          - switch.shelly_shsw_1_55e273
           - light.gateway_light_34ce00fb56e8
         type: entities
       - title: Tosia's bedroom
         entities:
-          - sensor.temperature_158d0001b92092
-          - sensor.humidity_158d0001b92092
+          - sensor.temperature_158d00033b4d2c
+          - sensor.humidity_158d00033b4d2c
           - binary_sensor.door_window_sensor_158d000232da46
           - light.tosia_left_wall_lamp
           - light.right_wall_lamp
           - light.tosia_lamp
+          - switch.xiaomi_miio_switch
         type: entities
       - title: Guest room
         entities:
@@ -65,7 +65,7 @@ views:
           - binary_sensor.door_window_sensor_158d0002436b09
           - light.xiaomi_philips_e14_crystal
           - light.xiaomi_philips_e14_crystal_2
-          - switch.xiaomi_miio_switch
+          - fan.xiaomi_smart_fan
         type: entities
       - title: Attic
         entities:
@@ -78,8 +78,8 @@ views:
       - title: Bathrooms
         entities:
           - light.downstairs_bathroom_lamp
-          - switch.downstairs_bathroom_side
-          - switch.upstairs_bathroom_ceiling
+          - switch.shelly_shsw_1_55dead
+          - switch.shelly_shsw_1_5545a9
         type: entities
       - title: Upstairs hall
         entities:
@@ -257,6 +257,14 @@ views:
           - automation.wardrobe_motion
           - automation.wardrobe_empty
         type: entities
+      - title: Scenes
+        entities:
+          - scene.somebody_sleeping_in_living_room
+          - scene.living_room_normal_mode
+          - scene.wojtek_is_cycling
+          - scene.wojtek_finished_cycling
+        type: entities
+        show_header_toggle: false
       - title: People at home
         entities:
           - device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d
