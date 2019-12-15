@@ -327,3 +327,5 @@ scene.wojtek_is_cycling:
   friendly_name: Wojtek is cycling
 scene.wojtek_finished_cycling:
   friendly_name: Wojtek finished cycling
+binary_sensor.motion_sensor_158d0002ebdbdf:
+  friendly_name: Downstairs bathroom shower sensor

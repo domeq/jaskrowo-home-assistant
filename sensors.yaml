@@ -87,7 +87,7 @@
 - platform: cpuspeed
 - platform: command_line
   name: CPU Temperature
-  command: "cat /sys/class/thermal/thermal_zone3/temp"
+  command: "cat /sys/class/thermal/thermal_zone2/temp"
   unit_of_measurement: "°C"
   value_template: '{{ (value | multiply(0.001)) | round(1) }}'
 # - platform: google_travel_time
@@ -106,3 +106,9 @@
   name: Xiaomi Air Quality Monitor
   host: 192.168.1.44
   token: dccf23c77edb2d19e4b827a49330f26f
+- platform: attributes
+  friendly_name: "Spotify source"
+  icon: "mdi:spotify"
+  attribute: source
+  entities:
+    - media_player.spotify

@@ -22,6 +22,15 @@ views:
           - remote.jaskrowo_media
           - media_player.marantz_sr5008
         type: entities
+      - type: conditional
+        conditions:
+          - entity: media_player.spotify
+            state: "playing"
+          - entity: sensor.spotify_source
+            state_not: "Xiaomi Mi MIX 2"
+        card:
+          type: media-control
+          entity: media_player.spotify
       - title: Kitchen
         entities:
           - sensor.temperature_158d0002320de3
@@ -214,6 +223,27 @@ views:
     path: automations
     badges: []
     cards:
+      - title: Scenes
+        entities:
+          - scene.somebody_sleeping_in_living_room
+          - scene.living_room_normal_mode
+          - scene.wojtek_is_cycling
+          - scene.wojtek_finished_cycling
+        type: entities
+        show_header_toggle: false
+      - title: People at home
+        entities:
+          - device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d
+          - device_tracker.wiskra_mimix2_2
+          - device_tracker.gosiak_mia2_2
+        type: entities
+        show_header_toggle: false
+      - title: Various
+        entities:
+          - binary_sensor.car_wash
+          - sun.sun
+        type: entities
+        show_header_toggle: false
       - title: all automations
         entities:
           - automation.attic_empty_room
@@ -257,26 +287,6 @@ views:
           - automation.wardrobe_motion
           - automation.wardrobe_empty
         type: entities
-      - title: Scenes
-        entities:
-          - scene.somebody_sleeping_in_living_room
-          - scene.living_room_normal_mode
-          - scene.wojtek_is_cycling
-          - scene.wojtek_finished_cycling
-        type: entities
-        show_header_toggle: false
-      - title: People at home
-        entities:
-          - device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d
-          - device_tracker.wiskra_mimix2_2
-          - device_tracker.gosiak_mia2_2
-        type: entities
-        show_header_toggle: false
-      - title: Sunlight
-        entities:
-          - sun.sun
-        type: entities
-        show_header_toggle: false
       - title: Automatic brightness
         entities:
           - switch.circadian_lighting_attic_lights_auto
@@ -323,6 +333,7 @@ views:
         show_header_toggle: false
         entities:
           - binary_sensor.motion_sensor_158d0001e43ac7
+          - binary_sensor.motion_sensor_158d000257a1be
           - binary_sensor.motion_sensor_158d0001e43bc7
           - binary_sensor.motion_sensor_158d0001e4707c
           - binary_sensor.motion_sensor_158d0001e531e0
@@ -331,11 +342,12 @@ views:
           - binary_sensor.motion_sensor_158d0001e55ff7
           - binary_sensor.motion_sensor_158d0002b70d79
           - binary_sensor.motion_sensor_158d0002b85113
-          - binary_sensor.motion_sensor_158d0002b72030
-          - binary_sensor.motion_sensor_158d0002b422b4
           - binary_sensor.motion_sensor_158d000257a1db
           - binary_sensor.motion_sensor_158d0002ec7efa
           - binary_sensor.motion_sensor_158d0001655da1
+          - binary_sensor.motion_sensor_158d0002b72030
+          - binary_sensor.motion_sensor_158d0002b422b4
+          - binary_sensor.motion_sensor_158d0002ebdbdf
       - title: Lights temperature
         entities:
           - sensor.light_ct_philips_ceiling_light

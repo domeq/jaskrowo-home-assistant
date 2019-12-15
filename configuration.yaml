@@ -77,12 +77,13 @@ homeassistant:
 
 # Enables the frontend
 frontend:
-  themes: !include themes.yaml
+  themes: !include_dir_merge_named themes
 
 # Enables configuration UI
 config:
 
 http:
+  base_url: https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa
   cors_allowed_origins:
     - https://google.com
     - https://www.home-assistant.io
@@ -283,6 +284,8 @@ binary_sensor:
         sample_duration: 1200
         max_samples: 15
         min_gradient: 0.00055
+  - platform: car_wash
+    weather: weather.home
 
 asuswrt:
   host: 192.168.1.254
@@ -410,16 +413,21 @@ scene:
         automation.living_room_motion_03_tv_mode: on
   - name: Wojtek is cycling
     entities:
-        light.xiaomi_philips_e14_crystal: off
+        switch.circadian_lighting_guest_room_lights_auto: off
+        automation.guest_room_motion: off
+        light.xiaomi_philips_e14_crystal:
+          state: on
+          brightness: 3
         light.xiaomi_philips_e14_crystal_2: off
-        switch.xiaomi_miio_switch: on
         fan.xiaomi_smart_fan: on
   - name: Wojtek finished cycling
     entities:
+        switch.circadian_lighting_guest_room_lights_auto: on
+        automation.guest_room_motion: on
         light.xiaomi_philips_e14_crystal: off
         light.xiaomi_philips_e14_crystal_2: off
-        switch.xiaomi_miio_switch: off
         fan.xiaomi_smart_fan: off
+
 # To start the camera:
 # pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
 # camera:
@@ -448,6 +456,12 @@ media_player:
     host: 192.168.1.5
     name: Marantz SR5008
     show_all_sources: true
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
+    aliases:
+        abc123def456: 'Living Room'
+        9183abas000: 'Bed Room'
 
 recorder:
   purge_keep_days: 3
@@ -489,7 +503,14 @@ group:
       - light.stairs_leds
       - light.downstairs_hall_lamp
       - switch.shelly_shsw_1_554b82
+  downstairs_bathroom_lights:
+    name: Downstairs bathroom lights
+    entities:
+      - light.downstairs_bathroom_lamp
+      - switch.shelly_shsw_1_55dead
 mqtt:
   broker: 172.17.0.1
 
 shelly:
+
+mobile_app:

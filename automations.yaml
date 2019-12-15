@@ -231,16 +231,8 @@
   action:
   - data:
       entity_id:
-      - light.xiaomi_philips_ceiling_light
-      - light.wall_leds
-      - light.stairs_leds
-      transition: 1
-    service: light.turn_off
-  - data:
-      entity_id:
-      - switch.shelly_shsw_1_5556b7
-      - switch.shelly_shsw_1_554b82
-    service: switch.turn_off
+      - group.living_room_lights
+    service: homeassistant.turn_off
 - id: '1541522658112'
   alias: Attic - entry area motion
   trigger:
@@ -1138,15 +1130,14 @@
     from: 'off'
     platform: state
     to: 'on'
+  - entity_id: binary_sensor.motion_sensor_158d0002ebdbdf
+    from: 'off'
+    platform: state
+    to: 'on'
   condition:
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: light.downstairs_bathroom_lamp
-      state: 'off'
-    - condition: state
-      entity_id: switch.shelly_shsw_1_55dead
-      state: 'off'
+  - condition: state
+    entity_id: group.downstairs_bathroom_lights
+    state: 'off'
   action:
   - data:
       entity_id: light.downstairs_bathroom_lamp
@@ -1160,25 +1151,18 @@
   trigger:
   - platform: template
     value_template: '{% if states.binary_sensor.motion_sensor_158d0002b422b4.attributes[''No
-      motion since''] | int >= 1200 and states.binary_sensor.motion_sensor_158d0002b422b4.state
-      == ''off'' %}True{% else %}False{% endif %}'
+      motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0002b422b4.state
+      == ''off'' and states.binary_sensor.motion_sensor_158d0002ebdbdf.attributes[''No
+        motion since''] | int >= 300 and states.binary_sensor.motion_sensor_158d0002ebdbdf.state
+        == ''off'' %}True{% else %}False{% endif %}'
   condition:
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: light.downstairs_bathroom_lamp
-      state: 'on'
-    - condition: state
-      entity_id: switch.shelly_shsw_1_55dead
-      state: 'on'
+  - condition: state
+    entity_id: group.downstairs_bathroom_lights
+    state: 'on'
   action:
   - data:
-      entity_id: light.downstairs_bathroom_lamp
-      transition: 1
-    service: light.turn_off
-  - data:
-      entity_id: switch.shelly_shsw_1_55dead
-    service: switch.turn_off
+      entity_id: group.downstairs_bathroom_lights
+    service: homeassistant.turn_off
 - id: '1549129661008'
   alias: Tosia wall switch - left button
   trigger:
@@ -1487,6 +1471,14 @@
     value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.others_weekend_wake_up.attributes.last_triggered)
       | int > 43200 }}'
   action:
+  - data:
+      entity_id: remote.jaskrowo_media
+      activity: "Listen to music"
+    service: remote.turn_on
+  - service: media_player.volume_set
+    data_template:
+      entity_id: media_player.marantz_sr5008
+      volume_level: 0.35
   - service: media_player.volume_set
     data_template:
       entity_id: media_player.living_room_speakers
@@ -1497,16 +1489,15 @@
     data:
       message: Dzień dobry Kochanie, specjalnie dla Ciebie piosenka.
       language: pl
-  - delay: 00:00:05
-  - service: media_player.play_media
+  - service: media_player.select_source
     data_template:
-      entity_id: media_player.living_room_speakers
-      media_content_id: https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa/local/wake_up.flac
-      media_content_type: audio/flac
-  - service: media_player.volume_set
+      entity_id: media_player.spotify
+      source: "Marantz SR5008"
+  - delay: 00:00:03
+  - service: spotify.play_playlist
     data_template:
-      entity_id: media_player.living_room_speakers
-      volume_level: 0.3
+      media_content_id: "spotify:playlist:37i9dQZF1DWWxPM4nWdhyI"
+      random_song: True
 - id: '1549654128210'
   alias: Living room stairs - motion
   trigger:
@@ -1788,12 +1779,8 @@
   condition: []
   action:
   - data:
-      entity_id: light.downstairs_bathroom_lamp
-      transition: 1
-    service: light.toggle
-  - data:
-      entity_id: switch.shelly_shsw_1_55dead
-    service: switch.toggle
+      entity_id: group.downstairs_bathroom_lights
+    service: homeassistant.toggle
 - id: '1554627285943'
   alias: Downstairs bathroom - toggle side
   trigger:
