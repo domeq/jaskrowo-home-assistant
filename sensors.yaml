@@ -1,72 +1,48 @@
-- platform: template
-  sensors:
-    battery_wiskra_mimix2:
-      friendly_name: Wojtek's Mi Mix 2
-      unit_of_measurement: '%'
-      value_template: >-
-          {%- if states.device_tracker.wiskra_mimix2_2.attributes.battery_level %}
-              {{ states.device_tracker.wiskra_mimix2_2.attributes.battery_level|round }}
-          {% else %}
-              {{ states.device_tracker.wiskra_mimix2_2.state }}
-          {%- endif %}
-      device_class: battery
-    battery_gosiak_mia2:
-      friendly_name: Gosiak's Mi A2 Lite
-      unit_of_measurement: '%'
-      value_template: >-
-          {%- if states.device_tracker.gosiak_mia2_2.attributes.battery_level %}
-              {{ states.device_tracker.gosiak_mia2_2.attributes.battery_level|round }}
-          {% else %}
-              {{ states.device_tracker.gosiak_mia2_2.state }}
-          {%- endif %}
-      device_class: battery
-    battery_wiskra_ipad:
-      friendly_name: iPad
-      unit_of_measurement: '%'
-      value_template: >-
-          {%- if states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d_2.attributes.battery_level %}
-              {{ states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d_2.attributes.battery_level|round }}
-          {% else %}
-              {{ states.device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d_2.state }}
-          {%- endif %}
-      device_class: battery
+- platform: attributes
+  friendly_name: "Batteries"
+  attribute: battery_level
+  unit_of_measurement: "%"
+  entities:
+    - device_tracker.mi_mix_2
+    - device_tracker.mi_a2_lite
+    - device_tracker.wojtek_s_ipad
 - platform: template
   sensors:
     light_brightness_philips_ceiling_light:
       friendly_name: "Philips Ceiling light brightness"
       value_template: >-
-          {%- if is_state('light.xiaomi_philips_ceiling_light', 'on') %}
-              {{ (100 * states.light.xiaomi_philips_ceiling_light.attributes.brightness / 255) | round }}
-          {% else %}
-              0
-          {%- endif %}
-      icon_template: 'mdi:brightness-6'
+        {%- if is_state('light.xiaomi_philips_ceiling_light', 'on') %}
+            {{ (100 * states.light.xiaomi_philips_ceiling_light.attributes.brightness / 255) | round }}
+        {% else %}
+            0
+        {%- endif %}
+      icon_template: "mdi:brightness-6"
       entity_id: light.xiaomi_philips_ceiling_light
       device_class: illuminance
-      unit_of_measurement: '%'
+      unit_of_measurement: "%"
     light_ct_philips_ceiling_light:
       friendly_name: "Philips Ceiling light CT"
       value_template: >-
-          {%- if is_state('light.xiaomi_philips_ceiling_light', 'on') %}
-              {{ (100 * states.light.xiaomi_philips_ceiling_light.attributes.color_temp / states.light.xiaomi_philips_ceiling_light.attributes.max_mireds) | round }}
-          {% else %}
-              0
-          {%- endif %}
-      icon_template: 'mdi:temperature-kelvin'
+        {%- if is_state('light.xiaomi_philips_ceiling_light', 'on') %}
+            {{ (100 * states.light.xiaomi_philips_ceiling_light.attributes.color_temp / states.light.xiaomi_philips_ceiling_light.attributes.max_mireds) | round }}
+        {% else %}
+            0
+        {%- endif %}
+      icon_template: "mdi:temperature-kelvin"
       entity_id: light.xiaomi_philips_ceiling_light
-      unit_of_measurement: '%'
+      unit_of_measurement: "%"
     light_brightness_hall_light:
       friendly_name: "Hall light brightness"
       value_template: >-
-          {%- if is_state('light.yeelight_color2_7c49eb1566bb', 'on') %}
-              {{ (100 * states.light.yeelight_color2_7c49eb1566bb.attributes.brightness / 255) | round }}
-          {% else %}
-              0
-          {%- endif %}
-      icon_template: 'mdi:brightness-6'
+        {%- if is_state('light.yeelight_color2_7c49eb1566bb', 'on') %}
+            {{ (100 * states.light.yeelight_color2_7c49eb1566bb.attributes.brightness / 255) | round }}
+        {% else %}
+            0
+        {%- endif %}
+      icon_template: "mdi:brightness-6"
       entity_id: light.yeelight_color2_7c49eb1566bb
       device_class: illuminance
-      unit_of_measurement: '%'
+      unit_of_measurement: "%"
     light_ct_hall_light:
       friendly_name: "Hall Light CT"
       value_template: >-
@@ -75,9 +51,9 @@
         {% else %}
             0
         {%- endif %}
-      icon_template: 'mdi:temperature-kelvin'
+      icon_template: "mdi:temperature-kelvin"
       entity_id: light.yeelight_color2_7c49eb1566bb
-      unit_of_measurement: '%'
+      unit_of_measurement: "%"
 - platform: systemmonitor
   resources:
     - type: load_1m
@@ -89,7 +65,7 @@
   name: CPU Temperature
   command: "cat /sys/class/thermal/thermal_zone2/temp"
   unit_of_measurement: "°C"
-  value_template: '{{ (value | multiply(0.001)) | round(1) }}'
+  value_template: "{{ (value | multiply(0.001)) | round(1) }}"
 # - platform: google_travel_time
 #   scan_interval: 600
 #   api_key: AIzaSyAjBHHLSZ_3TeLhqhHXXY6Sq3RJRmODWZQ

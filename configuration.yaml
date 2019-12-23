@@ -134,7 +134,6 @@ yeelight:
     192.168.1.43:
       name: Attic wardrobe area light
 
-
 # Enables support for tracking state changes over time
 history:
 
@@ -144,7 +143,7 @@ logbook:
 # Text to speech
 tts:
   - platform: google_translate
-    language: 'pl'
+    language: "pl"
 
 # Cloud
 cloud:
@@ -166,7 +165,7 @@ xiaomi_aqara:
     - mac: 04:CF:8C:B8:7B:D4
       key: zaoly671rews6dtn
     # - mac: 04:CF:8C:B8:95:11
-      # key: ggcrtr1y791zwna1
+    # key: ggcrtr1y791zwna1
 
 light:
   - platform: xiaomi_miio
@@ -209,7 +208,6 @@ light:
     host: 192.168.1.28
     token: 9077b63fbca71504a06c0441906260c9
     model: philips.light.downlight
-
 
 vacuum:
   - platform: xiaomi_miio
@@ -311,7 +309,7 @@ circadian_lighting:
   max_colortemp: 5500
   min_colortemp: 3000
   sunrise_offset: "03:00:00"
-  sunset_offset: "-01:30:00"
+  sunset_offset: "-00:45:00"
 
 switch:
   - platform: xiaomi_miio
@@ -386,47 +384,52 @@ switch:
 scene:
   - name: Living room day
     entities:
-        light.xiaomi_philips_ceiling_light: on
-        light.wall_leds: off
+      light.xiaomi_philips_ceiling_light: on
+      light.wall_leds: off
+      switch.plug_158d0001de79e6: on
+      switch.fan: on
   - name: Living room evening
     entities:
-        light.xiaomi_philips_ceiling_light: on
-        light.wall_leds: on
-        switch.plug_158d0001de79e6: on
+      light.xiaomi_philips_ceiling_light: on
+      light.wall_leds: on
+      switch.plug_158d0001de79e6: on
+      switch.fan: on
   - name: Living room TV mode
     entities:
-        light.xiaomi_philips_ceiling_light: off
-        light.wall_leds: on
-        switch.plug_158d0001de79e6: on
+      light.xiaomi_philips_ceiling_light: off
+      light.wall_leds: on
+      switch.plug_158d0001de79e6: on
+      switch.fan: on
   - name: Somebody sleeping in living room
     entities:
-        automation.living_room_motion_01_normal: off
-        automation.living_room_motion_02_evening: off
-        automation.living_room_motion_03_tv_mode: off
-        group.living_room_lights: off
-        group.kitchen_lights: off
-        group.dining_area: off
+      automation.living_room_motion_01_normal: off
+      automation.living_room_motion_02_evening: off
+      automation.living_room_motion_03_tv_mode: off
+      group.living_room_lights: off
+      group.kitchen_lights: off
+      group.dining_area: off
   - name: Living room normal mode
     entities:
-        automation.living_room_motion_01_normal: on
-        automation.living_room_motion_02_evening: on
-        automation.living_room_motion_03_tv_mode: on
+      automation.living_room_motion_01_normal: on
+      automation.living_room_motion_02_evening: on
+      automation.living_room_motion_03_tv_mode: on
+      switch.circadian_lighting_living_room_auto_ceiling: on
   - name: Wojtek is cycling
     entities:
-        switch.circadian_lighting_guest_room_lights_auto: off
-        automation.guest_room_motion: off
-        light.xiaomi_philips_e14_crystal:
-          state: on
-          brightness: 3
-        light.xiaomi_philips_e14_crystal_2: off
-        fan.xiaomi_smart_fan: on
+      switch.circadian_lighting_guest_room_lights_auto: off
+      automation.guest_room_motion: off
+      light.xiaomi_philips_e14_crystal:
+        state: on
+        brightness: 3
+      light.xiaomi_philips_e14_crystal_2: off
+      fan.xiaomi_smart_fan: on
   - name: Wojtek finished cycling
     entities:
-        switch.circadian_lighting_guest_room_lights_auto: on
-        automation.guest_room_motion: on
-        light.xiaomi_philips_e14_crystal: off
-        light.xiaomi_philips_e14_crystal_2: off
-        fan.xiaomi_smart_fan: off
+      switch.circadian_lighting_guest_room_lights_auto: on
+      automation.guest_room_motion: on
+      light.xiaomi_philips_e14_crystal: off
+      light.xiaomi_philips_e14_crystal_2: off
+      fan.xiaomi_smart_fan: off
 
 # To start the camera:
 # pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
@@ -460,8 +463,8 @@ media_player:
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_client_secret
     aliases:
-        abc123def456: 'Living Room'
-        9183abas000: 'Bed Room'
+      abc123def456: "Living Room"
+      9183abas000: "Bed Room"
 
 recorder:
   purge_keep_days: 3
@@ -500,6 +503,7 @@ group:
       - switch.shelly_shsw_1_5556b7
       - light.wall_leds
       - switch.plug_158d0001de79e6
+      - switch.fan
       - light.stairs_leds
       - light.downstairs_hall_lamp
       - switch.shelly_shsw_1_554b82
@@ -508,6 +512,13 @@ group:
     entities:
       - light.downstairs_bathroom_lamp
       - switch.shelly_shsw_1_55dead
+  tosia_bedroom_lights:
+    name: Tosia's bedroom lights
+    entities:
+      - light.tosia_left_wall_lamp
+      - light.right_wall_lamp
+      - light.tosia_lamp
+      - switch.xiaomi_miio_switch
 mqtt:
   broker: 172.17.0.1
 

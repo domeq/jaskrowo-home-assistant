@@ -7,30 +7,33 @@ views:
     path: default_view
     badges: []
     cards:
-      - title: Living room
-        entities:
-          - sensor.temperature_158d0001b1c3fb
-          - sensor.humidity_158d0001b1c3fb
-          - binary_sensor.door_window_sensor_158d0001ad5eb6
-          - light.xiaomi_philips_ceiling_light
-          - switch.shelly_shsw_1_5556b7
-          - light.wall_leds
-          - switch.plug_158d0001de79e6
-          - light.stairs_leds
-          - light.downstairs_hall_lamp
-          - switch.shelly_shsw_1_554b82
-          - remote.jaskrowo_media
-          - media_player.marantz_sr5008
-        type: entities
-      - type: conditional
-        conditions:
-          - entity: media_player.spotify
-            state: "playing"
-          - entity: sensor.spotify_source
-            state_not: "Xiaomi Mi MIX 2"
-        card:
-          type: media-control
-          entity: media_player.spotify
+      - type: vertical-stack
+        cards:
+          - type: conditional
+            conditions:
+              - entity: media_player.spotify
+                state: "playing"
+              - entity: sensor.spotify_source
+                state_not: "Xiaomi Mi MIX 2"
+            card:
+              type: media-control
+              entity: media_player.spotify
+          - title: Living room
+            entities:
+              - sensor.temperature_158d0001b1c3fb
+              - sensor.humidity_158d0001b1c3fb
+              - binary_sensor.door_window_sensor_158d0001ad5eb6
+              - light.xiaomi_philips_ceiling_light
+              - switch.shelly_shsw_1_5556b7
+              - light.wall_leds
+              - switch.plug_158d0001de79e6
+              - switch.fan
+              - light.stairs_leds
+              - light.downstairs_hall_lamp
+              - switch.shelly_shsw_1_554b82
+              - remote.jaskrowo_media
+              - media_player.marantz_sr5008
+            type: entities
       - title: Kitchen
         entities:
           - sensor.temperature_158d0002320de3
@@ -114,45 +117,25 @@ views:
           - sensor.airly_description
         type: entities
         show_header_toggle: false
-      - title: Device battery
-        entities:
-          - sensor.battery_gosiak_mia2
-          - sensor.battery_wiskra_mimix2
-          - sensor.battery_wiskra_ipad
-        theme: Backend-selected
-        type: entities
-        show_header_toggle: false
-      - title: Network
-        entities:
-          - sensor.speedtest_download
-          - sensor.speedtest_upload
-          - sensor.speedtest_ping
-          - sensor.asuswrt_download_speed
-          - sensor.asuswrt_upload_speed
-        type: entities
-        show_header_toggle: false
-      - type: weather-forecast
-        entity: weather.home
-      - title: Humidity
-        entities:
-          - sensor.humidity_158d0001b9208d
-          - sensor.humidity_158d0001b92092
-          - sensor.humidity_158d0001b92145
-          - sensor.humidity_158d0001b1c3fb
-          - sensor.humidity_158d00023208a6
-          - sensor.humidity_158d0002320de3
-          - sensor.humidity_158d0002320e0c
-        hours_to_show: 24
-        type: history-graph
-        refresh_interval: 60
-      # - title: Air pollution
-      #   entities:
-      #     - sensor.airly_caqi
-      #     - sensor.airly_pm2_5
-      #     - sensor.airly_pm10
-      #   hours_to_show: 72
-      #   type: history-graph
-      #   refresh_interval: 900
+      - type: vertical-stack
+        cards:
+          - title: Device battery
+            entities:
+              - sensor.mi_a2_lite_battery_level
+              - sensor.mi_mix_2_battery_level
+              - sensor.wojtek_s_ipad_battery_level
+            theme: Backend-selected
+            type: entities
+            show_header_toggle: false
+          - title: Network
+            entities:
+              - sensor.speedtest_download
+              - sensor.speedtest_upload
+              - sensor.speedtest_ping
+              - sensor.asuswrt_download_speed
+              - sensor.asuswrt_upload_speed
+            type: entities
+            show_header_toggle: false
       - title: Windows open?
         entities:
           - binary_sensor.door_window_sensor_158d00023709f7
@@ -164,6 +147,8 @@ views:
         hours_to_show: 24
         type: history-graph
         refresh_interval: 60
+      - type: weather-forecast
+        entity: weather.home
       - refresh_inteval: 60
         title: Temperature
         entities:
@@ -177,17 +162,31 @@ views:
           - sensor.airly_temperature
         hours_to_show: 24
         type: history-graph
+      - title: Humidity
+        entities:
+          - sensor.humidity_158d0001b9208d
+          - sensor.humidity_158d0001b92092
+          - sensor.humidity_158d0001b92145
+          - sensor.humidity_158d0001b1c3fb
+          - sensor.humidity_158d00023208a6
+          - sensor.humidity_158d0002320de3
+          - sensor.humidity_158d0002320e0c
+        hours_to_show: 24
+        type: history-graph
+        refresh_interval: 60
+
       - type: map
         aspect_ratio: 16:9
         default_zoom: 12
         entities:
-          - device_tracker.gosiak_mia2_2
-          - device_tracker.wiskra_mimix2_2
+          - device_tracker.mi_a2_lite
+          - device_tracker.mi_mix_2
+          - device_tracker.wojtek_s_ipad
           - zone.home
       - type: glance
         title: Vacuum
         entities:
-          - icon: 'mdi:water'
+          - icon: "mdi:water"
             type: entity-button
             entity: script.vacuum_start_mopping
             tap_action:
@@ -195,7 +194,7 @@ views:
               service: script.turn_on
               service_data:
                 entity_id: script.vacuum_start_mopping
-          - icon: 'mdi:robot-vacuum'
+          - icon: "mdi:robot-vacuum"
             type: entity-button
             entity: script.vacuum_start_cleaning
             tap_action:
@@ -203,7 +202,7 @@ views:
               service: script.turn_on
               service_data:
                 entity_id: script.vacuum_start_cleaning
-          - icon: 'mdi:pause'
+          - icon: "mdi:pause"
             type: entity-button
             entity: script.vacuum_pause
             tap_action:
@@ -211,7 +210,7 @@ views:
               service: script.turn_on
               service_data:
                 entity_id: script.vacuum_pause
-          - icon: 'mdi:home-circle'
+          - icon: "mdi:home-circle"
             type: entity-button
             entity: script.vacuum_go_home
             tap_action:
@@ -233,16 +232,16 @@ views:
         show_header_toggle: false
       - title: People at home
         entities:
-          - device_tracker.wojtek_1996c7e7_3ef9_451b_be55_5b27c09d3c5d
-          - device_tracker.wiskra_mimix2_2
-          - device_tracker.gosiak_mia2_2
-        type: entities
-        show_header_toggle: false
+          - device_tracker.mi_a2_lite
+          - device_tracker.mi_mix_2
+          - device_tracker.wojtek_s_ipad
+        type: glance
       - title: Various
         entities:
           - binary_sensor.car_wash
           - sun.sun
-        type: entities
+          - binary_sensor.updater
+        type: glance
         show_header_toggle: false
       - title: all automations
         entities:
@@ -296,19 +295,8 @@ views:
           - switch.circadian_lighting_living_room_auto_ceiling
           - switch.circadian_lighting_master_bedroom_lights_auto
           - switch.circadian_lighting_tosia_room_lights_auto
-        type: entities
-      - title: Switches
-        entities:
-          - binary_sensor.switch_158d00016dbe9e
-          - binary_sensor.switch_158d00019ca9dc
-          - binary_sensor.switch_158d00019d5813
-          - binary_sensor.switch_158d0001b1827e
-          - binary_sensor.switch_158d0001b182db
-          - binary_sensor.switch_158d0001be5b10
-          - binary_sensor.switch_158d0001d8eeb1
-          - binary_sensor.switch_158d0001f9c3fe
-        type: entities
-      - type: entities
+        type: glance
+      - type: glance
         title: Illumination
         show_header_toggle: false
         entities:
@@ -328,7 +316,7 @@ views:
           - sensor.illumination_158d0002ec7efa
           - sensor.illumination_158d000257a1be
           - sensor.illumination_158d000257a1db
-      - type: entities
+      - type: glance
         title: Motion detection
         show_header_toggle: false
         entities:

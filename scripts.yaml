@@ -1,32 +1,32 @@
 vacuum_start_mopping:
   alias: Mop
   sequence:
-  - data:
-      fan_speed: 105 # mop
-      entity_id: vacuum.xiaomi_vacuum_cleaner
-    service: vacuum.set_fan_speed
-  - data:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
-    service: vacuum.start
+    - data:
+        fan_speed: 105 # mop
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+      service: vacuum.set_fan_speed
+    - data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+      service: vacuum.start
 vacuum_start_cleaning:
   alias: Clean
   sequence:
-  - data:
-      fan_speed: 102 # balanced
-      entity_id: vacuum.xiaomi_vacuum_cleaner
-    service: vacuum.set_fan_speed
-  - data:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
-    service: vacuum.start
+    - data:
+        fan_speed: 102 # balanced
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+      service: vacuum.set_fan_speed
+    - data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+      service: vacuum.start
 vacuum_pause:
   alias: Pause
   sequence:
-  - data:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
-    service: vacuum.pause
+    - data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+      service: vacuum.pause
 vacuum_go_home:
   alias: Go home
   sequence:
-  - data:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
-    service: vacuum.return_to_base
+    - data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+      service: vacuum.return_to_base
