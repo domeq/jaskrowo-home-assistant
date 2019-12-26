@@ -335,6 +335,7 @@ switch:
     name: "Hall lights auto"
     lights_ct:
       - light.downstairs_hall_lamp
+    min_brightness: 50
   - platform: circadian_lighting
     name: "Guest room lights auto"
     min_brightness: 50
@@ -507,6 +508,12 @@ group:
       - light.stairs_leds
       - light.downstairs_hall_lamp
       - switch.shelly_shsw_1_554b82
+  downstairs_windows:
+    name: Downstairs windows
+    entities:
+      - binary_sensor.door_window_sensor_158d0001ad5eb6
+      - binary_sensor.door_window_sensor_158d00023709f7
+      - binary_sensor.door_window_sensor_158d00022f148a
   downstairs_bathroom_lights:
     name: Downstairs bathroom lights
     entities:

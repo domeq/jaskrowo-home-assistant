@@ -2,9 +2,7 @@
   alias: Windows open
   trigger:
     - entity_id:
-        - binary_sensor.door_window_sensor_158d0001ad5eb6
-        - binary_sensor.door_window_sensor_158d00022f148a
-        - binary_sensor.door_window_sensor_158d00023709f7
+        - group.downstairs_windows
       from: "off"
       platform: state
       to: "on"
@@ -24,22 +22,11 @@
   alias: Windows closed
   trigger:
     - entity_id:
-        - binary_sensor.door_window_sensor_158d0001ad5eb6
-        - binary_sensor.door_window_sensor_158d00022f148a
-        - binary_sensor.door_window_sensor_158d00023709f7
+        - group.downstairs_windows
       from: "on"
       platform: state
       to: "off"
-  condition:
-    - condition: state
-      entity_id: binary_sensor.door_window_sensor_158d0001ad5eb6
-      state: "off"
-    - condition: state
-      entity_id: binary_sensor.door_window_sensor_158d00022f148a
-      state: "off"
-    - condition: state
-      entity_id: binary_sensor.door_window_sensor_158d00023709f7
-      state: "off"
+  condition: []
   action:
     - service: tts.google_translate_say
       entity_id: media_player.living_room_speakers
@@ -326,10 +313,6 @@
           - light.xiaomi_philips_e14_crystal_2
         transition: 1
       service: light.turn_on
-    # - data:
-    #     entity_id:
-    #     - switch.xiaomi_miio_switch
-    # service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d0001e532dc.attributes['No
         motion since'] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e532dc.state
@@ -340,10 +323,6 @@
           - light.xiaomi_philips_e14_crystal_2
         transition: 1
       service: light.turn_off
-  # - data:
-  #     entity_id:
-  #     - switch.xiaomi_miio_switch
-  #   service: switch.turn_off
 - id: "1542050718235"
   alias: Guest room - toggle light
   hide_entity: true
@@ -366,10 +345,6 @@
           - light.xiaomi_philips_e14_crystal_2
         transition: 1
       service: light.toggle
-  # - data:
-  #     entity_id:
-  #     - switch.xiaomi_miio_switch
-  #   service: switch.toggle
 - id: "1542053124048"
   alias: Guest room - bright mode
   trigger:
@@ -390,10 +365,6 @@
           - light.xiaomi_philips_e14_crystal
           - light.xiaomi_philips_e14_crystal_2
       service: light.turn_on
-    # - data:
-    #     entity_id:
-    #     - switch.xiaomi_miio_switch
-    #   service: switch.turn_on
     - data:
         entity_id:
           - light.xiaomi_philips_e14_crystal
@@ -1333,17 +1304,7 @@
       condition: numeric_state
       below: 25
     - condition: state
-      entity_id: binary_sensor.door_window_sensor_158d0001ad5eb6
-      state: "off"
-      for:
-        hours: 24
-    - condition: state
-      entity_id: binary_sensor.door_window_sensor_158d00022f148a
-      state: "off"
-      for:
-        hours: 24
-    - condition: state
-      entity_id: binary_sensor.door_window_sensor_158d00023709f7
+      entity_id: group.downstairs_windows
       state: "off"
       for:
         hours: 24
@@ -1366,9 +1327,7 @@
     - platform: time_pattern
       minutes: /2
     - entity_id:
-        - binary_sensor.door_window_sensor_158d0001ad5eb6
-        - binary_sensor.door_window_sensor_158d00022f148a
-        - binary_sensor.door_window_sensor_158d00023709f7
+        - group.downstairs_windows
       from: "off"
       platform: state
       to: "on"
@@ -1379,13 +1338,7 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: binary_sensor.door_window_sensor_158d0001ad5eb6
-          state: "on"
-        - condition: state
-          entity_id: binary_sensor.door_window_sensor_158d00022f148a
-          state: "on"
-        - condition: state
-          entity_id: binary_sensor.door_window_sensor_158d00023709f7
+          entity_id: group.downstairs_windows
           state: "on"
   action:
     - service: media_player.volume_set
@@ -1405,7 +1358,7 @@
       data_template:
         entity_id: media_player.living_room_speakers
         volume_level: 0.4
-    - service: notify.home_assistant_mi_mix_2
+    - service: notify.mobile_app_mi_mix_2
       data_template:
         title: Alert smogowy
         message:
@@ -1417,7 +1370,7 @@
             - 100
             - 400
           image: https://cdn.galleries.smcloud.net/t/galleries/gf-iqLN-uVay-HHCu_smog-664x442-nocrop.jpg
-    - service: notify.home_assistant_gosiak_mia2
+    - service: notify.mobile_app_mi_a2_lite
       data_template:
         title: Alert smogowy
         message:
@@ -1450,7 +1403,7 @@
   action:
     - data:
         entity_id: remote.jaskrowo_media
-        activity: "Listen to music"
+        activity: Listen to music
       service: remote.turn_on
     - service: media_player.volume_set
       data_template:
@@ -1469,12 +1422,12 @@
     - service: media_player.select_source
       data_template:
         entity_id: media_player.spotify
-        source: "Marantz SR5008"
+        source: Marantz SR5008
     - delay: 00:00:03
     - service: spotify.play_playlist
       data_template:
-        media_content_id: "spotify:playlist:37i9dQZF1DWWxPM4nWdhyI"
-        random_song: True
+        media_content_id: spotify:playlist:37i9dQZF1DWWxPM4nWdhyI
+        random_song: true
 - id: "1549654128210"
   alias: Living room stairs - motion
   trigger:
@@ -2081,3 +2034,20 @@
         entity_id:
           - group.dining_area
       service: homeassistant.turn_off
+- id: "1577216646456"
+  alias: Vacuum - scheduled cleanup
+  description: Clean up apartment on weekdays @ 11:30
+  trigger:
+    - at: "11:30"
+      platform: time
+  condition:
+    condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+    - entity_id: script.vacuum_start_cleaning
+      service: script.turn_on

@@ -283,6 +283,7 @@ views:
           - automation.upstairs_bathroom_empty
           - automation.upstairs_hall_motion
           - automation.upstairs_hall_empty
+          - automation.vacuum_scheduled_cleanup
           - automation.wardrobe_motion
           - automation.wardrobe_empty
         type: entities
@@ -316,7 +317,7 @@ views:
           - sensor.illumination_158d0002ec7efa
           - sensor.illumination_158d000257a1be
           - sensor.illumination_158d000257a1db
-      - type: glance
+      - type: entities
         title: Motion detection
         show_header_toggle: false
         entities:
@@ -336,20 +337,22 @@ views:
           - binary_sensor.motion_sensor_158d0002b72030
           - binary_sensor.motion_sensor_158d0002b422b4
           - binary_sensor.motion_sensor_158d0002ebdbdf
-      - title: Lights temperature
-        entities:
-          - sensor.light_ct_philips_ceiling_light
-          - sensor.light_ct_hall_light
-        hours_to_show: 72
-        type: history-graph
-        refresh_time: 300
-      - title: Lights brightness
-        entities:
-          - sensor.light_brightness_philips_ceiling_light
-          - sensor.light_brightness_hall_light
-        hours_to_show: 72
-        type: history-graph
-        refresh_time: 300
+      - type: vertical-stack
+        cards:
+          - title: Lights temperature
+            entities:
+              - sensor.light_ct_philips_ceiling_light
+              - sensor.light_ct_hall_light
+            hours_to_show: 72
+            type: history-graph
+            refresh_time: 300
+          - title: Lights brightness
+            entities:
+              - sensor.light_brightness_philips_ceiling_light
+              - sensor.light_brightness_hall_light
+            hours_to_show: 72
+            type: history-graph
+            refresh_time: 300
       - type: glance
         title: System load
         entities:
