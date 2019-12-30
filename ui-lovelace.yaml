@@ -333,8 +333,8 @@ views:
     cards:
       - type: vertical-stack
         cards:
-          - type: picture-elements
-            # image: /local/floor_1.png
+          - title: 1st floor
+            type: picture-elements
             image: /local/floor_1_6.svg
             elements:
               - type: image
@@ -355,6 +355,21 @@ views:
               - type: image
                 image: /local/yellow.png
                 entity: binary_sensor.motion_sensor_158d0001e4707c
+                tap_action:
+                  action: more-info
+                filter: opacity(0%)
+                state_filter:
+                  "on": opacity(50%)
+                style:
+                  position: absolute
+                  transform: none
+                  top: 53%
+                  left: 43%
+                  width: 14.5%
+                  height: 43%
+              - type: image
+                image: /local/yellow.png
+                entity: binary_sensor.motion_sensor_158d000257a1be
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -595,7 +610,8 @@ views:
                 style:
                   top: 59%
                   left: 40%
-          - type: picture-elements
+          - title: 2nd floor
+            type: picture-elements
             image: /local/floor_2_4.svg
             elements:
               - type: image
@@ -744,7 +760,7 @@ views:
                 entity: sensor.temperature_158d0001b92145
                 style:
                   top: 87%
-                  left: 82%
+                  left: 82.5%
                   color: black
                   font-size: 9px
               - type: state-label
@@ -753,8 +769,26 @@ views:
                 entity: sensor.humidity_158d0001b92145
                 style:
                   top: 91.5%
-                  left: 82%
+                  left: 82.5%
                   color: black
+                  font-size: 9px
+              - type: state-label
+                tap_action:
+                  action: more-info
+                entity: sensor.temperature_158d0001b9208d
+                style:
+                  top: 87%
+                  left: 92%
+                  color: white
+                  font-size: 9px
+              - type: state-label
+                tap_action:
+                  action: more-info
+                entity: sensor.humidity_158d0001b9208d
+                style:
+                  top: 91.5%
+                  left: 92%
+                  color: white
                   font-size: 9px
               - type: state-icon
                 tap_action:
@@ -762,7 +796,7 @@ views:
                 entity: binary_sensor.door_window_sensor_158d000232db84
                 style:
                   top: 52%
-                  left: 83%
+                  left: 85%
               - type: state-icon
                 tap_action:
                   action: toggle
@@ -869,7 +903,7 @@ views:
                   left: 58%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e4707c
+                entity: binary_sensor.motion_sensor_158d000257a1be
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -890,7 +924,8 @@ views:
                 style:
                   top: 82%
                   left: 53%
-          - type: picture-elements
+          - title: Attic
+            type: picture-elements
             image: /local/floor_3_4.svg
             style:
               width: 50%
