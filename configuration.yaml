@@ -438,6 +438,8 @@ scene:
 #   - platform: ffmpeg
 #     input: -rtsp_transport tcp -i rtsp://127.0.0.1:8554/
 #     extra_arguments: -pred 1 -q:v 2
+
+stream:
 #
 # image_processing:
 #   - platform: deepstack_face
@@ -526,9 +528,26 @@ group:
       - light.right_wall_lamp
       - light.tosia_lamp
       - switch.xiaomi_miio_switch
+  guest_room_lights:
+    name: Guest room lights
+    entities:
+      - light.xiaomi_philips_e14_crystal
+      - light.xiaomi_philips_e14_crystal_2
+
 mqtt:
   broker: 172.17.0.1
 
 shelly:
 
 mobile_app:
+
+alarm_control_panel:
+  - platform: manual
+    code: !secret alarm_code
+    pending_time: 30
+    delay_time: 30
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      pending_time: 0
+      delay_time: 0

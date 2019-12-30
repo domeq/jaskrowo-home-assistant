@@ -168,7 +168,7 @@ binary_sensor.switch_158d00016dbe9e:
   friendly_name: Master bedroom table switch
 light.downstairs_bathroom_lamp:
   friendly_name: Downstairs bathroom lamp
-  icon: "mdi:shower-head"
+  icon: "mdi:ceiling-light"
 binary_sensor.motion_sensor_158d0002b70d79:
   friendly_name: Wardrobe motion sensor
 sensor.illumination_158d0002b70d79:
@@ -237,7 +237,7 @@ switch.shelly_shsw_1_2c03c5:
   icon: "mdi:ceiling-light"
 switch.shelly_shsw_1_5545a9:
   friendly_name: Upstairs bathroom lights
-  icon: "mdi:shower"
+  icon: "mdi:spotlight-beam"
 sensor.xiaomi_air_quality_monitor:
   friendly_name: Indoor air quality
 binary_sensor.wall_switch_both_158d0002b455e6:

@@ -2,6 +2,9 @@
 *
 !*.yaml
 !.gitignore
+!www/
+!www/*.svg
+!www/*.png
 ._*
 *.conf
 *.txt

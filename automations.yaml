@@ -298,10 +298,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: light.xiaomi_philips_e14_crystal
-      state: "off"
-    - condition: state
-      entity_id: light.xiaomi_philips_e14_crystal_2
+      entity_id: group.guest_room_lights
       state: "off"
     - below: "30"
       condition: numeric_state
@@ -309,20 +306,18 @@
   action:
     - data:
         entity_id:
-          - light.xiaomi_philips_e14_crystal
-          - light.xiaomi_philips_e14_crystal_2
+          - group.guest_room_lights
         transition: 1
-      service: light.turn_on
+      service: homeassistant.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d0001e532dc.attributes['No
         motion since'] | int >= 120 and states.binary_sensor.motion_sensor_158d0001e532dc.state
         == 'off' %}True{% else %}False{% endif %}"
     - data:
         entity_id:
-          - light.xiaomi_philips_e14_crystal
-          - light.xiaomi_philips_e14_crystal_2
+          - group.guest_room_lights
         transition: 1
-      service: light.turn_off
+      service: homeassistant.turn_off
 - id: "1542050718235"
   alias: Guest room - toggle light
   hide_entity: true
@@ -341,10 +336,9 @@
   action:
     - data:
         entity_id:
-          - light.xiaomi_philips_e14_crystal
-          - light.xiaomi_philips_e14_crystal_2
+          - group.guest_room_lights
         transition: 1
-      service: light.toggle
+      service: homeassistant.toggle
 - id: "1542053124048"
   alias: Guest room - bright mode
   trigger:
@@ -362,9 +356,8 @@
   action:
     - data:
         entity_id:
-          - light.xiaomi_philips_e14_crystal
-          - light.xiaomi_philips_e14_crystal_2
-      service: light.turn_on
+          - group.guest_room_lights
+      service: homeassistant.turn_on
     - data:
         entity_id:
           - light.xiaomi_philips_e14_crystal
@@ -380,17 +373,9 @@
         minutes: 3
       platform: numeric_state
   condition:
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: light.xiaomi_philips_ceiling_light
-          state: "on"
-        - condition: state
-          entity_id: light.wall_leds
-          state: "on"
-        - condition: state
-          entity_id: light.stairs_leds
-          state: "on"
+    - condition: state
+      entity_id: group.living_room_lights
+      state: "on"
   action:
     - data:
         language: pl
@@ -399,10 +384,8 @@
       service: tts.google_translate_say
     - data:
         entity_id:
-          - light.xiaomi_philips_ceiling_light
-          - light.wall_leds
-        transition: 1
-      service: light.turn_off
+          - group.living_room_lights
+      service: homeassistant.turn_off
 - id: "1543859792965"
   alias: Tosia room - motion
   trigger:
@@ -2041,13 +2024,88 @@
     - at: "11:30"
       platform: time
   condition:
-    condition: time
-    weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
   action:
     - entity_id: script.vacuum_start_cleaning
       service: script.turn_on
+- alias: "Trigger alarm while armed away"
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.motion_sensor_158d0001e43ac7
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: armed_away
+  action:
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room_speakers
+      data:
+        message: Wykryłem ruch, masz 30 sekund na wyłączenie alarmu
+        language: pl
+    - service: alarm_control_panel.alarm_trigger
+      entity_id: alarm_control_panel.ha_alarm
+- alias: "Send notification when alarm triggered"
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: "triggered"
+  action:
+    - service: notify.mobile_app_mi_mix_2
+      data:
+        message: "ALARM! The alarm has been triggered"
+- alias: "Send notification when alarm is Armed in Away mode"
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: "pending"
+  condition:
+    - condition: template
+      value_template: '{{ state_attr("alarm_control_panel.ha_alarm", "post_pending_state") == "armed_away" }}'
+  action:
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room_speakers
+      data:
+        message: Alarm uzbrojony, masz 30 sekund na wyjście.
+        language: pl
+    - service: notify.mobile_app_mi_mix_2
+      data_template:
+        message: "ALARM! The alarm is armed in Away mode {{ states('sensor.date_time') }}"
+- alias: "Disarm alarm when we're getting home"
+  trigger:
+    - platform: state
+      entity_id: device_tracker.mi_mix_2
+      to: "home"
+    - platform: state
+      entity_id: device_tracker.mi_a2_lite
+      to: "home"
+  condition:
+    - condition: state
+      entity_id: alarm_control_panel.ha_alarm
+      state: "armed_away"
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm
+    - service: notify.mobile_app_mi_mix_2
+      data_template:
+        message: "Welcome home! The alarm disarmed successfully"
+- alias: "Send notification when alarm is disarmed"
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: "disarmed"
+  action:
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room_speakers
+      data:
+        message: Alarm wyłączony
+        language: pl
+    - service: notify.mobile_app_mi_mix_2
+      data_template:
+        message: "The alarm disarmed successfully"
