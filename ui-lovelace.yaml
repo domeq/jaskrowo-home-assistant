@@ -158,10 +158,12 @@ views:
         aspect_ratio: 16:9
         default_zoom: 12
         entities:
-          - device_tracker.mi_a2_lite
-          - device_tracker.mi_mix_2
-          - device_tracker.wojtek_s_ipad
+          - person.wojciech_iskra
+          - person.malgorzata_iskra
+          # - device_tracker.wojtek_s_ipad
           - zone.home
+          - zone.abb
+          - zone.schibsted
       - type: glance
         title: Vacuum
         entities:
@@ -740,7 +742,7 @@ views:
                   left: 15%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e532dc
+                entity: binary_sensor.motion_sensor_158d0001e43bc7
                 tap_action:
                   action: more-info
                 filter: opacity(0%)

@@ -398,15 +398,14 @@
       condition: numeric_state
       entity_id: sensor.illumination_158d0002b85113
     - condition: time
-      after: "17:00:00"
+      after: "09:00:00"
       before: "20:00:00"
     - condition: state
       entity_id: group.tosia_bedroom_lights
       state: "off"
   action:
     - data:
-        entity_id:
-          - group.tosia_bedroom_lights
+        entity_id: group.tosia_bedroom_lights
       service: homeassistant.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d0002b85113.attributes['No
@@ -416,9 +415,8 @@
       entity_id: group.tosia_bedroom_lights
       state: "on"
     - data:
-        entity_id:
-          - group.tosia_bedroom_lights
-      service: homeassistant.turn_on
+        entity_id: group.tosia_bedroom_lights
+      service: homeassistant.turn_off
 - id: "1544955116908"
   alias: Tosia toggle lamp
   hide_entity: true
@@ -488,6 +486,8 @@
           - switch.plug_158d0001ded32d
           - switch.shelly_shsw_1_55e273
           - switch.plug_158d0001de79e6
+    # - service: alarm_control_panel.alarm_arm_away
+    #   entity_id: alarm_control_panel.ha_alarm
 - id: "1544970728739"
   alias: Coming home
   trigger:
@@ -1566,12 +1566,9 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: light.upstairs_hall_left_lamp
+      entity_id: group.upstairs_hall_lights
       state: "off"
-    - condition: state
-      entity_id: light.upstairs_hall_right_lamp
-      state: "off"
-    - below: "20"
+    - below: "30"
       condition: numeric_state
       entity_id: sensor.illumination_158d000257a1db
     - after: 06:30:00
@@ -1579,54 +1576,39 @@
       condition: time
   action:
     - data:
-        entity_id: switch.circadian_lighting_wardrobe_lights_auto
-      service: switch.turn_on
-    - data:
-        entity_id:
-          - light.upstairs_hall_left_lamp
-          - light.upstairs_hall_right_lamp
+        entity_id: group.upstairs_hall_lights
         transition: 1
-      service: light.turn_on
+      service: homeassistant.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d000257a1db.attributes['No
         motion since'] | int >= 0 and states.binary_sensor.motion_sensor_158d000257a1db.state
         == 'off' %}True{% else %}False{% endif %}"
     - condition: state
-      entity_id: light.upstairs_hall_left_lamp
-      state: "on"
-    - condition: state
-      entity_id: light.upstairs_hall_right_lamp
+      entity_id: group.upstairs_hall_lights
       state: "on"
     - data:
-        entity_id:
-          - light.upstairs_hall_left_lamp
-          - light.upstairs_hall_right_lamp
+        entity_id: group.upstairs_hall_lights
         transition: 1
-      service: light.turn_off
+      service: homeassistant.turn_off
 - id: "1551162210734"
   alias: Upstairs hall - empty
   trigger:
-    - platform: template
-      value_template:
-        "{% if states.binary_sensor.motion_sensor_158d000257a1db.attributes['No
-        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d000257a1db.state
-        == 'off' %}True{% else %}False{% endif %}"
+    - platform: numeric_state
+      entity_id: binary_sensor.motion_sensor_158d000257a1db
+      value_template: "{{ state.attributes['No motion since'] | int }}"
+      above: 600
   condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: light.upstairs_hall_left_lamp
-        state: "on"
-      - condition: state
-        entity_id: light.upstairs_hall_right_lamp
-        state: "on"
+    - condition: state
+      entity_id: binary_sensor.motion_sensor_158d000257a1db
+      state: "on"
+    - condition: state
+      entity_id: group.upstairs_hall_lights
+      state: "on"
   action:
     - data:
-        entity_id:
-          - light.upstairs_hall_left_lamp
-          - light.upstairs_hall_right_lamp
+        entity_id: group.upstairs_hall_lights
         transition: 1
-      service: light.turn_off
+      service: homeassistant.turn_off
 - id: "1554142824635"
   alias: Living room stairs - toggle
   trigger:
@@ -2037,18 +2019,29 @@
 - alias: "Trigger alarm while armed away"
   trigger:
     - platform: state
-      entity_id: binary_sensor.motion_sensor_158d0001e43ac7
+      entity_id:
+        - binary_sensor.motion_sensor_158d0001e43ac7
+        - binary_sensor.motion_sensor_158d000257a1be
+        - binary_sensor.motion_sensor_158d0001e43bc7
+        - binary_sensor.motion_sensor_158d0001e4707c
+        - binary_sensor.motion_sensor_158d0001e531e0
+        - binary_sensor.motion_sensor_158d0001e532dc
+        - binary_sensor.motion_sensor_158d0001e547ae
+        - binary_sensor.motion_sensor_158d0001e55ff7
+        - binary_sensor.motion_sensor_158d0002b70d79
+        - binary_sensor.motion_sensor_158d0002b85113
+        - binary_sensor.motion_sensor_158d000257a1db
+        - binary_sensor.motion_sensor_158d0002ec7efa
+        - binary_sensor.motion_sensor_158d0001655da1
+        - binary_sensor.motion_sensor_158d0002b72030
+        - binary_sensor.motion_sensor_158d0002b422b4
+        - binary_sensor.motion_sensor_158d0002ebdbdf
       to: "on"
   condition:
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
       state: armed_away
   action:
-    - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
-      data:
-        message: Wykryłem ruch, masz 30 sekund na wyłączenie alarmu
-        language: pl
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.ha_alarm
 - alias: "Send notification when alarm triggered"
@@ -2060,6 +2053,58 @@
     - service: notify.mobile_app_mi_mix_2
       data:
         message: "ALARM! The alarm has been triggered"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.living_room_speakers
+        volume_level: 0.8
+    - delay: 00:00:01
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room_speakers
+      data_template:
+        message: Powiadomiłem właścicieli i policję - bagiety już jadą
+        language: pl
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: 34:CE:00:88:A5:79
+        ringtone_id: 8
+        ringtone_vol: 30
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: 34:CE:00:FB:56:E8
+        ringtone_id: 8
+        ringtone_vol: 30
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: 04:CF:8C:B8:7B:D4
+        ringtone_id: 8
+        ringtone_vol: 30
+    - data:
+        entity_id:
+          - switch.circadian_lighting_hall_lights_auto
+          - switch.circadian_lighting_living_room_auto_ceiling
+          - switch.circadian_lighting_living_room_auto_leds
+          - switch.circadian_lighting_guest_room_lights_auto
+          - switch.circadian_lighting_attic_lights_auto
+          - switch.circadian_lighting_master_bedroom_lights_auto
+          - switch.circadian_lighting_kitchen_lights_auto
+          - switch.circadian_lighting_tosia_room_lights_auto
+          - switch.circadian_lighting_wardrobe_lights_auto
+          - switch.circadian_lighting_downstairs_bathroom_lights_auto
+      service: switch.turn_off
+    - data:
+        entity_id:
+          - light.downstairs_hall_lamp
+          - light.downstairs_bathroom_lamp
+          - light.wall_leds
+          - light.stairs_leds
+          - light.stove_leds
+        effect: Police
+      service: light.turn_on
+    - delay: 00:00:05
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.living_room_speakers
+        volume_level: 0.4
 - alias: "Send notification when alarm is Armed in Away mode"
   trigger:
     - platform: state
@@ -2072,18 +2117,20 @@
     - service: tts.google_translate_say
       entity_id: media_player.living_room_speakers
       data:
-        message: Alarm uzbrojony, masz 30 sekund na wyjście.
+        message: Alarm uzbrojony, masz 10 sekund na wyjście.
         language: pl
     - service: notify.mobile_app_mi_mix_2
       data_template:
-        message: "ALARM! The alarm is armed in Away mode {{ states('sensor.date_time') }}"
+        message: "ALARM! The alarm is armed"
 - alias: "Disarm alarm when we're getting home"
   trigger:
     - platform: state
       entity_id: device_tracker.mi_mix_2
+      from: "away"
       to: "home"
     - platform: state
       entity_id: device_tracker.mi_a2_lite
+      from: "away"
       to: "home"
   condition:
     - condition: state
@@ -2091,7 +2138,9 @@
       state: "armed_away"
   action:
     - service: alarm_control_panel.alarm_disarm
-      entity_id: alarm_control_panel.ha_alarm
+      data:
+        entity_id: alarm_control_panel.ha_alarm
+        code: !secret alarm_code
     - service: notify.mobile_app_mi_mix_2
       data_template:
         message: "Welcome home! The alarm disarmed successfully"
@@ -2109,3 +2158,45 @@
     - service: notify.mobile_app_mi_mix_2
       data_template:
         message: "The alarm disarmed successfully"
+    - data:
+        entity_id:
+          - switch.circadian_lighting_hall_lights_auto
+          - switch.circadian_lighting_living_room_auto_ceiling
+          - switch.circadian_lighting_living_room_auto_leds
+          - switch.circadian_lighting_guest_room_lights_auto
+          - switch.circadian_lighting_attic_lights_auto
+          - switch.circadian_lighting_master_bedroom_lights_auto
+          - switch.circadian_lighting_kitchen_lights_auto
+          - switch.circadian_lighting_tosia_room_lights_auto
+          - switch.circadian_lighting_wardrobe_lights_auto
+          - switch.circadian_lighting_downstairs_bathroom_lights_auto
+      service: switch.turn_on
+    - data:
+        entity_id:
+          - light.downstairs_hall_lamp
+          - light.downstairs_bathroom_lamp
+          - light.wall_leds
+          - light.stairs_leds
+          - light.stove_leds
+        transition: 1
+      service: light.turn_off
+- alias: "TESTING: Wojtek left home"
+  trigger:
+    - platform: state
+      entity_id: person.wojciech_iskra
+      from: "home"
+      to: "not_home"
+  action:
+    - service: notify.mobile_app_mi_mix_2
+      data_template:
+        message: "Home assistant detected you left home"
+- alias: "TESTING: Wojtek is back home"
+  trigger:
+    - platform: state
+      entity_id: person.wojciech_iskra
+      from: "not_home"
+      to: "home"
+  action:
+    - service: notify.mobile_app_mi_mix_2
+      data_template:
+        message: "Home assistant detected you're back home"

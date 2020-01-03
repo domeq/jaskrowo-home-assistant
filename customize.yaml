@@ -350,3 +350,9 @@ sensor.mi_a2_lite_battery_level:
 sensor.wojtek_s_ipad_battery_level:
   friendly_name: iPad
   icon: "mdi:apple"
+person.wojciech_iskra:
+  friendly_name: Wojtek
+  entity_picture: https://www.gravatar.com/avatar/79ed48a9ea28ae3ea084ba8fc8c5384f.jpg?size=160
+person.malgorzata_iskra:
+  friendly_name: Gosia
+  entity_picture: https://www.gravatar.com/avatar/d31811b59ff26164930193e1bd5ead0c.jpg?s=160
