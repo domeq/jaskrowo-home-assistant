@@ -15,6 +15,7 @@ services:
     image: eclipse-mosquitto
     hostname: mosquitto
     container_name: mosquitto
+    restart: always
     expose:
       - "1883"
       - "9001"
@@ -23,6 +24,7 @@ services:
       - "9001:9001"
     volumes:
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto/data:/mosquitto/data
 
   zigbee2mqtt:
     container_name: zigbee2mqtt

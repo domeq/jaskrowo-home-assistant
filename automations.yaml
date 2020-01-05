@@ -906,8 +906,8 @@
       state: "on"
     - data:
         entity_id:
-          - group.kitchen_lights
-      service: homeassistant.turn_off
+          - switch.shelly1_55df6e_relay_0
+      service: switch.turn_off
 - id: "1546013479738"
   alias: Kitchen - empty
   trigger:
@@ -2256,6 +2256,8 @@
   trigger:
     - platform: homeassistant
       event: start
+    - platform: time_pattern
+      minutes: "/5"
   action:
     service: mqtt.publish
     data:
