@@ -1,7 +1,6 @@
 ._*
 .*
 *.flac
-*.conf
 *.txt
 *.log
 *.db
@@ -16,5 +15,6 @@ tts
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
+harmony_jaskrowo_media.conf
 id_rsa
 www/community
