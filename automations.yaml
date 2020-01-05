@@ -886,6 +886,9 @@
       platform: state
       to: "on"
   condition:
+    - condition: state
+      entity_id: switch.shelly1_55df6e_relay_0
+      state: "off"
     - below: "60"
       condition: numeric_state
       entity_id: sensor.illumination_158d0002ec7efa
@@ -2256,8 +2259,8 @@
   trigger:
     - platform: homeassistant
       event: start
-    - platform: time_pattern
-      minutes: "/5"
+    # - platform: time_pattern
+    # minutes: "/5"
   action:
     service: mqtt.publish
     data:
