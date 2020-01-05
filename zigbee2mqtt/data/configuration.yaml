@@ -14,12 +14,17 @@ device_options:
 devices:
   "0x00158d000319aa4b":
     friendly_name: vibration_sensor
+    retain: true
   "0x00158d0001be5a61":
     friendly_name: test_wireless_switch
+    retain: true
   "0x00158d0002b88c1c":
     friendly_name: test_light
+    retain: true
   "0x00158d0001de79e6":
     friendly_name: christmas_wall_lights
+    retain: true
   "0x00158d0002320de3":
     friendly_name: "kitchen_temperature_sensor"
     debounce: 1
+    retain: true
