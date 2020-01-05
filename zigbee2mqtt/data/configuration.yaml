@@ -8,6 +8,9 @@ advanced:
 serial:
   port: /dev/ttyACM0
   disable_led: false
+device_options:
+  temperature_precision: 1
+  humidity_precision: 1
 devices:
   "0x00158d000319aa4b":
     friendly_name: vibration_sensor
@@ -16,4 +19,7 @@ devices:
   "0x00158d0002b88c1c":
     friendly_name: test_light
   "0x00158d0001de79e6":
-    friendly_name: "christmas_wall_lights"
+    friendly_name: christmas_wall_lights
+  "0x00158d0002320de3":
+    friendly_name: "kitchen_temperature_sensor"
+    debounce: 1

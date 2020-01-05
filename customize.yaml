@@ -73,9 +73,9 @@ sensor.temperature_158d0002320e0c:
   friendly_name: Guest room temperature
 sensor.humidity_158d0002320e0c:
   friendly_name: Guest room humidity
-sensor.temperature_158d0002320de3:
+sensor.0x00158d0002320de3_temperature:
   friendly_name: Kitchen temperature
-sensor.humidity_158d0002320de3:
+sensor.0x00158d0002320de3_humidity:
   friendly_name: Kitchen humidity
 light.master_bedroom_bed_lamp:
   friendly_name: Master bedroom lamp

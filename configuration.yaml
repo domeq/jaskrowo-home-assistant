@@ -10,6 +10,7 @@ homeassistant:
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Warsaw
+  packages: !include_dir_named packages
   # Customization file
   customize: !include customize.yaml
   # Customize entities matching a pattern
@@ -235,7 +236,7 @@ history_graph:
       - sensor.temperature_158d0001b92145
       - sensor.temperature_158d0001b1c3fb
       - sensor.temperature_158d00023208a6
-      - sensor.temperature_158d0002320de3
+      - sensor.0x00158d0002320de3_temperature
       - sensor.temperature_158d0002320e0c
     hours_to_show: 24
     refresh: 60
@@ -247,7 +248,7 @@ history_graph:
       - sensor.humidity_158d0001b92145
       - sensor.humidity_158d0001b1c3fb
       - sensor.humidity_158d00023208a6
-      - sensor.humidity_158d0002320de3
+      - sensor.0x00158d0002320de3_humidity
       - sensor.humidity_158d0002320e0c
     hours_to_show: 24
     refresh: 60
@@ -555,17 +556,6 @@ mqtt:
     topic: "hass/status"
     payload: "offline"
 
-input_boolean:
-  zigbee_permit_join:
-    name: Allow devices to join
-    initial: off
-    icon: mdi:cellphone-wireless
-
-timer:
-  zigbee_permit_join:
-    name: Time remaining
-    duration: 600 # Updated this to the number of seconds you wish
-
 mobile_app:
 
 alarm_control_panel:
@@ -581,18 +571,15 @@ zone:
   - name: Schibsted
     latitude: 50.072845
     longitude: 19.945800
-    radius: 500
     icon: mdi:office-building
   - name: ABB
     latitude: 50.064151
     longitude: 19.960579
-    radius: 500
     icon: mdi:office-building
   # This will override the default home zone
   - name: Home
     latitude: !secret geo_latitude
     longitude: !secret geo_longitude
-    radius: 500
     icon: mdi:home
 
 python_script:

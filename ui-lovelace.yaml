@@ -36,8 +36,8 @@ views:
             type: entities
       - title: Kitchen
         entities:
-          - sensor.temperature_158d0002320de3
-          - sensor.humidity_158d0002320de3
+          - sensor.0x00158d0002320de3_temperature
+          - sensor.0x00158d0002320de3_humidity
           - switch.shelly1_55df6e_relay_0
           - switch.shelly2_5a4ada_relay_0
           - switch.shelly2_5a4ada_relay_1
@@ -137,7 +137,7 @@ views:
           - sensor.temperature_158d0001b92145
           - sensor.temperature_158d0001b1c3fb
           - sensor.temperature_158d00023208a6
-          - sensor.temperature_158d0002320de3
+          - sensor.0x00158d0002320de3_temperature
           - sensor.temperature_158d0002320e0c
           - sensor.airly_temperature
         hours_to_show: 24
@@ -149,7 +149,7 @@ views:
           - sensor.humidity_158d0001b92145
           - sensor.humidity_158d0001b1c3fb
           - sensor.humidity_158d00023208a6
-          - sensor.humidity_158d0002320de3
+          - sensor.0x00158d0002320de3_humidity
           - sensor.humidity_158d0002320e0c
         hours_to_show: 24
         type: history-graph
@@ -500,7 +500,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.temperature_158d0002320de3
+                entity: sensor.0x00158d0002320de3_temperature
                 style:
                   top: 89.5%
                   left: 26%
@@ -509,7 +509,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.humidity_158d0002320de3
+                entity: sensor.0x00158d0002320de3_humidity
                 style:
                   top: 94%
                   left: 26%
@@ -1073,13 +1073,24 @@ views:
     path: zigbee-network
     # panel: true # this renders the first card on full width, other cards in this view will not be rendered
     cards:
-      - type: entities
-        entities:
-          - entity: input_boolean.zigbee_permit_join
-          - entity: timer.zigbee_permit_join
-          - entity: sensor.bridge_state
+      - title: Zigbee2mqtt
+        type: entities
         show_header_toggle: false
-        title: Zigbee2MQTT
+        entities:
+          - entity: sensor.zigbee2mqtt_bridge_state
+          - entity: sensor.zigbee2mqtt_version
+          - entity: sensor.coordinator_version
+          - entity: input_select.zigbee2mqtt_log_level
+          - type: divider
+          - entity: switch.zigbee2mqtt_main_join
+          - entity: timer.zigbee_permit_join
+          - type: divider
+          - entity: input_text.zigbee2mqtt_old_name
+          - entity: input_text.zigbee2mqtt_new_name
+          - entity: script.zigbee2mqtt_rename
+          - type: divider
+          - entity: input_text.zigbee2mqtt_remove
+          - entity: script.zigbee2mqtt_remove
       - type: custom:zigbee2mqtt-networkmap
         entity: sensor.zigbee2mqtt_networkmap
         # the following are optional:
