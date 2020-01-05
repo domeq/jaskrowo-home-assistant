@@ -1,0 +1,60 @@
+version: "3"
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant:latest
+    volumes:
+      - .:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    network_mode: host
+    depends_on:
+      - mosquitto
+
+  mosquitto:
+    image: eclipse-mosquitto
+    hostname: mosquitto
+    container_name: mosquitto
+    expose:
+      - "1883"
+      - "9001"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt
+    volumes:
+      - ./zigbee2mqtt/data:/app/data
+      - /run/udev:/run/udev:ro
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    restart: always
+    network_mode: host
+    privileged: true
+    environment:
+      - TZ=Europe/Warsaw
+    depends_on:
+      - mosquitto
+  # xiaomi-aqara-rtsp:
+  #   container_name: "xiaomi-aqara-rtsp"
+  #   image: "humpedli/docker-xiaomi-aqara-rtsp"
+  #   ports:
+  #     - "8554:8554"
+  #   environment:
+  #     - "IP=192.168.1.158"
+  #     - "TOKEN=34313335586f726f5657486476357663"
+  #   restart: "always"
+  #    deepstack:
+  #container_name: image-processing
+  #image: deepquestai/deepstack
+  #ports:
+  #  - "5000:5000"
+  #environment:
+  #  - VISION-FACE=True
+  #volumes:
+  #  - /home/wojtek/image-processing:/datastore
+  #restart: always

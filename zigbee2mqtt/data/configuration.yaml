@@ -1,0 +1,19 @@
+homeassistant: true
+permit_join: false
+mqtt:
+  base_topic: zigbee2mqtt
+  server: "mqtt://172.17.0.1"
+advanced:
+  availability_timeout: 60
+serial:
+  port: /dev/ttyACM0
+  disable_led: false
+devices:
+  "0x00158d000319aa4b":
+    friendly_name: vibration_sensor
+  "0x00158d0001be5a61":
+    friendly_name: test_wireless_switch
+  "0x00158d0002b88c1c":
+    friendly_name: test_light
+  "0x00158d0001de79e6":
+    friendly_name: "christmas_wall_lights"
