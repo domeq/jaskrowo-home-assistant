@@ -13,7 +13,9 @@
   unit_of_measurement: "%"
   entities:
     - device_tracker.mi_mix_2
+    - device_tracker.wojtek_mimix2
     - device_tracker.mi_a2_lite
+    - device_tracker.gosiak_mia2_2
     - device_tracker.wojtek_s_ipad
 - platform: template
   sensors:
@@ -97,3 +99,15 @@
   attribute: source
   entities:
     - media_player.spotify
+- platform: mqtt
+  name: Bridge state
+  state_topic: "zigbee2mqtt/bridge/state"
+  icon: mdi:router-wireless
+- platform: mqtt
+  name: Zigbee2mqtt Networkmap
+  # if you change base_topic of Zigbee2mqtt, change state_topic accordingly
+  state_topic: zigbee2mqtt/bridge/networkmap/raw
+  value_template: >-
+    {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
+  # again, if you change base_topic of Zigbee2mqtt, change json_attributes_topic accordingly
+  json_attributes_topic: zigbee2mqtt/bridge/networkmap/raw

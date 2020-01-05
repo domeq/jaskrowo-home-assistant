@@ -1,6 +1,6 @@
 title: Home
 resources:
-  - url: /local/surveillance-card.js?v=1
+  - url: /community_plugin/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
     type: module
 views:
   - title: Home
@@ -24,13 +24,13 @@ views:
               - sensor.humidity_158d0001b1c3fb
               - binary_sensor.door_window_sensor_158d0001ad5eb6
               - light.xiaomi_philips_ceiling_light
-              - switch.shelly_shsw_1_5556b7
+              - switch.shelly1_5556b7_relay_0
               - light.wall_leds
-              - switch.plug_158d0001de79e6
+              - switch.0x00158d0001de79e6_switch
               - switch.fan
               - light.stairs_leds
               - light.downstairs_hall_lamp
-              - switch.shelly_shsw_1_554b82
+              - switch.shelly1_554b82_relay_0
               - remote.jaskrowo_media
               - media_player.marantz_sr5008
             type: entities
@@ -38,9 +38,9 @@ views:
         entities:
           - sensor.temperature_158d0002320de3
           - sensor.humidity_158d0002320de3
-          - switch.shelly_shsw_1_55df6e
-          - switch.shelly_shsw_21_5a4ada_1
-          - switch.shelly_shsw_21_5a4ada_2
+          - switch.shelly1_55df6e_relay_0
+          - switch.shelly2_5a4ada_relay_0
+          - switch.shelly2_5a4ada_relay_1
           - light.stove_leds
           - switch.plug_158d0001ded32d
           - binary_sensor.door_window_sensor_158d00023709f7
@@ -56,8 +56,8 @@ views:
           - binary_sensor.door_window_sensor_158d000232db84
           - light.master_bedroom_bed_lamp
           - light.bed_leds
-          - switch.shelly_shsw_1_2c03c5
-          - switch.shelly_shsw_1_55e273
+          - switch.shelly1_2c03c5_relay_0
+          - switch.shelly1_55e273_relay_0
           - light.gateway_light_34ce00fb56e8
         type: entities
       - title: Tosia's bedroom
@@ -90,8 +90,8 @@ views:
       - title: Bathrooms
         entities:
           - light.downstairs_bathroom_lamp
-          - switch.shelly_shsw_1_55dead
-          - switch.shelly_shsw_1_5545a9
+          - switch.shelly1_55dead_relay_0
+          - switch.shelly1_5545a9_relay_0
         type: entities
       - title: Upstairs hall
         entities:
@@ -110,8 +110,8 @@ views:
         show_header_toggle: false
       - title: Device battery
         entities:
-          - sensor.mi_a2_lite_battery_level
-          - sensor.mi_mix_2_battery_level
+          - sensor.gosiak_mia2_2_battery_level
+          - sensor.wojtek_mimix2_battery_level
           - sensor.wojtek_s_ipad_battery_level
         theme: Backend-selected
         type: entities
@@ -128,7 +128,7 @@ views:
         type: history-graph
         refresh_interval: 60
       - type: weather-forecast
-        entity: weather.home
+        entity: weather.dark_sky
       - refresh_inteval: 60
         title: Temperature
         entities:
@@ -304,8 +304,8 @@ views:
             show_header_toggle: false
           - title: Various
             entities:
-              - binary_sensor.car_wash
               - sun.sun
+              - binary_sensor.car_wash
               - binary_sensor.updater
             type: glance
             show_header_toggle: false
@@ -394,7 +394,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_1_5556b7
+                entity: switch.shelly1_5556b7_relay_0
                 style:
                   top: 32%
                   right: 18%
@@ -408,7 +408,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.plug_158d0001de79e6
+                entity: switch.0x00158d0001de79e6_switch
                 style:
                   top: 32%
                   right: 11%
@@ -429,7 +429,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_1_554b82
+                entity: switch.shelly1_554b82_relay_0
                 style:
                   top: 78%
                   left: 53%
@@ -525,14 +525,14 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_21_5a4ada_1
+                entity: switch.shelly2_5a4ada_relay_0
                 style:
                   top: 94%
                   left: 15%
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_21_5a4ada_2
+                entity: switch.shelly2_5a4ada_relay_1
                 style:
                   top: 76%
                   left: 18%
@@ -555,9 +555,23 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_1_55df6e
+                entity: switch.shelly1_55df6e_relay_0
                 style:
                   top: 23%
+                  left: 16%
+              - type: state-icon
+                tap_action:
+                  action: toggle
+                entity: light.stove_leds
+                style:
+                  top: 44%
+                  left: 16%
+              - type: state-icon
+                tap_action:
+                  action: toggle
+                entity: switch.plug_158d0001ded32d
+                style:
+                  top: 8%
                   left: 16%
               - type: state-icon
                 tap_action:
@@ -608,7 +622,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_1_55dead
+                entity: switch.shelly1_55dead_relay_0
                 style:
                   top: 59%
                   left: 40%
@@ -816,14 +830,14 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_1_2c03c5
+                entity: switch.shelly1_2c03c5_relay_0
                 style:
                   top: 38%
                   left: 69%
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_1_55e273
+                entity: switch.shelly1_55e273_relay_0
                 style:
                   top: 89%
                   left: 68%
@@ -869,7 +883,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_1_5545a9
+                entity: switch.shelly1_5545a9_relay_0
                 style:
                   top: 83%
                   left: 34%
@@ -922,7 +936,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_shsw_1_554b82
+                entity: switch.shelly1_554b82_relay_0
                 style:
                   top: 82%
                   left: 53%
@@ -1012,9 +1026,8 @@ views:
               - arm_away
           - title: People at home
             entities:
-              - device_tracker.mi_a2_lite
-              - device_tracker.mi_mix_2
-              - device_tracker.wojtek_s_ipad
+              - person.malgorzata_iskra
+              - person.wojciech_iskra
             type: glance
       # - type: picture-glance
       #   title: Kitchen
@@ -1055,3 +1068,39 @@ views:
   #       cameras:
   #         - entity: camera.ffmpeg
   #           motion_entity: binary_sensor.motion_sensor_158d0001e547ae
+  - title: Zigbee Network
+    icon: "mdi:zigbee"
+    path: zigbee-network
+    # panel: true # this renders the first card on full width, other cards in this view will not be rendered
+    cards:
+      - type: entities
+        entities:
+          - entity: input_boolean.zigbee_permit_join
+          - entity: timer.zigbee_permit_join
+          - entity: sensor.bridge_state
+        show_header_toggle: false
+        title: Zigbee2MQTT
+      - type: custom:zigbee2mqtt-networkmap
+        entity: sensor.zigbee2mqtt_networkmap
+        # the following are optional:
+        mqtt_base_topic: zigbee2mqtt # if you change base_topic of Zigbee2mqtt, change it accordingly
+        force: 3000 # decrease it to get smaller map if you have many devices
+        node_size: 16
+        font_size: 12
+        link_width: 2
+        height: 400 # height of the card
+        # use this css config or use whatever css tech to change look and feel,
+        # the same variable can also be used in Home Assistant themes, see https://www.home-assistant.io/components/frontend/#defining-themes
+        css: |
+          :host {
+            --zigbee2mqtt-networkmap-node-color: rgba(18, 120, 98, .7);
+            --zigbee2mqtt-networkmap-node-fill-color: #dcfaf3;
+            --zigbee2mqtt-networkmap-node-pinned-color: rgba(190, 56, 93, .6);
+            --zigbee2mqtt-networkmap-link-color: rgba(18, 120, 98, .5);
+            --zigbee2mqtt-networkmap-hover-color: #be385d;
+            --zigbee2mqtt-networkmap-link-selected-color: rgba(202, 164, 85, .6);
+            --zigbee2mqtt-networkmap-label-color: #127862;
+            --zigbee2mqtt-networkmap-arrow-color: rgba(18, 120, 98, 0.7);
+            --zigbee2mqtt-networkmap-node-coordinator-color: rgba(224, 78, 93, .7);
+            --zigbee2mqtt-networkmap-node-router-color: rgba(0, 165, 255, .7);
+          }

@@ -475,17 +475,17 @@
     - service: switch.turn_off
       data:
         entity_id:
-          - switch.shelly_shsw_1_5556b7
-          - switch.shelly_shsw_1_554b82
-          - switch.shelly_shsw_1_55df6e
-          - switch.shelly_shsw_21_5a4ada_1
-          - switch.shelly_shsw_21_5a4ada_2
-          - switch.shelly_shsw_1_2c03c5
-          - switch.shelly_shsw_1_5545a9
-          - switch.shelly_shsw_1_55dead
+          - switch.shelly1_5556b7_relay_0
+          - switch.shelly1_554b82_relay_0
+          - switch.shelly1_55df6e_relay_0
+          - switch.shelly2_5a4ada_relay_0
+          - switch.shelly2_5a4ada_relay_1
+          - switch.shelly1_2c03c5_relay_0
+          - switch.shelly1_5545a9_relay_0
+          - switch.shelly1_55dead_relay_0
           - switch.plug_158d0001ded32d
-          - switch.shelly_shsw_1_55e273
-          - switch.plug_158d0001de79e6
+          - switch.shelly1_55e273_relay_0
+          - switch.0x00158d0001de79e6_switch
     # - service: alarm_control_panel.alarm_arm_away
     #   entity_id: alarm_control_panel.ha_alarm
 - id: "1544970728739"
@@ -516,7 +516,7 @@
     - service: switch.turn_on
       data:
         entity_id:
-          - switch.shelly_shsw_1_55df6e
+          - switch.shelly1_55df6e_relay_0
 - id: "1545557982983"
   alias: Turn on Circadian Lighting switches on startup
   trigger:
@@ -578,8 +578,8 @@
       service: light.turn_off
     - data:
         entity_id:
-          - switch.shelly_shsw_1_2c03c5
-          - switch.shelly_shsw_1_55e273
+          - switch.shelly1_2c03c5_relay_0
+          - switch.shelly1_55e273_relay_0
       service: switch.turn_off
 - id: "1545565868381"
   alias: Master bedroom - empty
@@ -596,10 +596,10 @@
         entity_id: light.master_bedroom_bed_lamp
         state: "on"
       - condition: state
-        entity_id: switch.shelly_shsw_1_55e273
+        entity_id: switch.shelly1_55e273_relay_0
         state: "on"
       - condition: state
-        entity_id: switch.shelly_shsw_1_2c03c5
+        entity_id: switch.shelly1_2c03c5_relay_0
         state: "on"
       - condition: state
         entity_id: light.bed_leds
@@ -617,8 +617,8 @@
       service: light.turn_off
     - data:
         entity_id:
-          - switch.shelly_shsw_1_2c03c5
-          - switch.shelly_shsw_1_55e273
+          - switch.shelly1_2c03c5_relay_0
+          - switch.shelly1_55e273_relay_0
       service: switch.turn_off
 - id: "1545992685443"
   alias: Tosia room - empty
@@ -718,7 +718,7 @@
         action_type: move
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_5556b7
+        entity_id: switch.shelly1_5556b7_relay_0
       service: switch.toggle
 - id: "1545995978732"
   alias: Living room right wall switch - both click
@@ -886,9 +886,6 @@
       platform: state
       to: "on"
   condition:
-    - condition: state
-      entity_id: switch.shelly_shsw_1_55df6e
-      state: "off"
     - below: "60"
       condition: numeric_state
       entity_id: sensor.illumination_158d0002ec7efa
@@ -898,7 +895,7 @@
   action:
     - data:
         entity_id:
-          - switch.shelly_shsw_1_55df6e
+          - switch.shelly1_55df6e_relay_0
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d0002ec7efa.attributes['No
@@ -1025,13 +1022,10 @@
     condition: or
     conditions:
       - condition: state
-        entity_id: light.stove_leds
+        entity_id: group.kitchen_lights
         state: "on"
       - condition: state
-        entity_id: switch.plug_158d0001ded32d
-        state: "on"
-      - condition: state
-        entity_id: switch.shelly_shsw_1_55df6e
+        entity_id: group.dining_area_lights
         state: "on"
   action:
     - service: tts.google_translate_say
@@ -1045,9 +1039,9 @@
       service: light.turn_off
     - data:
         entity_id:
-          - switch.plug_158d0001ded32d
-          - switch.shelly_shsw_1_55df6e
-      service: switch.turn_off
+          - group.kitchen_lights
+          - group.dining_area_lights
+      service: homeassistant.turn_off
 - id: "1548095677962"
   alias: Downstairs bathroom - motion
   trigger:
@@ -1069,7 +1063,7 @@
         transition: 1
       service: light.turn_on
     - data:
-        entity_id: switch.shelly_shsw_1_55dead
+        entity_id: switch.shelly1_55dead_relay_0
       service: switch.turn_on
 - id: "1548095715939"
   alias: Downstairs bathroom - empty
@@ -1079,7 +1073,7 @@
         "{% if states.binary_sensor.motion_sensor_158d0002b422b4.attributes['No
         motion since'] | int >= 300 and states.binary_sensor.motion_sensor_158d0002b422b4.state
         == 'off' and states.binary_sensor.motion_sensor_158d0002ebdbdf.attributes['No
-        motion since'] | int >= 300 and states.binary_sensor.motion_sensor_158d0002ebdbdf.state
+        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0002ebdbdf.state
         == 'off' %}True{% else %}False{% endif %}"
   condition:
     - condition: state
@@ -1208,7 +1202,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_55e273
+        entity_id: switch.shelly1_55e273_relay_0
       service: switch.toggle
 - id: "1549196224140"
   alias: Master bedroom - toggle wall lamp
@@ -1221,7 +1215,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_2c03c5
+        entity_id: switch.shelly1_2c03c5_relay_0
       service: switch.toggle
 - id: "1549196304469"
   alias: Upstairs bathroom - motion
@@ -1232,14 +1226,14 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.shelly_shsw_1_5545a9
+      entity_id: switch.shelly1_5545a9_relay_0
       state: "off"
     - after: 06:30:00
       before: "22:00:00"
       condition: time
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_5545a9
+        entity_id: switch.shelly1_5545a9_relay_0
       service: switch.turn_on
 - id: "1549196345036"
   alias: Upstairs bathroom - empty
@@ -1251,11 +1245,11 @@
         == 'off' %}True{% else %}False{% endif %}"
   condition:
     - condition: state
-      entity_id: switch.shelly_shsw_1_5545a9
+      entity_id: switch.shelly1_5545a9_relay_0
       state: "on"
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_5545a9
+        entity_id: switch.shelly1_5545a9_relay_0
       service: switch.turn_off
 - id: "1549196390092"
   alias: Upstairs bathroom - toggle light
@@ -1268,7 +1262,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_5545a9
+        entity_id: switch.shelly1_5545a9_relay_0
       service: switch.toggle
 - id: "1549390161319"
   alias: Smog - air is clean
@@ -1341,7 +1335,7 @@
       data_template:
         entity_id: media_player.living_room_speakers
         volume_level: 0.4
-    - service: notify.mobile_app_mi_mix_2
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
         title: Alert smogowy
         message:
@@ -1353,7 +1347,7 @@
             - 100
             - 400
           image: https://cdn.galleries.smcloud.net/t/galleries/gf-iqLN-uVay-HHCu_smog-664x442-nocrop.jpg
-    - service: notify.mobile_app_mi_a2_lite
+    - service: notify.mobile_app_gosia_s_mi_a2_lite
       data_template:
         title: Alert smogowy
         message:
@@ -1420,7 +1414,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.shelly_shsw_1_554b82
+      entity_id: switch.shelly1_554b82_relay_0
       state: "off"
     - below: "10"
       condition: numeric_state
@@ -1430,17 +1424,17 @@
       condition: time
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_554b82
+        entity_id: switch.shelly1_554b82_relay_0
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d000257a1be.attributes['No
         motion since'] | int >= 0 and states.binary_sensor.motion_sensor_158d000257a1be.state
         == 'off' %}True{% else %}False{% endif %}"
     - condition: state
-      entity_id: switch.shelly_shsw_1_554b82
+      entity_id: switch.shelly1_554b82_relay_0
       state: "on"
     - data:
-        entity_id: switch.shelly_shsw_1_554b82
+        entity_id: switch.shelly1_554b82_relay_0
       service: switch.turn_off
 - id: "1549654154926"
   alias: Living room stairs - empty
@@ -1452,11 +1446,11 @@
         == 'off' %}True{% else %}False{% endif %}"
   condition:
     - condition: state
-      entity_id: switch.shelly_shsw_1_554b82
+      entity_id: switch.shelly1_554b82_relay_0
       state: "on"
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_554b82
+        entity_id: switch.shelly1_554b82_relay_0
       service: switch.turn_off
 - id: "1549810614088"
   alias: Dining area - empty
@@ -1486,7 +1480,7 @@
   action:
     - data:
         entity_id:
-          - switch.shelly_shsw_1_55df6e
+          - switch.shelly1_55df6e_relay_0
       service: switch.toggle
     - data:
         entity_id: light.stove_leds
@@ -1503,7 +1497,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_shsw_21_5a4ada_2
+        entity_id: switch.shelly2_5a4ada_relay_1
       service: switch.toggle
 - id: "1549810780701"
   alias: Kitchen right wall switch - right button
@@ -1516,7 +1510,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_shsw_21_5a4ada_1
+        entity_id: switch.shelly2_5a4ada_relay_0
       service: switch.toggle
 - id: "1549820992742"
   alias: Kitchen - motion at night
@@ -1625,7 +1619,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_554b82
+        entity_id: switch.shelly1_554b82_relay_0
       service: switch.toggle
 - id: "1554226640385"
   alias: Attic stairs - toggle
@@ -1693,7 +1687,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_55dead
+        entity_id: switch.shelly1_55dead_relay_0
       service: switch.toggle
 - id: "1554627478669"
   alias: Downstairs bathroom - toggle ceiling
@@ -1880,7 +1874,7 @@
       condition: time
   action:
     - data:
-        entity_id: switch.plug_158d0001de79e6
+        entity_id: switch.0x00158d0001de79e6_switch
       service: switch.turn_on
 - id: "1560962773416"
   alias: Attic - turn off fan
@@ -1894,11 +1888,11 @@
       platform: time
   condition:
     - condition: state
-      entity_id: switch.plug_158d0001de79e6
+      entity_id: switch.0x00158d0001de79e6_switch
       state: "on"
   action:
     - data:
-        entity_id: switch.plug_158d0001de79e6
+        entity_id: switch.0x00158d0001de79e6_switch
       service: switch.turn_off
 - id: "1560969416454"
   alias: Living room - turn on fan evening
@@ -1964,7 +1958,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_shsw_1_55df6e
+        entity_id: switch.shelly1_55df6e_relay_0
       service: switch.toggle
 - id: "1575388333096"
   alias: Dining area - motion
@@ -1986,7 +1980,7 @@
   action:
     - data:
         entity_id:
-          - switch.shelly_shsw_21_5a4ada_2
+          - switch.shelly2_5a4ada_relay_1
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d0001655da1.attributes['No
@@ -2050,7 +2044,7 @@
       entity_id: alarm_control_panel.ha_alarm
       to: "triggered"
   action:
-    - service: notify.mobile_app_mi_mix_2
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
       data:
         message: "ALARM! The alarm has been triggered"
     - service: media_player.volume_set
@@ -2119,7 +2113,7 @@
       data:
         message: Alarm uzbrojony, masz 10 sekund na wyjście.
         language: pl
-    - service: notify.mobile_app_mi_mix_2
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
         message: "ALARM! The alarm is armed"
 - alias: "Disarm alarm when we're getting home"
@@ -2141,7 +2135,7 @@
       data:
         entity_id: alarm_control_panel.ha_alarm
         code: !secret alarm_code
-    - service: notify.mobile_app_mi_mix_2
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
         message: "Welcome home! The alarm disarmed successfully"
 - alias: "Send notification when alarm is disarmed"
@@ -2155,7 +2149,7 @@
       data:
         message: Alarm wyłączony
         language: pl
-    - service: notify.mobile_app_mi_mix_2
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
         message: "The alarm disarmed successfully"
     - data:
@@ -2187,8 +2181,8 @@
       from: "home"
       to: "not_home"
   action:
-    - service: notify.mobile_app_mi_mix_2
-      data_template:
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
+      data:
         message: "Home assistant detected you left home"
 - alias: "TESTING: Wojtek is back home"
   trigger:
@@ -2197,6 +2191,84 @@
       from: "not_home"
       to: "home"
   action:
-    - service: notify.mobile_app_mi_mix_2
-      data_template:
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
+      data:
         message: "Home assistant detected you're back home"
+- id: enable_zigbee_join
+  alias: Enable Zigbee joining
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_boolean.zigbee_permit_join
+    to: "on"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/bridge/config/permit_join
+        payload: "true"
+    - service: timer.start
+      data:
+        entity_id: timer.zigbee_permit_join
+- id: disable_zigbee_join
+  alias: Disable Zigbee joining
+  trigger:
+    - entity_id: input_boolean.zigbee_permit_join
+      platform: state
+      to: "off"
+  action:
+    - data:
+        payload: "false"
+        topic: zigbee2mqtt/bridge/config/permit_join
+      service: mqtt.publish
+    - data:
+        entity_id: timer.zigbee_permit_join
+      service: timer.cancel
+  hide_entity: true
+- id: disable_zigbee_join_timer
+  alias: Disable Zigbee joining by timer
+  hide_entity: true
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.zigbee_permit_join
+  action:
+    - service: mqtt.publish
+      data:
+        topic: zigbee2mqtt/bridge/config/permit_join
+        payload: "false"
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.zigbee_permit_join
+- alias: "Notify when washing machine is done"
+  trigger:
+    - platform: state
+      entity_id: sensor.0x00158d000319aa4b_action
+      from: "vibration"
+      to: ""
+      for: "00:10:00"
+  action:
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
+      data:
+        message: "Washing machine seems to be done"
+- id: shellies_announce
+  alias: "Shellies Announce"
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    service: mqtt.publish
+    data:
+      topic: shellies/command
+      payload: announce
+- id: "shellies_discovery"
+  alias: "Shellies Discovery"
+  trigger:
+    - platform: mqtt
+      topic: shellies/announce
+  action:
+    service: python_script.shellies_discovery
+    data_template:
+      id: "{{ trigger.payload_json.id }}"
+      mac: "{{ trigger.payload_json.mac }}"
+      fw_ver: "{{ trigger.payload_json.fw_ver }}"

@@ -1,4 +1,4 @@
-switch.shelly_shsw_1_2c03c5light:
+light.hall_light:
   friendly_name: Hall light
   icon: "mdi:ceiling-light"
 light.bed_leds:
@@ -185,7 +185,7 @@ binary_sensor.motion_sensor_158d0002b422b4:
   friendly_name: Downstairs bathroom motion sensor
 sensor.illumination_158d0002b422b4:
   friendly_name: Downstairs bathroom illumination sensor
-switch.plug_158d0001de79e6:
+switch.0x00158d0001de79e6_switch:
   friendly_name: Wall Christmas lights
   icon: "mdi:spotlight-beam"
   # icon: 'mdi:spotlight-beam'
@@ -229,13 +229,13 @@ binary_sensor.wall_switch_158d0002828af1:
 light.attic_wardrobe_area_light:
   friendly_name: Attic wardrobe area lamp
   icon: "mdi:floor-lamp"
-switch.shelly_shsw_1_55e273:
+switch.shelly1_55e273_relay_0:
   friendly_name: Stairs lights
   icon: "mdi:stairs"
-switch.shelly_shsw_1_2c03c5:
+switch.shelly1_2c03c5_relay_0:
   friendly_name: Wall lamp
   icon: "mdi:ceiling-light"
-switch.shelly_shsw_1_5545a9:
+switch.shelly1_5545a9_relay_0:
   friendly_name: Upstairs bathroom lights
   icon: "mdi:spotlight-beam"
 sensor.xiaomi_air_quality_monitor:
@@ -248,10 +248,10 @@ binary_sensor.wall_switch_right_158d0002b455e6:
   friendly_name: Master bedroom wall switch - right button
 binary_sensor.wall_switch_158d000282896e:
   friendly_name: Upstairs bathroom wall switch
-switch.shelly_shsw_1_554b82:
+switch.shelly1_554b82_relay_0:
   friendly_name: Stairs lamp
   icon: "mdi:stairs"
-switch.shelly_shsw_1_5556b7:
+switch.shelly1_5556b7_relay_0:
   friendly_name: Wall lights
   icon: "mdi:spotlight-beam"
 binary_sensor.motion_sensor_158d000257a1be:
@@ -265,13 +265,13 @@ binary_sensor.motion_sensor_158d0002ec7efa:
   friendly_name: Kitchen motion sensor
 sensor.illumination_158d0002ec7efa:
   friendly_name: Kitchen illumination sensor
-switch.shelly_shsw_1_55df6e:
+switch.shelly1_55df6e_relay_0:
   friendly_name: Ceiling lights
   icon: "mdi:spotlight-beam"
-switch.shelly_shsw_21_5a4ada_1:
+switch.shelly2_5a4ada_relay_0:
   friendly_name: Dining area wall lamp
   icon: "mdi:spotlight-beam"
-switch.shelly_shsw_21_5a4ada_2:
+switch.shelly2_5a4ada_relay_1:
   friendly_name: Dining area ceiling lamp
   icon: "mdi:ceiling-light"
 binary_sensor.wall_switch_158d00028f6c2f:
@@ -309,7 +309,7 @@ binary_sensor.wall_switch_158d00030ac48b:
   friendly_name: Upstairs hall switch
 binary_sensor.wall_switch_158d0003131adb:
   friendly_name: Upstairs hall switch 2
-switch.shelly_shsw_1_55dead:
+switch.shelly1_55dead_relay_0:
   friendly_name: Downstairs bathroom side
   icon: "mdi:spotlight-beam"
 binary_sensor.switch_158d000123e3fe:
@@ -338,13 +338,16 @@ device_tracker.mi_mix_2:
 device_tracker.mi_a2_lite:
   friendly_name: Gosia
   entity_picture: https://www.gravatar.com/avatar/d31811b59ff26164930193e1bd5ead0c.jpg?s=160
+device_tracker.gosiak_mia2_2:
+  friendly_name: Gosia
+  entity_picture: https://www.gravatar.com/avatar/d31811b59ff26164930193e1bd5ead0c.jpg?s=160
 device_tracker.wojtek_s_ipad:
   friendly_name: iPad
   icon: "mdi:apple"
-sensor.mi_mix_2_battery_level:
+sensor.wojtek_mimix2_battery_level:
   friendly_name: Wojtek's phone
   entity_picture: https://www.gravatar.com/avatar/79ed48a9ea28ae3ea084ba8fc8c5384f.jpg?size=160
-sensor.mi_a2_lite_battery_level:
+sensor.gosiak_mia2_2_battery_level:
   friendly_name: Gosia's phone
   entity_picture: https://www.gravatar.com/avatar/d31811b59ff26164930193e1bd5ead0c.jpg?s=160
 sensor.wojtek_s_ipad_battery_level:
