@@ -497,24 +497,6 @@ views:
                   left: 1.75%
                   width: 28%
                   height: 42%
-              - type: state-label
-                tap_action:
-                  action: more-info
-                entity: sensor.0x00158d0002320de3_temperature
-                style:
-                  top: 89.5%
-                  left: 26%
-                  color: black
-                  font-size: 9px
-              - type: state-label
-                tap_action:
-                  action: more-info
-                entity: sensor.0x00158d0002320de3_humidity
-                style:
-                  top: 94%
-                  left: 26%
-                  color: black
-                  font-size: 9px
               - type: state-icon
                 tap_action:
                   action: more-info
@@ -538,7 +520,7 @@ views:
                   left: 18%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001655da1
+                entity: binary_sensor.motion_sensor_158d0002ec7efa
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -552,6 +534,26 @@ views:
                   left: 1.75%
                   width: 28%
                   height: 50%
+              - type: state-label
+                tap_action:
+                  action: more-info
+                entity: sensor.0x00158d0002320de3_temperature
+                style:
+                  transform: none
+                  top: 1%
+                  left: 1%
+                  color: black
+                  font-size: 9px
+              - type: state-label
+                tap_action:
+                  action: more-info
+                entity: sensor.0x00158d0002320de3_humidity
+                style:
+                  transform: none
+                  top: 4.5%
+                  left: 1%
+                  color: black
+                  font-size: 9px
               - type: state-icon
                 tap_action:
                   action: toggle
