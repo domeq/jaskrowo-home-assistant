@@ -39,14 +39,14 @@ sensor.temperature_158d0001b92145:
   friendly_name: Master bedroom temperature
 sensor.humidity_158d0001b92145:
   friendly_name: Master bedroom humidity
-sensor.temperature_158d0001b1c3fb:
+sensor.0x00158d0001b1c3fb_temperature:
   friendly_name: Living room temperature
-sensor.humidity_158d0001b1c3fb:
+sensor.0x00158d0001b1c3fb_humidity:
   friendly_name: Living room humidity
-binary_sensor.door_window_sensor_158d0001ad5eb6:
+binary_sensor.0x00158d0001ad5eb6_contact:
   friendly_name: Living room balcony
   icon: "mdi:window-closed"
-binary_sensor.door_window_sensor_158d000232da46:
+binary_sensor.0x00158d000232da46_contact:
   friendly_name: Tosia window
   icon: "mdi:window-closed"
 binary_sensor.door_window_sensor_158d00023709f7:
@@ -61,9 +61,9 @@ binary_sensor.door_window_sensor_158d000232db84:
 binary_sensor.door_window_sensor_158d0002436b09:
   friendly_name: Guest room window
   icon: "mdi:window-closed"
-sensor.temperature_158d00033b4d2c:
+sensor.0x00158d00033b4d2c_temperature:
   friendly_name: Tosia room temperature
-sensor.humidity_158d00033b4d2c:
+sensor.0x00158d00033b4d2c_humidity:
   friendly_name: Tosia room humidity
 sensor.temperature_158d00023208a6:
   friendly_name: Attic temperature
@@ -166,16 +166,16 @@ binary_sensor.switch_158d00019ca9dc:
   friendly_name: Master bedroom wall switch
 binary_sensor.switch_158d00016dbe9e:
   friendly_name: Master bedroom table switch
-light.downstairs_bathroom_lamp:
+light.0x00158d0002c67ac3_light:
   friendly_name: Downstairs bathroom lamp
   icon: "mdi:ceiling-light"
 binary_sensor.motion_sensor_158d0002b70d79:
   friendly_name: Wardrobe motion sensor
 sensor.illumination_158d0002b70d79:
   friendly_name: Wardrobe illumination sensor
-binary_sensor.motion_sensor_158d0002b85113:
+binary_sensor.0x00158d0002b85113_occupancy:
   friendly_name: Tosia room motion sensor
-sensor.illumination_158d0002b85113:
+sensor.0x00158d0002b85113_illuminance:
   friendly_name: Tosia room illumination sensor
 binary_sensor.motion_sensor_158d0002b72030:
   friendly_name: Upstairs bathroom motion sensor
@@ -209,7 +209,7 @@ binary_sensor.switch_158d0001d8eeb1:
 light.tosia_left_wall_lamp:
   friendly_name: Tosia left wall lamp
   icon: "mdi:ceiling-light"
-light.right_wall_lamp:
+light.0x00158d0002b88c1c_light:
   friendly_name: Tosia right wall lamp
   icon: "mdi:ceiling-light"
 sensor.airly_air_quality_50_009_19_961:
@@ -258,7 +258,7 @@ binary_sensor.motion_sensor_158d000257a1be:
   friendly_name: Living room stairs - motion sensor
 sensor.illumination_158d000257a1be:
   friendly_name: Living room stairs - illumination sensor
-switch.plug_158d0001ded32d:
+switch.0x00158d0001ded32d_switch:
   friendly_name: Sink lights
   icon: "mdi:spotlight-beam"
 binary_sensor.motion_sensor_158d0002ec7efa:

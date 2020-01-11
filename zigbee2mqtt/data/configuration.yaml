@@ -4,27 +4,86 @@ mqtt:
   base_topic: zigbee2mqtt
   server: "mqtt://172.17.0.1"
 advanced:
-  availability_timeout: 60
+  log_output:
+    - console
+  last_seen: ISO_8601_local
+#   availability_timeout: 60
+#   availability_blacklist: ["tosia_right_wall"]
 serial:
   port: /dev/ttyACM0
-  disable_led: false
+  disable_led: true
+
+# Optional: Queue settings, useful when your zigbee stick get's
+# unstable when executing many commands
+queue:
+  # Optional: Delay in ms between each command (default: shown below)
+  delay: 250
+  # Optional: Max no. of simultaneously running commands (default: shown below)
+  simultaneously: 5
+
 device_options:
   temperature_precision: 1
   humidity_precision: 1
+  transition: 0.2
+  no_occupancy_since:
+    - 0
+    - 60
+    - 120
+    - 180
+    - 240
+    - 300
+    - 600
+    - 1200
+    - 1800
 devices:
   "0x00158d000319aa4b":
     friendly_name: vibration_sensor
     retain: true
+    qos: 2
   "0x00158d0001be5a61":
     friendly_name: test_wireless_switch
     retain: true
+    qos: 2
   "0x00158d0002b88c1c":
-    friendly_name: test_light
+    friendly_name: tosia_right_wall
     retain: true
+    qos: 2
   "0x00158d0001de79e6":
     friendly_name: christmas_wall_lights
     retain: true
+    qos: 2
   "0x00158d0002320de3":
-    friendly_name: "kitchen_temperature_sensor"
+    friendly_name: kitchen_temperature_sensor
     debounce: 1
     retain: true
+    qos: 2
+  "0x00158d0002c67ac3":
+    friendly_name: downstairs_bathroom_ceiling
+    retain: true
+    qos: 2
+  "0x00158d00033b4d2c":
+    friendly_name: tosia_room_temperature
+    debounce: 1
+    retain: true
+    qos: 2
+  "0x00158d000232da46":
+    friendly_name: tosia_room_window
+    retain: true
+    qos: 2
+  "0x00158d0002b85113":
+    friendly_name: tosia_room_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0001ded32d":
+    friendly_name: kitchen_sink_lights
+    retain: true
+    qos: 2
+  "0x00158d0001ad5eb6":
+    friendly_name: "living_room_balcony_door"
+    retain: true
+    qos: 2
+  "0x00158d0001b1c3fb":
+    friendly_name: "living_room_temperature"
+    debounce: 1
+    retain: true
+    qos: 2

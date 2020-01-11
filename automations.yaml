@@ -389,14 +389,14 @@
 - id: "1543859792965"
   alias: Tosia room - motion
   trigger:
-    - entity_id: binary_sensor.motion_sensor_158d0002b85113
+    - entity_id: binary_sensor.0x00158d0002b85113_occupancy
       from: "off"
       platform: state
       to: "on"
   condition:
     - below: "30"
       condition: numeric_state
-      entity_id: sensor.illumination_158d0002b85113
+      entity_id: sensor.0x00158d0002b85113_illuminance
     - condition: time
       after: "09:00:00"
       before: "20:00:00"
@@ -408,9 +408,10 @@
         entity_id: group.tosia_bedroom_lights
       service: homeassistant.turn_on
     - wait_template:
-        "{% if states.binary_sensor.motion_sensor_158d0002b85113.attributes['No
-        motion since'] | int >= 180 and states.binary_sensor.motion_sensor_158d0002b85113.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d0002b85113_occupancy'].state == 'off'
+        and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since | int >= 180
+        %}True{% else %}False{% endif %}"
     - condition: state
       entity_id: group.tosia_bedroom_lights
       state: "on"
@@ -483,11 +484,13 @@
           - switch.shelly1_2c03c5_relay_0
           - switch.shelly1_5545a9_relay_0
           - switch.shelly1_55dead_relay_0
-          - switch.plug_158d0001ded32d
+          - switch.0x00158d0001ded32d_switch
           - switch.shelly1_55e273_relay_0
           - switch.0x00158d0001de79e6_switch
     # - service: alarm_control_panel.alarm_arm_away
-    #   entity_id: alarm_control_panel.ha_alarm
+    #   data:
+    #     entity_id: alarm_control_panel.ha_alarm
+    #     code: !secret alarm_code
 - id: "1544970728739"
   alias: Coming home
   trigger:
@@ -625,9 +628,10 @@
   trigger:
     - platform: template
       value_template:
-        "{% if states.binary_sensor.motion_sensor_158d0002b85113.attributes['No
-        motion since'] | int >= 1800 and states.binary_sensor.motion_sensor_158d0002b85113.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d0002b85113_occupancy'].state
+        == 'off'  and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since is defined
+        and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since | int >= 1800
+        %}True{% else %}False{% endif %}"
   condition:
     - condition: state
       entity_id: group.tosia_bedroom_lights
@@ -1062,7 +1066,7 @@
       state: "off"
   action:
     - data:
-        entity_id: light.downstairs_bathroom_lamp
+        entity_id: light.0x00158d0002c67ac3_light
         transition: 1
       service: light.turn_on
     - data:
@@ -1074,9 +1078,9 @@
     - platform: template
       value_template:
         "{% if states.binary_sensor.motion_sensor_158d0002b422b4.attributes['No
-        motion since'] | int >= 300 and states.binary_sensor.motion_sensor_158d0002b422b4.state
+        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0002b422b4.state
         == 'off' and states.binary_sensor.motion_sensor_158d0002ebdbdf.attributes['No
-        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0002ebdbdf.state
+        motion since'] | int >= 1200 and states.binary_sensor.motion_sensor_158d0002ebdbdf.state
         == 'off' %}True{% else %}False{% endif %}"
   condition:
     - condition: state
@@ -1111,7 +1115,8 @@
   condition: []
   action:
     - data:
-        entity_id: light.right_wall_lamp
+        entity_id:
+          - light.0x00158d0002b88c1c_light
         transition: 1
       service: light.toggle
 - id: "1549129715747"
@@ -1125,12 +1130,8 @@
   condition: []
   action:
     - data:
-        entity_id:
-          - light.right_wall_lamp
-          - light.tosia_left_wall_lamp
-          - light.tosia_lamp
-        transition: 1
-      service: light.toggle
+        entity_id: group.tosia_bedroom_lights
+      service: homeassistant.toggle
 - id: "1549179592040"
   alias: Wardrobe - motion
   trigger:
@@ -1244,7 +1245,7 @@
     - platform: template
       value_template:
         "{% if states.binary_sensor.motion_sensor_158d0002b72030.attributes['No
-        motion since'] | int >= 300 and states.binary_sensor.motion_sensor_158d0002b72030.state
+        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0002b72030.state
         == 'off' %}True{% else %}False{% endif %}"
   condition:
     - condition: state
@@ -1461,7 +1462,7 @@
     - platform: template
       value_template:
         "{% if states.binary_sensor.motion_sensor_158d0001655da1.attributes['No
-        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0001655da1.state
+        motion since'] | int >= 900 and states.binary_sensor.motion_sensor_158d0001655da1.state
         == 'off' %}True{% else %}False{% endif %}"
   condition:
     condition: state
@@ -1524,7 +1525,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.plug_158d0001ded32d
+      entity_id: switch.0x00158d0001ded32d_switch
       state: "off"
     - below: "60"
       condition: numeric_state
@@ -1541,7 +1542,7 @@
         transition: 1
       service: light.turn_on
     - data:
-        entity_id: switch.plug_158d0001ded32d
+        entity_id: switch.0x00158d0001ded32d_switch
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d0002ec7efa.attributes['No
@@ -1703,8 +1704,7 @@
   condition: []
   action:
     - data:
-        entity_id: light.downstairs_bathroom_lamp
-        transition: 1
+        entity_id: light.0x00158d0002c67ac3_light
       service: light.toggle
 - id: "1559483412308"
   alias: Living room - turn on fan daytime
@@ -1715,7 +1715,7 @@
   condition:
     - above: "24.0"
       condition: numeric_state
-      entity_id: sensor.temperature_158d0001b1c3fb
+      entity_id: sensor.0x00158d0001b1c3fb_temperature
     - after: 06:30:00
       before: "20:00:00"
       condition: time
@@ -1756,12 +1756,12 @@
   condition:
     - above: 24
       condition: numeric_state
-      entity_id: sensor.temperature_158d0001b1c3fb
+      entity_id: sensor.0x00158d0001b1c3fb_temperature
     - below: "22"
       condition: numeric_state
       entity_id: sensor.temperature_158d0001b9208d
     - condition: state
-      entity_id: binary_sensor.door_window_sensor_158d0001ad5eb6
+      entity_id: binary_sensor.0x00158d0001ad5eb6_contact
       for:
         hours: 6
       state: "off"
@@ -1802,7 +1802,7 @@
   condition:
     - above: 24
       condition: numeric_state
-      entity_id: sensor.temperature_158d0001b1c3fb
+      entity_id: sensor.0x00158d0001b1c3fb_temperature
     - above: "27"
       condition: numeric_state
       entity_id: sensor.temperature_158d0001b9208d
@@ -1812,7 +1812,7 @@
     - condition: or
       conditions:
         - condition: state
-          entity_id: binary_sensor.door_window_sensor_158d0001ad5eb6
+          entity_id: binary_sensor.0x00158d0001ad5eb6_contact
           state: "on"
         - condition: state
           entity_id: binary_sensor.door_window_sensor_158d00022f148a
@@ -1906,7 +1906,7 @@
   condition:
     - above: "24.0"
       condition: numeric_state
-      entity_id: sensor.temperature_158d0001b1c3fb
+      entity_id: sensor.0x00158d0001b1c3fb_temperature
     - after: "20:00:00"
       before: "22:00:00"
       condition: time
@@ -1948,7 +1948,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.plug_158d0001ded32d
+        entity_id: switch.0x00158d0001ded32d_switch
       service: switch.toggle
 - id: "1569862819815"
   alias: Kitchen switch ceiling light
@@ -2026,7 +2026,7 @@
         - binary_sensor.motion_sensor_158d0001e547ae
         - binary_sensor.motion_sensor_158d0001e55ff7
         - binary_sensor.motion_sensor_158d0002b70d79
-        - binary_sensor.motion_sensor_158d0002b85113
+        - binary_sensor.0x00158d0002b85113_occupancy
         - binary_sensor.motion_sensor_158d000257a1db
         - binary_sensor.motion_sensor_158d0002ec7efa
         - binary_sensor.motion_sensor_158d0001655da1
@@ -2050,6 +2050,19 @@
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data:
         message: "ALARM! The alarm has been triggered"
+        data:
+          android:
+            notification:
+              image: >
+                https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa{{ states.camera.yi_hack_01.attributes.entity_picture }}
+    - service: notify.mobile_app_gosia_s_mi_a2_lite
+      data:
+        message: "ALARM! The alarm has been triggered"
+        data:
+          android:
+            notification:
+              image: >
+                https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa{{ states.camera.yi_hack_01.attributes.entity_picture }}
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.living_room_speakers
@@ -2091,7 +2104,7 @@
     - data:
         entity_id:
           - light.downstairs_hall_lamp
-          - light.downstairs_bathroom_lamp
+          - light.0x00158d0002c67ac3_light
           - light.wall_leds
           - light.stairs_leds
           - light.stove_leds
@@ -2122,12 +2135,10 @@
 - alias: "Disarm alarm when we're getting home"
   trigger:
     - platform: state
-      entity_id: device_tracker.mi_mix_2
-      from: "away"
-      to: "home"
-    - platform: state
-      entity_id: device_tracker.mi_a2_lite
-      from: "away"
+      entity_id:
+        - person.wojciech_iskra
+        - person.malgorzata_iskra
+      from: "not_home"
       to: "home"
   condition:
     - condition: state
@@ -2171,7 +2182,7 @@
     - data:
         entity_id:
           - light.downstairs_hall_lamp
-          - light.downstairs_bathroom_lamp
+          - light.0x00158d0002c67ac3_light
           - light.wall_leds
           - light.stairs_leds
           - light.stove_leds
@@ -2185,7 +2196,7 @@
       to: "not_home"
   action:
     - service: notify.mobile_app_wojtek_s_mi_mix_2
-      data:
+      data_template:
         message: "Home assistant detected you left home"
 - alias: "TESTING: Wojtek is back home"
   trigger:
@@ -2253,7 +2264,20 @@
   action:
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data:
-        message: "Washing machine seems to be done"
+        title: Washing machine
+        message: "Washing machine seems to be done "
+        data:
+          android:
+            notification:
+              image: https://previews.123rf.com/images/memoangeles/memoangeles1606/memoangeles160600003/59790403-cartoon-washing-machine-vector-clip-art-illustration-with-simple-gradients-all-in-a-single-layer-.jpg
+    - service: notify.mobile_app_gosia_s_mi_a2_lite
+      data:
+        title: Pralka
+        message: Wygląda, że pralka skończyła prać
+        data:
+          android:
+            notification:
+              image: https://previews.123rf.com/images/memoangeles/memoangeles1606/memoangeles160600003/59790403-cartoon-washing-machine-vector-clip-art-illustration-with-simple-gradients-all-in-a-single-layer-.jpg
 - id: shellies_announce
   alias: "Shellies Announce"
   trigger:

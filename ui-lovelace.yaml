@@ -20,9 +20,9 @@ views:
               entity: media_player.spotify
           - title: Living room
             entities:
-              - sensor.temperature_158d0001b1c3fb
-              - sensor.humidity_158d0001b1c3fb
-              - binary_sensor.door_window_sensor_158d0001ad5eb6
+              - sensor.0x00158d0001b1c3fb_temperature
+              - sensor.0x00158d0001b1c3fb_humidity
+              - binary_sensor.0x00158d0001ad5eb6_contact
               - light.xiaomi_philips_ceiling_light
               - switch.shelly1_5556b7_relay_0
               - light.wall_leds
@@ -42,7 +42,7 @@ views:
           - switch.shelly2_5a4ada_relay_0
           - switch.shelly2_5a4ada_relay_1
           - light.stove_leds
-          - switch.plug_158d0001ded32d
+          - switch.0x00158d0001ded32d_switch
           - binary_sensor.door_window_sensor_158d00023709f7
           - binary_sensor.door_window_sensor_158d00022f148a
           - vacuum.xiaomi_vacuum_cleaner
@@ -62,11 +62,11 @@ views:
         type: entities
       - title: Tosia's bedroom
         entities:
-          - sensor.temperature_158d00033b4d2c
-          - sensor.humidity_158d00033b4d2c
-          - binary_sensor.door_window_sensor_158d000232da46
+          - sensor.0x00158d00033b4d2c_temperature
+          - sensor.0x00158d00033b4d2c_humidity
+          - binary_sensor.0x00158d000232da46_contact
           - light.tosia_left_wall_lamp
-          - light.right_wall_lamp
+          - light.0x00158d0002b88c1c_light
           - light.tosia_lamp
           - switch.xiaomi_miio_switch
         type: entities
@@ -89,7 +89,7 @@ views:
         type: entities
       - title: Bathrooms
         entities:
-          - light.downstairs_bathroom_lamp
+          - light.0x00158d0002c67ac3_light
           - switch.shelly1_55dead_relay_0
           - switch.shelly1_5545a9_relay_0
         type: entities
@@ -119,10 +119,10 @@ views:
       - title: Windows open?
         entities:
           - binary_sensor.door_window_sensor_158d00023709f7
-          - binary_sensor.door_window_sensor_158d0001ad5eb6
+          - binary_sensor.0x00158d0001ad5eb6_contact
           - binary_sensor.door_window_sensor_158d00022f148a
           - binary_sensor.door_window_sensor_158d000232db84
-          - binary_sensor.door_window_sensor_158d000232da46
+          - binary_sensor.0x00158d000232da46_contact
           - binary_sensor.door_window_sensor_158d0002436b09
         hours_to_show: 24
         type: history-graph
@@ -135,7 +135,7 @@ views:
           - sensor.temperature_158d0001b9208d
           - sensor.temperature_158d0001b92092
           - sensor.temperature_158d0001b92145
-          - sensor.temperature_158d0001b1c3fb
+          - sensor.0x00158d0001b1c3fb_temperature
           - sensor.temperature_158d00023208a6
           - sensor.0x00158d0002320de3_temperature
           - sensor.temperature_158d0002320e0c
@@ -147,7 +147,7 @@ views:
           - sensor.humidity_158d0001b9208d
           - sensor.humidity_158d0001b92092
           - sensor.humidity_158d0001b92145
-          - sensor.humidity_158d0001b1c3fb
+          - sensor.0x00158d0001b1c3fb_humidity
           - sensor.humidity_158d00023208a6
           - sensor.0x00158d0002320de3_humidity
           - sensor.humidity_158d0002320e0c
@@ -269,7 +269,7 @@ views:
               - switch.circadian_lighting_living_room_auto_ceiling
               - switch.circadian_lighting_master_bedroom_lights_auto
               - switch.circadian_lighting_tosia_room_lights_auto
-            type: glance
+            type: entities
           - title: Lights brightness
             entities:
               - sensor.light_brightness_philips_ceiling_light
@@ -321,7 +321,7 @@ views:
           - sensor.illumination_158d0001e43bc7
           - sensor.illumination_34ce00fb56e8
           - sensor.illumination_158d0001e532dc
-          - sensor.illumination_158d0002b85113
+          - sensor.0x00158d0002b85113_illuminance
           - sensor.illumination_158d0002b70d79
           - sensor.illumination_158d0002b72030
           - sensor.illumination_158d0001e547ae
@@ -436,14 +436,14 @@ views:
               - type: state-icon
                 tap_action:
                   action: more-info
-                entity: binary_sensor.door_window_sensor_158d0001ad5eb6
+                entity: binary_sensor.0x00158d0001ad5eb6_contact
                 style:
                   top: 46%
                   left: 89%
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.temperature_158d0001b1c3fb
+                entity: sensor.0x00158d0001b1c3fb_temperature
                 style:
                   top: 77%
                   left: 87%
@@ -452,7 +452,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.humidity_158d0001b1c3fb
+                entity: sensor.0x00158d0001b1c3fb_humidity
                 style:
                   top: 81%
                   left: 87%
@@ -571,7 +571,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.plug_158d0001ded32d
+                entity: switch.0x00158d0001ded32d_switch
                 style:
                   top: 8%
                   left: 16%
@@ -617,7 +617,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.downstairs_bathroom_lamp
+                entity: light.0x00158d0002c67ac3_light
                 style:
                   top: 67%
                   left: 36%
@@ -634,7 +634,7 @@ views:
             elements:
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0002b85113
+                entity: binary_sensor.0x00158d0002b85113_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -651,7 +651,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.temperature_158d00033b4d2c
+                entity: sensor.0x00158d00033b4d2c_temperature
                 style:
                   top: 87.5%
                   left: 19%
@@ -660,7 +660,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.humidity_158d00033b4d2c
+                entity: sensor.0x00158d00033b4d2c_humidity
                 style:
                   top: 92%
                   left: 19%
@@ -669,7 +669,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: more-info
-                entity: binary_sensor.door_window_sensor_158d000232da46
+                entity: binary_sensor.0x00158d000232da46_contact
                 style:
                   top: 68.5%
                   left: 5%
@@ -683,7 +683,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.right_wall_lamp
+                entity: light.0x00158d0002b88c1c_light
                 style:
                   top: 48%
                   left: 12%
@@ -738,7 +738,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: more-info
-                entity: binary_sensor.door_window_sensor_158d000232da46
+                entity: binary_sensor.0x00158d000232da46_contact
                 style:
                   top: 27%
                   left: 5%
@@ -1031,15 +1031,24 @@ views:
               - person.malgorzata_iskra
               - person.wojciech_iskra
             type: glance
-      # - type: picture-glance
-      #   title: Kitchen
-      #   entities:
-      #     - sensor.temperature_158d0001b1c3fb
-      #     - sensor.humidity_158d0001b1c3fb
-      #     - group.kitchen_lights
-      #     - group.dining_area
-      #   camera_image: camera.ffmpeg
-      #   camera_view: live
+      - type: conditional
+        conditions:
+          - entity: person.wojciech_iskra
+            state_not: "home"
+          - entity: person.malgorzata_iskra
+            state_not: "home"
+        card:
+          type: picture-glance
+          title: Living room
+          entities:
+            - sensor.0x00158d0001b1c3fb_temperature
+            - sensor.0x00158d0001b1c3fb_humidity
+            - binary_sensor.0x00158d0001ad5eb6_contact
+            - group.living_room_lights
+            - group.kitchen_lights
+            - group.dining_area
+          camera_image: camera.yi_hack_01
+          camera_view: live
       - type: entities
         title: Motion detection
         show_header_toggle: false
@@ -1053,23 +1062,13 @@ views:
           - binary_sensor.motion_sensor_158d0001e547ae
           - binary_sensor.motion_sensor_158d0001e55ff7
           - binary_sensor.motion_sensor_158d0002b70d79
-          - binary_sensor.motion_sensor_158d0002b85113
+          - binary_sensor.0x00158d0002b85113_occupancy
           - binary_sensor.motion_sensor_158d000257a1db
           - binary_sensor.motion_sensor_158d0002ec7efa
           - binary_sensor.motion_sensor_158d0001655da1
           - binary_sensor.motion_sensor_158d0002b72030
           - binary_sensor.motion_sensor_158d0002b422b4
           - binary_sensor.motion_sensor_158d0002ebdbdf
-        # - title: Surveillance
-  #   icon: mdi:cctv
-  #   panel: true
-  #   cards:
-  #     - type: custom:surveillance-card
-  #       thumb_interval: "0.5"
-  #       update_interval: "0.5"
-  #       cameras:
-  #         - entity: camera.ffmpeg
-  #           motion_entity: binary_sensor.motion_sensor_158d0001e547ae
   - title: Zigbee Network
     icon: "mdi:zigbee"
     path: zigbee-network

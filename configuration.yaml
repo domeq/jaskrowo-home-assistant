@@ -119,7 +119,7 @@ yeelight:
     192.168.1.35:
       name: Stove LEDs
     192.168.1.36:
-      name: Downstairs bathroom lamp
+      name: Spare light 1
     192.168.1.37:
       name: Stairs LEDs
     192.168.1.39:
@@ -221,10 +221,10 @@ history_graph:
     name: Windows open?
     entities:
       - binary_sensor.door_window_sensor_158d00023709f7
-      - binary_sensor.door_window_sensor_158d0001ad5eb6
+      - binary_sensor.0x00158d0001ad5eb6_contact
       - binary_sensor.door_window_sensor_158d00022f148a
       - binary_sensor.door_window_sensor_158d000232db84
-      - binary_sensor.door_window_sensor_158d000232da46
+      - binary_sensor.0x00158d000232da46_contact
       - binary_sensor.door_window_sensor_158d0002436b09
     hours_to_show: 24
     refresh: 60
@@ -234,7 +234,7 @@ history_graph:
       - sensor.temperature_158d0001b9208d
       - sensor.temperature_158d0001b92092
       - sensor.temperature_158d0001b92145
-      - sensor.temperature_158d0001b1c3fb
+      - sensor.0x00158d0001b1c3fb_temperature
       - sensor.temperature_158d00023208a6
       - sensor.0x00158d0002320de3_temperature
       - sensor.temperature_158d0002320e0c
@@ -246,7 +246,7 @@ history_graph:
       - sensor.humidity_158d0001b9208d
       - sensor.humidity_158d0001b92092
       - sensor.humidity_158d0001b92145
-      - sensor.humidity_158d0001b1c3fb
+      - sensor.0x00158d0001b1c3fb_humidity
       - sensor.humidity_158d00023208a6
       - sensor.0x00158d0002320de3_humidity
       - sensor.humidity_158d0002320e0c
@@ -366,7 +366,7 @@ switch:
     name: "Downstairs bathroom lights auto"
     min_brightness: 70
     lights_ct:
-      - light.downstairs_bathroom_lamp
+      - light.0x00158d0002c67ac3_light
   - platform: circadian_lighting
     name: "Kitchen lights auto"
     min_brightness: 90
@@ -380,8 +380,7 @@ switch:
     lights_ct:
       - light.tosia_lamp
       - light.tosia_left_wall_lamp
-    lights_brightness:
-      - light.right_wall_lamp
+      - light.0x00158d0002b88c1c_light
   - platform: circadian_lighting
     name: "Wardrobe lights auto"
     lights_ct:
@@ -438,9 +437,15 @@ scene:
       light.xiaomi_philips_e14_crystal_2: off
       fan.xiaomi_smart_fan: off
 
+camera:
+  - platform: generic
+    name: yi-hack-01
+    still_image_url: http://192.168.1.49:8080/cgi-bin/snapshot.sh
+    stream_source: rtsp://192.168.1.49/ch0_0.h264
+    verify_ssl: false
+
 # To start the camera:
 # pi@hassbian:~/videoP2Proxy $ videop2proxy --ip 192.168.1.125 --token 34313335586f726f5657486476357663 --rtsp 8554
-# camera:
 #   - platform: ffmpeg
 #     input: -rtsp_transport tcp -i rtsp://127.0.0.1:8554/
 #     extra_arguments: -pred 1 -q:v 2
@@ -499,7 +504,7 @@ group:
     entities:
       - switch.shelly1_55df6e_relay_0
       - light.stove_leds
-      - switch.plug_158d0001ded32d
+      - switch.0x00158d0001ded32d_switch
   dining_area:
     name: Dining area
     entities:
@@ -519,19 +524,19 @@ group:
   downstairs_windows:
     name: Downstairs windows
     entities:
-      - binary_sensor.door_window_sensor_158d0001ad5eb6
+      - binary_sensor.0x00158d0001ad5eb6_contact
       - binary_sensor.door_window_sensor_158d00023709f7
       - binary_sensor.door_window_sensor_158d00022f148a
   downstairs_bathroom_lights:
     name: Downstairs bathroom lights
     entities:
-      - light.downstairs_bathroom_lamp
+      - light.0x00158d0002c67ac3_light
       - switch.shelly1_55dead_relay_0
   tosia_bedroom_lights:
     name: Tosia's bedroom lights
     entities:
       - light.tosia_left_wall_lamp
-      - light.right_wall_lamp
+      - light.0x00158d0002b88c1c_light
       - light.tosia_lamp
       - switch.xiaomi_miio_switch
   guest_room_lights:
@@ -569,13 +574,15 @@ alarm_control_panel:
 
 zone:
   - name: Schibsted
-    latitude: 50.072845
-    longitude: 19.945800
+    latitude: 50.073305
+    longitude: 19.945491
     icon: mdi:office-building
+    radius: 300
   - name: ABB
     latitude: 50.064151
     longitude: 19.960579
     icon: mdi:office-building
+    radius: 300
   # This will override the default home zone
   - name: Home
     latitude: !secret geo_latitude
