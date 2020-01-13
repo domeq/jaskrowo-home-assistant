@@ -566,6 +566,7 @@ mobile_app:
 alarm_control_panel:
   - platform: manual
     code: !secret alarm_code
+    code_arm_required: false
     pending_time: 10
     disarmed:
       trigger_time: 0

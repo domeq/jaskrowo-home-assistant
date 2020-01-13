@@ -394,7 +394,7 @@
       platform: state
       to: "on"
   condition:
-    - below: "30"
+    - below: "60"
       condition: numeric_state
       entity_id: sensor.0x00158d0002b85113_illuminance
     - condition: time
@@ -2048,7 +2048,7 @@
       to: "triggered"
   action:
     - service: notify.mobile_app_wojtek_s_mi_mix_2
-      data:
+      data_template:
         message: "ALARM! The alarm has been triggered"
         data:
           android:
@@ -2056,7 +2056,7 @@
               image: >
                 https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa{{ states.camera.yi_hack_01.attributes.entity_picture }}
     - service: notify.mobile_app_gosia_s_mi_a2_lite
-      data:
+      data_template:
         message: "ALARM! The alarm has been triggered"
         data:
           android:
