@@ -1,9 +1,26 @@
 title: Home
 resources:
+  - url: /community_plugin/custom-header/custom-header.js
+    type: module
+  - url: /community_plugin/lovelace-state-switch/state-switch.js
+    type: module
   - url: /community_plugin/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
     type: module
+custom_header:
+  compact_mode: true
+  hide_help: true
+  hide_config: true
+  exceptions:
+    - conditions:
+        user: Gosiak
+      config:
+        options_hide: true
+        show_tabs:
+          - Home
+          - Alarm
 views:
   - title: Home
+    icon: "mdi:home"
     path: default_view
     badges: []
     cards:
@@ -34,19 +51,56 @@ views:
               - remote.jaskrowo_media
               - media_player.marantz_sr5008
             type: entities
-      - title: Kitchen
-        entities:
-          - sensor.0x00158d0002320de3_temperature
-          - sensor.0x00158d0002320de3_humidity
-          - switch.shelly1_55df6e_relay_0
-          - switch.shelly2_5a4ada_relay_0
-          - switch.shelly2_5a4ada_relay_1
-          - light.stove_leds
-          - switch.0x00158d0001ded32d_switch
-          - binary_sensor.door_window_sensor_158d00023709f7
-          - binary_sensor.door_window_sensor_158d00022f148a
-          - vacuum.xiaomi_vacuum_cleaner
-        type: entities
+      - type: vertical-stack
+        cards:
+          - title: Kitchen
+            entities:
+              - sensor.0x00158d0002320de3_temperature
+              - sensor.0x00158d0002320de3_humidity
+              - switch.shelly1_55df6e_relay_0
+              - switch.shelly2_5a4ada_relay_0
+              - switch.shelly2_5a4ada_relay_1
+              - light.stove_leds
+              - switch.0x00158d0001ded32d_switch
+              - binary_sensor.door_window_sensor_158d00023709f7
+              - binary_sensor.door_window_sensor_158d00022f148a
+              - vacuum.xiaomi_vacuum_cleaner
+            type: entities
+          - type: glance
+            title: Vacuum
+            entities:
+              - icon: "mdi:water"
+                type: entity-button
+                entity: script.vacuum_start_mopping
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.vacuum_start_mopping
+              - icon: "mdi:robot-vacuum"
+                type: entity-button
+                entity: script.vacuum_start_cleaning
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.vacuum_start_cleaning
+              - icon: "mdi:pause"
+                type: entity-button
+                entity: script.vacuum_pause
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.vacuum_pause
+              - icon: "mdi:home-circle"
+                type: entity-button
+                entity: script.vacuum_go_home
+                tap_action:
+                  action: call-service
+                  service: script.turn_on
+                  service_data:
+                    entity_id: script.vacuum_go_home
       - title: Master bedroom
         entities:
           - sensor.temperature_158d0001b92145
@@ -108,6 +162,14 @@ views:
           - sensor.airly_description
         type: entities
         show_header_toggle: false
+      - title: Scenes
+        entities:
+          - scene.somebody_sleeping_in_living_room
+          - scene.living_room_normal_mode
+          - scene.wojtek_is_cycling
+          - scene.wojtek_finished_cycling
+        type: entities
+        show_header_toggle: false
       - title: Device battery
         entities:
           - sensor.gosiak_mia2_2_battery_level
@@ -129,206 +191,6 @@ views:
         refresh_interval: 60
       - type: weather-forecast
         entity: weather.dark_sky
-      - refresh_inteval: 60
-        title: Temperature
-        entities:
-          - sensor.temperature_158d0001b9208d
-          - sensor.temperature_158d0001b92092
-          - sensor.temperature_158d0001b92145
-          - sensor.0x00158d0001b1c3fb_temperature
-          - sensor.temperature_158d00023208a6
-          - sensor.0x00158d0002320de3_temperature
-          - sensor.temperature_158d0002320e0c
-          - sensor.airly_temperature
-        hours_to_show: 24
-        type: history-graph
-      - title: Humidity
-        entities:
-          - sensor.humidity_158d0001b9208d
-          - sensor.humidity_158d0001b92092
-          - sensor.humidity_158d0001b92145
-          - sensor.0x00158d0001b1c3fb_humidity
-          - sensor.humidity_158d00023208a6
-          - sensor.0x00158d0002320de3_humidity
-          - sensor.humidity_158d0002320e0c
-        hours_to_show: 24
-        type: history-graph
-        refresh_interval: 60
-      - type: map
-        aspect_ratio: 16:9
-        default_zoom: 12
-        entities:
-          - person.wojciech_iskra
-          - person.malgorzata_iskra
-          # - device_tracker.wojtek_s_ipad
-          - zone.home
-          - zone.abb
-          - zone.schibsted
-      - type: glance
-        title: Vacuum
-        entities:
-          - icon: "mdi:water"
-            type: entity-button
-            entity: script.vacuum_start_mopping
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.vacuum_start_mopping
-          - icon: "mdi:robot-vacuum"
-            type: entity-button
-            entity: script.vacuum_start_cleaning
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.vacuum_start_cleaning
-          - icon: "mdi:pause"
-            type: entity-button
-            entity: script.vacuum_pause
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.vacuum_pause
-          - icon: "mdi:home-circle"
-            type: entity-button
-            entity: script.vacuum_go_home
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.vacuum_go_home
-  - title: Automations
-    icon: "mdi:home-automation"
-    path: automations
-    badges: []
-    cards:
-      - type: vertical-stack
-        cards:
-          - title: Scenes
-            entities:
-              - scene.somebody_sleeping_in_living_room
-              - scene.living_room_normal_mode
-              - scene.wojtek_is_cycling
-              - scene.wojtek_finished_cycling
-            type: entities
-            show_header_toggle: false
-          - title: all automations
-            entities:
-              - automation.attic_empty_room
-              - automation.attic_entry_area_motion
-              - automation.attic_wardrobe_area_motion
-              - automation.dining_area_empty
-              - automation.downstairs_bathroom_motion
-              - automation.downstairs_bathroom_empty
-              - automation.guest_room_bright_mode
-              - automation.guest_room_motion
-              - automation.hall_empty_room
-              - automation.hall_motion
-              - automation.kitchen_motion_daytime
-              - automation.kitchen_motion_at_night
-              - automation.kitchen_empty
-              - automation.kitchen_bright_enough
-              - automation.leaving_home
-              - automation.living_room_bright_enough
-              - automation.living_room_empty_room
-              - automation.living_room_stair_leds
-              - automation.living_room_stairs_motion
-              - automation.living_room_stairs_empty
-              - automation.living_room_motion_01_normal
-              - automation.living_room_motion_02_evening
-              - automation.living_room_motion_03_tv_mode
-              - automation.living_room_turn_on_fan_daytime
-              - automation.living_room_turn_on_fan_evening
-              - automation.master_bedroom_empty
-              - automation.master_bedroom_motion
-              - automation.smog_air_is_clean
-              - automation.smog_close_the_windows
-              - automation.tosia_room_motion
-              - automation.tosia_room_empty
-              - automation.tosia_toggle_christmas_tree
-              - automation.tosia_toggle_lamp
-              - automation.turn_on_circadian_lighting_switches_on_startup
-              - automation.upstairs_bathroom_motion
-              - automation.upstairs_bathroom_empty
-              - automation.upstairs_hall_motion
-              - automation.upstairs_hall_empty
-              - automation.vacuum_scheduled_cleanup
-              - automation.wardrobe_motion
-              - automation.wardrobe_empty
-            type: entities
-      - type: vertical-stack
-        cards:
-          - title: Automatic brightness
-            entities:
-              - switch.circadian_lighting_attic_lights_auto
-              - switch.circadian_lighting_guest_room_lights_auto
-              - switch.circadian_lighting_hall_lights_auto
-              - switch.circadian_lighting_living_room_auto_leds
-              - switch.circadian_lighting_living_room_auto_ceiling
-              - switch.circadian_lighting_master_bedroom_lights_auto
-              - switch.circadian_lighting_tosia_room_lights_auto
-            type: entities
-          - title: Lights brightness
-            entities:
-              - sensor.light_brightness_philips_ceiling_light
-              - sensor.light_brightness_hall_light
-            hours_to_show: 72
-            type: history-graph
-            refresh_time: 300
-          - title: Lights temperature
-            entities:
-              - sensor.light_ct_philips_ceiling_light
-              - sensor.light_ct_hall_light
-            hours_to_show: 72
-            type: history-graph
-            refresh_time: 300
-      - type: vertical-stack
-        cards:
-          - type: glance
-            title: System load
-            entities:
-              - sensor.cpu_temperature
-              - sensor.cpu_speed
-              - sensor.load_5m
-              - sensor.memory_use_percent
-          - title: Network
-            entities:
-              - sensor.speedtest_download
-              - sensor.speedtest_upload
-              - sensor.speedtest_ping
-              - sensor.asuswrt_download_speed
-              - sensor.asuswrt_upload_speed
-            type: entities
-            show_header_toggle: false
-          - title: Various
-            entities:
-              - sun.sun
-              - binary_sensor.car_wash
-              - binary_sensor.updater
-            type: glance
-            show_header_toggle: false
-      - type: entities
-        title: Illumination
-        show_header_toggle: false
-        entities:
-          - sensor.illumination_34ce0088a579
-          - sensor.illumination_158d0001e43ac7
-          - sensor.illumination_158d0001e4707c
-          - sensor.illumination_158d0001e531e0
-          - sensor.illumination_158d0002b422b4
-          - sensor.illumination_158d0001e43bc7
-          - sensor.illumination_34ce00fb56e8
-          - sensor.illumination_158d0001e532dc
-          - sensor.0x00158d0002b85113_illuminance
-          - sensor.illumination_158d0002b70d79
-          - sensor.illumination_158d0002b72030
-          - sensor.illumination_158d0001e547ae
-          - sensor.illumination_158d0001e55ff7
-          - sensor.illumination_158d0002ec7efa
-          - sensor.illumination_158d000257a1be
-          - sensor.illumination_158d000257a1db
   - title: Alarm
     icon: "mdi:alarm-light-outline"
     path: alarm
@@ -1031,44 +893,213 @@ views:
               - person.malgorzata_iskra
               - person.wojciech_iskra
             type: glance
-      - type: conditional
-        conditions:
-          - entity: person.wojciech_iskra
-            state_not: "home"
-          - entity: person.malgorzata_iskra
-            state_not: "home"
-        card:
-          type: picture-glance
-          title: Living room
-          entities:
-            - sensor.0x00158d0001b1c3fb_temperature
-            - sensor.0x00158d0001b1c3fb_humidity
-            - binary_sensor.0x00158d0001ad5eb6_contact
-            - group.living_room_lights
-            - group.kitchen_lights
-            - group.dining_area
-          camera_image: camera.yi_hack_01
-          camera_view: live
+          - type: map
+            aspect_ratio: 16:9
+            default_zoom: 12
+            entities:
+              - person.wojciech_iskra
+              - person.malgorzata_iskra
+              # - device_tracker.wojtek_s_ipad
+              - zone.home
+              - zone.abb
+              - zone.schibsted
+      - type: custom:state-switch
+        entity: user
+        states:
+          wojtek:
+            type: picture-glance
+            title: Living room
+            entities:
+              - sensor.0x00158d0001b1c3fb_temperature
+              - sensor.0x00158d0001b1c3fb_humidity
+              - binary_sensor.0x00158d0001ad5eb6_contact
+              - group.living_room_lights
+              - group.kitchen_lights
+              - group.dining_area
+            camera_image: camera.yi_hack_01
+            camera_view: live
+          gosiak:
+            type: conditional
+            conditions:
+              - entity: person.wojciech_iskra
+                state_not: "home"
+              - entity: person.malgorzata_iskra
+                state_not: "home"
+            card:
+              type: picture-glance
+              title: Living room
+              entities:
+                - sensor.0x00158d0001b1c3fb_temperature
+                - sensor.0x00158d0001b1c3fb_humidity
+                - binary_sensor.0x00158d0001ad5eb6_contact
+                - group.living_room_lights
+                - group.kitchen_lights
+                - group.dining_area
+              camera_image: camera.yi_hack_01
+              camera_view: live
+      # - type: entities
+      #   title: Motion detection
+      #   show_header_toggle: false
+      #   entities:
+      #     - binary_sensor.motion_sensor_158d0001e43ac7
+      #     - binary_sensor.motion_sensor_158d000257a1be
+      #     - binary_sensor.motion_sensor_158d0001e43bc7
+      #     - binary_sensor.motion_sensor_158d0001e4707c
+      #     - binary_sensor.motion_sensor_158d0001e531e0
+      #     - binary_sensor.motion_sensor_158d0001e532dc
+      #     - binary_sensor.motion_sensor_158d0001e547ae
+      #     - binary_sensor.motion_sensor_158d0001e55ff7
+      #     - binary_sensor.motion_sensor_158d0002b70d79
+      #     - binary_sensor.0x00158d0002b85113_occupancy
+      #     - binary_sensor.motion_sensor_158d000257a1db
+      #     - binary_sensor.motion_sensor_158d0002ec7efa
+      #     - binary_sensor.motion_sensor_158d0001655da1
+      #     - binary_sensor.motion_sensor_158d0002b72030
+      #     - binary_sensor.motion_sensor_158d0002b422b4
+      #     - binary_sensor.motion_sensor_158d0002ebdbdf
+  - title: Automations
+    icon: "mdi:home-automation"
+    path: automations
+    badges: []
+    cards:
+      - title: all automations
+        entities:
+          - automation.attic_empty_room
+          - automation.attic_entry_area_motion
+          - automation.attic_wardrobe_area_motion
+          - automation.dining_area_empty
+          - automation.downstairs_bathroom_motion
+          - automation.downstairs_bathroom_empty
+          - automation.guest_room_bright_mode
+          - automation.guest_room_motion
+          - automation.hall_empty_room
+          - automation.hall_motion
+          - automation.kitchen_motion_daytime
+          - automation.kitchen_motion_at_night
+          - automation.kitchen_empty
+          - automation.kitchen_bright_enough
+          - automation.leaving_home
+          - automation.living_room_bright_enough
+          - automation.living_room_empty_room
+          - automation.living_room_stair_leds
+          - automation.living_room_stairs_motion
+          - automation.living_room_stairs_empty
+          - automation.living_room_motion_01_normal
+          - automation.living_room_motion_02_evening
+          - automation.living_room_motion_03_tv_mode
+          - automation.living_room_turn_on_fan_daytime
+          - automation.living_room_turn_on_fan_evening
+          - automation.master_bedroom_empty
+          - automation.master_bedroom_motion
+          - automation.smog_air_is_clean
+          - automation.smog_close_the_windows
+          - automation.tosia_room_motion
+          - automation.tosia_room_empty
+          - automation.tosia_toggle_christmas_tree
+          - automation.tosia_toggle_lamp
+          - automation.turn_on_circadian_lighting_switches_on_startup
+          - automation.upstairs_bathroom_motion
+          - automation.upstairs_bathroom_empty
+          - automation.upstairs_hall_motion
+          - automation.upstairs_hall_empty
+          - automation.vacuum_scheduled_cleanup
+          - automation.wardrobe_motion
+          - automation.wardrobe_empty
+        type: entities
+      - title: Automatic brightness
+        entities:
+          - switch.circadian_lighting_attic_lights_auto
+          - switch.circadian_lighting_guest_room_lights_auto
+          - switch.circadian_lighting_hall_lights_auto
+          - switch.circadian_lighting_living_room_auto_leds
+          - switch.circadian_lighting_living_room_auto_ceiling
+          - switch.circadian_lighting_master_bedroom_lights_auto
+          - switch.circadian_lighting_tosia_room_lights_auto
+        type: entities
+      - title: Lights brightness
+        entities:
+          - sensor.light_brightness_philips_ceiling_light
+          - sensor.light_brightness_hall_light
+        hours_to_show: 72
+        type: history-graph
+        refresh_time: 300
+      - title: Lights temperature
+        entities:
+          - sensor.light_ct_philips_ceiling_light
+          - sensor.light_ct_hall_light
+        hours_to_show: 72
+        type: history-graph
+        refresh_time: 300
+      - type: vertical-stack
+        cards:
+          - type: glance
+            title: System load
+            entities:
+              - sensor.cpu_temperature
+              - sensor.cpu_speed
+              - sensor.load_5m
+              - sensor.memory_use_percent
+          - title: Network
+            entities:
+              - sensor.speedtest_download
+              - sensor.speedtest_upload
+              - sensor.speedtest_ping
+              - sensor.asuswrt_download_speed
+              - sensor.asuswrt_upload_speed
+            type: entities
+            show_header_toggle: false
+          - title: Various
+            entities:
+              - sun.sun
+              - binary_sensor.car_wash
+              - binary_sensor.updater
+            type: glance
+            show_header_toggle: false
+      - refresh_inteval: 60
+        title: Temperature
+        entities:
+          - sensor.temperature_158d0001b9208d
+          - sensor.temperature_158d0001b92092
+          - sensor.temperature_158d0001b92145
+          - sensor.0x00158d0001b1c3fb_temperature
+          - sensor.temperature_158d00023208a6
+          - sensor.0x00158d0002320de3_temperature
+          - sensor.temperature_158d0002320e0c
+          - sensor.airly_temperature
+        hours_to_show: 24
+        type: history-graph
+      - title: Humidity
+        entities:
+          - sensor.humidity_158d0001b9208d
+          - sensor.humidity_158d0001b92092
+          - sensor.humidity_158d0001b92145
+          - sensor.0x00158d0001b1c3fb_humidity
+          - sensor.humidity_158d00023208a6
+          - sensor.0x00158d0002320de3_humidity
+          - sensor.humidity_158d0002320e0c
+        hours_to_show: 24
+        type: history-graph
+        refresh_interval: 60
       - type: entities
-        title: Motion detection
+        title: Illumination
         show_header_toggle: false
         entities:
-          - binary_sensor.motion_sensor_158d0001e43ac7
-          - binary_sensor.motion_sensor_158d000257a1be
-          - binary_sensor.motion_sensor_158d0001e43bc7
-          - binary_sensor.motion_sensor_158d0001e4707c
-          - binary_sensor.motion_sensor_158d0001e531e0
-          - binary_sensor.motion_sensor_158d0001e532dc
-          - binary_sensor.motion_sensor_158d0001e547ae
-          - binary_sensor.motion_sensor_158d0001e55ff7
-          - binary_sensor.motion_sensor_158d0002b70d79
-          - binary_sensor.0x00158d0002b85113_occupancy
-          - binary_sensor.motion_sensor_158d000257a1db
-          - binary_sensor.motion_sensor_158d0002ec7efa
-          - binary_sensor.motion_sensor_158d0001655da1
-          - binary_sensor.motion_sensor_158d0002b72030
-          - binary_sensor.motion_sensor_158d0002b422b4
-          - binary_sensor.motion_sensor_158d0002ebdbdf
+          - sensor.illumination_34ce0088a579
+          - sensor.illumination_158d0001e43ac7
+          - sensor.illumination_158d0001e4707c
+          - sensor.illumination_158d0001e531e0
+          - sensor.illumination_158d0002b422b4
+          - sensor.illumination_158d0001e43bc7
+          - sensor.illumination_34ce00fb56e8
+          - sensor.illumination_158d0001e532dc
+          - sensor.0x00158d0002b85113_illuminance
+          - sensor.illumination_158d0002b70d79
+          - sensor.illumination_158d0002b72030
+          - sensor.illumination_158d0001e547ae
+          - sensor.illumination_158d0001e55ff7
+          - sensor.illumination_158d0002ec7efa
+          - sensor.illumination_158d000257a1be
+          - sensor.illumination_158d000257a1db
   - title: Zigbee Network
     icon: "mdi:zigbee"
     path: zigbee-network
