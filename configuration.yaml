@@ -209,6 +209,11 @@ light:
     host: 192.168.1.28
     token: 9077b63fbca71504a06c0441906260c9
     model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Downstairs bathroom side lamp
+    host: 192.168.1.50
+    token: 49e966e4a479ba532d5a3763a3de7da4
+    model: philips.light.downlight
 
 vacuum:
   - platform: xiaomi_miio
@@ -363,10 +368,15 @@ switch:
       - light.attic_right_light
       - light.attic_wardrobe_area_light
   - platform: circadian_lighting
-    name: "Downstairs bathroom lights auto"
+    name: "Downstairs bathroom ceiling light auto"
     min_brightness: 70
     lights_ct:
       - light.0x00158d0002c67ac3_light
+  - platform: circadian_lighting
+    name: "Downstairs bathroom side light auto"
+    max_brightness: 60
+    lights_ct:
+      - light.downstairs_bathroom_side_lamp
   - platform: circadian_lighting
     name: "Kitchen lights auto"
     min_brightness: 90
@@ -531,7 +541,7 @@ group:
     name: Downstairs bathroom lights
     entities:
       - light.0x00158d0002c67ac3_light
-      - switch.shelly1_55dead_relay_0
+      - light.downstairs_bathroom_side_lamp
   tosia_bedroom_lights:
     name: Tosia's bedroom lights
     entities:

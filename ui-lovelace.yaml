@@ -144,7 +144,7 @@ views:
       - title: Bathrooms
         entities:
           - light.0x00158d0002c67ac3_light
-          - switch.shelly1_55dead_relay_0
+          - light.downstairs_bathroom_side_lamp
           - switch.shelly1_5545a9_relay_0
         type: entities
       - title: Upstairs hall
@@ -486,7 +486,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly1_55dead_relay_0
+                entity: light.downstairs_bathroom_side_lamp
                 style:
                   top: 59%
                   left: 40%

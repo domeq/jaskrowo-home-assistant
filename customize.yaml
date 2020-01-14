@@ -309,7 +309,7 @@ binary_sensor.wall_switch_158d00030ac48b:
   friendly_name: Upstairs hall switch
 binary_sensor.wall_switch_158d0003131adb:
   friendly_name: Upstairs hall switch 2
-switch.shelly1_55dead_relay_0:
+light.downstairs_bathroom_side_lamp:
   friendly_name: Downstairs bathroom side
   icon: "mdi:spotlight-beam"
 binary_sensor.switch_158d000123e3fe:

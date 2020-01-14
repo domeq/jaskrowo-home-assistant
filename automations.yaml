@@ -483,7 +483,6 @@
           - switch.shelly2_5a4ada_relay_1
           - switch.shelly1_2c03c5_relay_0
           - switch.shelly1_5545a9_relay_0
-          - switch.shelly1_55dead_relay_0
           - switch.0x00158d0001ded32d_switch
           - switch.shelly1_55e273_relay_0
           - switch.0x00158d0001de79e6_switch
@@ -1066,12 +1065,11 @@
       state: "off"
   action:
     - data:
-        entity_id: light.0x00158d0002c67ac3_light
+        entity_id:
+          - light.0x00158d0002c67ac3_light
+          - light.downstairs_bathroom_side_lamp
         transition: 1
       service: light.turn_on
-    - data:
-        entity_id: switch.shelly1_55dead_relay_0
-      service: switch.turn_on
 - id: "1548095715939"
   alias: Downstairs bathroom - empty
   trigger:
@@ -1089,6 +1087,7 @@
   action:
     - data:
         entity_id: group.downstairs_bathroom_lights
+        transition: 1
       service: homeassistant.turn_off
 - id: "1549129661008"
   alias: Tosia wall switch - left button
@@ -1679,6 +1678,7 @@
   action:
     - data:
         entity_id: group.downstairs_bathroom_lights
+        transition: 1
       service: homeassistant.toggle
 - id: "1554627285943"
   alias: Downstairs bathroom - toggle side
@@ -1691,8 +1691,9 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly1_55dead_relay_0
-      service: switch.toggle
+        entity_id: light.downstairs_bathroom_side_lamp
+        transition: 1
+      service: light.toggle
 - id: "1554627478669"
   alias: Downstairs bathroom - toggle ceiling
   trigger:
@@ -1705,6 +1706,7 @@
   action:
     - data:
         entity_id: light.0x00158d0002c67ac3_light
+        transition: 1
       service: light.toggle
 - id: "1559483412308"
   alias: Living room - turn on fan daytime
