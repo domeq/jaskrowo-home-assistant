@@ -1,10 +1,13 @@
 title: Home
+background: var(--background-image)
 resources:
   - url: /community_plugin/custom-header/custom-header.js
     type: module
   - url: /community_plugin/lovelace-state-switch/state-switch.js
     type: module
   - url: /community_plugin/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
+    type: module
+  - url: /community_plugin/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js?v=3.0.1
     type: module
 custom_header:
   compact_mode: true
@@ -43,8 +46,8 @@ views:
               - light.xiaomi_philips_ceiling_light
               - switch.shelly1_5556b7_relay_0
               - light.wall_leds
-              - switch.0x00158d0001de79e6_switch
-              - switch.fan
+              # - switch.0x00158d0001de79e6_switch
+              # - switch.fan
               - light.stairs_leds
               - light.downstairs_hall_lamp
               - switch.shelly1_554b82_relay_0
@@ -61,46 +64,48 @@ views:
               - switch.shelly2_5a4ada_relay_0
               - switch.shelly2_5a4ada_relay_1
               - light.stove_leds
-              - switch.0x00158d0001ded32d_switch
+              - switch.0x00158d0003951e91_switch
               - binary_sensor.door_window_sensor_158d00023709f7
               - binary_sensor.door_window_sensor_158d00022f148a
               - vacuum.xiaomi_vacuum_cleaner
             type: entities
-          - type: glance
-            title: Vacuum
-            entities:
-              - icon: "mdi:water"
-                type: entity-button
-                entity: script.vacuum_start_mopping
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.vacuum_start_mopping
-              - icon: "mdi:robot-vacuum"
-                type: entity-button
-                entity: script.vacuum_start_cleaning
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.vacuum_start_cleaning
-              - icon: "mdi:pause"
-                type: entity-button
-                entity: script.vacuum_pause
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.vacuum_pause
-              - icon: "mdi:home-circle"
-                type: entity-button
-                entity: script.vacuum_go_home
-                tap_action:
-                  action: call-service
-                  service: script.turn_on
-                  service_data:
-                    entity_id: script.vacuum_go_home
+          - type: custom:xiaomi-vacuum-card
+            entity: vacuum.xiaomi_vacuum_cleaner
+            name: Vacuum
+          # - type: glance
+          #   entities:
+          #     - icon: "mdi:water"
+          #       type: entity-button
+          #       entity: script.vacuum_start_mopping
+          #       tap_action:
+          #         action: call-service
+          #         service: script.turn_on
+          #         service_data:
+          #           entity_id: script.vacuum_start_mopping
+          #     - icon: "mdi:robot-vacuum"
+          #       type: entity-button
+          #       entity: script.vacuum_start_cleaning
+          #       tap_action:
+          #         action: call-service
+          #         service: script.turn_on
+          #         service_data:
+          #           entity_id: script.vacuum_start_cleaning
+          #     - icon: "mdi:pause"
+          #       type: entity-button
+          #       entity: script.vacuum_pause
+          #       tap_action:
+          #         action: call-service
+          #         service: script.turn_on
+          #         service_data:
+          #           entity_id: script.vacuum_pause
+          #     - icon: "mdi:home-circle"
+          #       type: entity-button
+          #       entity: script.vacuum_go_home
+          #       tap_action:
+          #         action: call-service
+          #         service: script.turn_on
+          #         service_data:
+          #           entity_id: script.vacuum_go_home
       - title: Master bedroom
         entities:
           - sensor.temperature_158d0001b92145
@@ -108,7 +113,7 @@ views:
           - sensor.temperature_158d0001b9208d
           - sensor.humidity_158d0001b9208d
           - binary_sensor.door_window_sensor_158d000232db84
-          - light.master_bedroom_bed_lamp
+          - light.0x086bd7fffe24aedb_light
           - light.bed_leds
           - switch.shelly1_2c03c5_relay_0
           - switch.shelly1_55e273_relay_0
@@ -119,24 +124,39 @@ views:
           - sensor.0x00158d00033b4d2c_temperature
           - sensor.0x00158d00033b4d2c_humidity
           - binary_sensor.0x00158d000232da46_contact
-          - light.tosia_left_wall_lamp
+          - light.0xec1bbdfffeb7fbbc_light
           - light.0x00158d0002b88c1c_light
           - light.tosia_lamp
-          - switch.xiaomi_miio_switch
+          # - switch.0x00158d0003951ef9_switch
         type: entities
       - title: Guest room
         entities:
           - sensor.temperature_158d0002320e0c
           - sensor.humidity_158d0002320e0c
           - binary_sensor.door_window_sensor_158d0002436b09
-          - light.xiaomi_philips_e14_crystal
-          - light.xiaomi_philips_e14_crystal_2
+          - light.0xccccccfffeb2f9db_light
+          - light.0x086bd7fffe2f5d2c_light
           - fan.xiaomi_smart_fan
+          - switch.0x00158d00039e5eb1_switch
         type: entities
+      - type: conditional
+        conditions:
+          - entity: sensor.zwift_online_1380479
+            state: "True"
+        card:
+          type: entities
+          title: Wojtek is training
+          icon: "mdi:bike"
+          entities:
+            - sensor.zwift_level_1380479
+            - sensor.zwift_distance_1380479
+            - sensor.zwift_power_1380479
+            - sensor.zwift_heart_rate_1380479
+            - sensor.zwift_cadence_1380479
       - title: Attic
         entities:
-          - sensor.temperature_158d00023208a6
-          - sensor.humidity_158d00023208a6
+          - sensor.0x00158d00023208a6_temperature
+          - sensor.0x00158d00023208a6_humidity
           - light.attic_left_light
           - light.attic_right_light
           - light.attic_wardrobe_area_light
@@ -166,8 +186,6 @@ views:
         entities:
           - scene.somebody_sleeping_in_living_room
           - scene.living_room_normal_mode
-          - scene.wojtek_is_cycling
-          - scene.wojtek_finished_cycling
         type: entities
         show_header_toggle: false
       - title: Device battery
@@ -267,20 +285,6 @@ views:
                 style:
                   top: 32%
                   right: 25%
-              - type: state-icon
-                tap_action:
-                  action: toggle
-                entity: switch.0x00158d0001de79e6_switch
-                style:
-                  top: 32%
-                  right: 11%
-              - type: state-icon
-                tap_action:
-                  action: toggle
-                entity: switch.fan
-                style:
-                  top: 67%
-                  left: 86%
               - type: state-icon
                 tap_action:
                   action: toggle
@@ -433,7 +437,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.0x00158d0001ded32d_switch
+                entity: switch.0x00158d0003951e91_switch
                 style:
                   top: 8%
                   left: 16%
@@ -538,7 +542,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.tosia_left_wall_lamp
+                entity: light.0xec1bbdfffeb7fbbc_light
                 style:
                   top: 88%
                   left: 12%
@@ -556,13 +560,6 @@ views:
                 style:
                   top: 48%
                   left: 17%
-              - type: state-icon
-                tap_action:
-                  action: toggle
-                entity: switch.xiaomi_miio_switch
-                style:
-                  top: 48%
-                  left: 22%
               - type: image
                 image: /local/yellow.png
                 entity: binary_sensor.motion_sensor_158d0001e532dc
@@ -607,14 +604,14 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.xiaomi_philips_e14_crystal_2
+                entity: light.0x086bd7fffe2f5d2c_light
                 style:
                   top: 6%
                   left: 15%
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.xiaomi_philips_e14_crystal
+                entity: light.0xccccccfffeb2f9db_light
                 style:
                   top: 34%
                   left: 15%
@@ -680,7 +677,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.master_bedroom_bed_lamp
+                entity: light.0x086bd7fffe24aedb_light
                 style:
                   top: 60%
                   left: 62%
@@ -845,7 +842,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.temperature_158d00023208a6
+                entity: sensor.0x00158d00023208a6_temperature
                 style:
                   top: 86%
                   left: 54%
@@ -854,7 +851,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.humidity_158d00023208a6
+                entity: sensor.0x00158d00023208a6_humidity
                 style:
                   top: 91.5%
                   left: 54%
@@ -903,40 +900,110 @@ views:
               - zone.home
               - zone.abb
               - zone.schibsted
-      - type: custom:state-switch
-        entity: user
-        states:
-          wojtek:
-            type: picture-glance
-            title: Living room
-            entities:
-              - sensor.0x00158d0001b1c3fb_temperature
-              - sensor.0x00158d0001b1c3fb_humidity
-              - binary_sensor.0x00158d0001ad5eb6_contact
-              - group.living_room_lights
-              - group.kitchen_lights
-              - group.dining_area
-            camera_image: camera.yi_hack_01
-            camera_view: live
-          gosiak:
-            type: conditional
-            conditions:
-              - entity: person.wojciech_iskra
-                state_not: "home"
-              - entity: person.malgorzata_iskra
-                state_not: "home"
-            card:
-              type: picture-glance
-              title: Living room
-              entities:
-                - sensor.0x00158d0001b1c3fb_temperature
-                - sensor.0x00158d0001b1c3fb_humidity
-                - binary_sensor.0x00158d0001ad5eb6_contact
-                - group.living_room_lights
-                - group.kitchen_lights
-                - group.dining_area
-              camera_image: camera.yi_hack_01
-              camera_view: live
+      - type: vertical-stack
+        cards:
+          - type: custom:state-switch
+            entity: user
+            states:
+              wojtek:
+                type: picture-glance
+                title: Living room
+                entities:
+                  - sensor.0x00158d0001b1c3fb_temperature
+                  - sensor.0x00158d0001b1c3fb_humidity
+                  - binary_sensor.0x00158d0001ad5eb6_contact
+                  - group.living_room_lights
+                  - group.kitchen_lights
+                  - group.dining_area
+                camera_image: camera.yi_hack_01
+                camera_view: live
+              Gosiak:
+                type: conditional
+                conditions:
+                  - entity: person.wojciech_iskra
+                    state_not: "home"
+                  - entity: person.malgorzata_iskra
+                    state_not: "home"
+                card:
+                  type: picture-glance
+                  title: Living room
+                  entities:
+                    - sensor.0x00158d0001b1c3fb_temperature
+                    - sensor.0x00158d0001b1c3fb_humidity
+                    - binary_sensor.0x00158d0001ad5eb6_contact
+                    - group.living_room_lights
+                    - group.kitchen_lights
+                    - group.dining_area
+                  camera_image: camera.yi_hack_01
+                  camera_view: live
+          - type: custom:state-switch
+            entity: user
+            states:
+              wojtek:
+                type: picture-glance
+                title: Tosia's room
+                entities:
+                  - sensor.0x00158d00033b4d2c_temperature
+                  - sensor.0x00158d00033b4d2c_humidity
+                  - binary_sensor.0x00158d000232da46_contact
+                  - light.0xec1bbdfffeb7fbbc_light
+                  - light.0x00158d0002b88c1c_light
+                  - light.tosia_lamp
+                  - switch.0x00158d0003951ef9_switch
+                camera_image: camera.yi_hack_03
+                camera_view: live
+              Gosiak:
+                type: conditional
+                conditions:
+                  - entity: person.wojciech_iskra
+                    state_not: "home"
+                  - entity: person.malgorzata_iskra
+                    state_not: "home"
+                card:
+                  type: picture-glance
+                  title: Tosia's room
+                  entities:
+                    - sensor.0x00158d00033b4d2c_temperature
+                    - sensor.0x00158d00033b4d2c_humidity
+                    - binary_sensor.0x00158d000232da46_contact
+                    - light.0xec1bbdfffeb7fbbc_light
+                    - light.0x00158d0002b88c1c_light
+                    - light.tosia_lamp
+                    - switch.0x00158d0003951ef9_switch
+                  camera_image: camera.yi_hack_03
+                  camera_view: live
+          - type: custom:state-switch
+            entity: user
+            states:
+              wojtek:
+                type: picture-glance
+                title: Attic
+                entities:
+                  - sensor.0x00158d00023208a6_temperature
+                  - sensor.0x00158d00023208a6_humidity
+                  - light.attic_left_light
+                  - light.attic_right_light
+                  - light.attic_wardrobe_area_light
+                camera_image: camera.yi_hack_02
+                camera_view: live
+              Gosiak:
+                type: conditional
+                conditions:
+                  - entity: person.wojciech_iskra
+                    state_not: "home"
+                  - entity: person.malgorzata_iskra
+                    state_not: "home"
+                card:
+                  type: picture-glance
+                  title: Attic
+                  entities:
+                    - sensor.0x00158d00023208a6_temperature
+                    - sensor.0x00158d00023208a6_humidity
+                    - light.attic_left_light
+                    - light.attic_right_light
+                    - light.attic_wardrobe_area_light
+                  camera_image: camera.yi_hack_02
+                  camera_view: live
       # - type: entities
       #   title: Motion detection
       #   show_header_toggle: false
@@ -1062,7 +1129,7 @@ views:
           - sensor.temperature_158d0001b92092
           - sensor.temperature_158d0001b92145
           - sensor.0x00158d0001b1c3fb_temperature
-          - sensor.temperature_158d00023208a6
+          - sensor.0x00158d00023208a6_temperature
           - sensor.0x00158d0002320de3_temperature
           - sensor.temperature_158d0002320e0c
           - sensor.airly_temperature
@@ -1074,7 +1141,7 @@ views:
           - sensor.humidity_158d0001b92092
           - sensor.humidity_158d0001b92145
           - sensor.0x00158d0001b1c3fb_humidity
-          - sensor.humidity_158d00023208a6
+          - sensor.0x00158d00023208a6_humidity
           - sensor.0x00158d0002320de3_humidity
           - sensor.humidity_158d0002320e0c
         hours_to_show: 24

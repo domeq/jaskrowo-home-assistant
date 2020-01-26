@@ -7,20 +7,12 @@ advanced:
   log_output:
     - console
   last_seen: ISO_8601_local
-#   availability_timeout: 60
-#   availability_blacklist: ["tosia_right_wall"]
 serial:
   port: /dev/ttyACM0
   disable_led: true
-
-# Optional: Queue settings, useful when your zigbee stick get's
-# unstable when executing many commands
 queue:
-  # Optional: Delay in ms between each command (default: shown below)
   delay: 250
-  # Optional: Max no. of simultaneously running commands (default: shown below)
   simultaneously: 5
-
 device_options:
   temperature_precision: 1
   humidity_precision: 1
@@ -75,15 +67,48 @@ devices:
     retain: true
     qos: 2
   "0x00158d0001ded32d":
-    friendly_name: kitchen_sink_lights
+    friendly_name: spare_switch_1
     retain: true
     qos: 2
   "0x00158d0001ad5eb6":
-    friendly_name: "living_room_balcony_door"
+    friendly_name: living_room_balcony_door
     retain: true
     qos: 2
   "0x00158d0001b1c3fb":
-    friendly_name: "living_room_temperature"
+    friendly_name: living_room_temperature
+    debounce: 1
+    retain: true
+    qos: 2
+  "0x00158d0003951e91":
+    friendly_name: kitchen_sink_lights
+    retain: true
+    qos: 2
+  "0x00158d0003951ef9":
+    friendly_name: tosia_christmas_tree
+    retain: true
+    qos: 2
+  "0x00158d00039e5eb1":
+    friendly_name: small_fan
+    retain: true
+    qos: 2
+  "0xccccccfffeb2f9db":
+    friendly_name: guest_left_wall
+    retain: true
+    qos: 2
+  "0x086bd7fffe2f5d2c":
+    friendly_name: guest_right_wall
+    retain: true
+    qos: 2
+  "0xec1bbdfffeb7fbbc":
+    friendly_name: tosia_left_wall
+    retain: true
+    qos: 2
+  "0x086bd7fffe24aedb":
+    friendly_name: master_bedroom_bed
+    retain: true
+    qos: 2
+  "0x00158d00023208a6":
+    friendly_name: attic_temperature_sensor
     debounce: 1
     retain: true
     qos: 2

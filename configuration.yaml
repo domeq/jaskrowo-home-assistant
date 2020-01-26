@@ -174,26 +174,26 @@ light:
     host: 192.168.1.21
     token: 3d5f7ae53b51aa312e464b150b37453b
     model: philips.light.ceiling
-  - platform: xiaomi_miio
-    name: Master bedroom bed lamp
-    host: 192.168.1.22
-    token: c1ac97f17b98eb0cc6132fd6f6433f91
-    model: philips.light.candle2
-  - platform: xiaomi_miio
-    name: Xiaomi Philips E14 Crystal
-    host: 192.168.1.23
-    token: 52c93cf48a74c69378780cd800b4f430
-    model: philips.light.candle2
-  - platform: xiaomi_miio
-    name: Xiaomi Philips E14 Crystal 2
-    host: 192.168.1.24
-    token: c16d7777b418c34a8e110f0a3614aa2a
-    model: philips.light.candle2
-  - platform: xiaomi_miio
-    name: Tosia left wall lamp
-    host: 192.168.1.25
-    token: 11f0e1c5e69ec2ca7b19833d642e8a82
-    model: philips.light.candle2
+  # - platform: xiaomi_miio
+  #   name: Master bedroom bed lamp
+  #   host: 192.168.1.22
+  #   token: c1ac97f17b98eb0cc6132fd6f6433f91
+  #   model: philips.light.candle2
+  # - platform: xiaomi_miio
+  #   name: Xiaomi Philips E14 Crystal
+  #   host: 192.168.1.23
+  #   token: 52c93cf48a74c69378780cd800b4f430
+  #   model: philips.light.candle2
+  # - platform: xiaomi_miio
+  #   name: Xiaomi Philips E14 Crystal 2
+  #   host: 192.168.1.24
+  #   token: c16d7777b418c34a8e110f0a3614aa2a
+  #   model: philips.light.candle2
+  # - platform: xiaomi_miio
+  #   name: Tosia left wall lamp
+  #   host: 192.168.1.25
+  #   token: 11f0e1c5e69ec2ca7b19833d642e8a82
+  #   model: philips.light.candle2
   - platform: xiaomi_miio
     name: Wardrobe lamp
     host: 192.168.1.26
@@ -240,7 +240,7 @@ history_graph:
       - sensor.temperature_158d0001b92092
       - sensor.temperature_158d0001b92145
       - sensor.0x00158d0001b1c3fb_temperature
-      - sensor.temperature_158d00023208a6
+      - sensor.0x00158d00023208a6_temperature
       - sensor.0x00158d0002320de3_temperature
       - sensor.temperature_158d0002320e0c
     hours_to_show: 24
@@ -252,7 +252,7 @@ history_graph:
       - sensor.humidity_158d0001b92092
       - sensor.humidity_158d0001b92145
       - sensor.0x00158d0001b1c3fb_humidity
-      - sensor.humidity_158d00023208a6
+      - sensor.0x00158d00023208a6_humidity
       - sensor.0x00158d0002320de3_humidity
       - sensor.humidity_158d0002320e0c
     hours_to_show: 24
@@ -317,20 +317,21 @@ lovelace:
 
 # Example configuration.yaml entry
 circadian_lighting:
-  max_colortemp: 5500
+  max_colortemp: 5000
   min_colortemp: 3000
+  transition: 30
   sunrise_offset: "03:00:00"
   sunset_offset: "-00:45:00"
 
 switch:
-  - platform: xiaomi_miio
-    name: "Guest room floor lamp"
-    host: 192.168.1.30
-    token: c434a0a9b9897896e9b6abc1ffc80fa3
-  - platform: xiaomi_miio
-    name: "Fan"
-    host: 192.168.1.31
-    token: 7d34b272ed27dfd6cf229a75ab5a7a47
+  # - platform: xiaomi_miio
+  #   name: "Guest room floor lamp"
+  #   host: 192.168.1.30
+  #   token: c434a0a9b9897896e9b6abc1ffc80fa3
+  # - platform: xiaomi_miio
+  #   name: "Fan"
+  #   host: 192.168.1.31
+  #   token: 7d34b272ed27dfd6cf229a75ab5a7a47
   - platform: circadian_lighting
     name: "Living room auto ceiling"
     max_brightness: 70
@@ -351,12 +352,12 @@ switch:
     name: "Guest room lights auto"
     min_brightness: 50
     lights_ct:
-      - light.xiaomi_philips_e14_crystal
-      - light.xiaomi_philips_e14_crystal_2
+      - light.0xccccccfffeb2f9db_light
+      - light.0x086bd7fffe2f5d2c_light
   - platform: circadian_lighting
     name: "Master bedroom lights auto"
     lights_ct:
-      - light.master_bedroom_bed_lamp
+      - light.0x086bd7fffe24aedb_light
     lights_rgb:
       - light.gateway_light_34ce00fb56e8
     lights_brightness:
@@ -374,7 +375,8 @@ switch:
       - light.0x00158d0002c67ac3_light
   - platform: circadian_lighting
     name: "Downstairs bathroom side light auto"
-    max_brightness: 60
+    max_brightness: 50
+    min_brightness: 30
     lights_ct:
       - light.downstairs_bathroom_side_lamp
   - platform: circadian_lighting
@@ -386,10 +388,9 @@ switch:
       - light.gateway_light_34ce0088a579
   - platform: circadian_lighting
     name: "Tosia room lights auto"
-    max_brightness: 50
     lights_ct:
       - light.tosia_lamp
-      - light.tosia_left_wall_lamp
+      - light.0xec1bbdfffeb7fbbc_light
       - light.0x00158d0002b88c1c_light
   - platform: circadian_lighting
     name: "Wardrobe lights auto"
@@ -397,6 +398,13 @@ switch:
       - light.wardrobe_lamp
       - light.upstairs_hall_left_lamp
       - light.upstairs_hall_right_lamp
+  - platform: circadian_lighting
+    name: "IKEA Tradfri auto brightness"
+    lights_brightness:
+      - light.0x086bd7fffe24aedb_light
+      - light.0xec1bbdfffeb7fbbc_light
+      - light.0xccccccfffeb2f9db_light
+      - light.0x086bd7fffe2f5d2c_light
 scene:
   - name: Living room day
     entities:
@@ -433,25 +441,39 @@ scene:
   - name: Wojtek is cycling
     entities:
       switch.circadian_lighting_guest_room_lights_auto: off
+      switch.circadian_lighting_ikea_tradfri_auto_brightness: off
       automation.guest_room_motion: off
-      light.xiaomi_philips_e14_crystal:
+      light.0xccccccfffeb2f9db_light:
         state: on
-        brightness: 3
-      light.xiaomi_philips_e14_crystal_2: off
+        brightness: 1
+      light.0x086bd7fffe2f5d2c_light: off
       fan.xiaomi_smart_fan: on
+      switch.0x00158d00039e5eb1_switch: on
   - name: Wojtek finished cycling
     entities:
       switch.circadian_lighting_guest_room_lights_auto: on
+      switch.circadian_lighting_ikea_tradfri_auto_brightness: on
       automation.guest_room_motion: on
-      light.xiaomi_philips_e14_crystal: off
-      light.xiaomi_philips_e14_crystal_2: off
+      light.0xccccccfffeb2f9db_light: on
+      light.0x086bd7fffe2f5d2c_light: on
       fan.xiaomi_smart_fan: off
+      switch.0x00158d00039e5eb1_switch: off
 
 camera:
   - platform: generic
     name: yi-hack-01
     still_image_url: http://192.168.1.49:8080/cgi-bin/snapshot.sh
     stream_source: rtsp://192.168.1.49/ch0_0.h264
+    verify_ssl: false
+  - platform: generic
+    name: yi-hack-02
+    still_image_url: http://192.168.1.51:8080/cgi-bin/snapshot.sh
+    stream_source: rtsp://192.168.1.51/ch0_0.h264
+    verify_ssl: false
+  - platform: generic
+    name: yi-hack-03
+    still_image_url: http://192.168.1.52:8080/cgi-bin/snapshot.sh
+    stream_source: rtsp://192.168.1.52/ch0_0.h264
     verify_ssl: false
 
 # To start the camera:
@@ -514,7 +536,7 @@ group:
     entities:
       - switch.shelly1_55df6e_relay_0
       - light.stove_leds
-      - switch.0x00158d0001ded32d_switch
+      - switch.0x00158d0003951e91_switch
   dining_area:
     name: Dining area
     entities:
@@ -526,8 +548,8 @@ group:
       - light.xiaomi_philips_ceiling_light
       - switch.shelly1_5556b7_relay_0
       - light.wall_leds
-      - switch.0x00158d0001de79e6_switch
-      - switch.fan
+      # - switch.0x00158d0001de79e6_switch
+      # - switch.fan
       - light.stairs_leds
       - light.downstairs_hall_lamp
       - switch.shelly1_554b82_relay_0
@@ -545,15 +567,15 @@ group:
   tosia_bedroom_lights:
     name: Tosia's bedroom lights
     entities:
-      - light.tosia_left_wall_lamp
+      - light.0xec1bbdfffeb7fbbc_light
       - light.0x00158d0002b88c1c_light
       - light.tosia_lamp
-      - switch.xiaomi_miio_switch
+      # - switch.0x00158d0003951ef9_switch
   guest_room_lights:
     name: Guest room lights
     entities:
-      - light.xiaomi_philips_e14_crystal
-      - light.xiaomi_philips_e14_crystal_2
+      - light.0xccccccfffeb2f9db_light
+      - light.0x086bd7fffe2f5d2c_light
   upstairs_hall_lights:
     name: Upstairs hall lights
     entities:

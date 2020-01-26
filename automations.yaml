@@ -360,8 +360,8 @@
       service: homeassistant.turn_on
     - data:
         entity_id:
-          - light.xiaomi_philips_e14_crystal
-          - light.xiaomi_philips_e14_crystal_2
+          - light.0xccccccfffeb2f9db_light
+          - light.0x086bd7fffe2f5d2c_light
         scene: 1
       service: light.xiaomi_miio_set_scene
 - id: "1543665916713"
@@ -398,20 +398,22 @@
       condition: numeric_state
       entity_id: sensor.0x00158d0002b85113_illuminance
     - condition: time
-      after: "09:00:00"
+      after: 09:00:00
       before: "20:00:00"
     - condition: state
       entity_id: group.tosia_bedroom_lights
       state: "off"
   action:
     - data:
-        entity_id: group.tosia_bedroom_lights
-      service: homeassistant.turn_on
+        entity_id:
+          - light.0xec1bbdfffeb7fbbc_light
+          - light.0x00158d0002b88c1c_light
+      service: light.turn_on
     - wait_template:
-        "{% if states.binary_sensor['0x00158d0002b85113_occupancy'].state == 'off'
+        "{% if states.binary_sensor['0x00158d0002b85113_occupancy'].state
+        == 'off' and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
         and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
-        and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since | int >= 180
-        %}True{% else %}False{% endif %}"
+        | int >= 180 %}True{% else %}False{% endif %}"
     - condition: state
       entity_id: group.tosia_bedroom_lights
       state: "on"
@@ -446,7 +448,7 @@
   action:
     - data:
         entity_id:
-          - switch.xiaomi_miio_switch
+          - switch.0x00158d0003951ef9_switch
       service: switch.toggle
 - id: "1544967617743"
   alias: Leaving home
@@ -483,13 +485,9 @@
           - switch.shelly2_5a4ada_relay_1
           - switch.shelly1_2c03c5_relay_0
           - switch.shelly1_5545a9_relay_0
-          - switch.0x00158d0001ded32d_switch
+          - switch.0x00158d0003951e91_switch
           - switch.shelly1_55e273_relay_0
           - switch.0x00158d0001de79e6_switch
-    # - service: alarm_control_panel.alarm_arm_away
-    #   data:
-    #     entity_id: alarm_control_panel.ha_alarm
-    #     code: !secret alarm_code
 - id: "1544970728739"
   alias: Coming home
   trigger:
@@ -548,7 +546,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: light.master_bedroom_bed_lamp
+      entity_id: light.0x086bd7fffe24aedb_light
       state: "off"
     - below: "20"
       condition: numeric_state
@@ -559,7 +557,7 @@
   action:
     - data:
         entity_id:
-          - light.master_bedroom_bed_lamp
+          - light.0x086bd7fffe24aedb_light
           - light.gateway_light_34ce00fb56e8
           - light.bed_leds
         transition: 1
@@ -569,11 +567,11 @@
         motion since'] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e43bc7.state
         == 'off' %}True{% else %}False{% endif %}"
     - condition: state
-      entity_id: light.master_bedroom_bed_lamp
+      entity_id: light.0x086bd7fffe24aedb_light
       state: "on"
     - data:
         entity_id:
-          - light.master_bedroom_bed_lamp
+          - light.0x086bd7fffe24aedb_light
           - light.gateway_light_34ce00fb56e8
           - light.bed_leds
         transition: 1
@@ -595,7 +593,7 @@
     condition: or
     conditions:
       - condition: state
-        entity_id: light.master_bedroom_bed_lamp
+        entity_id: light.0x086bd7fffe24aedb_light
         state: "on"
       - condition: state
         entity_id: switch.shelly1_55e273_relay_0
@@ -612,7 +610,7 @@
   action:
     - data:
         entity_id:
-          - light.master_bedroom_bed_lamp
+          - light.0x086bd7fffe24aedb_light
           - light.gateway_light_34ce00fb56e8
           - light.bed_leds
         transition: 1
@@ -628,9 +626,9 @@
     - platform: template
       value_template:
         "{% if states.binary_sensor['0x00158d0002b85113_occupancy'].state
-        == 'off'  and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since is defined
-        and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since | int >= 1800
-        %}True{% else %}False{% endif %}"
+        == 'off'  and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
+        is defined and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
+        | int >= 1800 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
       entity_id: group.tosia_bedroom_lights
@@ -836,7 +834,7 @@
   action:
     - data:
         entity_id:
-          - light.master_bedroom_bed_lamp
+          - light.0x086bd7fffe24aedb_light
           - light.bed_leds
           - light.gateway_light_34ce00fb56e8
         transition: 1
@@ -1100,7 +1098,7 @@
   condition: []
   action:
     - data:
-        entity_id: light.tosia_left_wall_lamp
+        entity_id: light.0xec1bbdfffeb7fbbc_light
         transition: 1
       service: light.toggle
 - id: "1549129689282"
@@ -1129,8 +1127,10 @@
   condition: []
   action:
     - data:
-        entity_id: group.tosia_bedroom_lights
-      service: homeassistant.toggle
+        entity_id:
+          - light.0xec1bbdfffeb7fbbc_light
+          - light.0x00158d0002b88c1c_light
+      service: light.toggle
 - id: "1549179592040"
   alias: Wardrobe - motion
   trigger:
@@ -1524,7 +1524,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.0x00158d0001ded32d_switch
+      entity_id: switch.0x00158d0003951e91_switch
       state: "off"
     - below: "60"
       condition: numeric_state
@@ -1541,7 +1541,7 @@
         transition: 1
       service: light.turn_on
     - data:
-        entity_id: switch.0x00158d0001ded32d_switch
+        entity_id: switch.0x00158d0003951e91_switch
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor.motion_sensor_158d0002ec7efa.attributes['No
@@ -1869,7 +1869,7 @@
       to: "on"
   condition:
     - condition: numeric_state
-      entity_id: sensor.temperature_158d00023208a6
+      entity_id: sensor.0x00158d00023208a6_temperature
       above: 23
     - condition: numeric_state
       entity_id: sensor.temperature_158d0001b9208d
@@ -1919,26 +1919,6 @@
     - data:
         entity_id: fan.xiaomi_smart_fan
       service: fan.xiaomi_miio_set_natural_mode_on
-- id: "1565709018926"
-  alias: Kitchen - turn on fan
-  trigger:
-    - at: 08:00:00
-      platform: time
-  condition: []
-  action:
-    - data:
-        entity_id: switch.fan
-      service: switch.turn_on
-- id: "1565709065749"
-  alias: Kitchen - turn off fan
-  trigger:
-    - at: "20:00:00"
-      platform: time
-  condition: []
-  action:
-    - data:
-        entity_id: switch.fan
-      service: switch.turn_off
 - id: "1569862674233"
   alias: Kitchen - switch sink light
   trigger:
@@ -1950,7 +1930,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.0x00158d0001ded32d_switch
+        entity_id: switch.0x00158d0003951e91_switch
       service: switch.toggle
 - id: "1569862819815"
   alias: Kitchen switch ceiling light
@@ -2015,7 +1995,7 @@
   action:
     - entity_id: script.vacuum_start_cleaning
       service: script.turn_on
-- alias: "Trigger alarm while armed away"
+- alias: Trigger alarm while armed away
   trigger:
     - platform: state
       entity_id:
@@ -2043,28 +2023,35 @@
   action:
     - service: alarm_control_panel.alarm_trigger
       entity_id: alarm_control_panel.ha_alarm
-- alias: "Send notification when alarm triggered"
+  id: 519875f86a2f4ae88941f6a1f9a97d01
+- alias: Send notification when alarm triggered
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
-      to: "triggered"
+      to: triggered
   action:
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
-        message: "ALARM! The alarm has been triggered"
+        message: ALARM! The alarm has been triggered
         data:
           android:
             notification:
-              image: >
-                https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa{{ states.camera.yi_hack_01.attributes.entity_picture }}
+              image:
+                "https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa{{ states.camera.yi_hack_01.attributes.entity_picture
+                }}
+
+                "
     - service: notify.mobile_app_gosia_s_mi_a2_lite
       data_template:
-        message: "ALARM! The alarm has been triggered"
+        message: ALARM! The alarm has been triggered
         data:
           android:
             notification:
-              image: >
-                https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa{{ states.camera.yi_hack_01.attributes.entity_picture }}
+              image:
+                "https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa{{ states.camera.yi_hack_01.attributes.entity_picture
+                }}
+
+                "
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.living_room_speakers
@@ -2117,14 +2104,17 @@
       data_template:
         entity_id: media_player.living_room_speakers
         volume_level: 0.4
-- alias: "Send notification when alarm is Armed in Away mode"
+  id: 1816d6e6ece24085bded2a74127d6513
+- alias: Send notification when alarm is Armed in Away mode
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
-      to: "pending"
+      to: pending
   condition:
     - condition: template
-      value_template: '{{ state_attr("alarm_control_panel.ha_alarm", "post_pending_state") == "armed_away" }}'
+      value_template:
+        '{{ state_attr("alarm_control_panel.ha_alarm", "post_pending_state")
+        == "armed_away" }}'
   action:
     - service: tts.google_translate_say
       entity_id: media_player.living_room_speakers
@@ -2133,32 +2123,34 @@
         language: pl
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
-        message: "ALARM! The alarm is armed"
-- alias: "Disarm alarm when we're getting home"
+        message: ALARM! The alarm is armed
+  id: 12c8cc91e5e14d18aa3d0d72715645f0
+- alias: Disarm alarm when we're getting home
   trigger:
     - platform: state
       entity_id:
         - person.wojciech_iskra
         - person.malgorzata_iskra
-      from: "not_home"
-      to: "home"
+      from: not_home
+      to: home
   condition:
     - condition: state
       entity_id: alarm_control_panel.ha_alarm
-      state: "armed_away"
+      state: armed_away
   action:
     - service: alarm_control_panel.alarm_disarm
       data:
         entity_id: alarm_control_panel.ha_alarm
-        code: !secret alarm_code
+        code: 2310
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
-        message: "Welcome home! The alarm disarmed successfully"
-- alias: "Send notification when alarm is disarmed"
+        message: Welcome home! The alarm disarmed successfully
+  id: 2404b66ad6674a8c985dec79d2d04ef3
+- alias: Send notification when alarm is disarmed
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
-      to: "disarmed"
+      to: disarmed
   action:
     - service: tts.google_translate_say
       entity_id: media_player.living_room_speakers
@@ -2167,7 +2159,7 @@
         language: pl
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
-        message: "The alarm disarmed successfully"
+        message: The alarm disarmed successfully
     - data:
         entity_id:
           - switch.circadian_lighting_hall_lights_auto
@@ -2190,26 +2182,29 @@
           - light.stove_leds
         transition: 1
       service: light.turn_off
+  id: 184debd9df574d06aad9e8c467155a62
 - alias: "TESTING: Wojtek left home"
   trigger:
     - platform: state
       entity_id: person.wojciech_iskra
-      from: "home"
-      to: "not_home"
+      from: home
+      to: not_home
   action:
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
-        message: "Home assistant detected you left home"
+        message: Home assistant detected you left home
+  id: d27b90ac7e2746d4a2dabeffe17d3fa0
 - alias: "TESTING: Wojtek is back home"
   trigger:
     - platform: state
       entity_id: person.wojciech_iskra
-      from: "not_home"
-      to: "home"
+      from: not_home
+      to: home
   action:
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data:
-        message: "Home assistant detected you're back home"
+        message: Home assistant detected you're back home
+  id: 0fc5e331592f4ec69307f2318dac3dc7
 - id: enable_zigbee_join
   alias: Enable Zigbee joining
   hide_entity: true
@@ -2256,13 +2251,13 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.zigbee_permit_join
-- alias: "Notify when washing machine is done"
+- alias: Notify when washing machine is done
   trigger:
     - platform: state
       entity_id: sensor.0x00158d000319aa4b_action
-      from: "vibration"
+      from: vibration
       to: ""
-      for: "00:10:00"
+      for: 00:10:00
   action:
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data:
@@ -2280,20 +2275,19 @@
           android:
             notification:
               image: https://previews.123rf.com/images/memoangeles/memoangeles1606/memoangeles160600003/59790403-cartoon-washing-machine-vector-clip-art-illustration-with-simple-gradients-all-in-a-single-layer-.jpg
+  id: 4d1ef518a2204b1ba9b812a85fa08b62
 - id: shellies_announce
-  alias: "Shellies Announce"
+  alias: Shellies Announce
   trigger:
     - platform: homeassistant
       event: start
-    # - platform: time_pattern
-    # minutes: "/5"
   action:
     service: mqtt.publish
     data:
       topic: shellies/command
       payload: announce
-- id: "shellies_discovery"
-  alias: "Shellies Discovery"
+- id: shellies_discovery
+  alias: Shellies Discovery
   trigger:
     - platform: mqtt
       topic: shellies/announce
@@ -2303,3 +2297,26 @@
       id: "{{ trigger.payload_json.id }}"
       mac: "{{ trigger.payload_json.mac }}"
       fw_ver: "{{ trigger.payload_json.fw_ver }}"
+- id: "1579586601273"
+  alias: Wojtek is cycling
+  description: ""
+  trigger:
+    - entity_id: sensor.zwift_online_1380479
+      from: "False"
+      platform: state
+      to: "True"
+  condition: []
+  action:
+    - entity_id: scene.wojtek_is_cycling
+      service: scene.turn_on
+- id: "1579586727557"
+  alias: Wojtek finished cycling
+  description: ""
+  trigger:
+    - entity_id: sensor.zwift_online_1380479
+      from: "True"
+      platform: state
+      to: "False"
+  condition: []
+  action:
+    - scene: scene.wojtek_finished_cycling

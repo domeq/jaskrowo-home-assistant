@@ -111,3 +111,6 @@
     {{ now().strftime('%Y-%m-%d %H:%M:%S') }}
   # again, if you change base_topic of Zigbee2mqtt, change json_attributes_topic accordingly
   json_attributes_topic: zigbee2mqtt/bridge/networkmap/raw
+- platform: zwift
+  username: !secret my_zwift_username
+  password: !secret my_zwift_password
