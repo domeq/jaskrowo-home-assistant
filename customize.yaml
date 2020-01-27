@@ -61,7 +61,7 @@ binary_sensor.door_window_sensor_158d00022f148a:
 binary_sensor.door_window_sensor_158d000232db84:
   friendly_name: Loggia door
   icon: "mdi:window-closed"
-binary_sensor.door_window_sensor_158d0002436b09:
+binary_sensor.0x00158d0002436b09_contact:
   friendly_name: Guest room window
   icon: "mdi:window-closed"
 sensor.0x00158d00033b4d2c_temperature:
@@ -72,9 +72,9 @@ sensor.0x00158d00023208a6_temperature:
   friendly_name: Attic temperature
 sensor.0x00158d00023208a6_humidity:
   friendly_name: Attic humidity
-sensor.temperature_158d0002320e0c:
+sensor.0x00158d0002320e0c_temperature:
   friendly_name: Guest room temperature
-sensor.humidity_158d0002320e0c:
+sensor.0x00158d0002320e0c_humidity:
   friendly_name: Guest room humidity
 sensor.0x00158d0002320de3_temperature:
   friendly_name: Kitchen temperature
@@ -155,9 +155,9 @@ binary_sensor.motion_sensor_158d0001e55ff7:
   friendly_name: Attic wardrobe motion sensor
 sensor.illumination_158d0001e55ff7:
   friendly_name: Attic wardrobe illumination sensor
-binary_sensor.motion_sensor_158d0001e532dc:
+binary_sensor.0x00158d0001e532dc_occupancy:
   friendly_name: Guest room motion sensor
-sensor.illumination_158d0001e532dc:
+sensor.0x00158d0001e532dc_illuminance:
   friendly_name: Guest room illumination sensor
 binary_sensor.motion_sensor_158d0001655da1:
   friendly_name: Dining area motion sensor

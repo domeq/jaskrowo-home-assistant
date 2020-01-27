@@ -131,9 +131,9 @@ views:
         type: entities
       - title: Guest room
         entities:
-          - sensor.temperature_158d0002320e0c
-          - sensor.humidity_158d0002320e0c
-          - binary_sensor.door_window_sensor_158d0002436b09
+          - sensor.0x00158d0002320e0c_temperature
+          - sensor.0x00158d0002320e0c_humidity
+          - binary_sensor.0x00158d0002436b09_contact
           - light.0xccccccfffeb2f9db_light
           - light.0x086bd7fffe2f5d2c_light
           - fan.xiaomi_smart_fan
@@ -203,7 +203,7 @@ views:
           - binary_sensor.door_window_sensor_158d00022f148a
           - binary_sensor.door_window_sensor_158d000232db84
           - binary_sensor.0x00158d000232da46_contact
-          - binary_sensor.door_window_sensor_158d0002436b09
+          - binary_sensor.0x00158d0002436b09_contact
         hours_to_show: 24
         type: history-graph
         refresh_interval: 60
@@ -562,7 +562,7 @@ views:
                   left: 17%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e532dc
+                entity: binary_sensor.0x00158d0001e532dc_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -579,7 +579,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.temperature_158d0002320e0c
+                entity: sensor.0x00158d0002320e0c_temperature
                 style:
                   top: 7%
                   left: 6.5%
@@ -588,7 +588,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.humidity_158d0002320e0c
+                entity: sensor.0x00158d0002320e0c_humidity
                 style:
                   top: 11.5%
                   left: 6.5%
@@ -900,110 +900,48 @@ views:
               - zone.home
               - zone.abb
               - zone.schibsted
-      - type: vertical-stack
-        cards:
-          - type: custom:state-switch
-            entity: user
-            states:
-              wojtek:
-                type: picture-glance
-                title: Living room
-                entities:
-                  - sensor.0x00158d0001b1c3fb_temperature
-                  - sensor.0x00158d0001b1c3fb_humidity
-                  - binary_sensor.0x00158d0001ad5eb6_contact
-                  - group.living_room_lights
-                  - group.kitchen_lights
-                  - group.dining_area
-                camera_image: camera.yi_hack_01
-                camera_view: live
-              Gosiak:
-                type: conditional
-                conditions:
-                  - entity: person.wojciech_iskra
-                    state_not: "home"
-                  - entity: person.malgorzata_iskra
-                    state_not: "home"
-                card:
-                  type: picture-glance
-                  title: Living room
-                  entities:
-                    - sensor.0x00158d0001b1c3fb_temperature
-                    - sensor.0x00158d0001b1c3fb_humidity
-                    - binary_sensor.0x00158d0001ad5eb6_contact
-                    - group.living_room_lights
-                    - group.kitchen_lights
-                    - group.dining_area
-                  camera_image: camera.yi_hack_01
-                  camera_view: live
-          - type: custom:state-switch
-            entity: user
-            states:
-              wojtek:
-                type: picture-glance
-                title: Tosia's room
-                entities:
-                  - sensor.0x00158d00033b4d2c_temperature
-                  - sensor.0x00158d00033b4d2c_humidity
-                  - binary_sensor.0x00158d000232da46_contact
-                  - light.0xec1bbdfffeb7fbbc_light
-                  - light.0x00158d0002b88c1c_light
-                  - light.tosia_lamp
-                  - switch.0x00158d0003951ef9_switch
-                camera_image: camera.yi_hack_03
-                camera_view: live
-              Gosiak:
-                type: conditional
-                conditions:
-                  - entity: person.wojciech_iskra
-                    state_not: "home"
-                  - entity: person.malgorzata_iskra
-                    state_not: "home"
-                card:
-                  type: picture-glance
-                  title: Tosia's room
-                  entities:
-                    - sensor.0x00158d00033b4d2c_temperature
-                    - sensor.0x00158d00033b4d2c_humidity
-                    - binary_sensor.0x00158d000232da46_contact
-                    - light.0xec1bbdfffeb7fbbc_light
-                    - light.0x00158d0002b88c1c_light
-                    - light.tosia_lamp
-                    - switch.0x00158d0003951ef9_switch
-                  camera_image: camera.yi_hack_03
-                  camera_view: live
-          - type: custom:state-switch
-            entity: user
-            states:
-              wojtek:
-                type: picture-glance
-                title: Attic
-                entities:
-                  - sensor.0x00158d00023208a6_temperature
-                  - sensor.0x00158d00023208a6_humidity
-                  - light.attic_left_light
-                  - light.attic_right_light
-                  - light.attic_wardrobe_area_light
-                camera_image: camera.yi_hack_02
-                camera_view: live
-              Gosiak:
-                type: conditional
-                conditions:
-                  - entity: person.wojciech_iskra
-                    state_not: "home"
-                  - entity: person.malgorzata_iskra
-                    state_not: "home"
-                card:
-                  type: picture-glance
-                  title: Attic
-                  entities:
-                    - sensor.0x00158d00023208a6_temperature
-                    - sensor.0x00158d00023208a6_humidity
-                    - light.attic_left_light
-                    - light.attic_right_light
-                    - light.attic_wardrobe_area_light
-                  camera_image: camera.yi_hack_02
-                  camera_view: live
+      - type: conditional
+        conditions:
+          - entity: person.wojciech_iskra
+            state_not: "home"
+          - entity: person.malgorzata_iskra
+            state_not: "home"
+        card:
+          type: vertical-stack
+          cards:
+            - type: picture-glance
+              title: Living room
+              entities:
+                - sensor.0x00158d0001b1c3fb_temperature
+                - sensor.0x00158d0001b1c3fb_humidity
+                - binary_sensor.0x00158d0001ad5eb6_contact
+                - group.living_room_lights
+                - group.kitchen_lights
+                - group.dining_area
+              camera_image: camera.yi_hack_01
+              camera_view: live
+            - type: picture-glance
+              title: Tosia's room
+              entities:
+                - sensor.0x00158d00033b4d2c_temperature
+                - sensor.0x00158d00033b4d2c_humidity
+                - binary_sensor.0x00158d000232da46_contact
+                - light.0xec1bbdfffeb7fbbc_light
+                - light.0x00158d0002b88c1c_light
+                - light.tosia_lamp
+                - switch.0x00158d0003951ef9_switch
+              camera_image: camera.yi_hack_03
+              camera_view: live
+            - type: picture-glance
+              title: Attic
+              entities:
+                - sensor.0x00158d00023208a6_temperature
+                - sensor.0x00158d00023208a6_humidity
+                - light.attic_left_light
+                - light.attic_right_light
+                - light.attic_wardrobe_area_light
+              camera_image: camera.yi_hack_02
+              camera_view: live
       # - type: entities
       #   title: Motion detection
       #   show_header_toggle: false
@@ -1013,7 +951,7 @@ views:
       #     - binary_sensor.motion_sensor_158d0001e43bc7
       #     - binary_sensor.motion_sensor_158d0001e4707c
       #     - binary_sensor.motion_sensor_158d0001e531e0
-      #     - binary_sensor.motion_sensor_158d0001e532dc
+      #     - binary_sensor.0x00158d0001e532dc_occupancy
       #     - binary_sensor.motion_sensor_158d0001e547ae
       #     - binary_sensor.motion_sensor_158d0001e55ff7
       #     - binary_sensor.motion_sensor_158d0002b70d79
@@ -1126,12 +1064,11 @@ views:
         title: Temperature
         entities:
           - sensor.temperature_158d0001b9208d
-          - sensor.temperature_158d0001b92092
           - sensor.temperature_158d0001b92145
           - sensor.0x00158d0001b1c3fb_temperature
           - sensor.0x00158d00023208a6_temperature
           - sensor.0x00158d0002320de3_temperature
-          - sensor.temperature_158d0002320e0c
+          - sensor.0x00158d0002320e0c_temperature
           - sensor.airly_temperature
         hours_to_show: 24
         type: history-graph
@@ -1143,7 +1080,7 @@ views:
           - sensor.0x00158d0001b1c3fb_humidity
           - sensor.0x00158d00023208a6_humidity
           - sensor.0x00158d0002320de3_humidity
-          - sensor.humidity_158d0002320e0c
+          - sensor.0x00158d0002320e0c_humidity
         hours_to_show: 24
         type: history-graph
         refresh_interval: 60
@@ -1158,7 +1095,7 @@ views:
           - sensor.illumination_158d0002b422b4
           - sensor.illumination_158d0001e43bc7
           - sensor.illumination_34ce00fb56e8
-          - sensor.illumination_158d0001e532dc
+          - sensor.0x00158d0001e532dc_illuminance
           - sensor.0x00158d0002b85113_illuminance
           - sensor.illumination_158d0002b70d79
           - sensor.illumination_158d0002b72030

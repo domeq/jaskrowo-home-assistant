@@ -230,7 +230,7 @@ history_graph:
       - binary_sensor.door_window_sensor_158d00022f148a
       - binary_sensor.door_window_sensor_158d000232db84
       - binary_sensor.0x00158d000232da46_contact
-      - binary_sensor.door_window_sensor_158d0002436b09
+      - binary_sensor.0x00158d0002436b09_contact
     hours_to_show: 24
     refresh: 60
   temperatures:
@@ -242,7 +242,7 @@ history_graph:
       - sensor.0x00158d0001b1c3fb_temperature
       - sensor.0x00158d00023208a6_temperature
       - sensor.0x00158d0002320de3_temperature
-      - sensor.temperature_158d0002320e0c
+      - sensor.0x00158d0002320e0c_temperature
     hours_to_show: 24
     refresh: 60
   humidity:
@@ -254,7 +254,7 @@ history_graph:
       - sensor.0x00158d0001b1c3fb_humidity
       - sensor.0x00158d00023208a6_humidity
       - sensor.0x00158d0002320de3_humidity
-      - sensor.humidity_158d0002320e0c
+      - sensor.0x00158d0002320e0c_humidity
     hours_to_show: 24
     refresh: 60
   pollution:
@@ -272,7 +272,7 @@ history_graph:
       - sensor.illumination_158d0001e43bc7
       - sensor.illumination_158d0001e4707c
       - sensor.illumination_158d0001e531e0
-      - sensor.illumination_158d0001e532dc
+      - sensor.0x00158d0001e532dc_illuminance
       - sensor.illumination_158d0001e547ae
       - sensor.illumination_158d0001e55ff7
     hours_to_show: 12
@@ -319,7 +319,6 @@ lovelace:
 circadian_lighting:
   max_colortemp: 5000
   min_colortemp: 3000
-  transition: 30
   sunrise_offset: "03:00:00"
   sunset_offset: "-00:45:00"
 
@@ -334,6 +333,7 @@ switch:
   #   token: 7d34b272ed27dfd6cf229a75ab5a7a47
   - platform: circadian_lighting
     name: "Living room auto ceiling"
+    min_brightness: 30
     max_brightness: 70
     lights_ct:
       - light.xiaomi_philips_ceiling_light
@@ -410,20 +410,14 @@ scene:
     entities:
       light.xiaomi_philips_ceiling_light: on
       light.wall_leds: off
-      switch.0x00158d0001de79e6_switch: on
-      switch.fan: on
   - name: Living room evening
     entities:
       light.xiaomi_philips_ceiling_light: on
       light.wall_leds: on
-      switch.0x00158d0001de79e6_switch: on
-      switch.fan: on
   - name: Living room TV mode
     entities:
       light.xiaomi_philips_ceiling_light: off
       light.wall_leds: on
-      switch.0x00158d0001de79e6_switch: on
-      switch.fan: on
   - name: Somebody sleeping in living room
     entities:
       automation.living_room_motion_01_normal: off

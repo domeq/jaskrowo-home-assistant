@@ -4,12 +4,12 @@ mqtt:
   base_topic: zigbee2mqtt
   server: "mqtt://172.17.0.1"
 advanced:
+  rtscts: false
   log_output:
     - console
   last_seen: ISO_8601_local
 serial:
-  port: /dev/ttyACM0
-  disable_led: true
+  port: /dev/ttyUSB0
 queue:
   delay: 250
   simultaneously: 5
@@ -110,5 +110,22 @@ devices:
   "0x00158d00023208a6":
     friendly_name: attic_temperature_sensor
     debounce: 1
+    retain: true
+    qos: 2
+  "0x00124b001cd47045":
+    friendly_name: zigbee_router_01
+  "0x00124b0018e324c4":
+    friendly_name: zigbee_router_02
+  "0x00158d0002320e0c":
+    friendly_name: guest_room_temperature_sensor
+    debounce: 1
+    retain: true
+    qos: 2
+  "0x00158d0001e532dc":
+    friendly_name: guest_room_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0002436b09":
+    friendly_name: guest_room_window
     retain: true
     qos: 2
