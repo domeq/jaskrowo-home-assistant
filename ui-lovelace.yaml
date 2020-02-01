@@ -65,8 +65,8 @@ views:
               - switch.shelly2_5a4ada_relay_1
               - light.stove_leds
               - switch.0x00158d0003951e91_switch
-              - binary_sensor.door_window_sensor_158d00023709f7
-              - binary_sensor.door_window_sensor_158d00022f148a
+              - binary_sensor.0x00158d00023709f7_contact
+              - binary_sensor.0x00158d00022f148a_contact
               - vacuum.xiaomi_vacuum_cleaner
             type: entities
           - type: custom:xiaomi-vacuum-card
@@ -108,12 +108,12 @@ views:
           #           entity_id: script.vacuum_go_home
       - title: Master bedroom
         entities:
-          - sensor.temperature_158d0001b92145
-          - sensor.humidity_158d0001b92145
+          - sensor.0x00158d0001b92145_temperature
+          - sensor.0x00158d0001b92145_humidity
           - sensor.temperature_158d0001b9208d
           - sensor.humidity_158d0001b9208d
-          - binary_sensor.door_window_sensor_158d000232db84
-          - light.0x086bd7fffe24aedb_light
+          - binary_sensor.0x00158d000232db84_contact
+          - light.master_bedroom_bed_lamp
           - light.bed_leds
           - switch.shelly1_2c03c5_relay_0
           - switch.shelly1_55e273_relay_0
@@ -157,9 +157,9 @@ views:
         entities:
           - sensor.0x00158d00023208a6_temperature
           - sensor.0x00158d00023208a6_humidity
-          - light.attic_left_light
-          - light.attic_right_light
-          - light.attic_wardrobe_area_light
+          - light.0x00158d0003fa55ab_light
+          - light.attic_right_lamp_light
+          - light.0x00158d000410f2db_light
         type: entities
       - title: Bathrooms
         entities:
@@ -198,10 +198,10 @@ views:
         show_header_toggle: false
       - title: Windows open?
         entities:
-          - binary_sensor.door_window_sensor_158d00023709f7
+          - binary_sensor.0x00158d00023709f7_contact
           - binary_sensor.0x00158d0001ad5eb6_contact
-          - binary_sensor.door_window_sensor_158d00022f148a
-          - binary_sensor.door_window_sensor_158d000232db84
+          - binary_sensor.0x00158d00022f148a_contact
+          - binary_sensor.0x00158d000232db84_contact
           - binary_sensor.0x00158d000232da46_contact
           - binary_sensor.0x00158d0002436b09_contact
         hours_to_show: 24
@@ -221,7 +221,7 @@ views:
             elements:
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e43ac7
+                entity: binary_sensor.0x00158d0001e43ac7_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -236,7 +236,7 @@ views:
                   height: 50%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e4707c
+                entity: binary_sensor.0x00158d0001e4707c_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -326,7 +326,7 @@ views:
                   font-size: 9px
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e531e0
+                entity: binary_sensor.0x00158d0001e531e0_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -349,7 +349,7 @@ views:
                   left: 36%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001655da1
+                entity: binary_sensor.0x00158d0001655da1_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -366,7 +366,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: more-info
-                entity: binary_sensor.door_window_sensor_158d00022f148a
+                entity: binary_sensor.0x00158d00022f148a_contact
                 style:
                   top: 68%
                   left: 4%
@@ -386,7 +386,7 @@ views:
                   left: 18%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0002ec7efa
+                entity: binary_sensor.0x00158d0002ec7efa_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -444,7 +444,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: more-info
-                entity: binary_sensor.door_window_sensor_158d00023709f7
+                entity: binary_sensor.0x00158d00023709f7_contact
                 style:
                   top: 34%
                   left: 4%
@@ -617,7 +617,7 @@ views:
                   left: 15%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e43bc7
+                entity: binary_sensor.0x00158d0001e43bc7_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -634,7 +634,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.temperature_158d0001b92145
+                entity: sensor.0x00158d0001b92145_temperature
                 style:
                   top: 87%
                   left: 82.5%
@@ -643,7 +643,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.humidity_158d0001b92145
+                entity: sensor.0x00158d0001b92145_humidity
                 style:
                   top: 91.5%
                   left: 82.5%
@@ -670,14 +670,14 @@ views:
               - type: state-icon
                 tap_action:
                   action: more-info
-                entity: binary_sensor.door_window_sensor_158d000232db84
+                entity: binary_sensor.0x00158d000232db84_contact
                 style:
                   top: 52%
                   left: 85%
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.0x086bd7fffe24aedb_light
+                entity: light.master_bedroom_bed_lamp
                 style:
                   top: 60%
                   left: 62%
@@ -727,7 +727,7 @@ views:
                   left: 40%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0002b72030
+                entity: binary_sensor.0x00158d0002b72030_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -750,7 +750,7 @@ views:
                   left: 34%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d000257a1db
+                entity: binary_sensor.0x00158d000257a1db_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -860,21 +860,21 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.attic_left_light
+                entity: light.0x00158d0003fa55ab_light
                 style:
                   top: 88%
                   left: 61%
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.attic_right_light
+                entity: light.attic_right_lamp_light
                 style:
                   top: 31%
                   left: 51%
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.attic_wardrobe_area_light
+                entity: light.0x00158d000410f2db_light
                 style:
                   top: 10%
                   left: 46%
@@ -937,29 +937,29 @@ views:
               entities:
                 - sensor.0x00158d00023208a6_temperature
                 - sensor.0x00158d00023208a6_humidity
-                - light.attic_left_light
-                - light.attic_right_light
-                - light.attic_wardrobe_area_light
+                - light.0x00158d0003fa55ab_light
+                - light.attic_right_lamp_light
+                - light.0x00158d000410f2db_light
               camera_image: camera.yi_hack_02
               camera_view: live
       # - type: entities
       #   title: Motion detection
       #   show_header_toggle: false
       #   entities:
-      #     - binary_sensor.motion_sensor_158d0001e43ac7
+      #     - binary_sensor.0x00158d0001e43ac7_occupancy
       #     - binary_sensor.motion_sensor_158d000257a1be
-      #     - binary_sensor.motion_sensor_158d0001e43bc7
-      #     - binary_sensor.motion_sensor_158d0001e4707c
-      #     - binary_sensor.motion_sensor_158d0001e531e0
+      #     - binary_sensor.0x00158d0001e43bc7_occupancy
+      #     - binary_sensor.0x00158d0001e4707c_occupancy
+      #     - binary_sensor.0x00158d0001e531e0_occupancy
       #     - binary_sensor.0x00158d0001e532dc_occupancy
       #     - binary_sensor.motion_sensor_158d0001e547ae
       #     - binary_sensor.motion_sensor_158d0001e55ff7
       #     - binary_sensor.motion_sensor_158d0002b70d79
       #     - binary_sensor.0x00158d0002b85113_occupancy
-      #     - binary_sensor.motion_sensor_158d000257a1db
-      #     - binary_sensor.motion_sensor_158d0002ec7efa
-      #     - binary_sensor.motion_sensor_158d0001655da1
-      #     - binary_sensor.motion_sensor_158d0002b72030
+      #     - binary_sensor.0x00158d000257a1db_occupancy
+      #     - binary_sensor.0x00158d0002ec7efa_occupancy
+      #     - binary_sensor.0x00158d0001655da1_occupancy
+      #     - binary_sensor.0x00158d0002b72030_occupancy
       #     - binary_sensor.motion_sensor_158d0002b422b4
       #     - binary_sensor.motion_sensor_158d0002ebdbdf
   - title: Automations
@@ -975,7 +975,6 @@ views:
           - automation.dining_area_empty
           - automation.downstairs_bathroom_motion
           - automation.downstairs_bathroom_empty
-          - automation.guest_room_bright_mode
           - automation.guest_room_motion
           - automation.hall_empty_room
           - automation.hall_motion
@@ -1064,7 +1063,7 @@ views:
         title: Temperature
         entities:
           - sensor.temperature_158d0001b9208d
-          - sensor.temperature_158d0001b92145
+          - sensor.0x00158d0001b92145_temperature
           - sensor.0x00158d0001b1c3fb_temperature
           - sensor.0x00158d00023208a6_temperature
           - sensor.0x00158d0002320de3_temperature
@@ -1075,8 +1074,7 @@ views:
       - title: Humidity
         entities:
           - sensor.humidity_158d0001b9208d
-          - sensor.humidity_158d0001b92092
-          - sensor.humidity_158d0001b92145
+          - sensor.0x00158d0001b92145_humidity
           - sensor.0x00158d0001b1c3fb_humidity
           - sensor.0x00158d00023208a6_humidity
           - sensor.0x00158d0002320de3_humidity
@@ -1089,21 +1087,21 @@ views:
         show_header_toggle: false
         entities:
           - sensor.illumination_34ce0088a579
-          - sensor.illumination_158d0001e43ac7
+          - sensor.0x00158d0001e43ac7_illuminance
           - sensor.illumination_158d0001e4707c
-          - sensor.illumination_158d0001e531e0
+          - sensor.0x00158d0001e531e0_illuminance
           - sensor.illumination_158d0002b422b4
-          - sensor.illumination_158d0001e43bc7
+          - sensor.0x00158d0001e43bc7_illuminance
           - sensor.illumination_34ce00fb56e8
           - sensor.0x00158d0001e532dc_illuminance
           - sensor.0x00158d0002b85113_illuminance
           - sensor.illumination_158d0002b70d79
-          - sensor.illumination_158d0002b72030
+          - sensor.0x00158d0002b72030_illuminance
           - sensor.illumination_158d0001e547ae
           - sensor.illumination_158d0001e55ff7
-          - sensor.illumination_158d0002ec7efa
+          - sensor.0x00158d0002ec7efa_illuminance
           - sensor.illumination_158d000257a1be
-          - sensor.illumination_158d000257a1db
+          - sensor.0x00158d000257a1db_illuminance
   - title: Zigbee Network
     icon: "mdi:zigbee"
     path: zigbee-network

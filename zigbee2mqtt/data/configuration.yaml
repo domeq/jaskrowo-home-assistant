@@ -32,16 +32,8 @@ devices:
     friendly_name: vibration_sensor
     retain: true
     qos: 2
-  "0x00158d0001be5a61":
-    friendly_name: test_wireless_switch
-    retain: true
-    qos: 2
   "0x00158d0002b88c1c":
     friendly_name: tosia_right_wall
-    retain: true
-    qos: 2
-  "0x00158d0001de79e6":
-    friendly_name: christmas_wall_lights
     retain: true
     qos: 2
   "0x00158d0002320de3":
@@ -83,10 +75,6 @@ devices:
     friendly_name: kitchen_sink_lights
     retain: true
     qos: 2
-  "0x00158d0003951ef9":
-    friendly_name: tosia_christmas_tree
-    retain: true
-    qos: 2
   "0x00158d00039e5eb1":
     friendly_name: small_fan
     retain: true
@@ -101,10 +89,6 @@ devices:
     qos: 2
   "0xec1bbdfffeb7fbbc":
     friendly_name: tosia_left_wall
-    retain: true
-    qos: 2
-  "0x086bd7fffe24aedb":
-    friendly_name: master_bedroom_bed
     retain: true
     qos: 2
   "0x00158d00023208a6":
@@ -127,5 +111,109 @@ devices:
     qos: 2
   "0x00158d0002436b09":
     friendly_name: guest_room_window
+    retain: true
+    qos: 2
+  "0x00158d000101c2a1":
+    friendly_name: living_room_cube
+    qos: 2
+  "0x00158d0001e4707c":
+    friendly_name: living_room_under_stairs_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0001e531e0":
+    friendly_name: downstairs_hall_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0002ec7efa":
+    friendly_name: kitchen_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0001655da1":
+    friendly_name: kitchen_dining_area_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d00022f148a":
+    friendly_name: kitchen_left_window
+    retain: true
+    qos: 2
+  "0x00158d00023709f7":
+    friendly_name: kitchen_right_window
+    retain: true
+    qos: 2
+  "0x00158d0001e43ac7":
+    friendly_name: living_room_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d000410f2db":
+    friendly_name: attic_wardrobe_area_lamp
+    retain: true
+    qos: 2
+  "0x00158d0003fa55ab":
+    friendly_name: attic_left_lamp
+    retain: true
+    qos: 2
+  "0x00158d000446ff8d":
+    friendly_name: attic_right_lamp
+    retain: true
+    qos: 2
+  "0x00158d00030a3104":
+    friendly_name: living_room_stairs_switch_down
+    retain: true
+    qos: 2
+  "0x00158d0001e06c11":
+    friendly_name: living_room_left_switch
+    retain: true
+    qos: 2
+  "0x00158d0001f42198":
+    friendly_name: living_room_right_switch
+    retain: true
+    qos: 2
+  "0x00158d0001de79e6":
+    friendly_name: christmas_wall_lights
+    retain: true
+    qos: 2
+  "0x00158d00030aaa92":
+    friendly_name: downstairs_bathroom_outside_switch
+    retain: true
+    qos: 2
+  "0x00158d000123e3fe":
+    friendly_name: downstairs_bathroom_inside_switch
+    retain: true
+    qos: 2
+  "0x00158d0001b92145":
+    friendly_name: master_bedroom_temperature
+    debounce: 1
+    retain: true
+    qos: 2
+  "0x00158d00019ca9dc":
+    friendly_name: master_bedroom_bed_switch_2
+    retain: true
+    qos: 2
+  "0x00158d00016dbe9e":
+    friendly_name: master_bedroom_bed_switch_1
+    retain: true
+    qos: 2
+  "0x00158d0001b1827e":
+    friendly_name: tosia_desk_lamp_switch
+    retain: true
+    qos: 2
+  "0x00158d0001be5b10":
+    friendly_name: living_room_lights_switch_2
+    retain: true
+    qos: 2
+  "0x00158d0002b72030":
+    friendly_name: upstairs_bathroom_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d000257a1db":
+    friendly_name: upstairs_hall_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d000232db84":
+    friendly_name: "master_bedroom_loggia_door"
+    retain: true
+    qos: 2
+  "0x00158d0001e43bc7":
+    friendly_name: "master_bedroom_motion_sensor"
     retain: true
     qos: 2

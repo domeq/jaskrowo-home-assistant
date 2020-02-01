@@ -128,12 +128,12 @@ yeelight:
       name: Bed LEDs
     192.168.1.40:
       name: Tosia lamp
-    192.168.1.41:
-      name: Attic left light
-    192.168.1.42:
-      name: Attic right light
-    192.168.1.43:
-      name: Attic wardrobe area light
+    # 192.168.1.41:
+    #   name: Attic left light
+    # 192.168.1.42:
+    #   name: Attic right light
+    # 192.168.1.43:
+    #   name: Attic wardrobe area light
 
 # Enables support for tracking state changes over time
 history:
@@ -174,11 +174,11 @@ light:
     host: 192.168.1.21
     token: 3d5f7ae53b51aa312e464b150b37453b
     model: philips.light.ceiling
-  # - platform: xiaomi_miio
-  #   name: Master bedroom bed lamp
-  #   host: 192.168.1.22
-  #   token: c1ac97f17b98eb0cc6132fd6f6433f91
-  #   model: philips.light.candle2
+  - platform: xiaomi_miio
+    name: Master bedroom bed lamp
+    host: 192.168.1.22
+    token: c1ac97f17b98eb0cc6132fd6f6433f91
+    model: philips.light.candle2
   # - platform: xiaomi_miio
   #   name: Xiaomi Philips E14 Crystal
   #   host: 192.168.1.23
@@ -225,10 +225,10 @@ history_graph:
   windows:
     name: Windows open?
     entities:
-      - binary_sensor.door_window_sensor_158d00023709f7
+      - binary_sensor.0x00158d00023709f7_contact
       - binary_sensor.0x00158d0001ad5eb6_contact
-      - binary_sensor.door_window_sensor_158d00022f148a
-      - binary_sensor.door_window_sensor_158d000232db84
+      - binary_sensor.0x00158d00022f148a_contact
+      - binary_sensor.0x00158d000232db84_contact
       - binary_sensor.0x00158d000232da46_contact
       - binary_sensor.0x00158d0002436b09_contact
     hours_to_show: 24
@@ -238,7 +238,7 @@ history_graph:
     entities:
       - sensor.temperature_158d0001b9208d
       - sensor.temperature_158d0001b92092
-      - sensor.temperature_158d0001b92145
+      - sensor.0x00158d0001b92145_temperature
       - sensor.0x00158d0001b1c3fb_temperature
       - sensor.0x00158d00023208a6_temperature
       - sensor.0x00158d0002320de3_temperature
@@ -249,8 +249,7 @@ history_graph:
     name: Humidity
     entities:
       - sensor.humidity_158d0001b9208d
-      - sensor.humidity_158d0001b92092
-      - sensor.humidity_158d0001b92145
+      - sensor.0x00158d0001b92145_humidity
       - sensor.0x00158d0001b1c3fb_humidity
       - sensor.0x00158d00023208a6_humidity
       - sensor.0x00158d0002320de3_humidity
@@ -268,10 +267,10 @@ history_graph:
   illumination:
     name: Illumination
     entities:
-      - sensor.illumination_158d0001e43ac7
-      - sensor.illumination_158d0001e43bc7
+      - sensor.0x00158d0001e43ac7_illuminance
+      - sensor.0x00158d0001e43bc7_illuminance
       - sensor.illumination_158d0001e4707c
-      - sensor.illumination_158d0001e531e0
+      - sensor.0x00158d0001e531e0_illuminance
       - sensor.0x00158d0001e532dc_illuminance
       - sensor.illumination_158d0001e547ae
       - sensor.illumination_158d0001e55ff7
@@ -357,17 +356,18 @@ switch:
   - platform: circadian_lighting
     name: "Master bedroom lights auto"
     lights_ct:
-      - light.0x086bd7fffe24aedb_light
+      - light.master_bedroom_bed_lamp
     lights_rgb:
       - light.gateway_light_34ce00fb56e8
     lights_brightness:
       - light.bed_leds
   - platform: circadian_lighting
     name: "Attic lights auto"
+    min_brightness: 50
     lights_ct:
-      - light.attic_left_light
-      - light.attic_right_light
-      - light.attic_wardrobe_area_light
+      - light.0x00158d0003fa55ab_light
+      - light.attic_right_lamp_light
+      - light.0x00158d000410f2db_light
   - platform: circadian_lighting
     name: "Downstairs bathroom ceiling light auto"
     min_brightness: 70
@@ -401,7 +401,7 @@ switch:
   - platform: circadian_lighting
     name: "IKEA Tradfri auto brightness"
     lights_brightness:
-      - light.0x086bd7fffe24aedb_light
+      - light.master_bedroom_bed_lamp
       - light.0xec1bbdfffeb7fbbc_light
       - light.0xccccccfffeb2f9db_light
       - light.0x086bd7fffe2f5d2c_light
@@ -551,8 +551,8 @@ group:
     name: Downstairs windows
     entities:
       - binary_sensor.0x00158d0001ad5eb6_contact
-      - binary_sensor.door_window_sensor_158d00023709f7
-      - binary_sensor.door_window_sensor_158d00022f148a
+      - binary_sensor.0x00158d00023709f7_contact
+      - binary_sensor.0x00158d00022f148a_contact
   downstairs_bathroom_lights:
     name: Downstairs bathroom lights
     entities:
@@ -575,6 +575,14 @@ group:
     entities:
       - light.upstairs_hall_left_lamp
       - light.upstairs_hall_right_lamp
+  master_bedroom_lights:
+    name: Master bedroom lights
+    entities:
+      - light.master_bedroom_bed_lamp
+      - light.bed_leds
+      - switch.shelly1_2c03c5_relay_0
+      - switch.shelly1_55e273_relay_0
+      - light.gateway_light_34ce00fb56e8
 
 mqtt:
   broker: 172.17.0.1
@@ -621,3 +629,13 @@ python_script:
 weather:
   - platform: darksky
     api_key: !secret darksky_key
+
+webhook:
+
+zigbee2mqtt_networkmap:
+  #topic: your topic (optional, default zigbee2mqtt)
+panel_iframe:
+  networkmap:
+    title: "Zigbee Map"
+    url: "/local/community/zigbee2mqtt_networkmap/map.html"
+    icon: "mdi:zigbee"
