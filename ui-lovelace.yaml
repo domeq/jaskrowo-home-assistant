@@ -110,8 +110,8 @@ views:
         entities:
           - sensor.0x00158d0001b92145_temperature
           - sensor.0x00158d0001b92145_humidity
-          - sensor.temperature_158d0001b9208d
-          - sensor.humidity_158d0001b9208d
+          - sensor.0x00158d0001b9208d_temperature
+          - sensor.0x00158d0001b9208d_humidity
           - binary_sensor.0x00158d000232db84_contact
           - light.master_bedroom_bed_lamp
           - light.bed_leds
@@ -251,7 +251,7 @@ views:
                   height: 43%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d000257a1be
+                entity: binary_sensor.0x00158d000257a1be_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -450,7 +450,7 @@ views:
                   left: 4%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0002b422b4
+                entity: binary_sensor.0x00158d0002b422b4_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -466,7 +466,7 @@ views:
                   height: 20%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0002ebdbdf
+                entity: binary_sensor.0x00158d0002ebdbdf_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -652,7 +652,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.temperature_158d0001b9208d
+                entity: sensor.0x00158d0001b9208d_temperature
                 style:
                   top: 87%
                   left: 92%
@@ -661,7 +661,7 @@ views:
               - type: state-label
                 tap_action:
                   action: more-info
-                entity: sensor.humidity_158d0001b9208d
+                entity: sensor.0x00158d0001b9208d_humidity
                 style:
                   top: 91.5%
                   left: 92%
@@ -704,7 +704,7 @@ views:
                   left: 68%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0002b70d79
+                entity: binary_sensor.0x00158d0002b70d79_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -780,7 +780,7 @@ views:
                   left: 58%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d000257a1be
+                entity: binary_sensor.0x00158d000257a1be_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -809,7 +809,7 @@ views:
             elements:
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e547ae
+                entity: binary_sensor.0x00158d0001e547ae_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -825,7 +825,7 @@ views:
                   height: 66%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.motion_sensor_158d0001e55ff7
+                entity: binary_sensor.0x00158d0001e55ff7_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -947,21 +947,21 @@ views:
       #   show_header_toggle: false
       #   entities:
       #     - binary_sensor.0x00158d0001e43ac7_occupancy
-      #     - binary_sensor.motion_sensor_158d000257a1be
+      #     - binary_sensor.0x00158d000257a1be_occupancy
       #     - binary_sensor.0x00158d0001e43bc7_occupancy
       #     - binary_sensor.0x00158d0001e4707c_occupancy
       #     - binary_sensor.0x00158d0001e531e0_occupancy
       #     - binary_sensor.0x00158d0001e532dc_occupancy
-      #     - binary_sensor.motion_sensor_158d0001e547ae
-      #     - binary_sensor.motion_sensor_158d0001e55ff7
-      #     - binary_sensor.motion_sensor_158d0002b70d79
+      #     - binary_sensor.0x00158d0001e547ae_occupancy
+      #     - binary_sensor.0x00158d0001e55ff7_occupancy
+      #     - binary_sensor.0x00158d0002b70d79_occupancy
       #     - binary_sensor.0x00158d0002b85113_occupancy
       #     - binary_sensor.0x00158d000257a1db_occupancy
       #     - binary_sensor.0x00158d0002ec7efa_occupancy
       #     - binary_sensor.0x00158d0001655da1_occupancy
       #     - binary_sensor.0x00158d0002b72030_occupancy
-      #     - binary_sensor.motion_sensor_158d0002b422b4
-      #     - binary_sensor.motion_sensor_158d0002ebdbdf
+      #     - binary_sensor.0x00158d0002b422b4_occupancy
+      #     - binary_sensor.0x00158d0002ebdbdf_occupancy
   - title: Automations
     icon: "mdi:home-automation"
     path: automations
@@ -1062,7 +1062,7 @@ views:
       - refresh_inteval: 60
         title: Temperature
         entities:
-          - sensor.temperature_158d0001b9208d
+          - sensor.0x00158d0001b9208d_temperature
           - sensor.0x00158d0001b92145_temperature
           - sensor.0x00158d0001b1c3fb_temperature
           - sensor.0x00158d00023208a6_temperature
@@ -1073,7 +1073,7 @@ views:
         type: history-graph
       - title: Humidity
         entities:
-          - sensor.humidity_158d0001b9208d
+          - sensor.0x00158d0001b9208d_humidity
           - sensor.0x00158d0001b92145_humidity
           - sensor.0x00158d0001b1c3fb_humidity
           - sensor.0x00158d00023208a6_humidity
@@ -1086,21 +1086,19 @@ views:
         title: Illumination
         show_header_toggle: false
         entities:
-          - sensor.illumination_34ce0088a579
           - sensor.0x00158d0001e43ac7_illuminance
-          - sensor.illumination_158d0001e4707c
+          - sensor.0x00158d0001e4707c_illuminance
           - sensor.0x00158d0001e531e0_illuminance
-          - sensor.illumination_158d0002b422b4
+          - sensor.0x00158d0002b422b4_illuminance
           - sensor.0x00158d0001e43bc7_illuminance
-          - sensor.illumination_34ce00fb56e8
           - sensor.0x00158d0001e532dc_illuminance
           - sensor.0x00158d0002b85113_illuminance
-          - sensor.illumination_158d0002b70d79
+          - sensor.0x00158d0002b70d79_illuminance
           - sensor.0x00158d0002b72030_illuminance
-          - sensor.illumination_158d0001e547ae
-          - sensor.illumination_158d0001e55ff7
+          - sensor.0x00158d0001e547ae_illuminance
+          - sensor.0x00158d0001e55ff7_illuminance
           - sensor.0x00158d0002ec7efa_illuminance
-          - sensor.illumination_158d000257a1be
+          - sensor.0x00158d000257a1be_illuminance
           - sensor.0x00158d000257a1db_illuminance
   - title: Zigbee Network
     icon: "mdi:zigbee"

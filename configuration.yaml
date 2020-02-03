@@ -161,12 +161,6 @@ xiaomi_aqara:
   gateways:
     - mac: 34:CE:00:FB:56:E8
       key: 4z31ifz2sfrfv9mb
-    - mac: 34:CE:00:88:A5:79
-      key: iquhed73jeqsevke
-    - mac: 04:CF:8C:B8:7B:D4
-      key: zaoly671rews6dtn
-    # - mac: 04:CF:8C:B8:95:11
-    # key: ggcrtr1y791zwna1
 
 light:
   - platform: xiaomi_miio
@@ -236,8 +230,7 @@ history_graph:
   temperatures:
     name: Temperature
     entities:
-      - sensor.temperature_158d0001b9208d
-      - sensor.temperature_158d0001b92092
+      - sensor.0x00158d0001b9208d_temperature
       - sensor.0x00158d0001b92145_temperature
       - sensor.0x00158d0001b1c3fb_temperature
       - sensor.0x00158d00023208a6_temperature
@@ -248,7 +241,7 @@ history_graph:
   humidity:
     name: Humidity
     entities:
-      - sensor.humidity_158d0001b9208d
+      - sensor.0x00158d0001b9208d_humidity
       - sensor.0x00158d0001b92145_humidity
       - sensor.0x00158d0001b1c3fb_humidity
       - sensor.0x00158d00023208a6_humidity
@@ -269,11 +262,11 @@ history_graph:
     entities:
       - sensor.0x00158d0001e43ac7_illuminance
       - sensor.0x00158d0001e43bc7_illuminance
-      - sensor.illumination_158d0001e4707c
+      - sensor.0x00158d0001e4707c_illuminance
       - sensor.0x00158d0001e531e0_illuminance
       - sensor.0x00158d0001e532dc_illuminance
-      - sensor.illumination_158d0001e547ae
-      - sensor.illumination_158d0001e55ff7
+      - sensor.0x00158d0001e547ae_illuminance
+      - sensor.0x00158d0001e55ff7_illuminance
     hours_to_show: 12
     refresh: 60
 
@@ -283,7 +276,7 @@ binary_sensor:
   - platform: trend
     sensors:
       outside_temperature_rising:
-        entity_id: sensor.temperature_158d0001b9208d
+        entity_id: sensor.0x00158d0001b9208d_temperature
         sample_duration: 1200
         max_samples: 15
         min_gradient: 0.00055
@@ -384,8 +377,6 @@ switch:
     min_brightness: 90
     lights_ct:
       - light.stove_leds
-    lights_rgb:
-      - light.gateway_light_34ce0088a579
   - platform: circadian_lighting
     name: "Tosia room lights auto"
     lights_ct:

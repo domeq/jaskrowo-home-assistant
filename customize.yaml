@@ -22,19 +22,15 @@ light.attic_right_lamp_light:
 light.tosia_lamp:
   friendly_name: Tosia lamp
   icon: "mdi:lamp"
-light.gateway_light_34ce0088a579:
-  friendly_name: Kitchen gateway light
-sensor.illumination_34ce0088a579:
-  friendly_name: Kitchen gateway illumination sensor
 light.gateway_light_34ce00fb56e8:
   friendly_name: Master bedroom gateway light
   icon: "mdi:led-outline"
 sensor.illumination_34ce00fb56e8:
   friendly_name: Master bedroom gateway illumination sensor
-sensor.temperature_158d0001b9208d:
+sensor.0x00158d0001b9208d_temperature:
   friendly_name: Loggia temperature
   device_class: temperature
-sensor.humidity_158d0001b9208d:
+sensor.0x00158d0001b9208d_humidity:
   friendly_name: Loggia humidity
 sensor.0x00158d0001b92145_temperature:
   friendly_name: Master bedroom temperature
@@ -141,19 +137,19 @@ sensor.0x00158d0001e531e0_illuminance:
   friendly_name: Hall illumination sensor
 binary_sensor.0x00158d0001e4707c_occupancy:
   friendly_name: Stairs motion sensor
-sensor.illumination_158d0001e4707c:
+sensor.0x00158d0001e4707c_illuminance:
   friendly_name: Stairs illumination sensor
 binary_sensor.0x00158d0001e43bc7_occupancy:
   friendly name: Master bedroom motion sensor
 sensor.0x00158d0001e43bc7_illuminance:
   friendly_name: Master bedroom illumination sensor
-binary_sensor.motion_sensor_158d0001e547ae:
+binary_sensor.0x00158d0001e547ae_occupancy:
   friendly_name: Attic entry motion sensor
-sensor.illumination_158d0001e547ae:
+sensor.0x00158d0001e547ae_illuminance:
   friendly_name: Attic entry illumination sensor
-binary_sensor.motion_sensor_158d0001e55ff7:
+binary_sensor.0x00158d0001e55ff7_occupancy:
   friendly_name: Attic wardrobe motion sensor
-sensor.illumination_158d0001e55ff7:
+sensor.0x00158d0001e55ff7_illuminance:
   friendly_name: Attic wardrobe illumination sensor
 binary_sensor.0x00158d0001e532dc_occupancy:
   friendly_name: Guest room motion sensor
@@ -166,17 +162,13 @@ binary_sensor.switch_158d0001b182db:
 light.0x00158d0002c67ac3_light:
   friendly_name: Downstairs bathroom lamp
   icon: "mdi:ceiling-light"
-binary_sensor.motion_sensor_158d0002b70d79:
-  friendly_name: Wardrobe motion sensor
-sensor.illumination_158d0002b70d79:
-  friendly_name: Wardrobe illumination sensor
 binary_sensor.0x00158d0002b85113_occupancy:
   friendly_name: Tosia room motion sensor
 sensor.0x00158d0002b85113_illuminance:
   friendly_name: Tosia room illumination sensor
-binary_sensor.motion_sensor_158d0002b422b4:
+binary_sensor.0x00158d0002b422b4_occupancy:
   friendly_name: Downstairs bathroom motion sensor
-sensor.illumination_158d0002b422b4:
+sensor.0x00158d0002b422b4_illuminance:
   friendly_name: Downstairs bathroom illumination sensor
 switch.0x00158d0001de79e6_switch:
   friendly_name: Wall Christmas lights
@@ -188,8 +180,6 @@ fan.xiaomi_smart_fan:
 switch.0x00158d00039e5eb1_switch:
   friendly_name: Small fan
   icon: "mdi:fan"
-binary_sensor.switch_158d00019d5813:
-  friendly_name: Hall switch
 binary_sensor.switch_158d0001f9c3fe:
   friendly_name: Attic desk switch
 binary_sensor.switch_158d0001d8eeb1:
@@ -206,14 +196,6 @@ sensor.airly_air_quality_49_87_19_497:
   friendly_name: Wadowice
 sensor.airly_air_quality_50_0721293_19_8916957:
   friendly_name: Schibsted
-binary_sensor.wall_switch_left_158d0002b453ca:
-  friendly_name: Tosia wall switch - left button
-binary_sensor.wall_switch_right_158d0002b453ca:
-  friendly_name: Tosia wall switch - right button
-binary_sensor.wall_switch_both_158d0002b453ca:
-  friendly_name: Tosia wall switch - both buttons
-binary_sensor.wall_switch_158d0002828af1:
-  friendly_name: Wardrobe wall switch
 light.0x00158d000410f2db_light:
   friendly_name: Attic wardrobe area lamp
   icon: "mdi:floor-lamp"
@@ -228,23 +210,15 @@ switch.shelly1_5545a9_relay_0:
   icon: "mdi:spotlight-beam"
 sensor.xiaomi_air_quality_monitor:
   friendly_name: Indoor air quality
-binary_sensor.wall_switch_both_158d0002b455e6:
-  friendly_name: Master bedroom wall switch - both buttons
-binary_sensor.wall_switch_left_158d0002b455e6:
-  friendly_name: Master bedroom wall switch - left button
-binary_sensor.wall_switch_right_158d0002b455e6:
-  friendly_name: Master bedroom wall switch - right button
-binary_sensor.wall_switch_158d000282896e:
-  friendly_name: Upstairs bathroom wall switch
 switch.shelly1_554b82_relay_0:
   friendly_name: Stairs lamp
   icon: "mdi:stairs"
 switch.shelly1_5556b7_relay_0:
   friendly_name: Wall lights
   icon: "mdi:spotlight-beam"
-binary_sensor.motion_sensor_158d000257a1be:
+binary_sensor.0x00158d000257a1be_occupancy:
   friendly_name: Living room stairs - motion sensor
-sensor.illumination_158d000257a1be:
+sensor.0x00158d000257a1be_illuminance:
   friendly_name: Living room stairs - illumination sensor
 switch.0x00158d0003951e91_switch:
   friendly_name: Sink lights
@@ -262,14 +236,6 @@ switch.shelly2_5a4ada_relay_0:
 switch.shelly2_5a4ada_relay_1:
   friendly_name: Dining area ceiling lamp
   icon: "mdi:ceiling-light"
-binary_sensor.wall_switch_158d00028f6c2f:
-  friendly_name: Kitchen left wall switch
-binary_sensor.wall_switch_right_158d0002b48cff:
-  friendly_name: Kitchen right wall switch - right button
-binary_sensor.wall_switch_left_158d0002b48cff:
-  friendly_name: Kitchen right wall switch - left button
-binary_sensor.wall_switch_both_158d0002b48cff:
-  friendly_name: Kitchen right wall switch - both buttons
 binary_sensor.0x00158d000257a1db_occupancy:
   friendly_name: Upstairs hall motion sensor
 sensor.0x00158d000257a1db_illuminance:
@@ -285,28 +251,14 @@ light.upstairs_hall_right_lamp:
   icon: "mdi:spotlight-beam"
 light.wardrobe_lamp:
   icon: "mdi:spotlight-beam"
-binary_sensor.wall_switch_158d00030a302b:
-  friendly_name: Stairs switch up
-binary_sensor.wall_switch_158d00030a3104:
-  friendly_name: Stairs switch down
-binary_sensor.wall_switch_158d00030a3141:
-  friendly_name: Attic stairs switch
-binary_sensor.wall_switch_158d00030ac4de:
-  friendly_name: Attic stairs switch 2
-binary_sensor.wall_switch_158d00030ac48b:
-  friendly_name: Upstairs hall switch
-binary_sensor.wall_switch_158d0003131adb:
-  friendly_name: Upstairs hall switch 2
 light.downstairs_bathroom_side_lamp:
   friendly_name: Downstairs bathroom side
   icon: "mdi:spotlight-beam"
-binary_sensor.switch_158d000123e3fe:
-  friendly_name: Downstairs bathroom side switch
 switch.fan:
   friendly_name: Christmas tree
   icon: "mdi:pine-tree"
   # icon: "mdi:fan"
-binary_sensor.switch_158d0001b1286b:
+sensor.0x00158d0001b1286b_click:
   friendly_name: Kitchen light switch
 scene.somebody_sleeping_in_living_room:
   friendly_name: Somebody sleeping in living room
@@ -316,7 +268,7 @@ scene.wojtek_is_cycling:
   friendly_name: Wojtek is cycling
 scene.wojtek_finished_cycling:
   friendly_name: Wojtek finished cycling
-binary_sensor.motion_sensor_158d0002ebdbdf:
+binary_sensor.0x00158d0002ebdbdf_occupancy:
   friendly_name: Downstairs bathroom shower sensor
 device_tracker.mi_mix_2:
   friendly_name: Wojtek

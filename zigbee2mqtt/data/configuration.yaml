@@ -210,10 +210,95 @@ devices:
     retain: true
     qos: 2
   "0x00158d000232db84":
-    friendly_name: "master_bedroom_loggia_door"
+    friendly_name: master_bedroom_loggia_door
     retain: true
     qos: 2
   "0x00158d0001e43bc7":
-    friendly_name: "master_bedroom_motion_sensor"
+    friendly_name: master_bedroom_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d000257a1be":
+    friendly_name: living_room_stairs_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0002b422b4":
+    friendly_name: downstairs_bathroom_entry_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0002ebdbdf":
+    friendly_name: downstairs_bathroom_shower_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d00028f6c2f":
+    friendly_name: kitchen_left_wall_switch
+    retain: true
+    qos: 2
+  "0x00158d0002b48cff":
+    friendly_name: kitchen_right_wall_switch
+    retain: true
+    qos: 2
+  "0x00158d0002b70d79":
+    friendly_name: upstairs_wardrobe_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0001e547ae":
+    friendly_name: attic_entry_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0001e55ff7":
+    friendly_name: attic_wardrobe_motion_sensor
+    retain: true
+    qos: 2
+  "0x00158d0001b1286b":
+    friendly_name: kitchen_sink_switch
+    retain: true
+    qos: 2
+  "0x00158d0001f3f75e":
+    friendly_name: downstairs_hall_entry_switch_1
+    retain: true
+    qos: 2
+  "0x00158d00019d5813":
+    friendly_name: downstairs_hall_entry_switch_2
+    retain: true
+    qos: 2
+  "0x00158d00030ac4de":
+    friendly_name: attic_stairs_switch_1
+    retain: true
+    qos: 2
+  "0x00158d00030a3141":
+    friendly_name: attic_stairs_switch_2
+    retain: true
+    qos: 2
+  "0x00158d0001b9208d":
+    friendly_name: loggia_temperature
+    debounce: 1
+    retain: true
+    qos: 2
+  "0x00158d0003131adb":
+    friendly_name: upstairs_hall_switch_1
+    retain: true
+    qos: 2
+  "0x00158d00030ac48b":
+    friendly_name: upstairs_hall_switch_2
+    retain: true
+    qos: 2
+  "0x00158d0002828af1":
+    friendly_name: wardrobe_switch
+    retain: true
+    qos: 2
+  "0x00158d00030a302b":
+    friendly_name: living_room_stairs_switch_2
+    retain: true
+    qos: 2
+  "0x00158d000282896e":
+    friendly_name: upstairs_bathroom_switch
+    retain: true
+    qos: 2
+  "0x00158d0002b453ca":
+    friendly_name: tosia_room_switch
+    retain: true
+    qos: 2
+  "0x00158d0002b455e6":
+    friendly_name: master_bedroom_wall_switch
     retain: true
     qos: 2

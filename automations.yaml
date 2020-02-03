@@ -210,14 +210,14 @@
 - id: "1541522658112"
   alias: Attic - entry area motion
   trigger:
-    - entity_id: binary_sensor.motion_sensor_158d0001e547ae
+    - entity_id: binary_sensor.0x00158d0001e547ae_occupancy
       from: "off"
       platform: state
       to: "on"
   condition:
     - below: "30"
       condition: numeric_state
-      entity_id: sensor.illumination_158d0001e547ae
+      entity_id: sensor.0x00158d0001e547ae_illuminance
   action:
     - data:
         entity_id:
@@ -226,9 +226,10 @@
         transition: 1
       service: light.turn_on
     - wait_template:
-        "{% if states.binary_sensor.motion_sensor_158d0001e547ae.attributes['No
-        motion since'] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e547ae.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d0001e547ae_occupancy'].state
+        == 'off' and states.binary_sensor['0x00158d0001e547ae_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d0001e547ae_occupancy'].attributes.no_occupancy_since
+        | int >= 180 %}True{% else %}False{% endif %}"
     - condition: state
       entity_id: light.0x00158d0003fa55ab_light
       state: "on"
@@ -241,7 +242,7 @@
 - id: "1541525021925"
   alias: Attic - wardrobe area motion
   trigger:
-    - entity_id: binary_sensor.motion_sensor_158d0001e55ff7
+    - entity_id: binary_sensor.0x00158d0001e55ff7_occupancy
       from: "off"
       platform: state
       to: "on"
@@ -251,9 +252,10 @@
         transition: 1
       service: light.turn_on
     - wait_template:
-        "{% if states.binary_sensor.motion_sensor_158d0001e55ff7.attributes['No
-        motion since'] | int >= 180 and states.binary_sensor.motion_sensor_158d0001e55ff7.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d0001e55ff7_occupancy'].state
+        == 'off' and states.binary_sensor['0x00158d0001e55ff7_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d0001e55ff7_occupancy'].attributes.no_occupancy_since
+        | int >= 180 %}True{% else %}False{% endif %}"
     - condition: state
       entity_id: light.0x00158d000410f2db_light
       state: "on"
@@ -266,11 +268,13 @@
   trigger:
     - platform: template
       value_template:
-        "{% if states.binary_sensor.motion_sensor_158d0001e547ae.attributes['No
-        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0001e55ff7.state
-        == 'off' and states.binary_sensor.motion_sensor_158d0001e55ff7.attributes['No
-        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0001e55ff7.state
-        == 'off'%}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d0001e547ae_occupancy'].state
+        == 'off'  and states.binary_sensor['0x00158d0001e547ae_occupancy'].attributes.no_occupancy_since
+        is defined and states.binary_sensor['0x00158d0001e547ae_occupancy'].attributes.no_occupancy_since
+        | int >= 600 and states.binary_sensor['0x00158d0001e55ff7_occupancy'].state
+        == 'off'  and states.binary_sensor['0x00158d0001e55ff7_occupancy'].attributes.no_occupancy_since
+        is defined and states.binary_sensor['0x00158d0001e55ff7_occupancy'].attributes.no_occupancy_since
+        | int >= 600 %}True{% else %}False{% endif %}"
   condition:
     condition: or
     conditions:
@@ -424,11 +428,9 @@
 - id: "1544967617743"
   alias: Leaving home
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d00019d5813
-        click_type: long_click_press
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d00019d5813_click
+      platform: state
+      to: "long"
   condition: []
   action:
     - data:
@@ -461,11 +463,9 @@
 - id: "1544970728739"
   alias: Coming home
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d00019d5813
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d00019d5813_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - service: tts.google_translate_say
@@ -520,7 +520,7 @@
       state: "off"
     - below: "20"
       condition: numeric_state
-      entity_id: sensor.illumination_158d0001e43bc7
+      entity_id: sensor.0x00158d0001e43bc7_illuminance
     - after: "10:00:00"
       before: "21:00:00"
       condition: time
@@ -678,11 +678,9 @@
 - id: "1545996231997"
   alias: Hall wall switch - left click
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_left_158d0001f3f75e
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001f3f75e_click
+      platform: state
+      to: "left"
   condition: []
   action:
     - data:
@@ -695,58 +693,22 @@
 - id: "1545996260772"
   alias: Hall wall switch - right click
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_right_158d0001f3f75e
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
-  condition:
-    - condition: state
-      entity_id: light.downstairs_hall_lamp
-      state: "on"
-  action:
-    - data:
-        entity_id: switch.circadian_lighting_hall_lights_auto
-      service: switch.turn_off
-    - service: light.turn_on
-      data_template:
-        transition: 1
-        entity_id: light.downstairs_hall_lamp
-        color_temp: 153
-        brightness:
-          "{{ ((states.light.downstairs_hall_lamp.attributes['brightness']
-          | int) * 0.5) | round }}"
-- id: "1545996302489"
-  alias: Hall wall switch - both click
-  trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_both_158d0001f3f75e
-        click_type: both
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001f3f75e_click
+      platform: state
+      to: "right"
   condition: []
   action:
     - data:
-        entity_id: switch.circadian_lighting_hall_lights_auto
-      service: switch.turn_off
-    - data:
-        entity_id: light.downstairs_hall_lamp
-        mode: normal
-      service: light.yeelight_set_mode
-    - data:
-        entity_id: light.downstairs_hall_lamp
+        entity_id: light.xiaomi_philips_ceiling_light
         transition: 1
-        brightness: 255
-      service: light.turn_on
+      service: light.toggle
 - id: "1546010274549"
   alias: Master bedroom - toggle lights
   hide_entity: true
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_both_158d0002b455e6
-        click_type: both
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002b455e6_click
+      platform: state
+      to: "both"
     - entity_id: sensor.0x00158d00016dbe9e_click
       platform: state
       to: "single"
@@ -969,11 +931,11 @@
 - id: "1548095677962"
   alias: Downstairs bathroom - motion
   trigger:
-    - entity_id: binary_sensor.motion_sensor_158d0002b422b4
+    - entity_id: binary_sensor.0x00158d0002b422b4_occupancy
       from: "off"
       platform: state
       to: "on"
-    - entity_id: binary_sensor.motion_sensor_158d0002ebdbdf
+    - entity_id: binary_sensor.0x00158d0002ebdbdf_occupancy
       from: "off"
       platform: state
       to: "on"
@@ -993,11 +955,11 @@
   trigger:
     - platform: template
       value_template:
-        "{% if states.binary_sensor.motion_sensor_158d0002b422b4.attributes['No
-        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0002b422b4.state
-        == 'off' and states.binary_sensor.motion_sensor_158d0002ebdbdf.attributes['No
-        motion since'] | int >= 1200 and states.binary_sensor.motion_sensor_158d0002ebdbdf.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d0002b422b4_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d0002b422b4_occupancy'].attributes.no_occupancy_since
+        | int >= 600 and states.binary_sensor['0x00158d0002ebdbdf_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d0002ebdbdf_occupancy'].attributes.no_occupancy_since
+        | int >= 1200 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
       entity_id: group.downstairs_bathroom_lights
@@ -1010,11 +972,9 @@
 - id: "1549129661008"
   alias: Tosia wall switch - left button
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_left_158d0002b453ca
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002b453ca_click
+      platform: state
+      to: "left"
   condition: []
   action:
     - data:
@@ -1024,11 +984,9 @@
 - id: "1549129689282"
   alias: Tosia wall switch - right click
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_right_158d0002b453ca
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002b453ca_click
+      platform: state
+      to: "right"
   condition: []
   action:
     - data:
@@ -1039,11 +997,9 @@
 - id: "1549129715747"
   alias: Tosia wall switch - both buttons
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_both_158d0002b453ca
-        click_type: both
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002b453ca_click
+      platform: state
+      to: "both"
   condition: []
   action:
     - data:
@@ -1054,7 +1010,7 @@
 - id: "1549179592040"
   alias: Wardrobe - motion
   trigger:
-    - entity_id: binary_sensor.motion_sensor_158d0002b70d79
+    - entity_id: binary_sensor.0x00158d0002b70d79_occupancy
       from: "off"
       platform: state
       to: "on"
@@ -1064,7 +1020,7 @@
       state: "off"
     - below: "35"
       condition: numeric_state
-      entity_id: sensor.illumination_158d0002b70d79
+      entity_id: sensor.0x00158d0002b70d79_illuminance
   action:
     - data:
         entity_id: switch.circadian_lighting_wardrobe_lights_auto
@@ -1074,9 +1030,10 @@
         transition: 1
       service: light.turn_on
     - wait_template:
-        "{% if states.binary_sensor.motion_sensor_158d0002b70d79.attributes['No
-        motion since'] | int >= 120 and states.binary_sensor.motion_sensor_158d0002b70d79.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d0002b70d79_occupancy'].state
+        == 'off' and states.binary_sensor['0x00158d0002b70d79_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d0002b70d79_occupancy'].attributes.no_occupancy_since
+        | int >= 300 %}True{% else %}False{% endif %}"
     - condition: state
       entity_id: light.wardrobe_lamp
       state: "on"
@@ -1088,9 +1045,9 @@
   trigger:
     - platform: template
       value_template:
-        "{% if states.binary_sensor.motion_sensor_158d0002b70d79.attributes['No
-        motion since'] | int >= 600 and states.binary_sensor.motion_sensor_158d0002b70d79.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d0002b70d79_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d0002b70d79_occupancy'].attributes.no_occupancy_since
+        | int >= 300 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
       entity_id: light.wardrobe_lamp
@@ -1103,11 +1060,9 @@
 - id: "1549179693148"
   alias: Wardrobe - toggle light
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_158d0002828af1
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002828af1_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - data:
@@ -1117,11 +1072,9 @@
 - id: "1549196193367"
   alias: Master bedroom - toggle stairs lamps
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_left_158d0002b455e6
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002b455e6_click
+      platform: state
+      to: "left"
   condition: []
   action:
     - data:
@@ -1130,11 +1083,9 @@
 - id: "1549196224140"
   alias: Master bedroom - toggle wall lamp
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_right_158d0002b455e6
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002b455e6_click
+      platform: state
+      to: "right"
   condition: []
   action:
     - data:
@@ -1177,11 +1128,9 @@
 - id: "1549196390092"
   alias: Upstairs bathroom - toggle light
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_158d000282896e
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d000282896e_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - data:
@@ -1331,7 +1280,7 @@
 - id: "1549654128210"
   alias: Living room stairs - motion
   trigger:
-    - entity_id: binary_sensor.motion_sensor_158d000257a1be
+    - entity_id: binary_sensor.0x00158d000257a1be_occupancy
       from: "off"
       platform: state
       to: "on"
@@ -1341,7 +1290,7 @@
       state: "off"
     - below: "10"
       condition: numeric_state
-      entity_id: sensor.illumination_158d000257a1be
+      entity_id: sensor.0x00158d000257a1be_illuminance
     - after: 06:30:00
       before: "22:00:00"
       condition: time
@@ -1350,9 +1299,10 @@
         entity_id: switch.shelly1_554b82_relay_0
       service: switch.turn_on
     - wait_template:
-        "{% if states.binary_sensor.motion_sensor_158d000257a1be.attributes['No
-        motion since'] | int >= 0 and states.binary_sensor.motion_sensor_158d000257a1be.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d000257a1be_occupancy'].state
+        == 'off' and states.binary_sensor['0x00158d000257a1be_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d000257a1be_occupancy'].attributes.no_occupancy_since
+        | int >= 300 %}True{% else %}False{% endif %}"
     - condition: state
       entity_id: switch.shelly1_554b82_relay_0
       state: "on"
@@ -1364,9 +1314,9 @@
   trigger:
     - platform: template
       value_template:
-        "{% if states.binary_sensor.motion_sensor_158d000257a1be.attributes['No
-        motion since'] | int >= 300 and states.binary_sensor.motion_sensor_158d000257a1be.state
-        == 'off' %}True{% else %}False{% endif %}"
+        "{% if states.binary_sensor['0x00158d000257a1be_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d000257a1be_occupancy'].attributes.no_occupancy_since
+        | int >= 300 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
       entity_id: switch.shelly1_554b82_relay_0
@@ -1394,11 +1344,9 @@
 - id: "1549810691857"
   alias: Kitchen left wall switch - click
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_158d00028f6c2f
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d00028f6c2f_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - data:
@@ -1412,11 +1360,9 @@
 - id: "1549810749195"
   alias: Kitchen right wall switch - left button
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_left_158d0002b48cff
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002b48cff_click
+      platform: state
+      to: "left"
   condition: []
   action:
     - data:
@@ -1425,11 +1371,9 @@
 - id: "1549810780701"
   alias: Kitchen right wall switch - right button
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_right_158d0002b48cff
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0002b48cff_click
+      platform: state
+      to: "right"
   condition: []
   action:
     - data:
@@ -1529,11 +1473,9 @@
 - id: "1554142824635"
   alias: Living room stairs - toggle
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_158d00030a302b
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d00030a302b_click
+      platform: state
+      to: "single"
     - entity_id: sensor.0x00158d00030a3104_click
       platform: state
       to: "single"
@@ -1545,16 +1487,12 @@
 - id: "1554226640385"
   alias: Attic stairs - toggle
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_158d00030a3141
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
-    - event_data:
-        entity_id: binary_sensor.wall_switch_158d00030ac4de
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d00030ac4de_click
+      platform: state
+      to: "single"
+    - entity_id: sensor.0x00158d00030a3141_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - data:
@@ -1564,18 +1502,14 @@
         transition: 1
       service: light.toggle
 - id: "1554394458437"
-  alias: Wardrobe - toggle
+  alias: Upstairs hall - toggle
   trigger:
-    - event_data:
-        entity_id: binary_sensor.wall_switch_158d00030ac48b
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
-    - event_data:
-        entity_id: binary_sensor.wall_switch_158d0003131adb
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0003131adb_click
+      platform: state
+      to: "single"
+    - entity_id: sensor.0x00158d00030ac48b_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - data:
@@ -1682,7 +1616,7 @@
       entity_id: sensor.0x00158d0001b1c3fb_temperature
     - below: "22"
       condition: numeric_state
-      entity_id: sensor.temperature_158d0001b9208d
+      entity_id: sensor.0x00158d0001b9208d_temperature
     - condition: state
       entity_id: binary_sensor.0x00158d0001ad5eb6_contact
       for:
@@ -1728,7 +1662,7 @@
       entity_id: sensor.0x00158d0001b1c3fb_temperature
     - above: "27"
       condition: numeric_state
-      entity_id: sensor.temperature_158d0001b9208d
+      entity_id: sensor.0x00158d0001b9208d_temperature
     - condition: state
       entity_id: binary_sensor.outside_temperature_rising
       state: "on"
@@ -1761,8 +1695,8 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.shelly_plug_s_51d92a_power_0
-      below: 5
-      for: 00:03:00
+      below: 3
+      for: 00:10:00
   condition:
     - condition: or
       conditions:
@@ -1804,11 +1738,9 @@
 - id: "1569862674233"
   alias: Kitchen - switch sink light
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d0001b1286b
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001b1286b_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - data:
@@ -1817,11 +1749,9 @@
 - id: "1569862819815"
   alias: Kitchen switch ceiling light
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d0001b1286b
-        click_type: double
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001b1286b_click
+      platform: state
+      to: "double"
   condition: []
   action:
     - data:
@@ -1883,21 +1813,21 @@
     - platform: state
       entity_id:
         - binary_sensor.0x00158d0001e43ac7_occupancy
-        - binary_sensor.motion_sensor_158d000257a1be
+        - binary_sensor.0x00158d000257a1be_occupancy
         - binary_sensor.0x00158d0001e43bc7_occupancy
         - binary_sensor.0x00158d0001e4707c_occupancy
         - binary_sensor.0x00158d0001e531e0_occupancy
         - binary_sensor.0x00158d0001e532dc_occupancy
-        - binary_sensor.motion_sensor_158d0001e547ae
-        - binary_sensor.motion_sensor_158d0001e55ff7
-        - binary_sensor.motion_sensor_158d0002b70d79
+        - binary_sensor.0x00158d0001e547ae_occupancy
+        - binary_sensor.0x00158d0001e55ff7_occupancy
+        - binary_sensor.0x00158d0002b70d79_occupancy
         - binary_sensor.0x00158d0002b85113_occupancy
         - binary_sensor.0x00158d000257a1db_occupancy
         - binary_sensor.0x00158d0002ec7efa_occupancy
         - binary_sensor.0x00158d0001655da1_occupancy
         - binary_sensor.0x00158d0002b72030_occupancy
-        - binary_sensor.motion_sensor_158d0002b422b4
-        - binary_sensor.motion_sensor_158d0002ebdbdf
+        - binary_sensor.0x00158d0002b422b4_occupancy
+        - binary_sensor.0x00158d0002ebdbdf_occupancy
       to: "on"
   condition:
     - condition: state
