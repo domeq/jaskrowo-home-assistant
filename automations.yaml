@@ -328,11 +328,9 @@
   alias: Guest room - toggle light
   hide_entity: true
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d0001b182db
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001b182db_click
+      platform: state
+      to: "single"
     - entity_id: sensor.0x00158d0001be5b10_click
       platform: state
       to: "single"
@@ -815,11 +813,9 @@
   alias: Attic - toggle left entry light
   hide_entity: true
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d0001f9c3fe
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001f9c3fe_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - data:
@@ -830,11 +826,9 @@
   alias: Attic - toggle right entry light
   hide_entity: true
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d0001f9c3fe
-        click_type: double
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001f9c3fe_click
+      platform: state
+      to: "double"
   condition: []
   action:
     - data:
@@ -845,11 +839,9 @@
   alias: Attic - toggle wardrobe area light
   hide_entity: true
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d0001f9c3fe
-        click_type: long_click_press
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001f9c3fe_click
+      platform: state
+      to: "long"
   condition: []
   action:
     - data:
@@ -859,11 +851,9 @@
 - id: "1546020188168"
   alias: Tosia feeder - gryzkaj, gryzkaj
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d0001d8eeb1
-        click_type: single
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001d8eeb1_click
+      platform: state
+      to: "single"
   condition: []
   action:
     - service: tts.google_translate_say
@@ -878,14 +868,32 @@
 
           "
         language: pl
+- alias: Tata talks - tani podryw
+  trigger:
+    - entity_id: sensor.0x00158d0001d8eeb1_click
+      platform: state
+      to: "double"
+  condition: []
+  action:
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room_speakers
+      data_template:
+        message:
+          "{{ [ 'Gdybyś była warzywem, byłabyś cud-kinią', 'Czy tu jest tak gorąco,
+          czy to po prostu Ty?', 'Masz chłopaka - to już najwyższy czas, byś poczuła, jak to jest mieć prawdziwego
+          mężczyznę.', 'Gdybyś była kanapką w McDonald’s, nazywałabyś się McBeauty.', 'Myślę, że masz coś w oku.
+          Och, spoko, to tylko błysk...', 'Jesteś tak piękna, że aż sam nie wiem, co powiedzieć.', 'Przepraszam,
+          czy ja jestem w cukierni, bo widzę niezłe ciasteczko', 'Masz może mapę? Bo zgubiłem się w twoich
+          oczach', 'Oj, Mała. Gdybyś była rzodkiewką, już dawno bym Cię wyrwał.' ] | random }}
+
+          "
+        language: pl
 - id: "1546020275655"
   alias: Tosia feeder - nie złość Mamy!
   trigger:
-    - event_data:
-        entity_id: binary_sensor.switch_158d0001d8eeb1
-        click_type: long_click_press
-      event_type: xiaomi_aqara.click
-      platform: event
+    - entity_id: sensor.0x00158d0001d8eeb1_click
+      platform: state
+      to: "long"
   condition: []
   action:
     - service: tts.google_translate_say

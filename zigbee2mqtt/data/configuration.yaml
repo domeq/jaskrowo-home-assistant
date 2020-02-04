@@ -198,7 +198,7 @@ devices:
     retain: true
     qos: 2
   "0x00158d0001be5b10":
-    friendly_name: living_room_lights_switch_2
+    friendly_name: guest_room_lights_switch_2
     retain: true
     qos: 2
   "0x00158d0002b72030":
@@ -300,5 +300,17 @@ devices:
     qos: 2
   "0x00158d0002b455e6":
     friendly_name: master_bedroom_wall_switch
+    retain: true
+    qos: 2
+  "0x00158d0001d8eeb1":
+    friendly_name: tata_talks_switch
+    retain: true
+    qos: 2
+  "0x00158d0001f9c3fe":
+    friendly_name: "attic_desk_switch"
+    retain: true
+    qos: 2
+  "0x00158d0001b182db":
+    friendly_name: "guest_room_lights_switch_1"
     retain: true
     qos: 2
