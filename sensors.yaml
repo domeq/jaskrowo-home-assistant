@@ -98,7 +98,7 @@
   icon: "mdi:spotify"
   attribute: source
   entities:
-    - media_player.spotify
+    - media_player.spotify_wojciech_iskra
 - platform: mqtt
   name: Bridge state
   state_topic: "zigbee2mqtt/bridge/state"
@@ -114,3 +114,10 @@
 - platform: zwift
   username: !secret my_zwift_username
   password: !secret my_zwift_password
+- platform: statistics
+  entity_id: sensor.shelly_plug_s_51d92a_power_0
+  name: washing_machine_power_stats
+  sampling_size: 120
+  precision: 0
+  max_age:
+    minutes: 60

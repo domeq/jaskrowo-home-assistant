@@ -9,7 +9,7 @@
   condition: []
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data:
         message: Wykryłem otwarte okno, wyłączam oczyszczacz powietrza.
         language: pl
@@ -29,7 +29,7 @@
   condition: []
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data:
         message: Wszystkie okna zamknięte, włączam oczyszczacz powietrza.
         language: pl
@@ -326,7 +326,6 @@
       service: homeassistant.turn_off
 - id: "1542050718235"
   alias: Guest room - toggle light
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d0001b182db_click
       platform: state
@@ -357,7 +356,7 @@
     - data:
         language: pl
         message: Wygląda, że jest wystarczająco jasno - wyłączam światła.
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.lenovosmartdisplay88416
       service: tts.google_translate_say
     - data:
         entity_id:
@@ -399,7 +398,6 @@
       service: homeassistant.turn_off
 - id: "1544955116908"
   alias: Tosia toggle lamp
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d0001b1827e_click
       platform: state
@@ -412,7 +410,6 @@
       service: light.toggle
 - id: "1544955175467"
   alias: Tosia toggle Christmas tree
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d0001b1827e_click
       platform: state
@@ -435,7 +432,7 @@
         entity_id: remote.jaskrowo_media
       service: remote.turn_off
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data:
         message: Do zobaczenia później - wyłączam światła.
         language: pl
@@ -467,7 +464,7 @@
   condition: []
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data:
         message: Witaj w domu! Włączam światła.
         language: pl
@@ -702,7 +699,6 @@
       service: light.toggle
 - id: "1546010274549"
   alias: Master bedroom - toggle lights
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d0002b455e6_click
       platform: state
@@ -728,7 +724,6 @@
       service: switch.toggle
 - id: "1546010333874"
   alias: Master bedroom - toggle LEDs
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d00016dbe9e_click
       platform: state
@@ -744,7 +739,6 @@
       service: light.toggle
 - id: "1546010434351"
   alias: Master bedroom - toggle gateway
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d00016dbe9e_click
       platform: state
@@ -811,7 +805,6 @@
       service: homeassistant.turn_off
 - id: "1546014691265"
   alias: Attic - toggle left entry light
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d0001f9c3fe_click
       platform: state
@@ -824,7 +817,6 @@
       service: light.toggle
 - id: "1546014728200"
   alias: Attic - toggle right entry light
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d0001f9c3fe_click
       platform: state
@@ -837,7 +829,6 @@
       service: light.toggle
 - id: "1546014760465"
   alias: Attic - toggle wardrobe area light
-  hide_entity: true
   trigger:
     - entity_id: sensor.0x00158d0001f9c3fe_click
       platform: state
@@ -857,7 +848,7 @@
   condition: []
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.living_room_speaker
       data_template:
         message:
           "{{ [ 'No dalej Tosia! Gryzkaj. Gryzkaj.', 'Tosia gryziemy. Duży
@@ -876,7 +867,7 @@
   condition: []
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.living_room_speaker
       data_template:
         message:
           "{{ [ 'Gdybyś była warzywem, byłabyś cud-kinią', 'Czy tu jest tak gorąco,
@@ -897,7 +888,7 @@
   condition: []
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.living_room_speaker
       data_template:
         message:
           "{{ [\n  'Dalej Tosia, nie złość Mamy.',\n  'Tosia bo sobie pójdę i\
@@ -923,7 +914,7 @@
         state: "on"
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.living_room_speaker
       data:
         message: Wygląda, że w kuchni jest wystarczająco jasno - wyłączam światła.
         language: pl
@@ -953,11 +944,9 @@
       state: "off"
   action:
     - data:
-        entity_id:
-          - light.0x00158d0002c67ac3_light
-          - light.downstairs_bathroom_side_lamp
+        entity_id: group.downstairs_bathroom_lights
         transition: 1
-      service: light.turn_on
+      service: homeassistant.turn_on
 - id: "1548095715939"
   alias: Downstairs bathroom - empty
   trigger:
@@ -1146,7 +1135,6 @@
       service: switch.toggle
 - id: "1549390161319"
   alias: Smog - air is clean
-  hide_entity: true
   trigger:
     - entity_id: binary_sensor.0x00158d0001e43ac7_occupancy
       from: "off"
@@ -1174,7 +1162,7 @@
         | int > 600 }}"
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data:
         message: Powietrze na zewnątrz jest czyste, przewietrzmy mieszkanie.
         language: pl
@@ -1198,23 +1186,11 @@
           entity_id: group.downstairs_windows
           state: "on"
   action:
-    - service: media_player.volume_set
-      data_template:
-        entity_id: media_player.living_room_speakers
-        volume_level: 0.8
-    - delay: 00:00:03
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data_template:
-        message:
-          Zamknij okna, dziś jest za duży smog ({{ states.sensor.airly_caqi.state
-          | int | round }} CAQI).
+        message: Zamknij okna, dziś jest za duży smog ({{ states.sensor.airly_caqi.state | int | round }} CAQI).
         language: pl
-    - delay: 00:00:05
-    - service: media_player.volume_set
-      data_template:
-        entity_id: media_player.living_room_speakers
-        volume_level: 0.4
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
         title: Alert smogowy
@@ -1264,11 +1240,11 @@
       service: remote.turn_on
     - service: media_player.volume_set
       data_template:
-        entity_id: media_player.living_room_speakers
-        volume_level: 0.3
+        entity_id: media_player.lenovosmartdisplay88416
+        volume_level: 0.4
     - delay: 00:00:03
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.lenovosmartdisplay88416
       data:
         message: Dzień dobry Kochanie, specjalnie dla Ciebie piosenka.
         language: pl
@@ -1278,13 +1254,18 @@
         volume_level: 0.35
     - service: media_player.select_source
       data_template:
-        entity_id: media_player.spotify
+        entity_id: media_player.spotify_wojciech_iskra
         source: Marantz SR5008
     - delay: 00:00:03
-    - service: spotify.play_playlist
-      data_template:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.spotify_wojciech_iskra
         media_content_id: spotify:playlist:37i9dQZF1DWWxPM4nWdhyI
-        random_song: true
+        media_content_type: playlist
+    - service: media_player.shuffle_set
+      data:
+        entity_id: media_player.spotify_wojciech_iskra
+        shuffle: true
 - id: "1549654128210"
   alias: Living room stairs - motion
   trigger:
@@ -1651,7 +1632,7 @@
     - data:
         language: pl
         message: Na zewnątrz jest chłodno, otwórz na trochę okna.
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       service: tts.google_translate_say
 - id: "1559584380688"
   alias: Weather - too hot outside
@@ -1696,33 +1677,43 @@
     - data:
         language: pl
         message: Na zewnątrz robi się gorąco, proszę pozamykaj okna.
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       service: tts.google_translate_say
 - id: "1559880624653"
   alias: Bathroom - washing machine is done
   trigger:
     - platform: numeric_state
       entity_id: sensor.shelly_plug_s_51d92a_power_0
-      below: 3
-      for: 00:10:00
+      below: 5
+      for: 00:05:00
   condition:
-    - condition: or
-      conditions:
-    - entity_id: binary_sensor.0x00158d0001e43ac7_occupancy
-      condition: state
-      state: "on"
-    - entity_id: binary_sensor.0x00158d0002ec7efa_occupancy
-      condition: state
-      state: "on"
+    - condition: template
+      value_template: "{{ (state_attr('sensor.washing_machine_power_stats', 'max_value')|int) > 10 }}"
     - condition: time
       after: 08:00:00
       before: "22:00:00"
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data:
         message: Pralka skończyła prać. Powieś ubrania.
         language: pl
+    - service: notify.mobile_app_wojtek_s_mi_mix_2
+      data:
+        title: Washing machine
+        message: "Washing machine seems to be done "
+        data:
+          android:
+            notification:
+              image: https://previews.123rf.com/images/memoangeles/memoangeles1606/memoangeles160600003/59790403-cartoon-washing-machine-vector-clip-art-illustration-with-simple-gradients-all-in-a-single-layer-.jpg
+    - service: notify.mobile_app_gosia_s_mi_a2_lite
+      data:
+        title: Pralka
+        message: Wygląda, że pralka skończyła prać
+        data:
+          android:
+            notification:
+              image: https://previews.123rf.com/images/memoangeles/memoangeles1606/memoangeles160600003/59790403-cartoon-washing-machine-vector-clip-art-illustration-with-simple-gradients-all-in-a-single-layer-.jpg
 - id: "1560969416454"
   alias: Living room - turn on fan evening
   trigger:
@@ -1875,11 +1866,11 @@
                 "
     - service: media_player.volume_set
       data_template:
-        entity_id: media_player.living_room_speakers
+        entity_id: media_player.downstairs_speaker
         volume_level: 0.8
     - delay: 00:00:01
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data_template:
         message: Powiadomiłem właścicieli i policję - bagiety już jadą
         language: pl
@@ -1923,7 +1914,7 @@
     - delay: 00:00:05
     - service: media_player.volume_set
       data_template:
-        entity_id: media_player.living_room_speakers
+        entity_id: media_player.lenovosmartdisplay88416
         volume_level: 0.4
   id: 1816d6e6ece24085bded2a74127d6513
 - alias: Send notification when alarm is Armed in Away mode
@@ -1938,7 +1929,7 @@
         == "armed_away" }}'
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data:
         message: Alarm uzbrojony, masz 10 sekund na wyjście.
         language: pl
@@ -1974,7 +1965,7 @@
       to: disarmed
   action:
     - service: tts.google_translate_say
-      entity_id: media_player.living_room_speakers
+      entity_id: media_player.downstairs_speaker
       data:
         message: Alarm wyłączony
         language: pl
@@ -2028,7 +2019,6 @@
   id: 0fc5e331592f4ec69307f2318dac3dc7
 - id: enable_zigbee_join
   alias: Enable Zigbee joining
-  hide_entity: true
   trigger:
     platform: state
     entity_id: input_boolean.zigbee_permit_join
@@ -2055,10 +2045,8 @@
     - data:
         entity_id: timer.zigbee_permit_join
       service: timer.cancel
-  hide_entity: true
 - id: disable_zigbee_join_timer
   alias: Disable Zigbee joining by timer
-  hide_entity: true
   trigger:
     - platform: event
       event_type: timer.finished
@@ -2072,31 +2060,6 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.zigbee_permit_join
-- alias: Notify when washing machine is done
-  trigger:
-    - platform: state
-      entity_id: sensor.0x00158d000319aa4b_action
-      from: vibration
-      to: ""
-      for: 00:10:00
-  action:
-    - service: notify.mobile_app_wojtek_s_mi_mix_2
-      data:
-        title: Washing machine
-        message: "Washing machine seems to be done "
-        data:
-          android:
-            notification:
-              image: https://previews.123rf.com/images/memoangeles/memoangeles1606/memoangeles160600003/59790403-cartoon-washing-machine-vector-clip-art-illustration-with-simple-gradients-all-in-a-single-layer-.jpg
-    - service: notify.mobile_app_gosia_s_mi_a2_lite
-      data:
-        title: Pralka
-        message: Wygląda, że pralka skończyła prać
-        data:
-          android:
-            notification:
-              image: https://previews.123rf.com/images/memoangeles/memoangeles1606/memoangeles160600003/59790403-cartoon-washing-machine-vector-clip-art-illustration-with-simple-gradients-all-in-a-single-layer-.jpg
-  id: 4d1ef518a2204b1ba9b812a85fa08b62
 - id: shellies_announce
   alias: Shellies Announce
   trigger:
@@ -2143,7 +2106,6 @@
     - scene: scene.wojtek_finished_cycling
 - id: update_networkmap
   alias: "Update Zigbee Map"
-  hide_entity: true
   trigger:
     platform: time_pattern
     minutes: "/15"

@@ -8,6 +8,7 @@ advanced:
   log_output:
     - console
   last_seen: ISO_8601_local
+  availability_timeout: 60
 serial:
   port: /dev/ttyUSB0
 queue:

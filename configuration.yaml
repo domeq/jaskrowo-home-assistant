@@ -75,6 +75,15 @@ homeassistant:
       hidden: false
       homebridge_hidden: true
       emulated_hue_hidden: true"
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.1.0/24
+      trusted_users:
+        192.168.1.103: 8d9bb01c879f4b8abcb4e1fee53a6a21
+        192.168.1.2: 8d9bb01c879f4b8abcb4e1fee53a6a21
+      allow_bypass_login: true
 
 # Enables the frontend
 frontend:
@@ -173,16 +182,16 @@ light:
     host: 192.168.1.22
     token: c1ac97f17b98eb0cc6132fd6f6433f91
     model: philips.light.candle2
-  # - platform: xiaomi_miio
-  #   name: Xiaomi Philips E14 Crystal
-  #   host: 192.168.1.23
-  #   token: 52c93cf48a74c69378780cd800b4f430
-  #   model: philips.light.candle2
-  # - platform: xiaomi_miio
-  #   name: Xiaomi Philips E14 Crystal 2
-  #   host: 192.168.1.24
-  #   token: c16d7777b418c34a8e110f0a3614aa2a
-  #   model: philips.light.candle2
+  - platform: xiaomi_miio
+    name: Xiaomi Philips E14 Crystal
+    host: 192.168.1.23
+    token: 52c93cf48a74c69378780cd800b4f430
+    model: philips.light.candle2
+  - platform: xiaomi_miio
+    name: Xiaomi Philips E14 Crystal 2
+    host: 192.168.1.24
+    token: c16d7777b418c34a8e110f0a3614aa2a
+    model: philips.light.candle2
   # - platform: xiaomi_miio
   #   name: Tosia left wall lamp
   #   host: 192.168.1.25
@@ -300,7 +309,6 @@ device_tracker:
     ssh_key: "/config/id_rsa"
     new_device_defaults:
       track_new_devices: false
-      hide_if_away: false
 
 sun:
 
@@ -344,8 +352,8 @@ switch:
     name: "Guest room lights auto"
     min_brightness: 50
     lights_ct:
-      - light.0xccccccfffeb2f9db_light
-      - light.0x086bd7fffe2f5d2c_light
+      - light.xiaomi_philips_e14_crystal
+      - light.xiaomi_philips_e14_crystal_2
   - platform: circadian_lighting
     name: "Master bedroom lights auto"
     lights_ct:
@@ -392,10 +400,7 @@ switch:
   - platform: circadian_lighting
     name: "IKEA Tradfri auto brightness"
     lights_brightness:
-      - light.master_bedroom_bed_lamp
       - light.0xec1bbdfffeb7fbbc_light
-      - light.0xccccccfffeb2f9db_light
-      - light.0x086bd7fffe2f5d2c_light
 scene:
   - name: Living room day
     entities:
@@ -428,10 +433,10 @@ scene:
       switch.circadian_lighting_guest_room_lights_auto: off
       switch.circadian_lighting_ikea_tradfri_auto_brightness: off
       automation.guest_room_motion: off
-      light.0xccccccfffeb2f9db_light:
+      light.xiaomi_philips_e14_crystal:
         state: on
-        brightness: 1
-      light.0x086bd7fffe2f5d2c_light: off
+        brightness: 3
+      light.xiaomi_philips_e14_crystal_2: off
       fan.xiaomi_smart_fan: on
       switch.0x00158d00039e5eb1_switch: on
   - name: Wojtek finished cycling
@@ -439,8 +444,8 @@ scene:
       switch.circadian_lighting_guest_room_lights_auto: on
       switch.circadian_lighting_ikea_tradfri_auto_brightness: on
       automation.guest_room_motion: on
-      light.0xccccccfffeb2f9db_light: on
-      light.0x086bd7fffe2f5d2c_light: on
+      light.xiaomi_philips_e14_crystal: on
+      light.xiaomi_philips_e14_crystal_2: on
       fan.xiaomi_smart_fan: off
       switch.0x00158d00039e5eb1_switch: off
 
@@ -490,12 +495,10 @@ media_player:
     host: 192.168.1.5
     name: Marantz SR5008
     show_all_sources: true
-  - platform: spotify
-    client_id: !secret spotify_client_id
-    client_secret: !secret spotify_client_secret
-    aliases:
-      abc123def456: "Living Room"
-      9183abas000: "Bed Room"
+
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
 
 recorder:
   purge_keep_days: 3
@@ -559,8 +562,8 @@ group:
   guest_room_lights:
     name: Guest room lights
     entities:
-      - light.0xccccccfffeb2f9db_light
-      - light.0x086bd7fffe2f5d2c_light
+      - light.xiaomi_philips_e14_crystal
+      - light.xiaomi_philips_e14_crystal_2
   upstairs_hall_lights:
     name: Upstairs hall lights
     entities:

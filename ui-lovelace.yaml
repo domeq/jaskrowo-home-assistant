@@ -9,6 +9,8 @@ resources:
     type: module
   - url: /community_plugin/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js?v=3.0.1
     type: module
+  - url: /community_plugin/lovelace-fan-xiaomi/fan-xiaomi.js
+    type: js
 custom_header:
   compact_mode: true
   hide_help: true
@@ -31,13 +33,13 @@ views:
         cards:
           - type: conditional
             conditions:
-              - entity: media_player.spotify
+              - entity: media_player.spotify_wojciech_iskra
                 state: "playing"
               - entity: sensor.spotify_source
                 state_not: "Xiaomi Mi MIX 2"
             card:
               type: media-control
-              entity: media_player.spotify
+              entity: media_player.spotify_wojciech_iskra
           - title: Living room
             entities:
               - sensor.0x00158d0001b1c3fb_temperature
@@ -134,11 +136,22 @@ views:
           - sensor.0x00158d0002320e0c_temperature
           - sensor.0x00158d0002320e0c_humidity
           - binary_sensor.0x00158d0002436b09_contact
-          - light.0xccccccfffeb2f9db_light
-          - light.0x086bd7fffe2f5d2c_light
+          - light.xiaomi_philips_e14_crystal
+          - light.xiaomi_philips_e14_crystal_2
           - fan.xiaomi_smart_fan
           - switch.0x00158d00039e5eb1_switch
         type: entities
+      # - entity: fan.xiaomi_smart_fan
+      #   name: Big fan
+      #   type: "custom:fan-xiaomi"
+      # - type: conditional
+      #   conditions:
+      #     - entity: fan.xiaomi_smart_fan
+      #       state: "on"
+      #   card:
+      #     - entity: fan.xiaomi_smart_fan
+      #       name: Big fan
+      #       type: "custom:fan-xiaomi"
       - type: conditional
         conditions:
           - entity: sensor.zwift_online_1380479
@@ -209,6 +222,25 @@ views:
         refresh_interval: 60
       - type: weather-forecast
         entity: weather.dark_sky
+      - type: vertical-stack
+        title: COVID-19 status
+        cards:
+          - type: history-graph
+            title: "Worldwide"
+            hours_to_show: 168
+            refresh_interval: 3600
+            entities:
+              - sensor.worldwide_coronavirus_confirmed
+              - sensor.worldwide_coronavirus_recovered
+              - sensor.worldwide_coronavirus_deaths
+          - type: history-graph
+            title: "Poland"
+            hours_to_show: 168
+            refresh_interval: 3600
+            entities:
+              - sensor.worldwide_poland_confirmed
+              - sensor.worldwide_poland_recovered
+              - sensor.worldwide_poland_deaths
   - title: Alarm
     icon: "mdi:alarm-light-outline"
     path: alarm
@@ -604,14 +636,14 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.0x086bd7fffe2f5d2c_light
+                entity: light.xiaomi_philips_e14_crystal_2
                 style:
                   top: 6%
                   left: 15%
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.0xccccccfffeb2f9db_light
+                entity: light.xiaomi_philips_e14_crystal
                 style:
                   top: 34%
                   left: 15%
