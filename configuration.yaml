@@ -128,7 +128,7 @@ yeelight:
     192.168.1.35:
       name: Stove LEDs
     192.168.1.36:
-      name: Spare light 1
+      name: Downstairs bathroom ceiling lamp
     192.168.1.37:
       name: Stairs LEDs
     192.168.1.39:
@@ -373,7 +373,7 @@ switch:
     name: "Downstairs bathroom ceiling light auto"
     min_brightness: 70
     lights_ct:
-      - light.0x00158d0002c67ac3_light
+      - light.downstairs_bathroom_ceiling_lamp
   - platform: circadian_lighting
     name: "Downstairs bathroom side light auto"
     max_brightness: 50
@@ -550,7 +550,7 @@ group:
   downstairs_bathroom_lights:
     name: Downstairs bathroom lights
     entities:
-      - light.0x00158d0002c67ac3_light
+      - light.downstairs_bathroom_ceiling_lamp
       - light.downstairs_bathroom_side_lamp
   tosia_bedroom_lights:
     name: Tosia's bedroom lights

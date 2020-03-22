@@ -176,7 +176,7 @@ views:
         type: entities
       - title: Bathrooms
         entities:
-          - light.0x00158d0002c67ac3_light
+          - light.downstairs_bathroom_ceiling_lamp
           - light.downstairs_bathroom_side_lamp
           - switch.shelly1_5545a9_relay_0
         type: entities
@@ -515,7 +515,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.0x00158d0002c67ac3_light
+                entity: light.downstairs_bathroom_ceiling_lamp
                 style:
                   top: 67%
                   left: 36%

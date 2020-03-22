@@ -1543,7 +1543,7 @@
   condition: []
   action:
     - data:
-        entity_id: light.0x00158d0002c67ac3_light
+        entity_id: light.downstairs_bathroom_ceiling_lamp
         transition: 1
       service: light.toggle
 - id: "1559483412308"
@@ -1900,7 +1900,7 @@
     - data:
         entity_id:
           - light.downstairs_hall_lamp
-          - light.0x00158d0002c67ac3_light
+          - light.downstairs_bathroom_ceiling_lamp
           - light.wall_leds
           - light.stairs_leds
           - light.stove_leds
@@ -1983,7 +1983,7 @@
     - data:
         entity_id:
           - light.downstairs_hall_lamp
-          - light.0x00158d0002c67ac3_light
+          - light.downstairs_bathroom_ceiling_lamp
           - light.wall_leds
           - light.stairs_leds
           - light.stove_leds

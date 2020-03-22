@@ -157,7 +157,7 @@ sensor.0x00158d0001e532dc_illuminance:
   friendly_name: Guest room illumination sensor
 binary_sensor.0x00158d0001655da1_occupancy:
   friendly_name: Dining area motion sensor
-light.0x00158d0002c67ac3_light:
+light.downstairs_bathroom_ceiling_lamp:
   friendly_name: Downstairs bathroom lamp
   icon: "mdi:ceiling-light"
 binary_sensor.0x00158d0002b85113_occupancy:
