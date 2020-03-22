@@ -238,9 +238,9 @@ views:
             hours_to_show: 168
             refresh_interval: 3600
             entities:
-              - sensor.worldwide_poland_confirmed
-              - sensor.worldwide_poland_recovered
-              - sensor.worldwide_poland_deaths
+              - sensor.poland_coronavirus_confirmed
+              - sensor.poland_coronavirus_recovered
+              - sensor.poland_coronavirus_deaths
   - title: Alarm
     icon: "mdi:alarm-light-outline"
     path: alarm

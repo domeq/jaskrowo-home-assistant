@@ -45,11 +45,6 @@
       platform: state
       to: "on"
   condition:
-    - above: "0"
-      below: "40"
-      condition: numeric_state
-      entity_id: sun.sun
-      value_template: "{{ state.attributes.elevation }}"
     - below: "60"
       condition: numeric_state
       entity_id: sensor.0x00158d0001e43ac7_illuminance
