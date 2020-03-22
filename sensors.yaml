@@ -17,6 +17,18 @@
     - device_tracker.mi_a2_lite
     - device_tracker.gosiak_mia2_2
     - device_tracker.wojtek_s_ipad
+- platform: attributes
+  friendly_name: "Airly CAQI"
+  attribute: air_quality_index
+  unit_of_measurement: "AQI"
+  icon: "mdi:cloud"
+  entities:
+    - air_quality.airly
+- platform: attributes
+  friendly_name: "Airly description"
+  attribute: advice
+  entities:
+    - air_quality.airly
 - platform: template
   sensors:
     light_brightness_philips_ceiling_light:
@@ -84,11 +96,6 @@
 #   destination: Armii Krajowej 28, Kraków
 #   options:
 #     mode: driving
-- platform: airly
-  name: home
-  api_key: !secret airly_api_key
-  latitude: !secret geo_latitude
-  longitude: !secret geo_longitude
 - platform: xiaomi_miio
   name: Xiaomi Air Quality Monitor
   host: 192.168.1.44

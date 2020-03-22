@@ -146,10 +146,6 @@ yeelight:
 
 # Enables support for tracking state changes over time
 history:
-
-# View all events in a logbook
-logbook:
-
 # Text to speech
 tts:
   - platform: google_translate
@@ -158,7 +154,6 @@ tts:
 # Cloud
 cloud:
 
-map:
 owntracks:
 
 automation: !include automations.yaml
@@ -223,63 +218,9 @@ vacuum:
     host: 192.168.1.29
     token: "616e4e30556767583138707636386345"
 
-# Full configuration.yaml entry
-history_graph:
-  windows:
-    name: Windows open?
-    entities:
-      - binary_sensor.0x00158d00023709f7_contact
-      - binary_sensor.0x00158d0001ad5eb6_contact
-      - binary_sensor.0x00158d00022f148a_contact
-      - binary_sensor.0x00158d000232db84_contact
-      - binary_sensor.0x00158d000232da46_contact
-      - binary_sensor.0x00158d0002436b09_contact
-    hours_to_show: 24
-    refresh: 60
-  temperatures:
-    name: Temperature
-    entities:
-      - sensor.0x00158d0001b9208d_temperature
-      - sensor.0x00158d0001b92145_temperature
-      - sensor.0x00158d0001b1c3fb_temperature
-      - sensor.0x00158d00023208a6_temperature
-      - sensor.0x00158d0002320de3_temperature
-      - sensor.0x00158d0002320e0c_temperature
-    hours_to_show: 24
-    refresh: 60
-  humidity:
-    name: Humidity
-    entities:
-      - sensor.0x00158d0001b9208d_humidity
-      - sensor.0x00158d0001b92145_humidity
-      - sensor.0x00158d0001b1c3fb_humidity
-      - sensor.0x00158d00023208a6_humidity
-      - sensor.0x00158d0002320de3_humidity
-      - sensor.0x00158d0002320e0c_humidity
-    hours_to_show: 24
-    refresh: 60
-  pollution:
-    name: Air pollution
-    entities:
-      - sensor.waqi_kurdwanow_krakow_maopolska_poland
-      - sensor.waqi_aleja_krasinskiego_krakow_maopolska_poland
-      - sensor.waqi_skawina_maopolska_poland
-    hours_to_show: 72
-    refresh: 60
-  illumination:
-    name: Illumination
-    entities:
-      - sensor.0x00158d0001e43ac7_illuminance
-      - sensor.0x00158d0001e43bc7_illuminance
-      - sensor.0x00158d0001e4707c_illuminance
-      - sensor.0x00158d0001e531e0_illuminance
-      - sensor.0x00158d0001e532dc_illuminance
-      - sensor.0x00158d0001e547ae_illuminance
-      - sensor.0x00158d0001e55ff7_illuminance
-    hours_to_show: 12
-    refresh: 60
-
 sensor: !include sensors.yaml
+
+input_boolean:
 
 binary_sensor:
   - platform: trend
@@ -314,6 +255,37 @@ sun:
 
 lovelace:
   mode: yaml
+  resources:
+    - url: /hacsfiles/lovelace-state-switch/state-switch.js
+      type: module
+    - url: /hacsfiles/zigbee2mqtt-networkmap/zigbee2mqtt-networkmap.js
+      type: module
+    - url: /hacsfiles/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js?v=3.0.1
+      type: module
+    - url: /hacsfiles/lovelace-fan-xiaomi/fan-xiaomi.js
+      type: js
+  dashboards:
+    lovelace-alarm: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: lovelace-alarm.yaml
+      title: Alarm
+      icon: mdi:alarm-light-outline
+      show_in_sidebar: true
+      require_admin: false
+    lovelace-automations: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: lovelace-automations.yaml
+      title: Automations
+      icon: mdi:home-automation
+      show_in_sidebar: true
+      require_admin: true
+    lovelace-zigbee: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: lovelace-zigbee.yaml
+      title: Zigbee
+      icon: mdi:zigbee
+      show_in_sidebar: true
+      require_admin: true
 
 # Example configuration.yaml entry
 circadian_lighting:
@@ -414,20 +386,6 @@ scene:
     entities:
       light.xiaomi_philips_ceiling_light: off
       light.wall_leds: on
-  - name: Somebody sleeping in living room
-    entities:
-      automation.living_room_motion_01_normal: off
-      automation.living_room_motion_02_evening: off
-      automation.living_room_motion_03_tv_mode: off
-      group.living_room_lights: off
-      group.kitchen_lights: off
-      group.dining_area: off
-  - name: Living room normal mode
-    entities:
-      automation.living_room_motion_01_normal: on
-      automation.living_room_motion_02_evening: on
-      automation.living_room_motion_03_tv_mode: on
-      switch.circadian_lighting_living_room_auto_ceiling: on
   - name: Wojtek is cycling
     entities:
       switch.circadian_lighting_guest_room_lights_auto: off

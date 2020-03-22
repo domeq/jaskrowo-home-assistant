@@ -324,10 +324,10 @@
   trigger:
     - entity_id: sensor.0x00158d0001b182db_click
       platform: state
-      to: "single"
+      to: single
     - entity_id: sensor.0x00158d0001be5b10_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -396,7 +396,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001b1827e_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -408,7 +408,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001b1827e_click
       platform: state
-      to: "double"
+      to: double
   condition: []
   action:
     - data:
@@ -420,7 +420,7 @@
   trigger:
     - entity_id: sensor.0x00158d00019d5813_click
       platform: state
-      to: "long"
+      to: long
   condition: []
   action:
     - data:
@@ -455,7 +455,7 @@
   trigger:
     - entity_id: sensor.0x00158d00019d5813_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - service: tts.google_translate_say
@@ -579,7 +579,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001e06c11_click
       platform: state
-      to: "right"
+      to: right
   condition: []
   action:
     - data:
@@ -593,7 +593,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001e06c11_click
       platform: state
-      to: "left"
+      to: left
   condition: []
   action:
     - data:
@@ -605,7 +605,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001e06c11_click
       platform: state
-      to: "both"
+      to: both
   condition: []
   action:
     - data:
@@ -619,7 +619,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001f42198_click
       platform: state
-      to: "left"
+      to: left
     - entity_id: sensor.0x00158d000101c2a1_action
       platform: state
       to: flip90
@@ -634,7 +634,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001f42198_click
       platform: state
-      to: "right"
+      to: right
     - entity_id: sensor.0x00158d000101c2a1_action
       platform: state
       to: slide
@@ -647,7 +647,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001f42198_click
       platform: state
-      to: "both"
+      to: both
     - entity_id: sensor.0x00158d000101c2a1_action
       platform: state
       to: shake
@@ -670,7 +670,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001f3f75e_click
       platform: state
-      to: "left"
+      to: left
   condition: []
   action:
     - data:
@@ -685,7 +685,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001f3f75e_click
       platform: state
-      to: "right"
+      to: right
   condition: []
   action:
     - data:
@@ -697,13 +697,13 @@
   trigger:
     - entity_id: sensor.0x00158d0002b455e6_click
       platform: state
-      to: "both"
+      to: both
     - entity_id: sensor.0x00158d00016dbe9e_click
       platform: state
-      to: "single"
+      to: single
     - entity_id: sensor.0x00158d00019ca9dc_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -722,10 +722,10 @@
   trigger:
     - entity_id: sensor.0x00158d00016dbe9e_click
       platform: state
-      to: "double"
+      to: double
     - entity_id: sensor.0x00158d00019ca9dc_click
       platform: state
-      to: "double"
+      to: double
   condition: []
   action:
     - data:
@@ -737,10 +737,10 @@
   trigger:
     - entity_id: sensor.0x00158d00016dbe9e_click
       platform: state
-      to: "long"
+      to: long
     - entity_id: sensor.0x00158d00019ca9dc_click
       platform: state
-      to: "long"
+      to: long
   condition: []
   action:
     - data:
@@ -803,7 +803,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001f9c3fe_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -815,7 +815,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001f9c3fe_click
       platform: state
-      to: "double"
+      to: double
   condition: []
   action:
     - data:
@@ -827,7 +827,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001f9c3fe_click
       platform: state
-      to: "long"
+      to: long
   condition: []
   action:
     - data:
@@ -839,7 +839,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001d8eeb1_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - service: tts.google_translate_say
@@ -858,28 +858,31 @@
   trigger:
     - entity_id: sensor.0x00158d0001d8eeb1_click
       platform: state
-      to: "double"
+      to: double
   condition: []
   action:
     - service: tts.google_translate_say
       entity_id: media_player.living_room_speaker
       data_template:
         message:
-          "{{ [ 'Gdybyś była warzywem, byłabyś cud-kinią', 'Czy tu jest tak gorąco,
-          czy to po prostu Ty?', 'Masz chłopaka - to już najwyższy czas, byś poczuła, jak to jest mieć prawdziwego
-          mężczyznę.', 'Gdybyś była kanapką w McDonald’s, nazywałabyś się McBeauty.', 'Myślę, że masz coś w oku.
-          Och, spoko, to tylko błysk...', 'Jesteś tak piękna, że aż sam nie wiem, co powiedzieć.', 'Przepraszam,
-          czy ja jestem w cukierni, bo widzę niezłe ciasteczko', 'Masz może mapę? Bo zgubiłem się w twoich
-          oczach', 'Oj, Mała. Gdybyś była rzodkiewką, już dawno bym Cię wyrwał.' ] | random }}
+          "{{ [ 'Gdybyś była warzywem, byłabyś cud-kinią', 'Czy tu jest tak
+          gorąco, czy to po prostu Ty?', 'Masz chłopaka - to już najwyższy czas, byś
+          poczuła, jak to jest mieć prawdziwego mężczyznę.', 'Gdybyś była kanapką
+          w McDonald’s, nazywałabyś się McBeauty.', 'Myślę, że masz coś w oku. Och,
+          spoko, to tylko błysk...', 'Jesteś tak piękna, że aż sam nie wiem, co powiedzieć.',
+          'Przepraszam, czy ja jestem w cukierni, bo widzę niezłe ciasteczko', 'Masz
+          może mapę? Bo zgubiłem się w twoich oczach', 'Oj, Mała. Gdybyś była rzodkiewką,
+          już dawno bym Cię wyrwał.' ] | random }}
 
           "
         language: pl
+  id: a1bf7283148a4ddfb56dad1d30ef108a
 - id: "1546020275655"
   alias: Tosia feeder - nie złość Mamy!
   trigger:
     - entity_id: sensor.0x00158d0001d8eeb1_click
       platform: state
-      to: "long"
+      to: long
   condition: []
   action:
     - service: tts.google_translate_say
@@ -966,7 +969,7 @@
   trigger:
     - entity_id: sensor.0x00158d0002b453ca_click
       platform: state
-      to: "left"
+      to: left
   condition: []
   action:
     - data:
@@ -978,7 +981,7 @@
   trigger:
     - entity_id: sensor.0x00158d0002b453ca_click
       platform: state
-      to: "right"
+      to: right
   condition: []
   action:
     - data:
@@ -991,7 +994,7 @@
   trigger:
     - entity_id: sensor.0x00158d0002b453ca_click
       platform: state
-      to: "both"
+      to: both
   condition: []
   action:
     - data:
@@ -1054,7 +1057,7 @@
   trigger:
     - entity_id: sensor.0x00158d0002828af1_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -1066,7 +1069,7 @@
   trigger:
     - entity_id: sensor.0x00158d0002b455e6_click
       platform: state
-      to: "left"
+      to: left
   condition: []
   action:
     - data:
@@ -1077,7 +1080,7 @@
   trigger:
     - entity_id: sensor.0x00158d0002b455e6_click
       platform: state
-      to: "right"
+      to: right
   condition: []
   action:
     - data:
@@ -1122,7 +1125,7 @@
   trigger:
     - entity_id: sensor.0x00158d000282896e_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -1184,7 +1187,9 @@
     - service: tts.google_translate_say
       entity_id: media_player.downstairs_speaker
       data_template:
-        message: Zamknij okna, dziś jest za duży smog ({{ states.sensor.airly_caqi.state | int | round }} CAQI).
+        message:
+          Zamknij okna, dziś jest za duży smog ({{ states.sensor.airly_caqi.state
+          | int | round }} CAQI).
         language: pl
     - service: notify.mobile_app_wojtek_s_mi_mix_2
       data_template:
@@ -1330,7 +1335,7 @@
   trigger:
     - entity_id: sensor.0x00158d00028f6c2f_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -1346,7 +1351,7 @@
   trigger:
     - entity_id: sensor.0x00158d0002b48cff_click
       platform: state
-      to: "left"
+      to: left
   condition: []
   action:
     - data:
@@ -1357,7 +1362,7 @@
   trigger:
     - entity_id: sensor.0x00158d0002b48cff_click
       platform: state
-      to: "right"
+      to: right
   condition: []
   action:
     - data:
@@ -1459,10 +1464,10 @@
   trigger:
     - entity_id: sensor.0x00158d00030a302b_click
       platform: state
-      to: "single"
+      to: single
     - entity_id: sensor.0x00158d00030a3104_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -1473,10 +1478,10 @@
   trigger:
     - entity_id: sensor.0x00158d00030ac4de_click
       platform: state
-      to: "single"
+      to: single
     - entity_id: sensor.0x00158d00030a3141_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -1490,10 +1495,10 @@
   trigger:
     - entity_id: sensor.0x00158d0003131adb_click
       platform: state
-      to: "single"
+      to: single
     - entity_id: sensor.0x00158d00030ac48b_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -1507,10 +1512,10 @@
   trigger:
     - entity_id: sensor.0x00158d000123e3fe_click
       platform: state
-      to: "single"
+      to: single
     - entity_id: sensor.0x00158d00030aaa92_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -1522,10 +1527,10 @@
   trigger:
     - entity_id: sensor.0x00158d000123e3fe_click
       platform: state
-      to: "double"
+      to: double
     - entity_id: sensor.0x00158d00030aaa92_click
       platform: state
-      to: "double"
+      to: double
   condition: []
   action:
     - data:
@@ -1683,7 +1688,9 @@
       for: 00:05:00
   condition:
     - condition: template
-      value_template: "{{ (state_attr('sensor.washing_machine_power_stats', 'max_value')|int) > 10 }}"
+      value_template:
+        "{{ (state_attr('sensor.washing_machine_power_stats', 'max_value')|int)
+        > 10 }}"
     - condition: time
       after: 08:00:00
       before: "22:00:00"
@@ -1734,7 +1741,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001b1286b_click
       platform: state
-      to: "single"
+      to: single
   condition: []
   action:
     - data:
@@ -1745,7 +1752,7 @@
   trigger:
     - entity_id: sensor.0x00158d0001b1286b_click
       platform: state
-      to: "double"
+      to: double
   condition: []
   action:
     - data:
@@ -2100,10 +2107,60 @@
   action:
     - scene: scene.wojtek_finished_cycling
 - id: update_networkmap
-  alias: "Update Zigbee Map"
+  alias: Update Zigbee Map
   trigger:
     platform: time_pattern
-    minutes: "/15"
-    seconds: 00
+    minutes: /15
+    seconds: 0
   action:
     service: zigbee2mqtt_networkmap.update
+- id: "1584882369650"
+  alias: Living room - sleeping mode on
+  description: ""
+  trigger:
+    - entity_id: input_boolean.someone_sleeping_in_the_living_room
+      from: "off"
+      platform: state
+      to: "on"
+  condition: []
+  action:
+    - data:
+        entity_id:
+          - automation.living_room_motion_01_normal
+          - automation.living_room_motion_02_evening
+          - automation.living_room_motion_03_tv_mode
+      service: automation.turn_off
+    - data:
+        entity_id:
+          - group.living_room_lights
+          - group.kitchen_lights
+          - group.dining_area
+      service: homeassistant.turn_off
+- id: "1584882369651"
+  alias: Living room - sleeping mode off
+  description: ""
+  trigger:
+    - entity_id: input_boolean.someone_sleeping_in_the_living_room
+      from: "on"
+      platform: state
+      to: "off"
+    - platform: state
+      entity_id: input_boolean.someone_sleeping_in_the_living_room
+      to: "on"
+      for: "12:00:00"
+  condition: []
+  action:
+    - data:
+        entity_id:
+          - automation.living_room_motion_01_normal
+          - automation.living_room_motion_02_evening
+          - automation.living_room_motion_03_tv_mode
+      service: automation.turn_on
+    - data:
+        entity_id:
+          - switch.circadian_lighting_living_room_auto_ceiling
+      service: switch.turn_on
+    - data:
+        entity_id:
+          - input_boolean.someone_sleeping_in_the_living_room
+      service: input_boolean.turn_off

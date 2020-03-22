@@ -1,0 +1,140 @@
+title: Automations
+background: var(--background-image)
+views:
+  - title: Automations
+    icon: "mdi:home-automation"
+    badges: []
+    cards:
+      - title: all automations
+        entities:
+          - automation.attic_empty_room
+          - automation.attic_entry_area_motion
+          - automation.attic_wardrobe_area_motion
+          - automation.dining_area_empty
+          - automation.downstairs_bathroom_motion
+          - automation.downstairs_bathroom_empty
+          - automation.guest_room_motion
+          - automation.hall_empty_room
+          - automation.hall_motion
+          - automation.kitchen_motion_daytime
+          - automation.kitchen_motion_at_night
+          - automation.kitchen_empty
+          - automation.kitchen_bright_enough
+          - automation.leaving_home
+          - automation.living_room_bright_enough
+          - automation.living_room_empty_room
+          - automation.living_room_stair_leds
+          - automation.living_room_stairs_motion
+          - automation.living_room_stairs_empty
+          - automation.living_room_motion_01_normal
+          - automation.living_room_motion_02_evening
+          - automation.living_room_motion_03_tv_mode
+          - automation.living_room_turn_on_fan_daytime
+          - automation.living_room_turn_on_fan_evening
+          - automation.master_bedroom_empty
+          - automation.master_bedroom_motion
+          - automation.smog_air_is_clean
+          - automation.smog_close_the_windows
+          - automation.tosia_room_motion
+          - automation.tosia_room_empty
+          - automation.tosia_toggle_christmas_tree
+          - automation.tosia_toggle_lamp
+          - automation.turn_on_circadian_lighting_switches_on_startup
+          - automation.upstairs_bathroom_motion
+          - automation.upstairs_bathroom_empty
+          - automation.upstairs_hall_motion
+          - automation.upstairs_hall_empty
+          - automation.vacuum_scheduled_cleanup
+          - automation.wardrobe_motion
+          - automation.wardrobe_empty
+        type: entities
+      - title: Automatic brightness
+        entities:
+          - switch.circadian_lighting_attic_lights_auto
+          - switch.circadian_lighting_guest_room_lights_auto
+          - switch.circadian_lighting_hall_lights_auto
+          - switch.circadian_lighting_living_room_auto_leds
+          - switch.circadian_lighting_living_room_auto_ceiling
+          - switch.circadian_lighting_master_bedroom_lights_auto
+          - switch.circadian_lighting_tosia_room_lights_auto
+        type: entities
+      - title: Lights brightness
+        entities:
+          - sensor.light_brightness_philips_ceiling_light
+          - sensor.light_brightness_hall_light
+        hours_to_show: 72
+        type: history-graph
+        refresh_time: 300
+      - title: Lights temperature
+        entities:
+          - sensor.light_ct_philips_ceiling_light
+          - sensor.light_ct_hall_light
+        hours_to_show: 72
+        type: history-graph
+        refresh_time: 300
+      - type: vertical-stack
+        cards:
+          - type: glance
+            title: System load
+            entities:
+              - sensor.cpu_temperature
+              - sensor.cpu_speed
+              - sensor.load_5m
+              - sensor.memory_use_percent
+          - title: Network
+            entities:
+              - sensor.speedtest_download
+              - sensor.speedtest_upload
+              - sensor.speedtest_ping
+              - sensor.asuswrt_download_speed
+              - sensor.asuswrt_upload_speed
+            type: entities
+            show_header_toggle: false
+          - title: Various
+            entities:
+              - sun.sun
+              - binary_sensor.car_wash
+              - binary_sensor.updater
+            type: glance
+            show_header_toggle: false
+      - refresh_inteval: 60
+        title: Temperature
+        entities:
+          - sensor.0x00158d0001b9208d_temperature
+          - sensor.0x00158d0001b92145_temperature
+          - sensor.0x00158d0001b1c3fb_temperature
+          - sensor.0x00158d00023208a6_temperature
+          - sensor.0x00158d0002320de3_temperature
+          - sensor.0x00158d0002320e0c_temperature
+          - sensor.airly_temperature
+        hours_to_show: 24
+        type: history-graph
+      - title: Humidity
+        entities:
+          - sensor.0x00158d0001b9208d_humidity
+          - sensor.0x00158d0001b92145_humidity
+          - sensor.0x00158d0001b1c3fb_humidity
+          - sensor.0x00158d00023208a6_humidity
+          - sensor.0x00158d0002320de3_humidity
+          - sensor.0x00158d0002320e0c_humidity
+        hours_to_show: 24
+        type: history-graph
+        refresh_interval: 60
+      - type: entities
+        title: Illumination
+        show_header_toggle: false
+        entities:
+          - sensor.0x00158d0001e43ac7_illuminance
+          - sensor.0x00158d0001e4707c_illuminance
+          - sensor.0x00158d0001e531e0_illuminance
+          - sensor.0x00158d0002b422b4_illuminance
+          - sensor.0x00158d0001e43bc7_illuminance
+          - sensor.0x00158d0001e532dc_illuminance
+          - sensor.0x00158d0002b85113_illuminance
+          - sensor.0x00158d0002b70d79_illuminance
+          - sensor.0x00158d0002b72030_illuminance
+          - sensor.0x00158d0001e547ae_illuminance
+          - sensor.0x00158d0001e55ff7_illuminance
+          - sensor.0x00158d0002ec7efa_illuminance
+          - sensor.0x00158d000257a1be_illuminance
+          - sensor.0x00158d000257a1db_illuminance

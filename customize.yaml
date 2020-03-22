@@ -113,8 +113,6 @@ weather.krakow:
   order: 7
 group.air_pollution:
   order: 8
-history_graph.air_pollution:
-  order: 9
 group.network:
   order: 10
 sensor.waqi_kurdwanow_krakow_maopolska_poland:
@@ -184,12 +182,6 @@ light.0xec1bbdfffeb7fbbc_light:
 light.0x00158d0002b88c1c_light:
   friendly_name: Tosia right wall lamp
   icon: "mdi:ceiling-light"
-sensor.airly_air_quality_50_009_19_961:
-  friendly_name: Turniejowa
-sensor.airly_air_quality_49_87_19_497:
-  friendly_name: Wadowice
-sensor.airly_air_quality_50_0721293_19_8916957:
-  friendly_name: Schibsted
 light.0x00158d000410f2db_light:
   friendly_name: Attic wardrobe area lamp
   icon: "mdi:floor-lamp"
@@ -254,10 +246,6 @@ switch.fan:
   # icon: "mdi:fan"
 sensor.0x00158d0001b1286b_click:
   friendly_name: Kitchen light switch
-scene.somebody_sleeping_in_living_room:
-  friendly_name: Somebody sleeping in living room
-scene.living_room_normal_mode:
-  friendly_name: Living room back to normal
 scene.wojtek_is_cycling:
   friendly_name: Wojtek is cycling
 scene.wojtek_finished_cycling:
