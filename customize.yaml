@@ -279,3 +279,5 @@ person.wojciech_iskra:
 person.malgorzata_iskra:
   friendly_name: Gosia
   entity_picture: https://www.gravatar.com/avatar/d31811b59ff26164930193e1bd5ead0c.jpg?s=160
+remote.jaskrowo_media:
+  friendly_name: Harmony

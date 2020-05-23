@@ -45,10 +45,10 @@
       platform: state
       to: "on"
   condition:
-    - below: "60"
+    - below: "75"
       condition: numeric_state
       entity_id: sensor.0x00158d0001e43ac7_illuminance
-    - after: 06:50:00
+    - after: 07:50:00
       before: "19:59:59"
       condition: time
   action:
@@ -69,10 +69,10 @@
       condition: numeric_state
       entity_id: sun.sun
       value_template: "{{ state.attributes.elevation }}"
-    - after: 06:50:00
+    - after: 07:50:00
       before: "19:59:59"
       condition: time
-    - below: "60"
+    - below: "75"
       condition: numeric_state
       entity_id: sensor.0x00158d0001e43ac7_illuminance
   action:
@@ -90,9 +90,9 @@
       to: "on"
   condition:
     - after: "20:00:00"
-      before: 06:49:59
+      before: 03:49:59
       condition: time
-    - below: "60"
+    - below: "75"
       condition: numeric_state
       entity_id: sensor.0x00158d0001e43ac7_illuminance
   action:
@@ -338,10 +338,9 @@
 - id: "1543665916713"
   alias: Living room - bright enough
   trigger:
-    - above: "160"
+    - above: "175"
       entity_id: sensor.0x00158d0001e43ac7_illuminance
-      for:
-        minutes: 3
+      for: 0:03:00
       platform: numeric_state
   condition:
     - condition: state
@@ -1229,6 +1228,9 @@
         - sat
         - sun
       condition: time
+    - entity_id: input_boolean.someone_sleeping_in_the_living_room
+      state: "off"
+      condition: state
     - condition: template
       value_template:
         "{{ as_timestamp(now()) - as_timestamp(states.automation.others_weekend_wake_up.attributes.last_triggered)
@@ -1248,6 +1250,7 @@
       data:
         message: Dzień dobry Kochanie, specjalnie dla Ciebie piosenka.
         language: pl
+    - delay: 00:00:03
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.marantz_sr5008
@@ -1280,7 +1283,7 @@
     - below: "10"
       condition: numeric_state
       entity_id: sensor.0x00158d000257a1be_illuminance
-    - after: 06:30:00
+    - after: 07:30:00
       before: "22:00:00"
       condition: time
   action:
@@ -1422,7 +1425,7 @@
     - below: "30"
       condition: numeric_state
       entity_id: sensor.0x00158d000257a1db_illuminance
-    - after: 06:30:00
+    - after: 07:30:00
       before: "20:30:00"
       condition: time
   action:
@@ -1558,7 +1561,7 @@
       platform: state
       to: "on"
   condition:
-    - above: "24.0"
+    - above: "25.0"
       condition: numeric_state
       entity_id: sensor.0x00158d0001b1c3fb_temperature
     - after: 06:30:00
@@ -1723,7 +1726,7 @@
       platform: state
       to: "on"
   condition:
-    - above: "24.0"
+    - above: "25.0"
       condition: numeric_state
       entity_id: sensor.0x00158d0001b1c3fb_temperature
     - after: "20:00:00"
@@ -1769,7 +1772,7 @@
     - condition: state
       entity_id: group.dining_area
       state: "off"
-    - after: 06:00:00
+    - after: 07:30:00
       before: "22:00:00"
       condition: time
     - below: "60"

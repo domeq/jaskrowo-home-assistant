@@ -86,8 +86,8 @@ views:
               - sensor.speedtest_download
               - sensor.speedtest_upload
               - sensor.speedtest_ping
-              - sensor.asuswrt_download_speed
-              - sensor.asuswrt_upload_speed
+              - sensor.rt_ac68u_36a0_kib_s_received
+              - sensor.rt_ac68u_36a0_kib_s_sent
             type: entities
             show_header_toggle: false
           - title: Various

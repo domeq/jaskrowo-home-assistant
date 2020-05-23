@@ -30,6 +30,7 @@ views:
               - light.stairs_leds
               - light.downstairs_hall_lamp
               - switch.shelly1_554b82_relay_0
+              - fan.xiaomi_smart_fan
               - remote.jaskrowo_media
               - media_player.marantz_sr5008
               - input_boolean.someone_sleeping_in_the_living_room
@@ -116,7 +117,6 @@ views:
           - binary_sensor.0x00158d0002436b09_contact
           - light.xiaomi_philips_e14_crystal
           - light.xiaomi_philips_e14_crystal_2
-          - fan.xiaomi_smart_fan
           - switch.0x00158d00039e5eb1_switch
         type: entities
       # - entity: fan.xiaomi_smart_fan
