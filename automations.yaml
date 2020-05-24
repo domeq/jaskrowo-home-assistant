@@ -1926,11 +1926,11 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.ha_alarm
-      to: pending
+      to: arming
   condition:
     - condition: template
       value_template:
-        '{{ state_attr("alarm_control_panel.ha_alarm", "post_pending_state")
+        '{{ state_attr("alarm_control_panel.ha_alarm", "next_state")
         == "armed_away" }}'
   action:
     - service: tts.google_translate_say
