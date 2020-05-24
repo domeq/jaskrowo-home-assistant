@@ -10,6 +10,8 @@ homeassistant:
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Warsaw
+  external_url: "https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa"
+  internal_url: "http://192.168.1.4:8123"
   packages: !include_dir_named packages
   # Customization file
   customize: !include customize.yaml
@@ -93,7 +95,6 @@ frontend:
 config:
 
 http:
-  base_url: https://t8rvacetnpv7de2kvwrbusxxhurmyci8.ui.nabu.casa
   cors_allowed_origins:
     - https://google.com
     - https://www.home-assistant.io
@@ -460,7 +461,6 @@ spotify:
 
 recorder:
   purge_keep_days: 3
-  purge_interval: 1
   exclude:
     domains:
       - automation
