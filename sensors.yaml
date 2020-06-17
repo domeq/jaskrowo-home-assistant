@@ -18,6 +18,12 @@
     - device_tracker.gosiak_mia2_2
     - device_tracker.wojtek_s_ipad
 - platform: attributes
+  friendly_name: "AC Power"
+  attribute: power_consumption_power
+  unit_of_measurement: "kW"
+  entities:
+    - climate.master_bedroom_ac
+- platform: attributes
   friendly_name: "Airly CAQI"
   attribute: air_quality_index
   unit_of_measurement: "AQI"
@@ -123,7 +129,7 @@
   password: !secret my_zwift_password
   update_interval: 180
 - platform: statistics
-  entity_id: sensor.shelly_plug_s_51d92a_power_0
+  entity_id: sensor.shelly_plug_s_51d92a_power_0_2
   name: washing_machine_power_stats
   sampling_size: 120
   precision: 0

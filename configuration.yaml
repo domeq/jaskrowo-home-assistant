@@ -126,16 +126,20 @@ yeelight:
       name: Downstairs hall lamp
     192.168.1.34:
       name: Wall LEDs
+      model: strip1
     192.168.1.35:
       name: Stove LEDs
+      model: strip1
     192.168.1.36:
       name: Downstairs bathroom ceiling lamp
     192.168.1.37:
       name: Stairs LEDs
+      model: strip1
     192.168.1.39:
       name: Right wall lamp
     192.168.1.38:
       name: Bed LEDs
+      model: strip1
     192.168.1.40:
       name: Tosia lamp
     # 192.168.1.41:
@@ -480,25 +484,25 @@ group:
   kitchen_lights:
     name: Kitchen lights
     entities:
-      - switch.shelly1_55df6e_relay_0
+      - switch.shelly_1_55df6e_relay_0
       - light.stove_leds
       - switch.0x00158d0003951e91_switch
   dining_area:
     name: Dining area
     entities:
-      - switch.shelly2_5a4ada_relay_1
-      - switch.shelly2_5a4ada_relay_0
+      - switch.shelly_2_5a4ada_relay_1
+      - switch.shelly_2_5a4ada_relay_0
   living_room_lights:
     name: Living room lights
     entities:
       - light.xiaomi_philips_ceiling_light
-      - switch.shelly1_5556b7_relay_0
+      - switch.shelly_1_5556b7_relay_0
       - light.wall_leds
       # - switch.0x00158d0001de79e6_switch
       # - switch.fan
       - light.stairs_leds
       - light.downstairs_hall_lamp
-      - switch.shelly1_554b82_relay_0
+      - switch.shelly_1_554b82_relay_0
   downstairs_windows:
     name: Downstairs windows
     entities:
@@ -532,8 +536,8 @@ group:
     entities:
       - light.master_bedroom_bed_lamp
       - light.bed_leds
-      - switch.shelly1_2c03c5_relay_0
-      - switch.shelly1_55e273_relay_0
+      - switch.shelly_1_2c03c5_relay_0
+      - switch.shelly_1_55e273_relay_0
       - light.gateway_light_34ce00fb56e8
 
 mqtt:

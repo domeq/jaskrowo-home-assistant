@@ -185,21 +185,21 @@ light.0x00158d0002b88c1c_light:
 light.0x00158d000410f2db_light:
   friendly_name: Attic wardrobe area lamp
   icon: "mdi:floor-lamp"
-switch.shelly1_55e273_relay_0:
+switch.shelly_1_55e273_relay_0:
   friendly_name: Stairs lights
   icon: "mdi:stairs"
-switch.shelly1_2c03c5_relay_0:
+switch.shelly_1_2c03c5_relay_0:
   friendly_name: Wall lamp
   icon: "mdi:ceiling-light"
-switch.shelly1_5545a9_relay_0:
+switch.shelly_1_5545a9_relay_0:
   friendly_name: Upstairs bathroom lights
   icon: "mdi:spotlight-beam"
 sensor.xiaomi_air_quality_monitor:
   friendly_name: Indoor air quality
-switch.shelly1_554b82_relay_0:
+switch.shelly_1_554b82_relay_0:
   friendly_name: Stairs lamp
   icon: "mdi:stairs"
-switch.shelly1_5556b7_relay_0:
+switch.shelly_1_5556b7_relay_0:
   friendly_name: Wall lights
   icon: "mdi:spotlight-beam"
 binary_sensor.0x00158d000257a1be_occupancy:
@@ -213,13 +213,13 @@ binary_sensor.0x00158d0002ec7efa_occupancy:
   friendly_name: Kitchen motion sensor
 sensor.0x00158d0002ec7efa_illuminance:
   friendly_name: Kitchen illumination sensor
-switch.shelly1_55df6e_relay_0:
+switch.shelly_1_55df6e_relay_0:
   friendly_name: Ceiling lights
   icon: "mdi:spotlight-beam"
-switch.shelly2_5a4ada_relay_0:
+switch.shelly_2_5a4ada_relay_0:
   friendly_name: Dining area wall lamp
   icon: "mdi:spotlight-beam"
-switch.shelly2_5a4ada_relay_1:
+switch.shelly_2_5a4ada_relay_1:
   friendly_name: Dining area ceiling lamp
   icon: "mdi:ceiling-light"
 binary_sensor.0x00158d000257a1db_occupancy:
@@ -281,3 +281,6 @@ person.malgorzata_iskra:
   entity_picture: https://www.gravatar.com/avatar/d31811b59ff26164930193e1bd5ead0c.jpg?s=160
 remote.jaskrowo_media:
   friendly_name: Harmony
+sensor.shelly_plug_s_51d92a_power_0_2:
+  friendly_name: Washing machine power
+  icon: "mdi:washing-machine"

@@ -23,13 +23,13 @@ views:
               - sensor.0x00158d0001b1c3fb_humidity
               - binary_sensor.0x00158d0001ad5eb6_contact
               - light.xiaomi_philips_ceiling_light
-              - switch.shelly1_5556b7_relay_0
+              - switch.shelly_1_5556b7_relay_0
               - light.wall_leds
               # - switch.0x00158d0001de79e6_switch
               # - switch.fan
               - light.stairs_leds
               - light.downstairs_hall_lamp
-              - switch.shelly1_554b82_relay_0
+              - switch.shelly_1_554b82_relay_0
               - fan.xiaomi_smart_fan
               - remote.jaskrowo_media
               - media_player.marantz_sr5008
@@ -41,9 +41,9 @@ views:
             entities:
               - sensor.0x00158d0002320de3_temperature
               - sensor.0x00158d0002320de3_humidity
-              - switch.shelly1_55df6e_relay_0
-              - switch.shelly2_5a4ada_relay_0
-              - switch.shelly2_5a4ada_relay_1
+              - switch.shelly_1_55df6e_relay_0
+              - switch.shelly_2_5a4ada_relay_0
+              - switch.shelly_2_5a4ada_relay_1
               - light.stove_leds
               - switch.0x00158d0003951e91_switch
               - binary_sensor.0x00158d00023709f7_contact
@@ -96,9 +96,11 @@ views:
           - binary_sensor.0x00158d000232db84_contact
           - light.master_bedroom_bed_lamp
           - light.bed_leds
-          - switch.shelly1_2c03c5_relay_0
-          - switch.shelly1_55e273_relay_0
+          - switch.shelly_1_2c03c5_relay_0
+          - switch.shelly_1_55e273_relay_0
           - light.gateway_light_34ce00fb56e8
+          - climate.master_bedroom_ac
+          - sensor.master_bedroom_ac_power_consumption_power
         type: entities
       - title: Tosia's bedroom
         entities:
@@ -156,7 +158,8 @@ views:
         entities:
           - light.downstairs_bathroom_ceiling_lamp
           - light.downstairs_bathroom_side_lamp
-          - switch.shelly1_5545a9_relay_0
+          - switch.shelly_1_5545a9_relay_0
+          - sensor.shelly_plug_s_51d92a_power_0_2
         type: entities
       - title: Upstairs hall
         entities:

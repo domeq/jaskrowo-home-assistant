@@ -440,15 +440,18 @@
     - service: switch.turn_off
       data:
         entity_id:
-          - switch.shelly1_5556b7_relay_0
-          - switch.shelly1_554b82_relay_0
-          - switch.shelly1_55df6e_relay_0
-          - switch.shelly2_5a4ada_relay_0
-          - switch.shelly2_5a4ada_relay_1
-          - switch.shelly1_2c03c5_relay_0
-          - switch.shelly1_5545a9_relay_0
+          - switch.shelly_1_5556b7_relay_0
+          - switch.shelly_1_554b82_relay_0
+          - switch.shelly_1_55df6e_relay_0
+          - switch.shelly_2_5a4ada_relay_0
+          - switch.shelly_2_5a4ada_relay_1
+          - switch.shelly_1_2c03c5_relay_0
+          - switch.shelly_1_5545a9_relay_0
           - switch.0x00158d0003951e91_switch
-          - switch.shelly1_55e273_relay_0
+          - switch.shelly_1_55e273_relay_0
+    - service: climate.turn_off
+      data:
+        entity_id: climate.master_bedroom_ac
 - id: "1544970728739"
   alias: Coming home
   trigger:
@@ -475,7 +478,7 @@
     - service: switch.turn_on
       data:
         entity_id:
-          - switch.shelly1_55df6e_relay_0
+          - switch.shelly_1_55df6e_relay_0
 - id: "1545557982983"
   alias: Turn on Circadian Lighting switches on startup
   trigger:
@@ -523,7 +526,7 @@
       service: light.turn_on
     - data:
         entity_id:
-          - switch.shelly1_55e273_relay_0
+          - switch.shelly_1_55e273_relay_0
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0001e43bc7_occupancy'].state
@@ -639,7 +642,7 @@
       to: slide
   action:
     - data:
-        entity_id: switch.shelly1_5556b7_relay_0
+        entity_id: switch.shelly_1_5556b7_relay_0
       service: switch.toggle
 - id: "1545995978732"
   alias: Living room right wall switch - both click
@@ -714,7 +717,7 @@
       service: light.toggle
     - data:
         entity_id:
-          - switch.shelly1_55e273_relay_0
+          - switch.shelly_1_55e273_relay_0
       service: switch.toggle
 - id: "1546010333874"
   alias: Master bedroom - toggle LEDs
@@ -755,7 +758,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.shelly1_55df6e_relay_0
+      entity_id: switch.shelly_1_55df6e_relay_0
       state: "off"
     - below: "60"
       condition: numeric_state
@@ -766,7 +769,7 @@
   action:
     - data:
         entity_id:
-          - switch.shelly1_55df6e_relay_0
+          - switch.shelly_1_55df6e_relay_0
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0002ec7efa_occupancy'].state
@@ -778,7 +781,7 @@
       state: "on"
     - data:
         entity_id:
-          - switch.shelly1_55df6e_relay_0
+          - switch.shelly_1_55df6e_relay_0
       service: switch.turn_off
 - id: "1546013479738"
   alias: Kitchen - empty
@@ -1072,7 +1075,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly1_55e273_relay_0
+        entity_id: switch.shelly_1_55e273_relay_0
       service: switch.toggle
 - id: "1549196224140"
   alias: Master bedroom - toggle wall lamp
@@ -1083,7 +1086,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly1_2c03c5_relay_0
+        entity_id: switch.shelly_1_2c03c5_relay_0
       service: switch.toggle
 - id: "1549196304469"
   alias: Upstairs bathroom - motion
@@ -1094,14 +1097,14 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.shelly1_5545a9_relay_0
+      entity_id: switch.shelly_1_5545a9_relay_0
       state: "off"
     - after: 06:30:00
       before: "22:00:00"
       condition: time
   action:
     - data:
-        entity_id: switch.shelly1_5545a9_relay_0
+        entity_id: switch.shelly_1_5545a9_relay_0
       service: switch.turn_on
 - id: "1549196345036"
   alias: Upstairs bathroom - empty
@@ -1113,11 +1116,11 @@
         | int >= 900 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
-      entity_id: switch.shelly1_5545a9_relay_0
+      entity_id: switch.shelly_1_5545a9_relay_0
       state: "on"
   action:
     - data:
-        entity_id: switch.shelly1_5545a9_relay_0
+        entity_id: switch.shelly_1_5545a9_relay_0
       service: switch.turn_off
 - id: "1549196390092"
   alias: Upstairs bathroom - toggle light
@@ -1128,7 +1131,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly1_5545a9_relay_0
+        entity_id: switch.shelly_1_5545a9_relay_0
       service: switch.toggle
 - id: "1549390161319"
   alias: Smog - air is clean
@@ -1278,7 +1281,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.shelly1_554b82_relay_0
+      entity_id: switch.shelly_1_554b82_relay_0
       state: "off"
     - below: "10"
       condition: numeric_state
@@ -1288,7 +1291,7 @@
       condition: time
   action:
     - data:
-        entity_id: switch.shelly1_554b82_relay_0
+        entity_id: switch.shelly_1_554b82_relay_0
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d000257a1be_occupancy'].state
@@ -1296,10 +1299,10 @@
         and states.binary_sensor['0x00158d000257a1be_occupancy'].attributes.no_occupancy_since
         | int >= 300 %}True{% else %}False{% endif %}"
     - condition: state
-      entity_id: switch.shelly1_554b82_relay_0
+      entity_id: switch.shelly_1_554b82_relay_0
       state: "on"
     - data:
-        entity_id: switch.shelly1_554b82_relay_0
+        entity_id: switch.shelly_1_554b82_relay_0
       service: switch.turn_off
 - id: "1549654154926"
   alias: Living room stairs - empty
@@ -1311,11 +1314,11 @@
         | int >= 300 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
-      entity_id: switch.shelly1_554b82_relay_0
+      entity_id: switch.shelly_1_554b82_relay_0
       state: "on"
   action:
     - data:
-        entity_id: switch.shelly1_554b82_relay_0
+        entity_id: switch.shelly_1_554b82_relay_0
       service: switch.turn_off
 - id: "1549810614088"
   alias: Dining area - empty
@@ -1343,7 +1346,7 @@
   action:
     - data:
         entity_id:
-          - switch.shelly1_55df6e_relay_0
+          - switch.shelly_1_55df6e_relay_0
       service: switch.toggle
     - data:
         entity_id: light.stove_leds
@@ -1358,7 +1361,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly2_5a4ada_relay_1
+        entity_id: switch.shelly_2_5a4ada_relay_1
       service: switch.toggle
 - id: "1549810780701"
   alias: Kitchen right wall switch - right button
@@ -1369,7 +1372,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly2_5a4ada_relay_0
+        entity_id: switch.shelly_2_5a4ada_relay_0
       service: switch.toggle
 - id: "1549820992742"
   alias: Kitchen - motion at night
@@ -1474,7 +1477,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly1_554b82_relay_0
+        entity_id: switch.shelly_1_554b82_relay_0
       service: switch.toggle
 - id: "1554226640385"
   alias: Attic stairs - toggle
@@ -1561,7 +1564,7 @@
       platform: state
       to: "on"
   condition:
-    - above: "25.0"
+    - above: "24.0"
       condition: numeric_state
       entity_id: sensor.0x00158d0001b1c3fb_temperature
     - after: 06:30:00
@@ -1573,7 +1576,7 @@
       service: fan.turn_on
     - data:
         entity_id: fan.xiaomi_smart_fan
-      service: fan.xiaomi_miio_set_natural_mode_off
+      service: fan.xiaomi_miio_set_natural_mode_on
 - id: "1559500105148"
   alias: Living room - turn off fan
   trigger:
@@ -1686,7 +1689,7 @@
   alias: Bathroom - washing machine is done
   trigger:
     - platform: numeric_state
-      entity_id: sensor.shelly_plug_s_51d92a_power_0
+      entity_id: sensor.shelly_plug_s_51d92a_power_0_2
       below: 5
       for: 00:05:00
   condition:
@@ -1726,7 +1729,7 @@
       platform: state
       to: "on"
   condition:
-    - above: "25.0"
+    - above: "24.0"
       condition: numeric_state
       entity_id: sensor.0x00158d0001b1c3fb_temperature
     - after: "20:00:00"
@@ -1759,7 +1762,7 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly1_55df6e_relay_0
+        entity_id: switch.shelly_1_55df6e_relay_0
       service: switch.toggle
 - id: "1575388333096"
   alias: Dining area - motion
@@ -1781,7 +1784,7 @@
   action:
     - data:
         entity_id:
-          - switch.shelly2_5a4ada_relay_1
+          - switch.shelly_2_5a4ada_relay_1
       service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0001e531e0_occupancy'].state
@@ -1930,8 +1933,8 @@
   condition:
     - condition: template
       value_template:
-        '{{ state_attr("alarm_control_panel.ha_alarm", "next_state")
-        == "armed_away" }}'
+        '{{ state_attr("alarm_control_panel.ha_alarm", "next_state") ==
+        "armed_away" }}'
   action:
     - service: tts.google_translate_say
       entity_id: media_player.downstairs_speaker
@@ -2167,3 +2170,44 @@
         entity_id:
           - input_boolean.someone_sleeping_in_the_living_room
       service: input_boolean.turn_off
+- id: "1591526100145"
+  alias: Turn on AC when it's hot
+  description: Only when somebody's home
+  trigger:
+    - above: "24"
+      entity_id: sensor.0x00158d0001b92145_temperature
+      platform: numeric_state
+  condition:
+    - after: "08:00:00"
+      before: "20:00:00"
+      condition: time
+    - condition: state
+      entity_id: climate.master_bedroom_ac
+      state: "off"
+    - condition: state
+      entity_id: binary_sensor.0x00158d000232db84_contact
+      state: "off"
+    - above: "26"
+      condition: numeric_state
+      entity_id: sensor.0x00158d0001b9208d_temperature
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.wojciech_iskra
+          state: home
+        - condition: state
+          entity_id: person.malgorzata_iskra
+          state: home
+  action:
+    - data:
+        entity_id: climate.master_bedroom_ac
+      service: climate.turn_on
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.master_bedroom_ac
+        fan_mode: auto
+    - service: tts.google_translate_say
+      entity_id: media_player.downstairs_speaker
+      data:
+        message: Na górze robi się gorąco, włączam klimatyzację
+        language: pl
