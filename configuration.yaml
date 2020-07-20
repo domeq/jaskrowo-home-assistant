@@ -217,6 +217,126 @@ light:
     host: 192.168.1.50
     token: 49e966e4a479ba532d5a3763a3de7da4
     model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 01
+    host: 192.168.1.57
+    token: add30a6ad6bab18e8c6166ba5981499e
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 02
+    host: 192.168.1.58
+    token: c1fe56ced27be3e0ac219229a8344195
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 03
+    host: 192.168.1.59
+    token: 14dfb6f28e5cff39e8e4be4b651de7cf
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 04
+    host: 192.168.1.60
+    token: 957e9b9cb8ce48dd9b5d152c42b7b80e
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 05
+    host: 192.168.1.61
+    token: e2398c9044cd4fbcb8ae06909c4ddb36
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 06
+    host: 192.168.1.62
+    token: c554a2c503519002a1f3e479beeb61cf
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 07
+    host: 192.168.1.63
+    token: 747bcaade4df6e9b47d267c8f7d0a566
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 08
+    host: 192.168.1.64
+    token: e2cbcfad1ad9dbdbecc097d7c797a07d
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 09
+    host: 192.168.1.65
+    token: bcf3c3739a14681ba8581991198c80ae
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 10
+    host: 192.168.1.66
+    token: 5aa69071dd0e098d1588a4535185dd5f
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 11
+    host: 192.168.1.67
+    token: 48f6dade46f75fc49896eed511452afa
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 12
+    host: 192.168.1.68
+    token: b745444a01630941928c50b359eb0e93
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 13
+    host: 192.168.1.69
+    token: b376b75214c1925f7ff1b63b63cef66e
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 14
+    host: 192.168.1.70
+    token: 8b2be69b5584612f9ccaf18648b4d0da
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 15
+    host: 192.168.1.71
+    token: 188f1888e20aac390483f9457c1ec923
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 16
+    host: 192.168.1.72
+    token: 97d64d11c69a78844f28453719c81e94
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 17
+    host: 192.168.1.73
+    token: 204edd4864072c67487a04f8f11dc671
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 18
+    host: 192.168.1.74
+    token: 4043e97bf0b47de91007c2f7d50e1c69
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 19
+    host: 192.168.1.75
+    token: 3ae5ac9e2cb361a9698a1c39784ceda7
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 20
+    host: 192.168.1.76
+    token: 3797fb5add7d4b9a3d1dc5f03506fead
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 21
+    host: 192.168.1.77
+    token: c42eab737b216047b623772429f91d7e
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 22
+    host: 192.168.1.78
+    token: 9043f945d47304cd291eed4d4b0f6b7a
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 23
+    host: 192.168.1.79
+    token: d5068d00113530c371145be597dc7fbf
+    model: philips.light.downlight
+  - platform: xiaomi_miio
+    name: Lamp 24
+    host: 192.168.1.80
+    token: e9b9d1233394158ec778b69127e06f1d
+    model: philips.light.downlight
 
 vacuum:
   - platform: xiaomi_miio
@@ -323,7 +443,7 @@ switch:
   - platform: circadian_lighting
     name: "Hall lights auto"
     lights_ct:
-      - light.downstairs_hall_lamp
+      - light.downstairs_hall_ceiling_lights
     min_brightness: 50
   - platform: circadian_lighting
     name: "Guest room lights auto"
@@ -501,7 +621,7 @@ group:
       # - switch.0x00158d0001de79e6_switch
       # - switch.fan
       - light.stairs_leds
-      - light.downstairs_hall_lamp
+      - light.downstairs_hall_ceiling_lights
       - switch.shelly_1_554b82_relay_0
   downstairs_windows:
     name: Downstairs windows
@@ -539,6 +659,42 @@ group:
       - switch.shelly_1_2c03c5_relay_0
       - switch.shelly_1_55e273_relay_0
       - light.gateway_light_34ce00fb56e8
+  downstairs_hall_ceiling_lights:
+    name: Downstairs hall lights
+    entities:
+      - light.light_09
+      - light.light_10
+      - light.light_11
+      - light.light_12
+      - light.light_13
+      - light.light_14
+  kitchen_ceiling_lights:
+    name: Kitchen ceiling lights
+    entities:
+      - light.light_01
+      - light.light_02
+      - light.light_03
+      - light.light_04
+      - light.light_05
+      - light.light_06
+      - light.light_07
+      - light.light_08
+  living_room_ceiling_lights:
+    name: Living room ceiling lights
+    entities:
+      - light.light_15
+      - light.light_16
+      - light.light_17
+      - light.light_18
+      - light.light_19
+      - light.light_20
+      - light.light_21
+  master_bedroom_ceiling_lights:
+    name: Living room ceiling lights
+    entities:
+      - light.light_22
+      - light.light_23
+      - light.light_24
 
 mqtt:
   broker: 172.17.0.1

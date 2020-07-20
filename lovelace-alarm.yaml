@@ -134,7 +134,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.downstairs_hall_lamp
+                entity: light.downstairs_hall_ceiling_lights
                 style:
                   top: 20%
                   left: 36%

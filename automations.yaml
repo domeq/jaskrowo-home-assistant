@@ -111,7 +111,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: light.downstairs_hall_lamp
+      entity_id: light.downstairs_hall_ceiling_lights
       state: "off"
     - below: "35"
       condition: numeric_state
@@ -121,8 +121,7 @@
         entity_id: switch.circadian_lighting_hall_lights_auto
       service: switch.turn_on
     - data:
-        entity_id: light.downstairs_hall_lamp
-        transition: 1
+        entity_id: light.downstairs_hall_ceiling_lights
       service: light.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0001e531e0_occupancy'].state
@@ -130,10 +129,10 @@
         and states.binary_sensor['0x00158d0001e531e0_occupancy'].attributes.no_occupancy_since
         | int >= 180 %}True{% else %}False{% endif %}"
     - condition: state
-      entity_id: light.downstairs_hall_lamp
+      entity_id: light.downstairs_hall_ceiling_lights
       state: "on"
     - data:
-        entity_id: light.downstairs_hall_lamp
+        entity_id: light.downstairs_hall_ceiling_lights
       service: light.turn_off
 - id: "1541327330757"
   alias: Hall - empty room
@@ -145,12 +144,11 @@
         | int >= 600 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
-      entity_id: light.downstairs_hall_lamp
+      entity_id: light.downstairs_hall_ceiling_lights
       state: "on"
   action:
     - data:
-        entity_id: light.downstairs_hall_lamp
-        transition: 1
+        entity_id: light.downstairs_hall_ceiling_lights
       service: light.turn_off
 - id: "1541327802282"
   alias: Living room - stair LEDs
@@ -470,10 +468,9 @@
       service: scene.turn_on
     - data:
         entity_id:
-          - light.downstairs_hall_lamp
+          - light.downstairs_hall_ceiling_lights
           - light.xiaomi_philips_ceiling_light
           - light.stove_leds
-        transition: 1
       service: light.turn_on
     - service: switch.turn_on
       data:
@@ -599,8 +596,7 @@
   condition: []
   action:
     - data:
-        entity_id: light.downstairs_hall_lamp
-        transition: 1
+        entity_id: light.downstairs_hall_ceiling_lights
       service: light.toggle
 - id: "1545994990745"
   alias: Living room left wall switch - both click
@@ -679,8 +675,7 @@
         entity_id: switch.circadian_lighting_hall_lights_auto
       service: switch.turn_off
     - data:
-        entity_id: light.downstairs_hall_lamp
-        transition: 1
+        entity_id: light.downstairs_hall_ceiling_lights
       service: light.toggle
 - id: "1545996260772"
   alias: Hall wall switch - right click
@@ -1912,7 +1907,7 @@
       service: switch.turn_off
     - data:
         entity_id:
-          - light.downstairs_hall_lamp
+          - light.downstairs_hall_ceiling_lights
           - light.downstairs_bathroom_ceiling_lamp
           - light.wall_leds
           - light.stairs_leds
@@ -1995,7 +1990,7 @@
       service: switch.turn_on
     - data:
         entity_id:
-          - light.downstairs_hall_lamp
+          - light.downstairs_hall_ceiling_lights
           - light.downstairs_bathroom_ceiling_lamp
           - light.wall_leds
           - light.stairs_leds

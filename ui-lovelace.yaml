@@ -28,7 +28,7 @@ views:
               # - switch.0x00158d0001de79e6_switch
               # - switch.fan
               - light.stairs_leds
-              - light.downstairs_hall_lamp
+              - light.downstairs_hall_ceiling_lights
               - switch.shelly_1_554b82_relay_0
               - fan.xiaomi_smart_fan
               - remote.jaskrowo_media
