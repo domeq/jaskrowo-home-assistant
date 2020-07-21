@@ -20,9 +20,9 @@
 - platform: attributes
   friendly_name: "AC Power"
   attribute: power_consumption_power
-  unit_of_measurement: "kW"
+  unit_of_measurement: "W"
   entities:
-    - climate.master_bedroom_ac
+    - climate.room_air_conditioner
 - platform: attributes
   friendly_name: "Airly CAQI"
   attribute: air_quality_index

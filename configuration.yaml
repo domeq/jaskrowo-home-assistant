@@ -142,6 +142,8 @@ yeelight:
       model: strip1
     192.168.1.40:
       name: Tosia lamp
+    192.168.1.56:
+      name: Dining area ceiling lamp
     # 192.168.1.41:
     #   name: Attic left light
     # 192.168.1.42:
@@ -163,13 +165,6 @@ owntracks:
 
 automation: !include automations.yaml
 script: !include scripts.yaml
-
-# 12 characters MAC can be obtained from the gateway.
-xiaomi_aqara:
-  discovery_retry: 10
-  gateways:
-    - mac: 34:CE:00:FB:56:E8
-      key: 4z31ifz2sfrfv9mb
 
 light:
   - platform: xiaomi_miio
@@ -455,10 +450,9 @@ switch:
     name: "Master bedroom lights auto"
     lights_ct:
       - light.master_bedroom_bed_lamp
-    lights_rgb:
-      - light.gateway_light_34ce00fb56e8
     lights_brightness:
       - light.bed_leds
+      - light.shelly_rgbw2_6d8073_light_0
   - platform: circadian_lighting
     name: "Attic lights auto"
     min_brightness: 50
@@ -573,12 +567,6 @@ notify:
     vapid_prv_key: !secret vapid_prv_key
     vapid_email: !secret vapid_email
 
-media_player:
-  - platform: denonavr
-    host: 192.168.1.5
-    name: Marantz SR5008
-    show_all_sources: true
-
 spotify:
   client_id: !secret spotify_client_id
   client_secret: !secret spotify_client_secret
@@ -658,6 +646,7 @@ group:
       - light.bed_leds
       - switch.shelly_1_2c03c5_relay_0
       - switch.shelly_1_55e273_relay_0
+      - light.shelly_rgbw2_6d8073_light_0
       - light.gateway_light_34ce00fb56e8
   downstairs_hall_ceiling_lights:
     name: Downstairs hall lights

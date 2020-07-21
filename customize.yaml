@@ -4,6 +4,9 @@ light.hall_light:
 light.bed_leds:
   friendly_name: Master bedroom LEDs
   icon: "mdi:led-strip"
+light.shelly_rgbw2_6d8073_light_0:
+  friendly_name: Wall LEDs
+  icon: "mdi:led-strip"
 light.stove_leds:
   friendly_name: Kitchen LEDs
   icon: "mdi:led-strip"
@@ -23,7 +26,7 @@ light.tosia_lamp:
   friendly_name: Tosia lamp
   icon: "mdi:lamp"
 light.gateway_light_34ce00fb56e8:
-  friendly_name: Master bedroom gateway light
+  friendly_name: Gateway light
   icon: "mdi:led-outline"
 sensor.illumination_34ce00fb56e8:
   friendly_name: Master bedroom gateway illumination sensor
@@ -264,7 +267,7 @@ device_tracker.gosiak_mia2_2:
 device_tracker.wojtek_s_ipad:
   friendly_name: iPad
   icon: "mdi:apple"
-sensor.wojtek_mimix2_battery_level:
+sensor.in2013_battery_level:
   friendly_name: Wojtek's phone
   entity_picture: https://www.gravatar.com/avatar/79ed48a9ea28ae3ea084ba8fc8c5384f.jpg?size=160
 sensor.gosiak_mia2_2_battery_level:

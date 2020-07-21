@@ -48,7 +48,7 @@
     - below: "75"
       condition: numeric_state
       entity_id: sensor.0x00158d0001e43ac7_illuminance
-    - after: 07:50:00
+    - after: 06:50:00
       before: "19:59:59"
       condition: time
   action:
@@ -69,7 +69,7 @@
       condition: numeric_state
       entity_id: sun.sun
       value_template: "{{ state.attributes.elevation }}"
-    - after: 07:50:00
+    - after: 06:50:00
       before: "19:59:59"
       condition: time
     - below: "75"
@@ -90,7 +90,7 @@
       to: "on"
   condition:
     - after: "20:00:00"
-      before: 03:49:59
+      before: 06:49:59
       condition: time
     - below: "75"
       condition: numeric_state
@@ -449,7 +449,7 @@
           - switch.shelly_1_55e273_relay_0
     - service: climate.turn_off
       data:
-        entity_id: climate.master_bedroom_ac
+        entity_id: climate.room_air_conditioner
 - id: "1544970728739"
   alias: Coming home
   trigger:
@@ -517,7 +517,7 @@
     - data:
         entity_id:
           - light.master_bedroom_bed_lamp
-          - light.gateway_light_34ce00fb56e8
+          - light.shelly_rgbw2_6d8073_light_0
           - light.bed_leds
         transition: 1
       service: light.turn_on
@@ -707,7 +707,7 @@
         entity_id:
           - light.master_bedroom_bed_lamp
           - light.bed_leds
-          - light.gateway_light_34ce00fb56e8
+          - light.shelly_rgbw2_6d8073_light_0
         transition: 1
       service: light.toggle
     - data:
@@ -730,7 +730,7 @@
         transition: 1
       service: light.toggle
 - id: "1546010434351"
-  alias: Master bedroom - toggle gateway
+  alias: Master bedroom - toggle wall LEDs
   trigger:
     - entity_id: sensor.0x00158d00016dbe9e_click
       platform: state
@@ -741,7 +741,7 @@
   condition: []
   action:
     - data:
-        entity_id: light.gateway_light_34ce00fb56e8
+        entity_id: light.shelly_rgbw2_6d8073_light_0
         transition: 1
       service: light.toggle
 - id: "1546013441545"
@@ -1571,7 +1571,7 @@
       service: fan.turn_on
     - data:
         entity_id: fan.xiaomi_smart_fan
-      service: fan.xiaomi_miio_set_natural_mode_on
+      service: fan.xiaomi_miio_set_natural_mode_off
 - id: "1559500105148"
   alias: Living room - turn off fan
   trigger:
@@ -2130,6 +2130,8 @@
           - automation.living_room_motion_01_normal
           - automation.living_room_motion_02_evening
           - automation.living_room_motion_03_tv_mode
+          - automation.living_room_turn_on_fan_daytime
+          - automation.living_room_turn_on_fan_evening
       service: automation.turn_off
     - data:
         entity_id:
@@ -2137,6 +2139,9 @@
           - group.kitchen_lights
           - group.dining_area
       service: homeassistant.turn_off
+    - data:
+        entity_id: fan.xiaomi_smart_fan
+      service: fan.turn_off
 - id: "1584882369651"
   alias: Living room - sleeping mode off
   description: ""
@@ -2156,6 +2161,8 @@
           - automation.living_room_motion_01_normal
           - automation.living_room_motion_02_evening
           - automation.living_room_motion_03_tv_mode
+          - automation.living_room_turn_on_fan_daytime
+          - automation.living_room_turn_on_fan_evening
       service: automation.turn_on
     - data:
         entity_id:
@@ -2177,7 +2184,7 @@
       before: "20:00:00"
       condition: time
     - condition: state
-      entity_id: climate.master_bedroom_ac
+      entity_id: climate.room_air_conditioner
       state: "off"
     - condition: state
       entity_id: binary_sensor.0x00158d000232db84_contact
@@ -2195,11 +2202,11 @@
           state: home
   action:
     - data:
-        entity_id: climate.master_bedroom_ac
+        entity_id: climate.room_air_conditioner
       service: climate.turn_on
     - service: climate.set_fan_mode
       data:
-        entity_id: climate.master_bedroom_ac
+        entity_id: climate.room_air_conditioner
         fan_mode: auto
     - service: tts.google_translate_say
       entity_id: media_player.downstairs_speaker
