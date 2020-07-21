@@ -65,7 +65,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_1_5556b7_relay_0
+                entity: group.living_room_ceiling_lights
                 style:
                   top: 32%
                   right: 18%
@@ -134,7 +134,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.downstairs_hall_ceiling_lights
+                entity: group.downstairs_hall_ceiling_lights
                 style:
                   top: 20%
                   left: 36%
@@ -214,7 +214,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_1_55df6e_relay_0
+                entity: group.kitchen_ceiling_lights
                 style:
                   top: 23%
                   left: 16%

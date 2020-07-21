@@ -111,7 +111,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: light.downstairs_hall_ceiling_lights
+      entity_id: group.downstairs_hall_ceiling_lights
       state: "off"
     - below: "35"
       condition: numeric_state
@@ -121,19 +121,19 @@
         entity_id: switch.circadian_lighting_hall_lights_auto
       service: switch.turn_on
     - data:
-        entity_id: light.downstairs_hall_ceiling_lights
-      service: light.turn_on
+        entity_id: group.downstairs_hall_ceiling_lights
+      service: homeassistant.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0001e531e0_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d0001e531e0_occupancy'].attributes.no_occupancy_since
         and states.binary_sensor['0x00158d0001e531e0_occupancy'].attributes.no_occupancy_since
         | int >= 180 %}True{% else %}False{% endif %}"
     - condition: state
-      entity_id: light.downstairs_hall_ceiling_lights
+      entity_id: group.downstairs_hall_ceiling_lights
       state: "on"
     - data:
-        entity_id: light.downstairs_hall_ceiling_lights
-      service: light.turn_off
+        entity_id: group.downstairs_hall_ceiling_lights
+      service: homeassistant.turn_off
 - id: "1541327330757"
   alias: Hall - empty room
   trigger:
@@ -144,12 +144,12 @@
         | int >= 600 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
-      entity_id: light.downstairs_hall_ceiling_lights
+      entity_id: group.downstairs_hall_ceiling_lights
       state: "on"
   action:
     - data:
-        entity_id: light.downstairs_hall_ceiling_lights
-      service: light.turn_off
+        entity_id: group.downstairs_hall_ceiling_lights
+      service: homeassistant.turn_off
 - id: "1541327802282"
   alias: Living room - stair LEDs
   trigger:
@@ -438,15 +438,19 @@
     - service: switch.turn_off
       data:
         entity_id:
-          - switch.shelly_1_5556b7_relay_0
           - switch.shelly_1_554b82_relay_0
-          - switch.shelly_1_55df6e_relay_0
           - switch.shelly_2_5a4ada_relay_0
           - switch.shelly_2_5a4ada_relay_1
           - switch.shelly_1_2c03c5_relay_0
           - switch.shelly_1_5545a9_relay_0
           - switch.0x00158d0003951e91_switch
           - switch.shelly_1_55e273_relay_0
+    - data:
+        entity_id:
+          - group.living_room_ceiling_lights
+          - group.kitchen_ceiling_lights
+          - group.downstairs_hall_ceiling_lights
+      service: homeassistant.turn_off
     - service: climate.turn_off
       data:
         entity_id: climate.room_air_conditioner
@@ -468,14 +472,14 @@
       service: scene.turn_on
     - data:
         entity_id:
-          - light.downstairs_hall_ceiling_lights
           - light.xiaomi_philips_ceiling_light
           - light.stove_leds
       service: light.turn_on
-    - service: switch.turn_on
-      data:
+    - data:
         entity_id:
-          - switch.shelly_1_55df6e_relay_0
+          - group.downstairs_hall_ceiling_lights
+          - group.kitchen_ceiling_lights
+      service: homeassistant.turn_on
 - id: "1545557982983"
   alias: Turn on Circadian Lighting switches on startup
   trigger:
@@ -488,10 +492,12 @@
           - switch.circadian_lighting_hall_lights_auto
           - switch.circadian_lighting_living_room_auto_ceiling
           - switch.circadian_lighting_living_room_auto_leds
+          - switch.circadian_lighting_living_room_wall_lights_auto
           - switch.circadian_lighting_guest_room_lights_auto
           - switch.circadian_lighting_attic_lights_auto
           - switch.circadian_lighting_master_bedroom_lights_auto
-          - switch.circadian_lighting_kitchen_lights_auto
+          - switch.circadian_lighting_kitchen_ceiling_lights_auto
+          - switch.circadian_lighting_kitchen_stove_leds_auto
           - switch.circadian_lighting_tosia_room_lights_auto
           - switch.circadian_lighting_wardrobe_lights_auto
           - switch.circadian_lighting_downstairs_bathroom_lights_auto
@@ -596,8 +602,8 @@
   condition: []
   action:
     - data:
-        entity_id: light.downstairs_hall_ceiling_lights
-      service: light.toggle
+        entity_id: group.downstairs_hall_ceiling_lights
+      service: homeassistant.toggle
 - id: "1545994990745"
   alias: Living room left wall switch - both click
   trigger:
@@ -638,8 +644,8 @@
       to: slide
   action:
     - data:
-        entity_id: switch.shelly_1_5556b7_relay_0
-      service: switch.toggle
+        entity_id: group.living_room_ceiling_lights
+      service: homeassistant.toggle
 - id: "1545995978732"
   alias: Living room right wall switch - both click
   trigger:
@@ -675,8 +681,8 @@
         entity_id: switch.circadian_lighting_hall_lights_auto
       service: switch.turn_off
     - data:
-        entity_id: light.downstairs_hall_ceiling_lights
-      service: light.toggle
+        entity_id: group.downstairs_hall_ceiling_lights
+      service: homeassistant.toggle
 - id: "1545996260772"
   alias: Hall wall switch - right click
   trigger:
@@ -753,7 +759,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.shelly_1_55df6e_relay_0
+      entity_id: group.kitchen_ceiling_lights
       state: "off"
     - below: "60"
       condition: numeric_state
@@ -764,8 +770,8 @@
   action:
     - data:
         entity_id:
-          - switch.shelly_1_55df6e_relay_0
-      service: switch.turn_on
+          - group.kitchen_ceiling_lights
+      service: homeassistant.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0002ec7efa_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d0002ec7efa_occupancy'].attributes.no_occupancy_since
@@ -776,8 +782,8 @@
       state: "on"
     - data:
         entity_id:
-          - switch.shelly_1_55df6e_relay_0
-      service: switch.turn_off
+          - group.kitchen_ceiling_lights
+      service: homeassistant.turn_off
 - id: "1546013479738"
   alias: Kitchen - empty
   trigger:
@@ -1341,8 +1347,8 @@
   action:
     - data:
         entity_id:
-          - switch.shelly_1_55df6e_relay_0
-      service: switch.toggle
+          - group.kitchen_ceiling_lights
+      service: homeassistant.toggle
     - data:
         entity_id: light.stove_leds
         transition: 1
@@ -1757,8 +1763,8 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_1_55df6e_relay_0
-      service: switch.toggle
+        entity_id: group.kitchen_ceiling_lights
+      service: homeassistant.toggle
 - id: "1575388333096"
   alias: Dining area - motion
   trigger:
@@ -1907,13 +1913,16 @@
       service: switch.turn_off
     - data:
         entity_id:
-          - light.downstairs_hall_ceiling_lights
           - light.downstairs_bathroom_ceiling_lamp
           - light.wall_leds
           - light.stairs_leds
           - light.stove_leds
         effect: Police
       service: light.turn_on
+    - data:
+        entity_id:
+          - group.downstairs_hall_ceiling_lights
+      service: homeassistant.turn_on
     - delay: 00:00:05
     - service: media_player.volume_set
       data_template:
@@ -1990,13 +1999,16 @@
       service: switch.turn_on
     - data:
         entity_id:
-          - light.downstairs_hall_ceiling_lights
           - light.downstairs_bathroom_ceiling_lamp
           - light.wall_leds
           - light.stairs_leds
           - light.stove_leds
         transition: 1
       service: light.turn_off
+    - data:
+        entity_id:
+          - group.downstairs_hall_ceiling_lights
+      service: homeassistant.turn_off
   id: 184debd9df574d06aad9e8c467155a62
 - alias: "TESTING: Wojtek left home"
   trigger:

@@ -1,6 +1,6 @@
-light.hall_light:
-  friendly_name: Hall light
-  icon: "mdi:ceiling-light"
+group.downstairs_hall_ceiling_lights:
+  friendly_name: Hall ceiling lights
+  icon: "mdi:spotlight-beam"
 light.bed_leds:
   friendly_name: Master bedroom LEDs
   icon: "mdi:led-strip"
@@ -202,7 +202,7 @@ sensor.xiaomi_air_quality_monitor:
 switch.shelly_1_554b82_relay_0:
   friendly_name: Stairs lamp
   icon: "mdi:stairs"
-switch.shelly_1_5556b7_relay_0:
+group.living_room_ceiling_lights:
   friendly_name: Wall lights
   icon: "mdi:spotlight-beam"
 binary_sensor.0x00158d000257a1be_occupancy:
@@ -216,7 +216,7 @@ binary_sensor.0x00158d0002ec7efa_occupancy:
   friendly_name: Kitchen motion sensor
 sensor.0x00158d0002ec7efa_illuminance:
   friendly_name: Kitchen illumination sensor
-switch.shelly_1_55df6e_relay_0:
+group.kitchen_ceiling_lights:
   friendly_name: Ceiling lights
   icon: "mdi:spotlight-beam"
 switch.shelly_2_5a4ada_relay_0:

@@ -436,9 +436,13 @@ switch:
       - light.stairs_leds
       - light.wall_leds
   - platform: circadian_lighting
+    name: "Living room wall lights auto"
+    lights_ct:
+      - group.living_room_ceiling_lights
+  - platform: circadian_lighting
     name: "Hall lights auto"
     lights_ct:
-      - light.downstairs_hall_ceiling_lights
+      - group.downstairs_hall_ceiling_lights
     min_brightness: 50
   - platform: circadian_lighting
     name: "Guest room lights auto"
@@ -472,7 +476,11 @@ switch:
     lights_ct:
       - light.downstairs_bathroom_side_lamp
   - platform: circadian_lighting
-    name: "Kitchen lights auto"
+    name: "Kitchen ceiling lights auto"
+    lights_ct:
+      - group.kitchen_ceiling_lights
+  - platform: circadian_lighting
+    name: "Kitchen stove LEDs auto"
     min_brightness: 90
     lights_ct:
       - light.stove_leds
@@ -592,7 +600,7 @@ group:
   kitchen_lights:
     name: Kitchen lights
     entities:
-      - switch.shelly_1_55df6e_relay_0
+      - group.kitchen_ceiling_lights
       - light.stove_leds
       - switch.0x00158d0003951e91_switch
   dining_area:
@@ -604,12 +612,12 @@ group:
     name: Living room lights
     entities:
       - light.xiaomi_philips_ceiling_light
-      - switch.shelly_1_5556b7_relay_0
+      - group.living_room_ceiling_lights
       - light.wall_leds
       # - switch.0x00158d0001de79e6_switch
       # - switch.fan
       - light.stairs_leds
-      - light.downstairs_hall_ceiling_lights
+      - group.downstairs_hall_ceiling_lights
       - switch.shelly_1_554b82_relay_0
   downstairs_windows:
     name: Downstairs windows
@@ -651,39 +659,39 @@ group:
   downstairs_hall_ceiling_lights:
     name: Downstairs hall lights
     entities:
-      - light.light_09
-      - light.light_10
-      - light.light_11
-      - light.light_12
-      - light.light_13
-      - light.light_14
+      - light.lamp_09
+      - light.lamp_10
+      - light.lamp_11
+      - light.lamp_12
+      - light.lamp_13
+      - light.lamp_14
   kitchen_ceiling_lights:
     name: Kitchen ceiling lights
     entities:
-      - light.light_01
-      - light.light_02
-      - light.light_03
-      - light.light_04
-      - light.light_05
-      - light.light_06
-      - light.light_07
-      - light.light_08
+      - light.lamp_01
+      - light.lamp_02
+      - light.lamp_03
+      - light.lamp_04
+      - light.lamp_05
+      - light.lamp_06
+      - light.lamp_07
+      - light.lamp_08
   living_room_ceiling_lights:
     name: Living room ceiling lights
     entities:
-      - light.light_15
-      - light.light_16
-      - light.light_17
-      - light.light_18
-      - light.light_19
-      - light.light_20
-      - light.light_21
+      - light.lamp_15
+      - light.lamp_16
+      - light.lamp_17
+      - light.lamp_18
+      - light.lamp_19
+      - light.lamp_20
+      - light.lamp_21
   master_bedroom_ceiling_lights:
     name: Living room ceiling lights
     entities:
-      - light.light_22
-      - light.light_23
-      - light.light_24
+      - light.lamp_22
+      - light.lamp_23
+      - light.lamp_24
 
 mqtt:
   broker: 172.17.0.1

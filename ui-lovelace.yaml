@@ -23,12 +23,12 @@ views:
               - sensor.0x00158d0001b1c3fb_humidity
               - binary_sensor.0x00158d0001ad5eb6_contact
               - light.xiaomi_philips_ceiling_light
-              - switch.shelly_1_5556b7_relay_0
+              - group.living_room_ceiling_lights
               - light.wall_leds
               # - switch.0x00158d0001de79e6_switch
               # - switch.fan
               - light.stairs_leds
-              - light.downstairs_hall_ceiling_lights
+              - group.downstairs_hall_ceiling_lights
               - switch.shelly_1_554b82_relay_0
               - fan.xiaomi_smart_fan
               - remote.jaskrowo_media
@@ -41,7 +41,7 @@ views:
             entities:
               - sensor.0x00158d0002320de3_temperature
               - sensor.0x00158d0002320de3_humidity
-              - switch.shelly_1_55df6e_relay_0
+              - group.kitchen_ceiling_lights
               - switch.shelly_2_5a4ada_relay_0
               - switch.shelly_2_5a4ada_relay_1
               - light.stove_leds
