@@ -6,6 +6,16 @@ views:
     path: default_view
     badges: []
     cards:
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.ping_wp_pl
+            state: "off"
+        card:
+          type: markdown
+          content: >
+            # We're offline!
+
+            ### Internet is down at the moment! 😱
       - type: vertical-stack
         cards:
           - type: conditional
@@ -24,12 +34,13 @@ views:
               - binary_sensor.0x00158d0001ad5eb6_contact
               - light.xiaomi_philips_ceiling_light
               - group.living_room_ceiling_lights
-              - light.wall_leds
+              - light.shelly_rgbw2_6ea3da_light_0
               # - switch.0x00158d0001de79e6_switch
               # - switch.fan
               - light.stairs_leds
               - group.downstairs_hall_ceiling_lights
-              - switch.shelly_1_554b82_relay_0
+              - light.shelly_rgbw2_68c63af431c2_light_0
+              - group.living_room_stairs_lights
               - fan.xiaomi_smart_fan
               - remote.jaskrowo_media
               - media_player.marantz_sr5008
@@ -42,8 +53,8 @@ views:
               - sensor.0x00158d0002320de3_temperature
               - sensor.0x00158d0002320de3_humidity
               - group.kitchen_ceiling_lights
-              - switch.shelly_2_5a4ada_relay_0
-              - switch.shelly_2_5a4ada_relay_1
+              - light.dining_area_wall_lamp
+              - light.dining_area_ceiling_lamp
               - light.stove_leds
               - switch.0x00158d0003951e91_switch
               - binary_sensor.0x00158d00023709f7_contact
@@ -98,7 +109,7 @@ views:
           - light.bed_leds
           - light.shelly_rgbw2_6d8073_light_0
           - switch.shelly_1_2c03c5_relay_0
-          - switch.shelly_1_55e273_relay_0
+          - group.master_bedroom_ceiling_lights
           - climate.room_air_conditioner
           - sensor.room_air_conditioner_power_consumption_power
         type: entities
@@ -153,6 +164,7 @@ views:
           - light.0x00158d0003fa55ab_light
           - light.attic_right_lamp_light
           - light.0x00158d000410f2db_light
+          - light.attic_closet_lamp
         type: entities
       - title: Bathrooms
         entities:

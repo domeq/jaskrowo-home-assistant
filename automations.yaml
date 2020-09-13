@@ -45,6 +45,10 @@
       platform: state
       to: "on"
   condition:
+    - above: "20"
+      condition: numeric_state
+      entity_id: sun.sun
+      value_template: "{{ state.attributes.elevation }}"
     - below: "75"
       condition: numeric_state
       entity_id: sensor.0x00158d0001e43ac7_illuminance
@@ -65,7 +69,7 @@
       platform: state
       to: "on"
   condition:
-    - below: "0"
+    - below: "20"
       condition: numeric_state
       entity_id: sun.sun
       value_template: "{{ state.attributes.elevation }}"
@@ -104,6 +108,7 @@
       service: switch.turn_on
 - id: "1541319904416"
   alias: Hall - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0001e531e0_occupancy
       from: "off"
@@ -111,9 +116,9 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: group.downstairs_hall_ceiling_lights
+      entity_id: group.downstairs_hall_lights
       state: "off"
-    - below: "35"
+    - below: "20"
       condition: numeric_state
       entity_id: sensor.0x00158d0001e531e0_illuminance
   action:
@@ -121,7 +126,7 @@
         entity_id: switch.circadian_lighting_hall_lights_auto
       service: switch.turn_on
     - data:
-        entity_id: group.downstairs_hall_ceiling_lights
+        entity_id: group.downstairs_hall_lights
       service: homeassistant.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0001e531e0_occupancy'].state
@@ -129,10 +134,10 @@
         and states.binary_sensor['0x00158d0001e531e0_occupancy'].attributes.no_occupancy_since
         | int >= 180 %}True{% else %}False{% endif %}"
     - condition: state
-      entity_id: group.downstairs_hall_ceiling_lights
+      entity_id: group.downstairs_hall_lights
       state: "on"
     - data:
-        entity_id: group.downstairs_hall_ceiling_lights
+        entity_id: group.downstairs_hall_lights
       service: homeassistant.turn_off
 - id: "1541327330757"
   alias: Hall - empty room
@@ -144,11 +149,11 @@
         | int >= 600 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
-      entity_id: group.downstairs_hall_ceiling_lights
+      entity_id: group.downstairs_hall_lights
       state: "on"
   action:
     - data:
-        entity_id: group.downstairs_hall_ceiling_lights
+        entity_id: group.downstairs_hall_lights
       service: homeassistant.turn_off
 - id: "1541327802282"
   alias: Living room - stair LEDs
@@ -202,6 +207,7 @@
       service: homeassistant.turn_off
 - id: "1541522658112"
   alias: Attic - entry area motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0001e547ae_occupancy
       from: "off"
@@ -234,6 +240,7 @@
       service: light.turn_off
 - id: "1541525021925"
   alias: Attic - wardrobe area motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0001e55ff7_occupancy
       from: "off"
@@ -290,6 +297,7 @@
       service: light.turn_off
 - id: "1542048714041"
   alias: Guest room - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0001e532dc_occupancy
       platform: state
@@ -356,6 +364,7 @@
       service: homeassistant.turn_off
 - id: "1543859792965"
   alias: Tosia room - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0002b85113_occupancy
       from: "off"
@@ -438,22 +447,17 @@
     - service: switch.turn_off
       data:
         entity_id:
-          - switch.shelly_1_554b82_relay_0
-          - switch.shelly_2_5a4ada_relay_0
-          - switch.shelly_2_5a4ada_relay_1
           - switch.shelly_1_2c03c5_relay_0
           - switch.shelly_1_5545a9_relay_0
           - switch.0x00158d0003951e91_switch
-          - switch.shelly_1_55e273_relay_0
     - data:
         entity_id:
           - group.living_room_ceiling_lights
           - group.kitchen_ceiling_lights
-          - group.downstairs_hall_ceiling_lights
+          - group.downstairs_hall_lights
+          - group.master_bedroom_ceiling_lights
+          - group.living_room_stairs_lights
       service: homeassistant.turn_off
-    - service: climate.turn_off
-      data:
-        entity_id: climate.room_air_conditioner
 - id: "1544970728739"
   alias: Coming home
   trigger:
@@ -477,7 +481,7 @@
       service: light.turn_on
     - data:
         entity_id:
-          - group.downstairs_hall_ceiling_lights
+          - group.downstairs_hall_lights
           - group.kitchen_ceiling_lights
       service: homeassistant.turn_on
 - id: "1545557982983"
@@ -489,21 +493,24 @@
   action:
     - data:
         entity_id:
-          - switch.circadian_lighting_hall_lights_auto
+          - switch.circadian_lighting_hall_ceiling_lights_auto
+          - switch.circadian_lighting_hall_ceiling_leds_auto
           - switch.circadian_lighting_living_room_auto_ceiling
-          - switch.circadian_lighting_living_room_auto_leds
-          - switch.circadian_lighting_living_room_wall_lights_auto
+          - switch.circadian_lighting_living_room_stairs_auto_leds
+          - switch.circadian_lighting_living_room_wall_auto_leds
           - switch.circadian_lighting_guest_room_lights_auto
           - switch.circadian_lighting_attic_lights_auto
           - switch.circadian_lighting_master_bedroom_lights_auto
-          - switch.circadian_lighting_kitchen_ceiling_lights_auto
-          - switch.circadian_lighting_kitchen_stove_leds_auto
+          - switch.circadian_lighting_master_bedroom_stairs_lights_auto
+          - switch.circadian_lighting_kitchen_lights_auto
+          - switch.circadian_lighting_dining_area_lights_auto
           - switch.circadian_lighting_tosia_room_lights_auto
           - switch.circadian_lighting_wardrobe_lights_auto
           - switch.circadian_lighting_downstairs_bathroom_lights_auto
       service: switch.turn_on
 - id: "1545565835153"
   alias: Master bedroom - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0001e43bc7_occupancy
       from: "off"
@@ -529,8 +536,8 @@
       service: light.turn_on
     - data:
         entity_id:
-          - switch.shelly_1_55e273_relay_0
-      service: switch.turn_on
+          - group.master_bedroom_ceiling_lights
+      service: homeassistant.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0001e43bc7_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d0001e43bc7_occupancy'].attributes.no_occupancy_since
@@ -585,12 +592,13 @@
     - entity_id: sensor.0x00158d0001e06c11_click
       platform: state
       to: right
+    - entity_id: sensor.0x00158d000101c2a1_action
+      platform: state
+      to: flip90
   condition: []
   action:
     - data:
-        entity_id:
-          - light.stairs_leds
-          - light.wall_leds
+        entity_id: light.xiaomi_philips_ceiling_light
         transition: 1
       service: light.toggle
 - id: "1545994964595"
@@ -602,7 +610,8 @@
   condition: []
   action:
     - data:
-        entity_id: group.downstairs_hall_ceiling_lights
+        entity_id: group.downstairs_hall_lights
+        transition: 1
       service: homeassistant.toggle
 - id: "1545994990745"
   alias: Living room left wall switch - both click
@@ -626,26 +635,24 @@
       to: left
     - entity_id: sensor.0x00158d000101c2a1_action
       platform: state
-      to: flip90
+      to: slide
   condition: []
   action:
     - data:
-        entity_id: light.xiaomi_philips_ceiling_light
+        entity_id: group.living_room_ceiling_lights
         transition: 1
-      service: light.toggle
+      service: homeassistant.toggle
 - id: "1545995954625"
   alias: Living room right wall switch - right click
   trigger:
     - entity_id: sensor.0x00158d0001f42198_click
       platform: state
       to: right
-    - entity_id: sensor.0x00158d000101c2a1_action
-      platform: state
-      to: slide
   action:
     - data:
-        entity_id: group.living_room_ceiling_lights
-      service: homeassistant.toggle
+        entity_id: light.shelly_rgbw2_6ea3da_light_0
+        transition: 1
+      service: light.toggle
 - id: "1545995978732"
   alias: Living room right wall switch - both click
   trigger:
@@ -669,6 +676,10 @@
         entity_id: light.xiaomi_philips_ceiling_light
         scene: 1
       service: light.xiaomi_miio_set_scene
+    - data:
+        entity_id: group.living_room_ceiling_lights
+        transition: 1
+      service: homeassistant.turn_on
 - id: "1545996231997"
   alias: Hall wall switch - left click
   trigger:
@@ -678,10 +689,8 @@
   condition: []
   action:
     - data:
-        entity_id: switch.circadian_lighting_hall_lights_auto
-      service: switch.turn_off
-    - data:
         entity_id: group.downstairs_hall_ceiling_lights
+        transition: 1
       service: homeassistant.toggle
 - id: "1545996260772"
   alias: Hall wall switch - right click
@@ -692,9 +701,24 @@
   condition: []
   action:
     - data:
-        entity_id: light.xiaomi_philips_ceiling_light
+        entity_id: light.shelly_rgbw2_68c63af431c2_light_0
         transition: 1
       service: light.toggle
+- id: "1595831867"
+  alias: Hall wall switch - both click
+  trigger:
+    - entity_id: sensor.0x00158d0001f3f75e_click
+      platform: state
+      to: both
+  condition: []
+  action:
+    - data:
+        entity_id:
+          - group.downstairs_hall_lights
+          - group.living_room_ceiling_lights
+          - light.shelly_rgbw2_6ea3da_light_0
+        transition: 1
+      service: homeassistant.toggle
 - id: "1546010274549"
   alias: Master bedroom - toggle lights
   trigger:
@@ -718,8 +742,8 @@
       service: light.toggle
     - data:
         entity_id:
-          - switch.shelly_1_55e273_relay_0
-      service: switch.toggle
+          - group.master_bedroom_ceiling_lights
+      service: homeassistant.toggle
 - id: "1546010333874"
   alias: Master bedroom - toggle LEDs
   trigger:
@@ -752,6 +776,7 @@
       service: light.toggle
 - id: "1546013441545"
   alias: Kitchen - motion daytime
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0002ec7efa_occupancy
       from: "off"
@@ -929,7 +954,8 @@
           - group.dining_area_lights
       service: homeassistant.turn_off
 - id: "1548095677962"
-  alias: Downstairs bathroom - motion
+  alias: Downstairs bathroom - motion day
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0002b422b4_occupancy
       from: "off"
@@ -943,11 +969,40 @@
     - condition: state
       entity_id: group.downstairs_bathroom_lights
       state: "off"
+    - after: 06:00:00
+      before: "22:00:00"
+      condition: time
   action:
     - data:
         entity_id: group.downstairs_bathroom_lights
         transition: 1
       service: homeassistant.turn_on
+- id: "1599980560658"
+  alias: Downstairs bathroom - motion night
+  mode: restart
+  trigger:
+    - entity_id: binary_sensor.0x00158d0002b422b4_occupancy
+      from: "off"
+      platform: state
+      to: "on"
+    - entity_id: binary_sensor.0x00158d0002ebdbdf_occupancy
+      from: "off"
+      platform: state
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: group.downstairs_bathroom_lights
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: time
+          after: "22:00:01"
+        - condition: time
+          before: 05:59:59
+  action:
+    - data: {}
+      entity_id: light.downstairs_bathroom_side_lamp
+      service: light.turn_on
 - id: "1548095715939"
   alias: Downstairs bathroom - empty
   trigger:
@@ -1007,6 +1062,7 @@
       service: light.toggle
 - id: "1549179592040"
   alias: Wardrobe - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0002b70d79_occupancy
       from: "off"
@@ -1076,8 +1132,8 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_1_55e273_relay_0
-      service: switch.toggle
+        entity_id: group.master_bedroom_ceiling_lights
+      service: homeassistant.toggle
 - id: "1549196224140"
   alias: Master bedroom - toggle wall lamp
   trigger:
@@ -1091,6 +1147,7 @@
       service: switch.toggle
 - id: "1549196304469"
   alias: Upstairs bathroom - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0002b72030_occupancy
       from: "off"
@@ -1235,6 +1292,9 @@
     - entity_id: input_boolean.someone_sleeping_in_the_living_room
       state: "off"
       condition: state
+    - entity_id: remote.jaskrowo_media
+      state: "off"
+      condition: state
     - condition: template
       value_template:
         "{{ as_timestamp(now()) - as_timestamp(states.automation.others_weekend_wake_up.attributes.last_triggered)
@@ -1275,6 +1335,7 @@
         shuffle: true
 - id: "1549654128210"
   alias: Living room stairs - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d000257a1be_occupancy
       from: "off"
@@ -1282,7 +1343,7 @@
       to: "on"
   condition:
     - condition: state
-      entity_id: switch.shelly_1_554b82_relay_0
+      entity_id: group.living_room_stairs_lights
       state: "off"
     - below: "10"
       condition: numeric_state
@@ -1292,19 +1353,19 @@
       condition: time
   action:
     - data:
-        entity_id: switch.shelly_1_554b82_relay_0
-      service: switch.turn_on
+        entity_id: group.living_room_stairs_lights
+      service: homeassistant.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d000257a1be_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d000257a1be_occupancy'].attributes.no_occupancy_since
         and states.binary_sensor['0x00158d000257a1be_occupancy'].attributes.no_occupancy_since
         | int >= 300 %}True{% else %}False{% endif %}"
     - condition: state
-      entity_id: switch.shelly_1_554b82_relay_0
+      entity_id: group.living_room_stairs_lights
       state: "on"
     - data:
-        entity_id: switch.shelly_1_554b82_relay_0
-      service: switch.turn_off
+        entity_id: group.living_room_stairs_lights
+      service: homeassistant.turn_off
 - id: "1549654154926"
   alias: Living room stairs - empty
   trigger:
@@ -1315,12 +1376,12 @@
         | int >= 300 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
-      entity_id: switch.shelly_1_554b82_relay_0
+      entity_id: group.living_room_stairs_lights
       state: "on"
   action:
     - data:
-        entity_id: switch.shelly_1_554b82_relay_0
-      service: switch.turn_off
+        entity_id: group.living_room_stairs_lights
+      service: homeassistant.turn_off
 - id: "1549810614088"
   alias: Dining area - empty
   trigger:
@@ -1362,8 +1423,8 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_2_5a4ada_relay_1
-      service: switch.toggle
+        entity_id: light.dining_area_ceiling_lamp
+      service: light.toggle
 - id: "1549810780701"
   alias: Kitchen right wall switch - right button
   trigger:
@@ -1373,10 +1434,11 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_2_5a4ada_relay_0
-      service: switch.toggle
+        entity_id: light.dining_area_wall_lamp
+      service: light.toggle
 - id: "1549820992742"
   alias: Kitchen - motion at night
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0002ec7efa_occupancy
       from: "off"
@@ -1417,6 +1479,7 @@
       service: homeassistant.turn_off
 - id: "1551162176946"
   alias: Upstairs hall - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d000257a1db_occupancy
       from: "off"
@@ -1478,8 +1541,8 @@
   condition: []
   action:
     - data:
-        entity_id: switch.shelly_1_554b82_relay_0
-      service: switch.toggle
+        entity_id: group.living_room_stairs_lights
+      service: homeassistant.toggle
 - id: "1554226640385"
   alias: Attic stairs - toggle
   trigger:
@@ -1556,7 +1619,6 @@
   action:
     - data:
         entity_id: light.downstairs_bathroom_ceiling_lamp
-        transition: 1
       service: light.toggle
 - id: "1559483412308"
   alias: Living room - turn on fan daytime
@@ -1571,6 +1633,9 @@
     - after: 06:30:00
       before: "20:00:00"
       condition: time
+    - condition: state
+      entity_id: fan.xiaomi_smart_fan
+      state: "off"
   action:
     - data:
         entity_id: fan.xiaomi_smart_fan
@@ -1656,12 +1721,13 @@
     - above: 24
       condition: numeric_state
       entity_id: sensor.0x00158d0001b1c3fb_temperature
-    - above: "27"
-      condition: numeric_state
-      entity_id: sensor.0x00158d0001b9208d_temperature
     - condition: state
       entity_id: binary_sensor.outside_temperature_rising
       state: "on"
+    - above: "27"
+      condition: numeric_state
+      entity_id: weather.home
+      value_template: "{{ state.attributes.temperature }}"
     - condition: or
       conditions:
         - condition: state
@@ -1767,6 +1833,7 @@
       service: homeassistant.toggle
 - id: "1575388333096"
   alias: Dining area - motion
+  mode: restart
   trigger:
     - entity_id: binary_sensor.0x00158d0001655da1_occupancy
       from: "off"
@@ -1785,8 +1852,8 @@
   action:
     - data:
         entity_id:
-          - switch.shelly_2_5a4ada_relay_1
-      service: switch.turn_on
+          - light.dining_area_ceiling_lamp
+      service: light.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0001e531e0_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d0001e531e0_occupancy'].attributes.no_occupancy_since
@@ -1907,6 +1974,7 @@
           - switch.circadian_lighting_attic_lights_auto
           - switch.circadian_lighting_master_bedroom_lights_auto
           - switch.circadian_lighting_kitchen_lights_auto
+          - switch.circadian_lighting_dining_area_lights_auto
           - switch.circadian_lighting_tosia_room_lights_auto
           - switch.circadian_lighting_wardrobe_lights_auto
           - switch.circadian_lighting_downstairs_bathroom_lights_auto
@@ -1914,14 +1982,13 @@
     - data:
         entity_id:
           - light.downstairs_bathroom_ceiling_lamp
-          - light.wall_leds
           - light.stairs_leds
           - light.stove_leds
         effect: Police
       service: light.turn_on
     - data:
         entity_id:
-          - group.downstairs_hall_ceiling_lights
+          - group.downstairs_hall_lights
       service: homeassistant.turn_on
     - delay: 00:00:05
     - service: media_player.volume_set
@@ -1986,12 +2053,15 @@
         message: The alarm disarmed successfully
     - data:
         entity_id:
-          - switch.circadian_lighting_hall_lights_auto
+          - switch.circadian_lighting_hall_ceiling_lights_auto
+          - switch.circadian_lighting_hall_ceiling_leds_auto
           - switch.circadian_lighting_living_room_auto_ceiling
-          - switch.circadian_lighting_living_room_auto_leds
+          - switch.circadian_lighting_living_room_stairs_auto_leds
+          - switch.circadian_lighting_living_room_wall_auto_leds
           - switch.circadian_lighting_guest_room_lights_auto
           - switch.circadian_lighting_attic_lights_auto
           - switch.circadian_lighting_master_bedroom_lights_auto
+          - switch.circadian_lighting_master_bedroom_stairs_lights_auto
           - switch.circadian_lighting_kitchen_lights_auto
           - switch.circadian_lighting_tosia_room_lights_auto
           - switch.circadian_lighting_wardrobe_lights_auto
@@ -2000,14 +2070,13 @@
     - data:
         entity_id:
           - light.downstairs_bathroom_ceiling_lamp
-          - light.wall_leds
+          - light.shelly_rgbw2_6ea3da_light_0
           - light.stairs_leds
           - light.stove_leds
-        transition: 1
       service: light.turn_off
     - data:
         entity_id:
-          - group.downstairs_hall_ceiling_lights
+          - group.downstairs_hall_lights
       service: homeassistant.turn_off
   id: 184debd9df574d06aad9e8c467155a62
 - alias: "TESTING: Wojtek left home"
@@ -2192,7 +2261,7 @@
       entity_id: sensor.0x00158d0001b92145_temperature
       platform: numeric_state
   condition:
-    - after: "08:00:00"
+    - after: 08:00:00
       before: "20:00:00"
       condition: time
     - condition: state
@@ -2201,9 +2270,10 @@
     - condition: state
       entity_id: binary_sensor.0x00158d000232db84_contact
       state: "off"
-    - above: "26"
+    - above: "27"
       condition: numeric_state
-      entity_id: sensor.0x00158d0001b9208d_temperature
+      entity_id: weather.home
+      value_template: "{{ state.attributes.temperature }}"
     - condition: or
       conditions:
         - condition: state
@@ -2225,3 +2295,33 @@
       data:
         message: Na górze robi się gorąco, włączam klimatyzację
         language: pl
+- id: "1595662969005"
+  alias: Attic closet - motion
+  description: Manage lamp in the closet
+  mode: restart
+  trigger:
+    - entity_id: binary_sensor.0x00158d0002ebcb89_occupancy
+      from: "off"
+      platform: state
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: light.attic_closet_lamp
+      state: "off"
+  action:
+    - data:
+        entity_id:
+          - light.attic_closet_lamp
+      service: light.turn_on
+    - wait_template:
+        "{% if states.binary_sensor['0x00158d0002ebcb89_occupancy'].state
+        == 'off' and states.binary_sensor['0x00158d0002ebcb89_occupancy'].attributes.no_occupancy_since
+        and states.binary_sensor['0x00158d0002ebcb89_occupancy'].attributes.no_occupancy_since
+        | int >= 60 %}True{% else %}False{% endif %}"
+    - condition: state
+      entity_id: light.attic_closet_lamp
+      state: "on"
+    - data:
+        entity_id:
+          - light.attic_closet_lamp
+      service: light.turn_off

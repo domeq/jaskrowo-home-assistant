@@ -1,6 +1,8 @@
 group.downstairs_hall_ceiling_lights:
   friendly_name: Hall ceiling lights
-  icon: "mdi:spotlight-beam"
+light.shelly_rgbw2_68c63af431c2_light_0:
+  friendly_name: Hall LEDs
+  icon: "mdi:led-strip"
 light.bed_leds:
   friendly_name: Master bedroom LEDs
   icon: "mdi:led-strip"
@@ -13,7 +15,7 @@ light.stove_leds:
 light.stairs_leds:
   friendly_name: Stairs LEDs
   icon: "mdi:led-strip"
-light.wall_leds:
+light.shelly_rgbw2_6ea3da_light_0:
   friendly_name: Wall LEDs
   icon: "mdi:led-strip"
 light.0x00158d0003fa55ab_light:
@@ -188,7 +190,7 @@ light.0x00158d0002b88c1c_light:
 light.0x00158d000410f2db_light:
   friendly_name: Attic wardrobe area lamp
   icon: "mdi:floor-lamp"
-switch.shelly_1_55e273_relay_0:
+group.master_bedroom_ceiling_lights:
   friendly_name: Stairs lights
   icon: "mdi:stairs"
 switch.shelly_1_2c03c5_relay_0:
@@ -199,12 +201,11 @@ switch.shelly_1_5545a9_relay_0:
   icon: "mdi:spotlight-beam"
 sensor.xiaomi_air_quality_monitor:
   friendly_name: Indoor air quality
-switch.shelly_1_554b82_relay_0:
+group.living_room_stairs_lights:
   friendly_name: Stairs lamp
   icon: "mdi:stairs"
 group.living_room_ceiling_lights:
   friendly_name: Wall lights
-  icon: "mdi:spotlight-beam"
 binary_sensor.0x00158d000257a1be_occupancy:
   friendly_name: Living room stairs - motion sensor
 sensor.0x00158d000257a1be_illuminance:
@@ -218,11 +219,10 @@ sensor.0x00158d0002ec7efa_illuminance:
   friendly_name: Kitchen illumination sensor
 group.kitchen_ceiling_lights:
   friendly_name: Ceiling lights
-  icon: "mdi:spotlight-beam"
-switch.shelly_2_5a4ada_relay_0:
+light.dining_area_wall_lamp:
   friendly_name: Dining area wall lamp
-  icon: "mdi:spotlight-beam"
-switch.shelly_2_5a4ada_relay_1:
+  icon: "mdi:ceiling-light"
+light.dining_area_ceiling_lamp:
   friendly_name: Dining area ceiling lamp
   icon: "mdi:ceiling-light"
 binary_sensor.0x00158d000257a1db_occupancy:
@@ -233,6 +233,7 @@ switch.0x00158d0003951ef9_switch:
   friendly_name: Christmas tree
   icon: "mdi:pine-tree"
 light.xiaomi_philips_ceiling_light:
+  friendly_name: Ceiling lamp
   icon: "mdi:ceiling-light"
 light.upstairs_hall_left_lamp:
   icon: "mdi:spotlight-beam"
@@ -287,3 +288,6 @@ remote.jaskrowo_media:
 sensor.shelly_plug_s_51d92a_power_0_2:
   friendly_name: Washing machine power
   icon: "mdi:washing-machine"
+light.attic_closet_lamp:
+  icon: "mdi:ceiling-light"
+  friendly_name: Closet lamp

@@ -83,6 +83,7 @@ views:
               - sensor.memory_use_percent
           - title: Network
             entities:
+              - binary_sensor.ping_wp_pl
               - sensor.speedtest_download
               - sensor.speedtest_upload
               - sensor.speedtest_ping
@@ -93,7 +94,6 @@ views:
           - title: Various
             entities:
               - sun.sun
-              - binary_sensor.car_wash
               - binary_sensor.updater
             type: glance
             show_header_toggle: false

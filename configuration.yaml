@@ -122,8 +122,6 @@ discovery:
 
 yeelight:
   devices:
-    192.168.1.33:
-      name: Downstairs hall lamp
     192.168.1.34:
       name: Wall LEDs
       model: strip1
@@ -131,12 +129,12 @@ yeelight:
       name: Stove LEDs
       model: strip1
     192.168.1.36:
-      name: Downstairs bathroom ceiling lamp
+      name: Dining area wall lamp
     192.168.1.37:
       name: Stairs LEDs
       model: strip1
     192.168.1.39:
-      name: Right wall lamp
+      name: Attic closet lamp
     192.168.1.38:
       name: Bed LEDs
       model: strip1
@@ -144,10 +142,15 @@ yeelight:
       name: Tosia lamp
     192.168.1.56:
       name: Dining area ceiling lamp
+    192.168.1.81:
+      name: Downstairs bathroom ceiling lamp
+      nightlight_switch_type: light
     # 192.168.1.41:
     #   name: Attic left light
-    # 192.168.1.42:
-    #   name: Attic right light
+    192.168.1.42:
+      name: Stairs lamp 1
+    192.168.1.33:
+      name: Stairs lamp 2
     # 192.168.1.43:
     #   name: Attic wardrobe area light
 
@@ -180,7 +183,7 @@ light:
   - platform: xiaomi_miio
     name: Xiaomi Philips E14 Crystal
     host: 192.168.1.23
-    token: 52c93cf48a74c69378780cd800b4f430
+    token: 4e2dec22169e07913920c5bff0b1a6c7
     model: philips.light.candle2
   - platform: xiaomi_miio
     name: Xiaomi Philips E14 Crystal 2
@@ -195,7 +198,7 @@ light:
   - platform: xiaomi_miio
     name: Wardrobe lamp
     host: 192.168.1.26
-    token: 641353095386f5057a1243c1f0c11a3d
+    token: 5be17b746f745faef1057ce69e4c0c9d
     model: philips.light.downlight
   - platform: xiaomi_miio
     name: Upstairs hall left lamp
@@ -350,8 +353,13 @@ binary_sensor:
         sample_duration: 1200
         max_samples: 15
         min_gradient: 0.00055
-  - platform: car_wash
-    weather: weather.dark_sky
+  - platform: trend
+    sensors:
+      weather_forecast_temperature_rising:
+        entity_id: weather.home
+        attribute: temperature
+  - platform: ping
+    host: wp.pl
 
 asuswrt:
   host: 192.168.1.254
@@ -430,20 +438,32 @@ switch:
     lights_ct:
       - light.xiaomi_philips_ceiling_light
   - platform: circadian_lighting
-    name: "Living room auto LEDs"
+    name: "Living room stairs auto LEDs"
     min_brightness: 35
     lights_ct:
       - light.stairs_leds
-      - light.wall_leds
+  - platform: circadian_lighting
+    name: "Living room wall auto LEDs"
+    lights_brightness:
+      - light.shelly_rgbw2_6ea3da_light_0
+    max_brightness: 40
   - platform: circadian_lighting
     name: "Living room wall lights auto"
     lights_ct:
       - group.living_room_ceiling_lights
   - platform: circadian_lighting
-    name: "Hall lights auto"
+    name: "Living room stairs lights auto"
+    lights_ct:
+      - group.living_room_stairs_lights
+  - platform: circadian_lighting
+    name: "Hall ceiling lights auto"
     lights_ct:
       - group.downstairs_hall_ceiling_lights
-    min_brightness: 50
+  - platform: circadian_lighting
+    name: "Hall ceiling LEDs auto"
+    lights_brightness:
+      - light.shelly_rgbw2_68c63af431c2_light_0
+    max_brightness: 40
   - platform: circadian_lighting
     name: "Guest room lights auto"
     min_brightness: 50
@@ -458,15 +478,20 @@ switch:
       - light.bed_leds
       - light.shelly_rgbw2_6d8073_light_0
   - platform: circadian_lighting
+    name: "Master bedroom stairs lights auto"
+    lights_ct:
+      - group.master_bedroom_ceiling_lights
+  - platform: circadian_lighting
     name: "Attic lights auto"
     min_brightness: 50
     lights_ct:
       - light.0x00158d0003fa55ab_light
       - light.attic_right_lamp_light
       - light.0x00158d000410f2db_light
+      - light.attic_closet_lamp
   - platform: circadian_lighting
     name: "Downstairs bathroom ceiling light auto"
-    min_brightness: 70
+    max_brightness: 50
     lights_ct:
       - light.downstairs_bathroom_ceiling_lamp
   - platform: circadian_lighting
@@ -484,6 +509,11 @@ switch:
     min_brightness: 90
     lights_ct:
       - light.stove_leds
+  - platform: circadian_lighting
+    name: "Dining area lights auto"
+    lights_ct:
+      - light.dining_area_wall_lamp
+      - light.dining_area_ceiling_lamp
   - platform: circadian_lighting
     name: "Tosia room lights auto"
     lights_ct:
@@ -504,15 +534,18 @@ scene:
   - name: Living room day
     entities:
       light.xiaomi_philips_ceiling_light: on
-      light.wall_leds: off
+      group.living_room_ceiling_lights: off
+      light.shelly_rgbw2_6ea3da_light_0: off
   - name: Living room evening
     entities:
       light.xiaomi_philips_ceiling_light: on
-      light.wall_leds: on
+      group.living_room_ceiling_lights: on
+      light.shelly_rgbw2_6ea3da_light_0: on
   - name: Living room TV mode
     entities:
       light.xiaomi_philips_ceiling_light: off
-      light.wall_leds: on
+      group.living_room_ceiling_lights: off
+      light.shelly_rgbw2_6ea3da_light_0: on
   - name: Wojtek is cycling
     entities:
       switch.circadian_lighting_guest_room_lights_auto: off
@@ -606,19 +639,29 @@ group:
   dining_area:
     name: Dining area
     entities:
-      - switch.shelly_2_5a4ada_relay_1
-      - switch.shelly_2_5a4ada_relay_0
+      - light.dining_area_ceiling_lamp
+      - light.dining_area_wall_lamp
+  downstairs_hall_lights:
+    name: Downstairs hall lights
+    entities:
+      - light.shelly_rgbw2_68c63af431c2_light_0
+      - group.downstairs_hall_ceiling_lights
   living_room_lights:
     name: Living room lights
     entities:
       - light.xiaomi_philips_ceiling_light
       - group.living_room_ceiling_lights
-      - light.wall_leds
+      - light.shelly_rgbw2_6ea3da_light_0
       # - switch.0x00158d0001de79e6_switch
       # - switch.fan
       - light.stairs_leds
-      - group.downstairs_hall_ceiling_lights
-      - switch.shelly_1_554b82_relay_0
+      - group.downstairs_hall_lights
+      - group.living_room_stairs_lights
+  living_room_stairs_lights:
+    name: Stairs lights
+    entities:
+      - light.stairs_lamp_1
+      - light.stairs_lamp_2
   downstairs_windows:
     name: Downstairs windows
     entities:
@@ -653,7 +696,7 @@ group:
       - light.master_bedroom_bed_lamp
       - light.bed_leds
       - switch.shelly_1_2c03c5_relay_0
-      - switch.shelly_1_55e273_relay_0
+      - group.master_bedroom_ceiling_lights
       - light.shelly_rgbw2_6d8073_light_0
       - light.gateway_light_34ce00fb56e8
   downstairs_hall_ceiling_lights:

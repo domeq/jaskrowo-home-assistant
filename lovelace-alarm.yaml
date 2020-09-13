@@ -72,7 +72,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.wall_leds
+                entity: light.shelly_rgbw2_6ea3da_light_0
                 style:
                   top: 32%
                   right: 25%
@@ -86,7 +86,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_1_554b82_relay_0
+                entity: group.living_room_stairs_lights
                 style:
                   top: 78%
                   left: 53%
@@ -136,7 +136,14 @@ views:
                   action: toggle
                 entity: group.downstairs_hall_ceiling_lights
                 style:
-                  top: 20%
+                  top: 28%
+                  left: 36%
+              - type: state-icon
+                tap_action:
+                  action: toggle
+                entity: light.shelly_rgbw2_68c63af431c2_light_0
+                style:
+                  top: 17%
                   left: 36%
               - type: image
                 image: /local/yellow.png
@@ -164,14 +171,14 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_2_5a4ada_relay_0
+                entity: light.dining_area_wall_lamp
                 style:
                   top: 94%
                   left: 15%
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_2_5a4ada_relay_1
+                entity: light.dining_area_ceiling_lamp
                 style:
                   top: 76%
                   left: 18%
@@ -489,7 +496,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_1_55e273_relay_0
+                entity: group.master_bedroom_ceiling_lights
                 style:
                   top: 89%
                   left: 68%
@@ -588,7 +595,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: switch.shelly_1_554b82_relay_0
+                entity: group.living_room_stairs_lights
                 style:
                   top: 82%
                   left: 53%
