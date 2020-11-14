@@ -128,29 +128,35 @@ yeelight:
     192.168.1.35:
       name: Stove LEDs
       model: strip1
-    192.168.1.36:
-      name: Dining area wall lamp
+      transition: 500
+    # 192.168.1.36:
+    #   name: Dining area wall lamp
     192.168.1.37:
       name: Stairs LEDs
       model: strip1
+      transition: 500
     192.168.1.39:
       name: Attic closet lamp
     192.168.1.38:
       name: Bed LEDs
       model: strip1
+      transition: 500
     192.168.1.40:
       name: Tosia lamp
+      transition: 500
     192.168.1.56:
       name: Dining area ceiling lamp
+      transition: 500
     192.168.1.81:
       name: Downstairs bathroom ceiling lamp
       nightlight_switch_type: light
+      transition: 500
     # 192.168.1.41:
     #   name: Attic left light
-    192.168.1.42:
-      name: Stairs lamp 1
-    192.168.1.33:
-      name: Stairs lamp 2
+    # 192.168.1.42:
+    #   name: Stairs lamp 1
+    # 192.168.1.33:
+    #   name: Stairs lamp 2
     # 192.168.1.43:
     #   name: Attic wardrobe area light
 
@@ -455,6 +461,7 @@ switch:
     name: "Living room stairs lights auto"
     lights_ct:
       - group.living_room_stairs_lights
+    min_brightness: 25
   - platform: circadian_lighting
     name: "Hall ceiling lights auto"
     lights_ct:
@@ -490,6 +497,11 @@ switch:
       - light.0x00158d000410f2db_light
       - light.attic_closet_lamp
   - platform: circadian_lighting
+    name: "Attic desk LEDs auto"
+    max_brightness: 15
+    lights_brightness:
+      - light.shelly_rgbw2_f43a41_light_0
+  - platform: circadian_lighting
     name: "Downstairs bathroom ceiling light auto"
     max_brightness: 50
     lights_ct:
@@ -502,6 +514,7 @@ switch:
       - light.downstairs_bathroom_side_lamp
   - platform: circadian_lighting
     name: "Kitchen ceiling lights auto"
+    min_brightness: 35
     lights_ct:
       - group.kitchen_ceiling_lights
   - platform: circadian_lighting
@@ -512,10 +525,11 @@ switch:
   - platform: circadian_lighting
     name: "Dining area lights auto"
     lights_ct:
-      - light.dining_area_wall_lamp
+      - light.0x00158d0004210bb5_light
       - light.dining_area_ceiling_lamp
   - platform: circadian_lighting
     name: "Tosia room lights auto"
+    min_brightness: 50
     lights_ct:
       - light.tosia_lamp
       - light.0xec1bbdfffeb7fbbc_light
@@ -640,7 +654,7 @@ group:
     name: Dining area
     entities:
       - light.dining_area_ceiling_lamp
-      - light.dining_area_wall_lamp
+      - light.0x00158d0004210bb5_light
   downstairs_hall_lights:
     name: Downstairs hall lights
     entities:
@@ -660,8 +674,8 @@ group:
   living_room_stairs_lights:
     name: Stairs lights
     entities:
-      - light.stairs_lamp_1
-      - light.stairs_lamp_2
+      - light.0x00158d0004041277_light
+      - light.0x00158d0004039fd1_light
   downstairs_windows:
     name: Downstairs windows
     entities:
@@ -672,6 +686,7 @@ group:
     name: Downstairs bathroom lights
     entities:
       - light.downstairs_bathroom_ceiling_lamp
+      - light.downstairs_bathroom_ceiling_lamp_nightlight
       - light.downstairs_bathroom_side_lamp
   tosia_bedroom_lights:
     name: Tosia's bedroom lights
@@ -735,6 +750,12 @@ group:
       - light.lamp_22
       - light.lamp_23
       - light.lamp_24
+  attic_entry_lights:
+    name: Attic entry lights
+    entities:
+      - light.0x00158d0003fa55ab_light
+      - light.attic_right_lamp_light
+      - light.shelly_rgbw2_f43a41_light_0
 
 mqtt:
   broker: 172.17.0.1
@@ -776,10 +797,6 @@ zone:
 
 python_script:
 
-weather:
-  - platform: darksky
-    api_key: !secret darksky_key
-
 webhook:
 
 zigbee2mqtt_networkmap:
@@ -789,3 +806,5 @@ panel_iframe:
     title: "Zigbee Map"
     url: "/local/community/zigbee2mqtt_networkmap/map.html"
     icon: "mdi:zigbee"
+
+media_source:

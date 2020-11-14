@@ -171,7 +171,7 @@ views:
               - type: state-icon
                 tap_action:
                   action: toggle
-                entity: light.dining_area_wall_lamp
+                entity: light.0x00158d0004210bb5_light
                 style:
                   top: 94%
                   left: 15%
@@ -184,7 +184,7 @@ views:
                   left: 18%
               - type: image
                 image: /local/yellow.png
-                entity: binary_sensor.0x00158d0002ec7efa_occupancy
+                entity: binary_sensor.0x00158d00054bddf0_occupancy
                 tap_action:
                   action: more-info
                 filter: opacity(0%)
@@ -755,7 +755,7 @@ views:
       #     - binary_sensor.0x00158d0002b70d79_occupancy
       #     - binary_sensor.0x00158d0002b85113_occupancy
       #     - binary_sensor.0x00158d000257a1db_occupancy
-      #     - binary_sensor.0x00158d0002ec7efa_occupancy
+      #     - binary_sensor.0x00158d00054bddf0_occupancy
       #     - binary_sensor.0x00158d0001655da1_occupancy
       #     - binary_sensor.0x00158d0002b72030_occupancy
       #     - binary_sensor.0x00158d0002b422b4_occupancy

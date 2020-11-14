@@ -53,7 +53,7 @@ views:
               - sensor.0x00158d0002320de3_temperature
               - sensor.0x00158d0002320de3_humidity
               - group.kitchen_ceiling_lights
-              - light.dining_area_wall_lamp
+              - light.0x00158d0004210bb5_light
               - light.dining_area_ceiling_lamp
               - light.stove_leds
               - switch.0x00158d0003951e91_switch
@@ -163,6 +163,7 @@ views:
           - sensor.0x00158d00023208a6_humidity
           - light.0x00158d0003fa55ab_light
           - light.attic_right_lamp_light
+          - light.shelly_rgbw2_f43a41_light_0
           - light.0x00158d000410f2db_light
           - light.attic_closet_lamp
         type: entities
@@ -175,23 +176,22 @@ views:
         type: entities
       - title: Upstairs hall
         entities:
-          - light.upstairs_hall_left_lamp
-          - light.upstairs_hall_right_lamp
+          - group.upstairs_hall_lights
           - light.wardrobe_lamp
         type: entities
       # - type: media-control
       #   entity: media_player.marantz_sr5008
-      # - title: Air pollution
-      #   entities:
-      #     - sensor.xiaomi_air_quality_monitor
-      #     - sensor.airly_air_quality_index
-      #     - sensor.airly_advice
-      # type: entities
-      # show_header_toggle: false
+      - title: Air pollution
+        entities:
+          - sensor.xiaomi_air_quality_monitor
+          - sensor.airly_air_quality_index
+          - sensor.airly_advice
+        type: entities
+        show_header_toggle: false
       - title: Device battery
         entities:
-          - sensor.gosiak_mia2_2_battery_level
-          - sensor.in2013_battery_level
+          - sensor.gosiak_pixel3_battery_level
+          - sensor.wojtek_oneplus8_battery_level
           - sensor.wojtek_s_ipad_battery_level
         theme: Backend-selected
         type: entities
@@ -208,4 +208,4 @@ views:
         type: history-graph
         refresh_interval: 60
       - type: weather-forecast
-        entity: weather.dark_sky
+        entity: weather.home

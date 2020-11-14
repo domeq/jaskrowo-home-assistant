@@ -12,10 +12,8 @@
   attribute: battery_level
   unit_of_measurement: "%"
   entities:
-    - device_tracker.mi_mix_2
-    - device_tracker.wojtek_mimix2
-    - device_tracker.mi_a2_lite
-    - device_tracker.gosiak_mia2_2
+    - device_tracker.gosiak_pixel3
+    - device_tracker.wojtek_oneplus8
     - device_tracker.wojtek_s_ipad
 - platform: attributes
   friendly_name: "AC Power"
@@ -127,7 +125,7 @@
 - platform: zwift
   username: !secret my_zwift_username
   password: !secret my_zwift_password
-  update_interval: 180
+  # update_interval: 180
 - platform: statistics
   entity_id: sensor.shelly_plug_s_51d92a_power_0_2
   name: washing_machine_power_stats
@@ -135,18 +133,3 @@
   precision: 0
   max_age:
     minutes: 60
-- platform: yr
-  monitored_conditions:
-    - temperature
-    - symbol
-    - precipitation
-    - windSpeed
-    - pressure
-    - windDirection
-    - humidity
-    - fog
-    - cloudiness
-    - lowClouds
-    - mediumClouds
-    - highClouds
-    - dewpointTemperature

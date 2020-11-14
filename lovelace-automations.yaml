@@ -51,12 +51,18 @@ views:
       - title: Automatic brightness
         entities:
           - switch.circadian_lighting_attic_lights_auto
+          - switch.circadian_lighting_attic_desk_leds_auto
+          - switch.circadian_lighting_dining_area_lights_auto
           - switch.circadian_lighting_guest_room_lights_auto
-          - switch.circadian_lighting_hall_lights_auto
-          - switch.circadian_lighting_living_room_auto_leds
           - switch.circadian_lighting_living_room_auto_ceiling
+          - switch.circadian_lighting_hall_ceiling_leds_auto
+          - switch.circadian_lighting_hall_ceiling_lights_auto
+          - switch.circadian_lighting_kitchen_ceiling_lights_auto
           - switch.circadian_lighting_master_bedroom_lights_auto
+          - switch.circadian_lighting_downstairs_bathroom_ceiling_light_auto
+          - switch.circadian_lighting_downstairs_bathroom_side_light_auto
           - switch.circadian_lighting_tosia_room_lights_auto
+          - switch.circadian_lighting_wardrobe_lights_auto
         type: entities
       - title: Lights brightness
         entities:
@@ -135,6 +141,6 @@ views:
           - sensor.0x00158d0002b72030_illuminance
           - sensor.0x00158d0001e547ae_illuminance
           - sensor.0x00158d0001e55ff7_illuminance
-          - sensor.0x00158d0002ec7efa_illuminance
+          - sensor.0x00158d00054bddf0_illuminance
           - sensor.0x00158d000257a1be_illuminance
           - sensor.0x00158d000257a1db_illuminance

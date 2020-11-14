@@ -213,13 +213,13 @@ sensor.0x00158d000257a1be_illuminance:
 switch.0x00158d0003951e91_switch:
   friendly_name: Sink lights
   icon: "mdi:spotlight-beam"
-binary_sensor.0x00158d0002ec7efa_occupancy:
+binary_sensor.0x00158d00054bddf0_occupancy:
   friendly_name: Kitchen motion sensor
-sensor.0x00158d0002ec7efa_illuminance:
+sensor.0x00158d00054bddf0_illuminance:
   friendly_name: Kitchen illumination sensor
 group.kitchen_ceiling_lights:
   friendly_name: Ceiling lights
-light.dining_area_wall_lamp:
+light.0x00158d0004210bb5_light:
   friendly_name: Dining area wall lamp
   icon: "mdi:ceiling-light"
 light.dining_area_ceiling_lamp:
@@ -268,10 +268,10 @@ device_tracker.gosiak_mia2_2:
 device_tracker.wojtek_s_ipad:
   friendly_name: iPad
   icon: "mdi:apple"
-sensor.in2013_battery_level:
+sensor.wojtek_oneplus8_battery_level:
   friendly_name: Wojtek's phone
   entity_picture: https://www.gravatar.com/avatar/79ed48a9ea28ae3ea084ba8fc8c5384f.jpg?size=160
-sensor.gosiak_mia2_2_battery_level:
+sensor.gosiak_pixel3_battery_level:
   friendly_name: Gosia's phone
   entity_picture: https://www.gravatar.com/avatar/d31811b59ff26164930193e1bd5ead0c.jpg?s=160
 sensor.wojtek_s_ipad_battery_level:
@@ -291,3 +291,6 @@ sensor.shelly_plug_s_51d92a_power_0_2:
 light.attic_closet_lamp:
   icon: "mdi:ceiling-light"
   friendly_name: Closet lamp
+light.shelly_rgbw2_f43a41_light_0:
+  icon: "mdi:led-strip"
+  friendly_name: Desk LEDs
