@@ -249,10 +249,6 @@ devices:
     friendly_name: downstairs_hall_entry_switch_1
     retain: true
     qos: 2
-  '0x00158d00019d5813':
-    friendly_name: downstairs_hall_entry_switch_2
-    retain: true
-    qos: 2
   '0x00158d00030ac4de':
     friendly_name: attic_stairs_switch_1
     retain: true
@@ -328,3 +324,11 @@ devices:
     qos: 2
   '0x00158d0002ec7efa':
     friendly_name: '0x00158d0002ec7efa'
+  '0x00158d0003951ef9':
+    friendly_name: tosia_room_christmas_tree
+  '0x00158d0001b199ef':
+    friendly_name: downstairs_hall_entry_switch_2
+    retain: true
+    qos: 2
+  '0x00158d00019d5813':
+    friendly_name: '0x00158d00019d5813'

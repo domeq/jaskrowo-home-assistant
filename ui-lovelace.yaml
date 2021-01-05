@@ -22,11 +22,16 @@ views:
             conditions:
               - entity: media_player.spotify_wojciech_iskra
                 state: "playing"
-              - entity: sensor.spotify_source
-                state_not: "Xiaomi Mi MIX 2"
             card:
               type: media-control
               entity: media_player.spotify_wojciech_iskra
+          - type: conditional
+            conditions:
+              - entity: media_player.kodi_259e2e8eb818649f98da60614c9822c3
+                state: "playing"
+            card:
+              type: media-control
+              entity: media_player.kodi_259e2e8eb818649f98da60614c9822c3
           - title: Living room
             entities:
               - sensor.0x00158d0001b1c3fb_temperature
@@ -36,14 +41,25 @@ views:
               - group.living_room_ceiling_lights
               - light.shelly_rgbw2_6ea3da_light_0
               # - switch.0x00158d0001de79e6_switch
-              # - switch.fan
+              - switch.shelly_plug_s_51d5ae_relay_0
               - light.stairs_leds
-              - group.downstairs_hall_ceiling_lights
-              - light.shelly_rgbw2_68c63af431c2_light_0
+              - group.downstairs_hall_lights
               - group.living_room_stairs_lights
               - fan.xiaomi_smart_fan
               - remote.jaskrowo_media
               - media_player.marantz_sr5008
+              - type: conditional
+                conditions:
+                  - entity: media_player.kodi_259e2e8eb818649f98da60614c9822c3
+                    state_not: "playing"
+                row:
+                  type: button
+                  name: Play random FLAC
+                  icon: "mdi:music"
+                  show_state: false
+                  tap_action:
+                    action: call-service
+                    service: script.kodi_party_mode
               - input_boolean.someone_sleeping_in_the_living_room
             type: entities
       - type: vertical-stack
@@ -121,7 +137,8 @@ views:
           - light.0xec1bbdfffeb7fbbc_light
           - light.0x00158d0002b88c1c_light
           - light.tosia_lamp
-          # - switch.0x00158d0003951ef9_switch
+          - switch.0x00158d0003951ef9_switch
+          - switch.0x00158d0001ded32d_switch
         type: entities
       - title: Guest room
         entities:
@@ -178,6 +195,7 @@ views:
         entities:
           - group.upstairs_hall_lights
           - light.wardrobe_lamp
+          - input_boolean.someone_s_ironining
         type: entities
       # - type: media-control
       #   entity: media_player.marantz_sr5008
@@ -190,8 +208,9 @@ views:
         show_header_toggle: false
       - title: Device battery
         entities:
-          - sensor.gosiak_pixel3_battery_level
-          - sensor.wojtek_oneplus8_battery_level
+          - sensor.gosiak_pixel_3_battery_level
+          - sensor.google_pixel_slate_battery_level
+          - sensor.in2013_battery_level
           - sensor.wojtek_s_ipad_battery_level
         theme: Backend-selected
         type: entities

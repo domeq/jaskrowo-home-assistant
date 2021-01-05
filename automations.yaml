@@ -417,7 +417,7 @@
 - id: "1543665916713"
   alias: Living room - bright enough
   trigger:
-    - above: "175"
+    - above: "200"
       entity_id: sensor.0x00158d0001e43ac7_illuminance
       for: 0:03:00
       platform: numeric_state
@@ -459,6 +459,11 @@
           - light.0xec1bbdfffeb7fbbc_light
           - light.0x00158d0002b88c1c_light
       service: light.turn_on
+    - data:
+        entity_id:
+          - switch.0x00158d0003951ef9_switch
+          - switch.0x00158d0001ded32d_switch
+      service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0002b85113_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
@@ -493,11 +498,12 @@
     - data:
         entity_id:
           - switch.0x00158d0003951ef9_switch
+          - switch.0x00158d0001ded32d_switch
       service: switch.toggle
 - id: "1544967617743"
   alias: Leaving home
   trigger:
-    - entity_id: sensor.0x00158d00019d5813_click
+    - entity_id: sensor.0x00158d0001b199ef_click
       platform: state
       to: long
   condition: []
@@ -534,7 +540,7 @@
 - id: "1544970728739"
   alias: Coming home
   trigger:
-    - entity_id: sensor.0x00158d00019d5813_click
+    - entity_id: sensor.0x00158d0001b199ef_click
       platform: state
       to: single
   condition: []
@@ -1392,7 +1398,7 @@
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.marantz_sr5008
-        volume_level: 0.35
+        volume_level: 0.3
     - service: media_player.select_source
       data_template:
         entity_id: media_player.spotify_wojciech_iskra
@@ -1999,7 +2005,7 @@
         "{% if states.binary_sensor['0x00158d0001655da1_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d0001655da1_occupancy'].attributes.no_occupancy_since
         and states.binary_sensor['0x00158d0001655da1_occupancy'].attributes.no_occupancy_since
-        | int >= 300 %}True{% else %}False{% endif %}"
+        | int >= 600 %}True{% else %}False{% endif %}"
     - condition: state
       entity_id: group.dining_area
       state: "on"

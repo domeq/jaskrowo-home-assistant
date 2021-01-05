@@ -25,7 +25,7 @@ light.attic_right_lamp_light:
   friendly_name: Attic right light
   icon: "mdi:ceiling-light"
 light.tosia_lamp:
-  friendly_name: Tosia lamp
+  friendly_name: Standing lamp
   icon: "mdi:lamp"
 light.gateway_light_34ce00fb56e8:
   friendly_name: Gateway light
@@ -173,8 +173,11 @@ sensor.0x00158d0002b422b4_illuminance:
   friendly_name: Downstairs bathroom illumination sensor
 switch.0x00158d0001de79e6_switch:
   friendly_name: Wall Christmas lights
-  icon: "mdi:spotlight-beam"
+  icon: "mdi:string-lights"
   # icon: 'mdi:spotlight-beam'
+switch.0x00158d0001ded32d_switch:
+  friendly_name: Wall Christmas lights
+  icon: "mdi:string-lights"
 fan.xiaomi_smart_fan:
   friendly_name: Living room fan
   icon: "mdi:fan"
@@ -182,10 +185,10 @@ switch.0x00158d00039e5eb1_switch:
   friendly_name: Small fan
   icon: "mdi:fan"
 light.0xec1bbdfffeb7fbbc_light:
-  friendly_name: Tosia left wall lamp
+  friendly_name: Left wall lamp
   icon: "mdi:ceiling-light"
 light.0x00158d0002b88c1c_light:
-  friendly_name: Tosia right wall lamp
+  friendly_name: Right wall lamp
   icon: "mdi:ceiling-light"
 light.0x00158d000410f2db_light:
   friendly_name: Attic wardrobe area lamp
@@ -244,7 +247,7 @@ light.wardrobe_lamp:
 light.downstairs_bathroom_side_lamp:
   friendly_name: Downstairs bathroom side
   icon: "mdi:spotlight-beam"
-switch.fan:
+switch.shelly_plug_s_51d5ae_relay_0:
   friendly_name: Christmas tree
   icon: "mdi:pine-tree"
   # icon: "mdi:fan"
