@@ -44,9 +44,10 @@ services:
 
   zigbee2mqtt:
     container_name: zigbee2mqtt
-    image: koenkk/zigbee2mqtt:1.14.0
+    # image: koenkk/zigbee2mqtt:1.14.0 # last stable version
+    image: koenkk/zigbee2mqtt
     labels:
-      - com.centurylinklabs.watchtower.enable=false
+      - com.centurylinklabs.watchtower.enable=true
     volumes:
       - ./zigbee2mqtt/data:/app/data
       - /run/udev:/run/udev:ro
