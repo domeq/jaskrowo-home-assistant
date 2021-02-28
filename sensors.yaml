@@ -44,7 +44,6 @@
             0
         {%- endif %}
       icon_template: "mdi:brightness-6"
-      entity_id: light.xiaomi_philips_ceiling_light
       device_class: illuminance
       unit_of_measurement: "%"
     light_ct_philips_ceiling_light:
@@ -56,7 +55,6 @@
             0
         {%- endif %}
       icon_template: "mdi:temperature-kelvin"
-      entity_id: light.xiaomi_philips_ceiling_light
       unit_of_measurement: "%"
     light_brightness_hall_light:
       friendly_name: "Hall light brightness"
@@ -67,7 +65,6 @@
             0
         {%- endif %}
       icon_template: "mdi:brightness-6"
-      entity_id: light.yeelight_color2_7c49eb1566bb
       device_class: illuminance
       unit_of_measurement: "%"
     light_ct_hall_light:
@@ -79,7 +76,6 @@
             0
         {%- endif %}
       icon_template: "mdi:temperature-kelvin"
-      entity_id: light.yeelight_color2_7c49eb1566bb
       unit_of_measurement: "%"
 - platform: systemmonitor
   resources:
