@@ -459,11 +459,11 @@
           - light.0xec1bbdfffeb7fbbc_light
           - light.0x00158d0002b88c1c_light
       service: light.turn_on
-    - data:
-        entity_id:
-          - switch.0x00158d0003951ef9_switch
-          - switch.0x00158d0001ded32d_switch
-      service: switch.turn_on
+    # - data:
+    #     entity_id:
+    #       - switch.0x00158d0003951ef9_switch
+    #       - switch.0x00158d0001ded32d_switch
+    #   service: switch.turn_on
     - wait_template:
         "{% if states.binary_sensor['0x00158d0002b85113_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
@@ -655,7 +655,7 @@
         "{% if states.binary_sensor['0x00158d0002b85113_occupancy'].state
         == 'off'  and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
         is defined and states.binary_sensor['0x00158d0002b85113_occupancy'].attributes.no_occupancy_since
-        | int >= 1800 %}True{% else %}False{% endif %}"
+        | int >= 600 %}True{% else %}False{% endif %}"
   condition:
     - condition: state
       entity_id: group.tosia_bedroom_lights
@@ -1986,9 +1986,6 @@
       platform: state
       to: "on"
   condition:
-    - condition: state
-      entity_id: group.dining_area
-      state: "off"
     - after: 06:00:00
       before: "22:00:00"
       condition: time
@@ -2005,12 +2002,16 @@
         "{% if states.binary_sensor['0x00158d0001655da1_occupancy'].state
         == 'off' and states.binary_sensor['0x00158d0001655da1_occupancy'].attributes.no_occupancy_since
         and states.binary_sensor['0x00158d0001655da1_occupancy'].attributes.no_occupancy_since
-        | int >= 600 %}True{% else %}False{% endif %}"
+        | int >= 300 %}True{% else %}False{% endif %}"
     - condition: state
       entity_id: group.dining_area
       state: "on"
     - data:
         transition: 1
+        entity_id:
+          - light.dining_area_ceiling_lamp
+      service: light.turn_off
+    - data:
         entity_id:
           - group.dining_area
       service: homeassistant.turn_off

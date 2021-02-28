@@ -41,7 +41,7 @@ views:
               - group.living_room_ceiling_lights
               - light.shelly_rgbw2_6ea3da_light_0
               # - switch.0x00158d0001de79e6_switch
-              - switch.shelly_plug_s_51d5ae_relay_0
+              # - switch.shelly_plug_s_51d5ae_relay_0
               - light.stairs_leds
               - group.downstairs_hall_lights
               - group.living_room_stairs_lights
@@ -137,8 +137,8 @@ views:
           - light.0xec1bbdfffeb7fbbc_light
           - light.0x00158d0002b88c1c_light
           - light.tosia_lamp
-          - switch.0x00158d0003951ef9_switch
-          - switch.0x00158d0001ded32d_switch
+          # - switch.0x00158d0003951ef9_switch
+          # - switch.0x00158d0001ded32d_switch
         type: entities
       - title: Guest room
         entities:
