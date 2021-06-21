@@ -30,26 +30,3 @@ vacuum_go_home:
     - data:
         entity_id: vacuum.xiaomi_vacuum_cleaner
       service: vacuum.return_to_base
-
-# Play Party Mode
-kodi_party_mode:
-  alias: Kodi Party Mode
-  sequence:
-    # - entity_id: remote.jaskrowo_media
-    #   state: "off"
-    #   condition: state
-    - service: kodi.call_method
-      data:
-        entity_id: media_player.kodi_259e2e8eb818649f98da60614c9822c3
-        method: Player.Open
-        item:
-          partymode: music
-    - service: remote.turn_on
-      data:
-        entity_id: remote.jaskrowo_media
-        activity: Listen to FLAC
-    - delay: 00:00:03
-    - service: media_player.volume_set
-      data:
-        entity_id: media_player.marantz_sr5008
-        volume_level: 0.3

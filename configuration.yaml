@@ -151,6 +151,12 @@ yeelight:
       name: Downstairs bathroom ceiling lamp
       nightlight_switch_type: light
       transition: 500
+    192.168.1.82:
+      name: Downstairs bathroom mirror lamp 1
+      transition: 500
+    192.168.1.83:
+      name: Downstairs bathroom mirror lamp 2
+      transition: 500
     # 192.168.1.41:
     #   name: Attic left light
     # 192.168.1.42:
@@ -216,11 +222,11 @@ light:
     host: 192.168.1.28
     token: 9077b63fbca71504a06c0441906260c9
     model: philips.light.downlight
-  - platform: xiaomi_miio
-    name: Downstairs bathroom side lamp
-    host: 192.168.1.50
-    token: 49e966e4a479ba532d5a3763a3de7da4
-    model: philips.light.downlight
+  # - platform: xiaomi_miio
+  #   name: Downstairs bathroom side lamp
+  #   host: 192.168.1.50
+  #   token: 49e966e4a479ba532d5a3763a3de7da4
+  #   model: philips.light.downlight
   - platform: xiaomi_miio
     name: Lamp 01
     host: 192.168.1.57
@@ -342,10 +348,20 @@ light:
     token: e9b9d1233394158ec778b69127e06f1d
     model: philips.light.downlight
 
-vacuum:
-  - platform: xiaomi_miio
-    host: 192.168.1.29
-    token: "616e4e30556767583138707636386345"
+# vacuum:
+#   - platform: xiaomi_miio
+#     host: 192.168.1.29
+#     token: "616e4e30556767583138707636386345"
+
+skodaconnect:
+  username: wojtek@domeq.net
+  password: !secret skoda_connect_password
+  spin: 2310
+  scandinavian_miles: false
+  scan_interval:
+    minutes: 1
+  name:
+    tmble7nu2l5008403: 'Karolek'
 
 sensor: !include sensors.yaml
 
@@ -367,23 +383,23 @@ binary_sensor:
   - platform: ping
     host: wp.pl
 
-asuswrt:
-  host: 192.168.1.254
-  protocol: ssh
-  username: wojtek
-  ssh_key: "/config/id_rsa"
-  sensors:
-    - upload_speed
-    - download_speed
+# asuswrt:
+#   host: 192.168.1.254
+#   protocol: ssh
+#   username: wojtek
+#   ssh_key: "/config/id_rsa"
+#   sensors:
+#     - upload_speed
+#     - download_speed
 
-device_tracker:
-  - platform: asuswrt
-    host: 192.168.1.254
-    protocol: ssh
-    username: wojtek
-    ssh_key: "/config/id_rsa"
-    new_device_defaults:
-      track_new_devices: false
+# device_tracker:
+#   - platform: asuswrt
+#     host: 192.168.1.254
+#     protocol: ssh
+#     username: wojtek
+#     ssh_key: "/config/id_rsa"
+#     new_device_defaults:
+#       track_new_devices: false
 
 sun:
 
@@ -425,8 +441,8 @@ lovelace:
 circadian_lighting:
   max_colortemp: 5000
   min_colortemp: 3000
-  sunrise_offset: "01:00:00"
-  sunset_offset: "01:00:00"
+  sunrise_offset: "02:00:00"
+  sunset_offset: "00:00:00"
 
 switch:
   # - platform: xiaomi_miio
@@ -502,16 +518,16 @@ switch:
     lights_brightness:
       - light.shelly_rgbw2_f43a41_light_0
   - platform: circadian_lighting
-    name: "Downstairs bathroom ceiling light auto"
-    max_brightness: 50
+    name: "Downstairs bathroom ceiling auto"
+    max_brightness: 75
     lights_ct:
       - light.downstairs_bathroom_ceiling_lamp
   - platform: circadian_lighting
-    name: "Downstairs bathroom side light auto"
-    max_brightness: 50
-    min_brightness: 30
+    name: "Downstairs bathroom mirror auto"
+    min_brightness: 35
     lights_ct:
-      - light.downstairs_bathroom_side_lamp
+      - light.downstairs_bathroom_mirror_lamp_1
+      - light.downstairs_bathroom_mirror_lamp_2
   - platform: circadian_lighting
     name: "Kitchen ceiling lights auto"
     min_brightness: 35
@@ -572,7 +588,7 @@ scene:
         state: on
         brightness: 3
       light.xiaomi_philips_e14_crystal_2: off
-      fan.xiaomi_smart_fan: on
+      fan.fan_2: on
       switch.0x00158d00039e5eb1_switch: on
   - name: Wojtek finished cycling
     entities:
@@ -581,7 +597,7 @@ scene:
       automation.guest_room_motion: on
       light.xiaomi_philips_e14_crystal: on
       light.xiaomi_philips_e14_crystal_2: on
-      fan.xiaomi_smart_fan: off
+      fan.fan_2: off
       switch.0x00158d00039e5eb1_switch: off
 
 camera:
@@ -643,6 +659,10 @@ fan:
     name: Xiaomi Smart Fan
     host: 192.168.1.32
     token: b385299315ea59d2a71abe8ae112b744
+  - platform: xiaomi_miio_fan
+    name: Fan 2
+    host: 192.168.1.226
+    token: a9e82a55123b10451bd11b322da0c224
 
 group:
   kitchen_lights:
@@ -670,7 +690,7 @@ group:
       # - switch.0x00158d0001de79e6_switch
       # - switch.shelly_plug_s_51d5ae_relay_0
       - light.stairs_leds
-      - group.downstairs_hall_lights
+      # - group.downstairs_hall_lights
       - group.living_room_stairs_lights
   living_room_stairs_lights:
     name: Stairs lights
@@ -683,12 +703,17 @@ group:
       - binary_sensor.0x00158d0001ad5eb6_contact
       - binary_sensor.0x00158d00023709f7_contact
       - binary_sensor.0x00158d00022f148a_contact
+  downstairs_bathroom_mirror:
+    name: Downstairs bathroom mirror
+    entities:
+      - light.downstairs_bathroom_mirror_lamp_1
+      - light.downstairs_bathroom_mirror_lamp_2
   downstairs_bathroom_lights:
     name: Downstairs bathroom lights
     entities:
       - light.downstairs_bathroom_ceiling_lamp
       - light.downstairs_bathroom_ceiling_lamp_nightlight
-      - light.downstairs_bathroom_side_lamp
+      - group.downstairs_bathroom_mirror
   tosia_bedroom_lights:
     name: Tosia's bedroom lights
     entities:

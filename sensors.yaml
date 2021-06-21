@@ -96,10 +96,10 @@
 #   destination: Armii Krajowej 28, Kraków
 #   options:
 #     mode: driving
-- platform: xiaomi_miio
-  name: Xiaomi Air Quality Monitor
-  host: 192.168.1.44
-  token: dccf23c77edb2d19e4b827a49330f26f
+# - platform: xiaomi_miio
+#   name: Xiaomi Air Quality Monitor
+#   host: 192.168.1.44
+#   token: dccf23c77edb2d19e4b827a49330f26f
 - platform: attributes
   friendly_name: "Spotify source"
   icon: "mdi:spotify"

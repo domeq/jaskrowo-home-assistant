@@ -51,16 +51,19 @@ views:
       - title: Automatic brightness
         entities:
           - switch.circadian_lighting_attic_lights_auto
-          - switch.circadian_lighting_attic_desk_leds_auto
           - switch.circadian_lighting_dining_area_lights_auto
+          - switch.circadian_lighting_downstairs_bathroom_ceiling_auto
+          - switch.circadian_lighting_downstairs_bathroom_mirror_auto
           - switch.circadian_lighting_guest_room_lights_auto
-          - switch.circadian_lighting_living_room_auto_ceiling
           - switch.circadian_lighting_hall_ceiling_leds_auto
           - switch.circadian_lighting_hall_ceiling_lights_auto
           - switch.circadian_lighting_kitchen_ceiling_lights_auto
+          - switch.circadian_lighting_kitchen_stove_leds_auto
+          - switch.circadian_lighting_living_room_auto_ceiling
+          - switch.circadian_lighting_living_room_stairs_auto_leds
+          - switch.circadian_lighting_living_room_wall_auto_leds
           - switch.circadian_lighting_master_bedroom_lights_auto
-          - switch.circadian_lighting_downstairs_bathroom_ceiling_light_auto
-          - switch.circadian_lighting_downstairs_bathroom_side_light_auto
+          - switch.circadian_lighting_master_bedroom_stairs_lights_auto
           - switch.circadian_lighting_tosia_room_lights_auto
           - switch.circadian_lighting_wardrobe_lights_auto
         type: entities

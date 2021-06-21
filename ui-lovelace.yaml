@@ -45,23 +45,22 @@ views:
               - light.stairs_leds
               - group.downstairs_hall_lights
               - group.living_room_stairs_lights
-              - fan.xiaomi_smart_fan
+              - fan.fan_2
               - remote.jaskrowo_media
               - media_player.marantz_sr5008
-              - type: conditional
-                conditions:
-                  - entity: media_player.kodi_259e2e8eb818649f98da60614c9822c3
-                    state_not: "playing"
-                row:
-                  type: button
-                  name: Play random FLAC
-                  icon: "mdi:music"
-                  show_state: false
-                  tap_action:
-                    action: call-service
-                    service: script.kodi_party_mode
               - input_boolean.someone_sleeping_in_the_living_room
             type: entities
+          # - entity: fan.fan_2
+          #   name: Big fan
+          #   type: "custom:fan-xiaomi"
+          # - type: conditional
+          #   conditions:
+          #     - entity: fan.fan_2
+          #       state: "on"
+          #   card:
+          #     - entity: fan.fan_2
+          #       name: Big fan
+          #       type: "custom:fan-xiaomi"
       - type: vertical-stack
         cards:
           - title: Kitchen
@@ -149,17 +148,6 @@ views:
           - light.xiaomi_philips_e14_crystal_2
           - switch.0x00158d00039e5eb1_switch
         type: entities
-      # - entity: fan.xiaomi_smart_fan
-      #   name: Big fan
-      #   type: "custom:fan-xiaomi"
-      # - type: conditional
-      #   conditions:
-      #     - entity: fan.xiaomi_smart_fan
-      #       state: "on"
-      #   card:
-      #     - entity: fan.xiaomi_smart_fan
-      #       name: Big fan
-      #       type: "custom:fan-xiaomi"
       - type: conditional
         conditions:
           - entity: sensor.zwift_online_1380479
@@ -183,11 +171,12 @@ views:
           - light.shelly_rgbw2_f43a41_light_0
           - light.0x00158d000410f2db_light
           - light.attic_closet_lamp
+          - fan.xiaomi_smart_fan
         type: entities
       - title: Bathrooms
         entities:
           - light.downstairs_bathroom_ceiling_lamp
-          - light.downstairs_bathroom_side_lamp
+          - group.downstairs_bathroom_mirror
           - switch.shelly_1_5545a9_relay_0
           - sensor.shelly_plug_s_51d92a_power_0_2
         type: entities
@@ -210,6 +199,7 @@ views:
         entities:
           - sensor.gosiak_pixel_3_battery_level
           - sensor.google_pixel_slate_battery_level
+          - sensor.tosia_mi_a2_lite_poziom_baterii
           - sensor.in2013_battery_level
           - sensor.wojtek_s_ipad_battery_level
         theme: Backend-selected

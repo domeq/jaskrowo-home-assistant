@@ -686,6 +686,7 @@ views:
           - title: People at home
             entities:
               - person.malgorzata_iskra
+              - person.tosia_iskra
               - person.wojciech_iskra
             type: glance
           - type: map
@@ -693,6 +694,7 @@ views:
             default_zoom: 12
             entities:
               - person.wojciech_iskra
+              - person.tosia_iskra
               - person.malgorzata_iskra
               # - device_tracker.wojtek_s_ipad
               - zone.home

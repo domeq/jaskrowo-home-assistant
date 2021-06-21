@@ -12,9 +12,9 @@ services:
 
   homeassistant:
     container_name: homeassistant
-    image: homeassistant/home-assistant:latest
+    image: homeassistant/home-assistant:2021.4.6
     labels:
-      - com.centurylinklabs.watchtower.enable=true
+      - com.centurylinklabs.watchtower.enable=false
     volumes:
       - .:/config
       - /etc/localtime:/etc/localtime:ro

@@ -102,9 +102,6 @@
     - after: "20:00:00"
       before: 06:49:59
       condition: time
-    - below: "75"
-      condition: numeric_state
-      entity_id: sensor.0x00158d0001e43ac7_illuminance
     - entity_id: input_boolean.someone_sleeping_in_the_living_room
       state: "off"
       condition: state
@@ -521,7 +518,7 @@
       data:
         entity_id: all
     - data:
-        entity_id: fan.xiaomi_smart_fan
+        entity_id: fan.fan_2
       service: fan.turn_off
     - service: switch.turn_off
       data:
@@ -581,11 +578,13 @@
           - switch.circadian_lighting_attic_lights_auto
           - switch.circadian_lighting_master_bedroom_lights_auto
           - switch.circadian_lighting_master_bedroom_stairs_lights_auto
-          - switch.circadian_lighting_kitchen_lights_auto
+          - switch.circadian_lighting_kitchen_ceiling_lights_auto
+          - switch.circadian_lighting_kitchen_stove_leds_auto
           - switch.circadian_lighting_dining_area_lights_auto
           - switch.circadian_lighting_tosia_room_lights_auto
           - switch.circadian_lighting_wardrobe_lights_auto
-          - switch.circadian_lighting_downstairs_bathroom_lights_auto
+          - switch.circadian_lighting_downstairs_bathroom_ceiling_auto
+          - switch.circadian_lighting_downstairs_bathroom_mirror_auto
       service: switch.turn_on
 - id: "1545565835153"
   alias: Master bedroom - motion
@@ -1055,9 +1054,12 @@
     - data:
         entity_id:
           - light.downstairs_bathroom_ceiling_lamp
-          - light.downstairs_bathroom_side_lamp
         transition: 1
       service: light.turn_on
+    - data:
+        entity_id: group.downstairs_bathroom_mirror
+        transition: 1
+      service: homeassistant.turn_on
 - id: "1599980560658"
   alias: Downstairs bathroom - motion night
   mode: restart
@@ -1677,9 +1679,13 @@
     - data:
         entity_id:
           - light.downstairs_bathroom_ceiling_lamp
-          - light.downstairs_bathroom_side_lamp
         transition: 1
       service: light.toggle
+    - data:
+        entity_id:
+          - group.downstairs_bathroom_mirror
+        transition: 1
+      service: homeassistant.toggle
 - id: "15546272477551"
   alias: Downstairs bathroom - toggle all night
   trigger:
@@ -1703,7 +1709,7 @@
           - light.downstairs_bathroom_ceiling_lamp_nightlight
       service: light.toggle
 - id: "1554627285943"
-  alias: Downstairs bathroom - toggle side
+  alias: Downstairs bathroom - toggle mirror
   trigger:
     - entity_id: sensor.0x00158d000123e3fe_click
       platform: state
@@ -1714,9 +1720,10 @@
   condition: []
   action:
     - data:
-        entity_id: light.downstairs_bathroom_side_lamp
+        entity_id:
+          - group.downstairs_bathroom_mirror
         transition: 1
-      service: light.toggle
+      service: homeassistant.toggle
 - id: "1554627478669"
   alias: Downstairs bathroom - toggle ceiling day
   trigger:
@@ -1762,24 +1769,24 @@
       platform: state
       to: "on"
   condition:
-    - above: "25.0"
+    - above: "24.5"
       condition: numeric_state
       entity_id: sensor.0x00158d0001b1c3fb_temperature
     - after: 06:30:00
       before: "20:00:00"
       condition: time
     - condition: state
-      entity_id: fan.xiaomi_smart_fan
+      entity_id: fan.fan_2
       state: "off"
     - entity_id: input_boolean.someone_sleeping_in_the_living_room
       state: "off"
       condition: state
   action:
     - data:
-        entity_id: fan.xiaomi_smart_fan
+        entity_id: fan.fan_2
       service: fan.turn_on
     - data:
-        entity_id: fan.xiaomi_smart_fan
+        entity_id: fan.fan_2
       service: fan.xiaomi_miio_set_natural_mode_off
 - id: "1559500105148"
   alias: Living room - turn off fan
@@ -1796,11 +1803,11 @@
       for: 00:15:00
   condition:
     - condition: state
-      entity_id: fan.xiaomi_smart_fan
+      entity_id: fan.fan_2
       state: "on"
   action:
     - data:
-        entity_id: fan.xiaomi_smart_fan
+        entity_id: fan.fan_2
       service: fan.turn_off
 - id: "1559584354899"
   alias: Weather - cool the flat down
@@ -1939,7 +1946,7 @@
       platform: state
       to: "on"
   condition:
-    - above: "25.0"
+    - above: "24.5"
       condition: numeric_state
       entity_id: sensor.0x00158d0001b1c3fb_temperature
     - after: "20:00:00"
@@ -1950,10 +1957,10 @@
       condition: state
   action:
     - data:
-        entity_id: fan.xiaomi_smart_fan
+        entity_id: fan.fan_2
       service: fan.turn_on
     - data:
-        entity_id: fan.xiaomi_smart_fan
+        entity_id: fan.fan_2
       service: fan.xiaomi_miio_set_natural_mode_on
 - id: "1569862674233"
   alias: Kitchen - switch sink light
@@ -2116,17 +2123,22 @@
         ringtone_vol: 30
     - data:
         entity_id:
-          - switch.circadian_lighting_hall_lights_auto
+          - switch.circadian_lighting_hall_ceiling_lights_auto
+          - switch.circadian_lighting_hall_ceiling_leds_auto
           - switch.circadian_lighting_living_room_auto_ceiling
-          - switch.circadian_lighting_living_room_auto_leds
+          - switch.circadian_lighting_living_room_stairs_auto_leds
+          - switch.circadian_lighting_living_room_wall_auto_leds
           - switch.circadian_lighting_guest_room_lights_auto
           - switch.circadian_lighting_attic_lights_auto
           - switch.circadian_lighting_master_bedroom_lights_auto
-          - switch.circadian_lighting_kitchen_lights_auto
+          - switch.circadian_lighting_master_bedroom_stairs_lights_auto
+          - switch.circadian_lighting_kitchen_ceiling_lights_auto
+          - switch.circadian_lighting_kitchen_stove_leds_auto
           - switch.circadian_lighting_dining_area_lights_auto
           - switch.circadian_lighting_tosia_room_lights_auto
           - switch.circadian_lighting_wardrobe_lights_auto
-          - switch.circadian_lighting_downstairs_bathroom_lights_auto
+          - switch.circadian_lighting_downstairs_bathroom_ceiling_auto
+          - switch.circadian_lighting_downstairs_bathroom_mirror_auto
       service: switch.turn_off
     - data:
         entity_id:
@@ -2171,6 +2183,7 @@
       entity_id:
         - person.wojciech_iskra
         - person.malgorzata_iskra
+        # - person.tosia_iskra
       from: not_home
       to: home
   condition:
@@ -2211,10 +2224,13 @@
           - switch.circadian_lighting_attic_lights_auto
           - switch.circadian_lighting_master_bedroom_lights_auto
           - switch.circadian_lighting_master_bedroom_stairs_lights_auto
-          - switch.circadian_lighting_kitchen_lights_auto
+          - switch.circadian_lighting_kitchen_ceiling_lights_auto
+          - switch.circadian_lighting_kitchen_stove_leds_auto
+          - switch.circadian_lighting_dining_area_lights_auto
           - switch.circadian_lighting_tosia_room_lights_auto
           - switch.circadian_lighting_wardrobe_lights_auto
-          - switch.circadian_lighting_downstairs_bathroom_lights_auto
+          - switch.circadian_lighting_downstairs_bathroom_ceiling_auto
+          - switch.circadian_lighting_downstairs_bathroom_mirror_auto
       service: switch.turn_on
     - data:
         entity_id:
@@ -2362,7 +2378,7 @@
           - group.dining_area
       service: homeassistant.turn_off
     - data:
-        entity_id: fan.xiaomi_smart_fan
+        entity_id: fan.fan_2
       service: fan.turn_off
 - id: "1584882369651"
   alias: Living room - sleeping mode off
